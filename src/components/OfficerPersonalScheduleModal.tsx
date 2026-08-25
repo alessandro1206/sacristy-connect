@@ -39,8 +39,8 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
   onLogout
 }) => {
   const [activeTab, setActiveTab] = useState<'duties' | 'profile'>('duties');
-
   const [selectedOfficerId, setSelectedOfficerId] = useState<string>(userSession.officerId || '001');
+  const [searchDateQuery, setSearchDateQuery] = useState<string>('');
 
   if (!isOpen) {
     return null;
@@ -60,7 +60,6 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
     status: 'Aktif' as const
   };
 
-  const [searchDateQuery, setSearchDateQuery] = useState<string>('');
 
   // Find all schedule slots assigned to this officer in September 2026
   const officerId3 = officer.id.padStart(3, '0');
