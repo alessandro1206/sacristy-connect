@@ -68,9 +68,7 @@ export const AdminBackoffice: React.FC<AdminBackofficeProps> = ({
 
 [Nama Petugas 1] #[No ID 1] tugas tgl [Tanggal] di [Lokasi 1] jam [Jam 1]..
 
-Tukar dgn pak @~[Nama Petugas 2] #[No ID 2] tgl [Tanggal] di [Lokasi 2] jam [Jam 2]
-
-CC @~[Nama Koorlap]`;
+Tukar dgn pak [Nama Petugas 2] #[No ID 2] tgl [Tanggal] di [Lokasi 2] jam [Jam 2]`;
 
   const PRESET_DIGANTIKAN = `Lapor tukar jadwal tugas :
 
@@ -82,8 +80,9 @@ Digantikan oleh:
 Terima kasih . 🙏`;
 
   const [inputMessage, setInputMessage] = useState<string>(
-    `Lapor Tukar Tugas\n\nPetugas A #001 tugas tgl 13 Sept di KJP2 jam 17.00..\n\nTukar dgn pak @~Petugas B #002 tgl 13 Sept di Gereja jam 18.00\n\nCC @~Koorlap Jaga`
+    `Lapor Tukar Tugas\n\nPetugas A #001 tugas tgl 13 Sept di KJP2 jam 17.00..\n\nTukar dgn pak Petugas B #002 tgl 13 Sept di Gereja jam 18.00`
   );
+
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
 
 
