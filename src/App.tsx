@@ -50,19 +50,39 @@ export default function App() {
   // Active slot for Kiosk mode
   const currentSlot = schedule.find(s => s.id === currentSlotId) || schedule[0];
 
-  // Helper to check if a view is an admin view
-  const isAdminView = (view: string) => {
-    return view.startsWith('admin') || view === 'schedules' || view === 'servers';
+  // Helper to check if a view requires strict Admin (highest level) authorization
+  const isStrictAdminView = (view: string) => {
+    return view === 'admin-dashboard' || 
+           view === 'admin-chat' || 
+           view === 'admin-servers' || 
+           view === 'servers' || 
+           view === 'admin-logs' || 
+           view === 'admin-reports';
   };
 
-  // Central navigation handler with role-level gate
+  // Helper to check if a view requires Koorlap or Admin level
+  const isKoorlapOrAdminView = (view: string) => {
+    return view === 'admin-schedule' || view === 'schedules';
+  };
+
+  // Central navigation handler with strict role-level security gate
   const handleNavigate = (view: string) => {
-    if (isAdminView(view)) {
+    if (isStrictAdminView(view)) {
+      // ONLY Admin (highest level) can access
+      if (userSession.role === 'admin') {
+        setCurrentView(view);
+      } else {
+        setPendingAdminView(view);
+        setInitialModalRole('admin');
+        setIsLoginModalOpen(true);
+      }
+    } else if (isKoorlapOrAdminView(view)) {
+      // Koorlap or Admin can access
       if (userSession.role === 'admin' || userSession.role === 'koorlap') {
         setCurrentView(view);
       } else {
         setPendingAdminView(view);
-        setInitialModalRole(view.startsWith('admin') ? 'admin' : 'koorlap');
+        setInitialModalRole('koorlap');
         setIsLoginModalOpen(true);
       }
     } else {
@@ -74,9 +94,14 @@ export default function App() {
     setUserSession(session);
     setIsLoginModalOpen(false);
     
-    // Navigate to target view if pending or default based on role
+    // Check if user has required level for pendingAdminView
     if (pendingAdminView) {
-      setCurrentView(pendingAdminView);
+      if (isStrictAdminView(pendingAdminView) && session.role !== 'admin') {
+        // Fallback to allowed view if user logged in as lower role
+        setCurrentView(session.role === 'koorlap' ? 'admin-schedule' : 'kiosk');
+      } else {
+        setCurrentView(pendingAdminView);
+      }
     } else if (session.role === 'admin') {
       setCurrentView('admin-dashboard');
     } else if (session.role === 'koorlap') {
@@ -85,13 +110,14 @@ export default function App() {
       setCurrentView('kiosk');
     }
 
-    const roleLabel = session.role === 'admin' ? 'Administrator' : session.role === 'koorlap' ? 'Koorlap' : 'Petugas';
+    const roleLabel = session.role === 'admin' ? 'Administrator (Highest Level)' : session.role === 'koorlap' ? 'Koorlap' : 'Petugas';
     handleAddLog({
       type: 'admin',
       description: `Autentikasi Berhasil: ${session.name} masuk sebagai [${roleLabel}]`,
       actor: `${roleLabel} Gate`
     });
   };
+
 
   const handleLogout = () => {
     const prevName = userSession.name;

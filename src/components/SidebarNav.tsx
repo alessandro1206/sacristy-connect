@@ -38,6 +38,8 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({
   onOpenLoginModal
 }) => {
 
+  const isAdminRole = userSession?.role === 'admin';
+
   return (
     <aside className="hidden md:flex flex-col bg-[#FAF7F2] border-r border-[#D9CEBA] h-full w-[270px] p-6 flex-shrink-0 z-10 select-none shadow-xs">
       {/* Header */}
@@ -66,58 +68,85 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({
         </div>
       </div>
 
+      {/* Active Role Indicator Card */}
+      <div className="mb-4 bg-[#F3EDE2] border border-[#D9CEBA] rounded-xl p-2.5 text-xs text-[#6E5A4B] flex items-center justify-between">
+        <div>
+          <span className="text-[10px] text-[#6E5A4B] uppercase tracking-wider block font-bold">Akses Anda:</span>
+          <span className="font-extrabold text-[#5B1414] text-xs">
+            {userSession?.role === 'admin' ? '👑 Admin (Super)' : userSession?.role === 'koorlap' ? '📋 Koorlap' : '🛡️ Petugas'}
+          </span>
+        </div>
+        {onOpenLoginModal && (
+          <button
+            onClick={onOpenLoginModal}
+            className="text-[10px] bg-[#5B1414] text-white px-2 py-1 rounded-lg font-bold hover:bg-[#420D0D] transition-colors"
+          >
+            Ubah
+          </button>
+        )}
+      </div>
+
       {/* Main Navigation Links */}
       <div className="flex-1 flex flex-col gap-1.5">
         
-        {/* 1. Dashboard Overview */}
+        {/* 1. Dashboard Overview (Admin Only) */}
         <button
           onClick={() => {
             playAudioFeedback('tap');
             onNavigate('admin-dashboard');
           }}
-          className={`flex items-center gap-3.5 px-4 py-3 rounded-xl text-left transition-all ${
+          className={`flex items-center justify-between px-4 py-3 rounded-xl text-left transition-all ${
             activeView === 'admin-dashboard'
               ? 'bg-[#5B1414] text-white font-bold shadow-xs'
               : 'text-[#6E5A4B] hover:bg-[#F3EDE2] hover:text-[#2C2420] font-medium'
           }`}
         >
-          <LayoutDashboard className="w-4 h-4" />
-          <span className="text-xs">Dashboard Overview</span>
+          <div className="flex items-center gap-3.5">
+            <LayoutDashboard className="w-4 h-4" />
+            <span className="text-xs">Dashboard Overview</span>
+          </div>
+          {!isAdminRole && <Lock className="w-3.5 h-3.5 text-amber-600" title="Khusus Admin" />}
         </button>
 
-        {/* 2. Database Asisten Imam (Database Management) */}
+        {/* 2. Database Asisten Imam (Admin Only) */}
         <button
           onClick={() => {
             playAudioFeedback('tap');
             onNavigate('admin-servers');
           }}
-          className={`flex items-center gap-3.5 px-4 py-3 rounded-xl text-left transition-all ${
+          className={`flex items-center justify-between px-4 py-3 rounded-xl text-left transition-all ${
             activeView === 'admin-servers' || activeView === 'servers'
               ? 'bg-[#5B1414] text-white font-bold shadow-xs'
               : 'text-[#6E5A4B] hover:bg-[#F3EDE2] hover:text-[#2C2420] font-medium'
           }`}
         >
-          <Users className="w-4 h-4" />
-          <span className="text-xs">Database Management</span>
+          <div className="flex items-center gap-3.5">
+            <Users className="w-4 h-4" />
+            <span className="text-xs">Database Management</span>
+          </div>
+          {!isAdminRole && <Lock className="w-3.5 h-3.5 text-amber-600" title="Khusus Admin" />}
         </button>
 
-        {/* 3. WA Tukar Jadwal (formerly WA Schedule Generator) */}
+        {/* 3. WA Tukar Jadwal (Admin Only) */}
         <button
           onClick={() => {
             playAudioFeedback('tap');
             onNavigate('admin-chat');
           }}
-          className={`flex items-center gap-3.5 px-4 py-3 rounded-xl text-left transition-all ${
+          className={`flex items-center justify-between px-4 py-3 rounded-xl text-left transition-all ${
             activeView === 'admin-chat'
               ? 'bg-[#5B1414] text-white font-bold shadow-xs'
               : 'text-[#6E5A4B] hover:bg-[#F3EDE2] hover:text-[#2C2420] font-medium'
           }`}
         >
-          <MessageSquare className="w-4 h-4" />
-          <span className="text-xs">WA Tukar Jadwal</span>
+          <div className="flex items-center gap-3.5">
+            <MessageSquare className="w-4 h-4" />
+            <span className="text-xs">WA Tukar Jadwal</span>
+          </div>
+          {!isAdminRole && <Lock className="w-3.5 h-3.5 text-amber-600" title="Khusus Admin" />}
         </button>
 
-        {/* 4. Schedule Generator (formerly Schedule Preview) */}
+        {/* 4. Schedule Generator (Koorlap & Admin) */}
         <button
           onClick={() => {
             playAudioFeedback('tap');
@@ -133,39 +162,46 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({
           <span className="text-xs">Schedule Generator</span>
         </button>
 
-        {/* 5. Laporan Tugas & Presensi (Separated Report view) */}
+        {/* 5. Laporan Tugas & Presensi (Admin Only) */}
         <button
           onClick={() => {
             playAudioFeedback('tap');
             onNavigate('admin-reports');
           }}
-          className={`flex items-center gap-3.5 px-4 py-3 rounded-xl text-left transition-all ${
+          className={`flex items-center justify-between px-4 py-3 rounded-xl text-left transition-all ${
             activeView === 'admin-reports'
               ? 'bg-[#5B1414] text-white font-bold shadow-xs'
               : 'text-[#6E5A4B] hover:bg-[#F3EDE2] hover:text-[#2C2420] font-medium'
           }`}
         >
-          <FileSpreadsheet className="w-4 h-4 text-emerald-700" />
-          <span className="text-xs">Laporan Tugas &amp; Presensi</span>
+          <div className="flex items-center gap-3.5">
+            <FileSpreadsheet className="w-4 h-4 text-emerald-700" />
+            <span className="text-xs">Laporan Tugas &amp; Presensi</span>
+          </div>
+          {!isAdminRole && <Lock className="w-3.5 h-3.5 text-amber-600" title="Khusus Admin" />}
         </button>
 
-        {/* 6. Log Sistem & Audit (Separated Log view) */}
+        {/* 6. Log Sistem & Audit (Admin Only) */}
         <button
           onClick={() => {
             playAudioFeedback('tap');
             onNavigate('admin-logs');
           }}
-          className={`flex items-center gap-3.5 px-4 py-3 rounded-xl text-left transition-all ${
+          className={`flex items-center justify-between px-4 py-3 rounded-xl text-left transition-all ${
             activeView === 'admin-logs'
               ? 'bg-[#5B1414] text-white font-bold shadow-xs'
               : 'text-[#6E5A4B] hover:bg-[#F3EDE2] hover:text-[#2C2420] font-medium'
           }`}
         >
-          <History className="w-4 h-4 text-amber-700" />
-          <span className="text-xs">Log Sistem &amp; Audit</span>
+          <div className="flex items-center gap-3.5">
+            <History className="w-4 h-4 text-amber-700" />
+            <span className="text-xs">Log Sistem &amp; Audit</span>
+          </div>
+          {!isAdminRole && <Lock className="w-3.5 h-3.5 text-amber-600" title="Khusus Admin" />}
         </button>
 
       </div>
+
 
       {/* Footer Links & Switch Mode CTA */}
       <div className="px-1 mt-auto flex flex-col gap-2 pt-4 border-t border-[#D9CEBA]">
