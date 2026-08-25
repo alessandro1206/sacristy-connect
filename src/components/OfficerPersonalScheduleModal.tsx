@@ -60,6 +60,8 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
     status: 'Aktif' as const
   };
 
+  const [searchDateQuery, setSearchDateQuery] = useState<string>('');
+
   // Find all schedule slots assigned to this officer in September 2026
   const officerId3 = officer.id.padStart(3, '0');
   const myAssignedSlots = schedule.filter(slot => {
@@ -67,6 +69,15 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
     return slot.serverIds.some(sid => sid && (sid === officer.id || sid.padStart(3, '0') === officerId3));
   });
 
+  const filteredDutySlots = myAssignedSlots.filter(slot => {
+    if (!searchDateQuery.trim()) return true;
+    const q = searchDateQuery.toLowerCase();
+    return (
+      slot.displayDate.toLowerCase().includes(q) ||
+      slot.massTime.toLowerCase().includes(q) ||
+      slot.location.toLowerCase().includes(q)
+    );
+  });
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in">
@@ -152,7 +163,6 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
             </select>
           </div>
 
-
           {onLogout && (
             <button
               onClick={() => {
@@ -173,68 +183,69 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
 
           {activeTab === 'duties' && (
             <div className="space-y-3">
-              <div className="flex justify-between items-center">
+              {/* Header & Date Search Filter */}
+              <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
                 <h3 className="text-xs font-black text-[#5B1414] uppercase tracking-wider flex items-center gap-1.5">
                   <Calendar className="w-4 h-4 text-[#5B1414]" />
-                  <span>JADWAL TUGAS MISA SEPTEMBER 2026</span>
+                  <span>JADWAL TUGAS MISA</span>
                 </h3>
                 <span className="text-[11px] font-bold text-[#8C7662]">
-                  Total: {myAssignedSlots.length} Misa
+                  Total: {filteredDutySlots.length} Misa Terdaftar
                 </span>
               </div>
 
-              {myAssignedSlots.length === 0 ? (
+              {/* Date Search Input Bar */}
+              <div className="relative">
+                <input
+                  type="text"
+                  value={searchDateQuery}
+                  onChange={(e) => setSearchDateQuery(e.target.value)}
+                  placeholder="🔍 Cari tanggal tugas (contoh: 06 Sep, Minggu, 18:00)..."
+                  className="w-full px-4 py-2 bg-white border border-[#D9CEBA] rounded-xl text-xs font-semibold text-[#2C2420] focus:outline-none focus:border-[#5B1414] shadow-2xs"
+                />
+                {searchDateQuery && (
+                  <button
+                    onClick={() => setSearchDateQuery('')}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-[#8C7662] hover:text-[#5B1414]"
+                  >
+                    ✕ Hapus
+                  </button>
+                )}
+              </div>
+
+              {filteredDutySlots.length === 0 ? (
                 <div className="p-8 text-center bg-white border border-[#E8DFC8] rounded-2xl text-[#8C7662]">
                   <CheckCircle2 className="w-10 h-10 mx-auto text-emerald-600 mb-2 opacity-80" />
-                  <p className="text-sm font-bold text-[#2C2420]">Belum Ada Jadwal Tugas Terdaftar</p>
-                  <p className="text-xs mt-1">Anda tidak memiliki jadwal penugasan Misa di bulan September 2026.</p>
+                  <p className="text-sm font-bold text-[#2C2420]">Tidak ada jadwal tugas yang cocok</p>
+                  <p className="text-xs mt-1">Coba kata kunci pencarian tanggal yang lain.</p>
                 </div>
               ) : (
-                <div className="space-y-3">
-                  {myAssignedSlots.map((slot, idx) => {
+                <div className="space-y-2.5">
+                  {filteredDutySlots.map((slot, idx) => {
                     const isAttended = slot.attendedServerIds?.includes(officer.id);
                     return (
                       <div 
                         key={slot.id || idx}
-                        className="bg-white border-2 border-[#D9CEBA] rounded-2xl p-4 shadow-2xs hover:border-[#5B1414] transition-all flex flex-col sm:flex-row justify-between sm:items-center gap-3"
+                        className="bg-white border-2 border-[#D9CEBA] rounded-2xl p-4 shadow-2xs hover:border-[#5B1414] transition-all"
                       >
-                        <div className="space-y-1">
-                          <div className="flex items-center gap-2">
-                            <span className="px-2 py-0.5 rounded-full bg-[#5B1414]/10 text-[#5B1414] text-[10px] font-bold uppercase font-mono">
-                              {slot.displayDate}
+                        <div className="space-y-1.5">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="px-2.5 py-0.5 rounded-full bg-[#5B1414]/10 text-[#5B1414] text-xs font-bold uppercase font-mono">
+                              📅 {slot.displayDate}
                             </span>
-                            <span className="text-xs font-bold text-[#5B1414]">
-                              {slot.massTime}
+                            <span className="text-xs font-extrabold text-[#5B1414]">
+                              ⏰ {slot.massTime}
                             </span>
                             {isAttended && (
                               <span className="text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded-full">
-                                ✓ Hadir Presensi
+                                ✓ Hadir
                               </span>
                             )}
                           </div>
-                          <h4 className="text-sm font-extrabold text-[#2C2420]">
-                            {slot.location}
+                          <h4 className="text-sm font-extrabold text-[#2C2420] flex items-center gap-1.5">
+                            <MapPin className="w-3.5 h-3.5 text-[#7C191E]" />
+                            <span>{slot.location}</span>
                           </h4>
-                          <p className="text-xs text-[#6E5A4B]">
-                            Rekan Tugas: <span className="font-semibold text-[#2C2420]">{slot.serverNames?.filter(Boolean).join(', ')}</span>
-                          </p>
-                        </div>
-
-                        <div className="flex items-center gap-2 shrink-0">
-                          {onOpenSwapChat && (
-                            <button
-                              onClick={() => {
-                                playAudioFeedback('tap');
-                                onClose();
-                                onOpenSwapChat();
-                              }}
-                              className="px-3 py-1.5 bg-[#FAF7F2] hover:bg-[#F3EDE2] text-[#5B1414] border border-[#D9CEBA] rounded-xl text-xs font-bold transition-all flex items-center gap-1 cursor-pointer"
-                              title="Tukar Jadwal Misa ini"
-                            >
-                              <MessageSquare className="w-3.5 h-3.5" />
-                              <span>Tukar</span>
-                            </button>
-                          )}
                         </div>
                       </div>
                     );
@@ -245,6 +256,7 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
           )}
 
           {activeTab === 'profile' && (
+
             <div className="bg-white border border-[#E8DFC8] rounded-2xl p-5 space-y-4">
               <h3 className="text-xs font-black text-[#5B1414] uppercase tracking-wider">
                 Informasi Pelayanan Asisten Imam
