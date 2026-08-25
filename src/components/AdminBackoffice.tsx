@@ -88,17 +88,21 @@ Terima kasih . 🙏`;
   const [detectedChange, setDetectedChange] = useState<{
     original: string;
     pengganti: string;
+    tanggal: string;
     jamMisa: string;
+    lokasi: string;
     action: string;
     swapType: 'TUKAR' | 'DIGANTIKAN';
     detailNotes: string;
   }>({
     original: 'Mikael Hengky Pratama (#105)',
     pengganti: 'Widyanto Setiawan Wijaya (#092)',
-    jamMisa: '17:00 & 18:00 WIB',
+    tanggal: '13 Sep 2026',
+    jamMisa: '17:00 ⇄ 18:00 WIB',
+    lokasi: 'KJP 2 ⇄ Gereja Utama',
     action: 'Tukar Jadwal (Mutual Switch)',
     swapType: 'TUKAR',
-    detailNotes: 'Bpk. Hengky (#105) bertukar jadwal hari/jam Misa dengan Bpk. Cecep Condro (#092).'
+    detailNotes: 'Bpk. Hengky (#105) bertukar jadwal dari KJP 2 (17:00) dengan Bpk. Cecep Condro (#092) di Gereja Utama (18:00).'
   });
 
   // Table rows for "Jadwal Hari Ini / Rekap Tukar"
@@ -106,7 +110,7 @@ Terima kasih . 🙏`;
     {
       id: 't-1',
       jamMisa: '17:00 WIB',
-      lokasi: 'Kapel 2',
+      lokasi: 'Kapel (KJP 2)',
       petugasOriginal: 'Mikael Hengky Pratama (#105)',
       petugasPengganti: 'Widyanto Setiawan Wijaya (#092)',
       status: 'Swapped'
@@ -122,7 +126,7 @@ Terima kasih . 🙏`;
   ]);
 
   const [importLogText, setImportLogText] = useState<string>(
-    'Batch #104: Berhasil memproses 2 format WhatsApp (Tukar & Digantikan) ke jadwal September 2026.'
+    'Batch #105: Berhasil memproses pertukaran jadwal (Tgl 13 Sept, Lokasi KJP2 & Gereja).'
   );
 
   const handleProcessMessage = async () => {
@@ -157,31 +161,46 @@ Terima kasih . 🙏`;
       const nameA = officerA ? `${officerA.name} (#${officerA.id.padStart(3, '0')})` : 'Petugas A';
       const nameB = officerB ? `${officerB.name} (#${officerB.id.padStart(3, '0')})` : 'Petugas B';
 
-      // 3. Extract Times (17.00, 18.00, 06:00, etc.)
+      // 3. Extract Date (tgl 13 Sept, minggu 30 agust, etc.)
+      const dateMatch = text.match(/(?:tgl|tanggal|minggu)\s+(\d{1,2}\s+[A-Za-z]+)/i) || text.match(/(\d{1,2}\s+(?:Sept|September|Agust|Agustus|Okt|Oktober))/i);
+      const parsedDate = dateMatch ? dateMatch[1] : '13 Sept 2026';
+
+      // 4. Extract Location (KJP, KJP2, Gereja, Kapel)
+      let lokasiA = 'Gereja Utama';
+      if (/kjp2|kjp 2/i.test(text)) lokasiA = 'Kapel (KJP 2)';
+      else if (/kjp1|kjp 1|kjp/i.test(text)) lokasiA = 'Kapel (KJP)';
+      else if (/kapel/i.test(text)) lokasiA = 'Kapel Paroki';
+
+      let lokasiB = lokasiA;
+      if (/di Gereja|Gereja Utama/i.test(text)) lokasiB = 'Gereja Utama';
+      else if (/di KJP|di Kapel/i.test(text)) lokasiB = 'Kapel (KJP)';
+
+      // 5. Extract Times (17.00, 18.00, 06:00, etc.)
       const timeMatches = text.match(/(\d{1,2}[:.]\d{2})/g) || [];
       const timeA = timeMatches[0] ? timeMatches[0].replace('.', ':') + ' WIB' : '18:00 WIB';
       const timeB = timeMatches[1] ? timeMatches[1].replace('.', ':') + ' WIB' : timeA;
 
       const actionLabel = swapType === 'TUKAR' ? 'Tukar Jadwal (Mutual Switch)' : 'Digantikan (One-Way Replacement)';
       const detailNotes = swapType === 'TUKAR'
-        ? `${nameA} bertukar jadwal Misa dengan ${nameB} (Saling tukar jam/hari bertugas).`
-        : `${nameA} tidak bisa bertugas, digantikan sepenuhnya oleh ${nameB}.`;
+        ? `${nameA} (${lokasiA}, ${timeA}) bertukar jadwal Misa tgl ${parsedDate} dengan ${nameB} (${lokasiB}, ${timeB}).`
+        : `${nameA} (${lokasiA}, ${timeA}) tidak bisa bertugas, digantikan oleh ${nameB}.`;
 
-      // 4. Update Live Preview Box
+      // 6. Update Live Preview Box
       setDetectedChange({
         original: nameA,
         pengganti: nameB,
+        tanggal: parsedDate,
         jamMisa: swapType === 'TUKAR' ? `${timeA} ⇄ ${timeB}` : timeA,
+        lokasi: swapType === 'TUKAR' ? `${lokasiA} ⇄ ${lokasiB}` : lokasiA,
         action: actionLabel,
         swapType,
         detailNotes
       });
 
-      // 5. Apply Changes to Real Schedule State (onUpdateSchedule)
+      // 7. Apply Changes to Real Schedule State (onUpdateSchedule)
       if (schedule && schedule.length > 0) {
         const updatedSchedule = schedule.map(slot => {
           if (swapType === 'DIGANTIKAN') {
-            // Replace officerA with officerB in matching slot
             if (officerA && officerB && slot.serverIds.includes(officerA.id)) {
               const newServerIds = slot.serverIds.map(id => id === officerA!.id ? officerB!.id : id);
               const newServerNames = slot.serverNames.map(n => n === officerA!.shortName || n === officerA!.name ? officerB!.shortName : n);
@@ -193,7 +212,6 @@ Terima kasih . 🙏`;
               };
             }
           } else if (swapType === 'TUKAR') {
-            // Swap officerA and officerB positions
             if (officerA && officerB) {
               const hasA = slot.serverIds.includes(officerA.id);
               const hasB = slot.serverIds.includes(officerB.id);
@@ -215,18 +233,20 @@ Terima kasih . 🙏`;
         onUpdateSchedule(updatedSchedule);
       }
 
-      // 6. Update Today's Schedule Table
+      // 8. Update Today's Schedule Table
       setTodayRows(prev => [
         {
           id: 't-' + Date.now(),
-          jamMisa: timeA,
-          lokasi: 'Gereja Utama',
+          jamMisa: `${parsedDate} ${timeA}`,
+
+          lokasi: lokasiA,
           petugasOriginal: nameA,
           petugasPengganti: nameB,
           status: swapType === 'TUKAR' ? 'Swapped' : 'Updated'
         },
         ...prev
       ]);
+
 
       // 7. Add to Feed & System Log
       const now = new Date();
@@ -416,16 +436,28 @@ Terima kasih . 🙏`;
                   </span>
                 </div>
 
-                <p className="text-xs md:text-sm text-[#3b342e] leading-relaxed">
+                <div className="flex flex-wrap items-center gap-2 text-xs text-[#3b342e]">
                   <span className="font-bold text-[#5B1414]">{detectedChange.original}</span>
-                  <span className="mx-1 text-[#8C7662]">↔</span>
+                  <span className="text-[#8C7662]">↔</span>
                   <span className="font-bold text-emerald-800">{detectedChange.pengganti}</span>
-                  <span className="ml-2 text-xs font-mono text-[#6E5A4B]">({detectedChange.jamMisa})</span>
-                </p>
+                </div>
 
-                <p className="text-xs text-[#6E5A4B] bg-[#FAF7F2] p-2 rounded-lg border border-[#E8DFC8] italic">
+                <div className="flex flex-wrap items-center gap-2 pt-1">
+                  <span className="px-2.5 py-1 bg-[#FAF7F2] border border-[#D9CEBA] rounded-lg text-xs font-bold text-[#5B1414] flex items-center gap-1">
+                    📅 Tanggal: {detectedChange.tanggal}
+                  </span>
+                  <span className="px-2.5 py-1 bg-[#FAF7F2] border border-[#D9CEBA] rounded-lg text-xs font-bold text-[#2C2420] flex items-center gap-1">
+                    📍 Lokasi: {detectedChange.lokasi}
+                  </span>
+                  <span className="px-2.5 py-1 bg-[#FAF7F2] border border-[#D9CEBA] rounded-lg text-xs font-bold text-[#6E5A4B] font-mono flex items-center gap-1">
+                    ⏰ Jam: {detectedChange.jamMisa}
+                  </span>
+                </div>
+
+                <p className="text-xs text-[#6E5A4B] bg-[#FAF7F2] p-2.5 rounded-xl border border-[#E8DFC8] italic">
                   💡 {detectedChange.detailNotes}
                 </p>
+
               </div>
 
             </div>
