@@ -27,6 +27,7 @@ interface SidebarNavProps {
   onAdminLogout?: () => void;
   userSession?: UserSession;
   onOpenLoginModal?: () => void;
+  onOpenOfficerSchedule?: () => void;
 }
 
 export const SidebarNav: React.FC<SidebarNavProps> = ({
@@ -35,8 +36,10 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({
   onOpenHelp,
   onAdminLogout,
   userSession,
-  onOpenLoginModal
+  onOpenLoginModal,
+  onOpenOfficerSchedule
 }) => {
+
 
   const isAdminRole = userSession?.role === 'admin';
 
@@ -201,7 +204,23 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({
           {!isAdminRole && <Lock className="w-3.5 h-3.5 text-amber-600" title="Khusus Admin" />}
         </button>
 
+        {/* 7. Profil & Tanggal Tugas Saya */}
+        {onOpenOfficerSchedule && (
+          <button
+            onClick={() => {
+              playAudioFeedback('tap');
+              onOpenOfficerSchedule();
+            }}
+            className="flex items-center gap-3.5 px-4 py-3 rounded-xl text-left bg-amber-400/20 hover:bg-amber-400/30 text-[#5B1414] font-bold transition-all border border-amber-300/50 cursor-pointer"
+          >
+            <UserCheck className="w-4 h-4 text-[#5B1414]" />
+            <span className="text-xs">Profil &amp; Tanggal Tugas</span>
+          </button>
+        )}
+
       </div>
+
+
 
 
       {/* Footer Links & Switch Mode CTA */}

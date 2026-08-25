@@ -308,6 +308,7 @@ export default function App() {
               setIsLoginModalOpen(true);
             }}
             onAdminLogout={handleLogout}
+            onOpenOfficerSchedule={() => setIsOfficerScheduleModalOpen(true)}
           />
         )}
 
@@ -321,8 +322,12 @@ export default function App() {
               officersCount={officers.length}
               activeMassTime={currentSlot.massTime}
               userSession={userSession}
+              currentSlot={currentSlot}
+              officers={officers}
+              onOpenProfile={() => setIsOfficerScheduleModalOpen(true)}
             />
           )}
+
 
 
           {/* 1. KIOSK MODE: Absensi mandiri dengan keypad */}

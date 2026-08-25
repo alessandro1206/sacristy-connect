@@ -146,17 +146,18 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
         )}
 
-        {/* Officers My Schedule Button */}
-        {userSession.role === 'officer' && onOpenOfficerSchedule && (
+        {/* Officers My Schedule & Profile Button */}
+        {onOpenOfficerSchedule && (
           <button
             onClick={onOpenOfficerSchedule}
-            className="flex items-center gap-1.5 bg-amber-400 hover:bg-amber-300 text-[#4A0E17] px-3 py-1.5 rounded-xl text-xs font-extrabold shadow-sm transition-all cursor-pointer"
-            title="Lihat Jadwal Tugas Misa Saya"
+            className="flex items-center gap-1.5 bg-amber-400 hover:bg-amber-300 text-[#4A0E17] px-3.5 py-1.5 rounded-xl text-xs font-extrabold shadow-sm transition-all cursor-pointer"
+            title="Lihat Profil & Tanggal Tugas Misa Saya"
           >
-            <Calendar className="w-4 h-4" />
-            <span>Jadwal Saya</span>
+            <UserCheck className="w-4 h-4" />
+            <span>Profil Saya</span>
           </button>
         )}
+
 
 
         {/* Logout if authenticated */}

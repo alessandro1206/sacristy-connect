@@ -13,11 +13,13 @@ import {
   Clock,
   MapPin,
   Flame,
-  LayoutGrid
+  LayoutGrid,
+  UserCheck
 } from 'lucide-react';
+
 import { playAudioFeedback } from '../utils/sound';
 
-import { UserSession } from '../types';
+import { Officer, ScheduleSlot, UserSession } from '../types';
 
 interface LandingPageViewProps {
   onSelectKiosk: () => void;
@@ -25,6 +27,9 @@ interface LandingPageViewProps {
   officersCount: number;
   activeMassTime: string;
   userSession?: UserSession;
+  currentSlot?: ScheduleSlot;
+  officers?: Officer[];
+  onOpenProfile?: () => void;
 }
 
 export const LandingPageView: React.FC<LandingPageViewProps> = ({
@@ -32,7 +37,10 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
   onSelectAdmin,
   officersCount,
   activeMassTime,
-  userSession
+  userSession,
+  currentSlot,
+  officers = [],
+  onOpenProfile
 }) => {
   const isAdminRole = userSession?.role === 'admin';
 
@@ -46,6 +54,14 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
     onSelectAdmin(view);
   };
 
+  // Assigned officers for nearest mass
+  const assignedOfficersForNearest = officers.filter(o => {
+    if (!currentSlot?.serverIds) return false;
+    return currentSlot.serverIds.includes(o.id) || currentSlot.serverIds.includes(o.id.padStart(3, '0'));
+  }).slice(0, 12);
+
+  const nearestKoorlapNames = assignedOfficersForNearest.filter(o => o.isKoorlap).map(o => o.name).join(' & ') || 'Koorlap Jaga';
+
   return (
     <div className="flex-1 bg-[#fbf9f5] overflow-y-auto p-4 sm:p-6 md:p-10 flex flex-col justify-between selection:bg-primary/20">
       <div className="max-w-5xl mx-auto w-full space-y-8 my-auto">
@@ -55,11 +71,11 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
         {/* ========================================================================= */}
         <div className="text-center space-y-3">
           <div className="inline-flex items-center gap-3 bg-[#f3ede2] border border-[#e6ded2] px-4 py-2 rounded-full shadow-2xs">
-            <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center p-0.5 border border-[#d6cbbe]">
+            <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center p-0.5 border border-[#d6cbbe] overflow-hidden">
               <img 
                 src={CHURCH_LOGO} 
                 alt="Paroki Santo Yakobus" 
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover rounded-full"
               />
             </div>
             <span className="text-xs font-bold text-[#7c191e] uppercase tracking-wider">
@@ -73,7 +89,83 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
           <p className="text-sm md:text-base text-[#665e55] max-w-2xl mx-auto font-medium">
             Sistem Informasi Terpadu Pelayanan Asisten Imam & Presensi Sakristi Gereja Santo Yakobus
           </p>
+
+          {/* Profil Saya & Jadwal Tugas CTA */}
+          {onOpenProfile && (
+            <div className="pt-2">
+              <button
+                onClick={() => {
+                  playAudioFeedback('tap');
+                  onOpenProfile();
+                }}
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#5B1414] hover:bg-[#420D0D] text-white text-xs font-extrabold rounded-2xl shadow-md transition-all cursor-pointer"
+              >
+                <UserCheck className="w-4 h-4 text-amber-300" />
+                <span>Profil &amp; Tanggal Tugas Saya</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          )}
         </div>
+
+        {/* ========================================================================= */}
+        {/* HERO CARD: MISA TERDEKAT & DAFTAR PETUGAS JAGA                             */}
+        {/* ========================================================================= */}
+        {currentSlot && (
+          <div className="bg-gradient-to-br from-[#5B1414] via-[#7C191E] to-[#420D0D] text-white rounded-3xl p-6 sm:p-8 shadow-xl border border-white/20 relative overflow-hidden">
+            {/* Header / Date & Time */}
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-6 border-b border-white/20">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-400 text-[#4A0E17] rounded-full text-xs font-black uppercase tracking-wider mb-2">
+                  <Flame className="w-3.5 h-3.5" />
+                  <span>Misa Terdekat &amp; Jadwal Sesi Aktif</span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-extrabold font-headline">
+                  {currentSlot.displayDate} — {currentSlot.massTime}
+                </h2>
+                <p className="text-xs sm:text-sm text-white/80 flex items-center gap-1.5 mt-1 font-medium">
+                  <MapPin className="w-4 h-4 text-amber-300 shrink-0" />
+                  <span>{currentSlot.location}</span>
+                </p>
+              </div>
+
+              <button
+                onClick={handleKioskClick}
+                className="px-5 py-2.5 bg-white text-[#5B1414] hover:bg-amber-100 rounded-2xl text-xs font-extrabold shadow-md transition-all flex items-center gap-2 cursor-pointer shrink-0"
+              >
+                <Touchpad className="w-4 h-4 text-[#5B1414]" />
+                <span>Absen Kiosk Misa Ini</span>
+              </button>
+            </div>
+
+            {/* Who Will Be The Tugas (Daftar Petugas Jaga) */}
+            <div className="pt-6 space-y-3">
+              <div className="flex items-center justify-between">
+                <h3 className="text-xs uppercase tracking-wider font-extrabold text-amber-300 flex items-center gap-2">
+                  <Users className="w-4 h-4" />
+                  <span>Petugas Misa Terdekat ({assignedOfficersForNearest.length} Asisten Imam)</span>
+                </h3>
+                <span className="text-[11px] text-white/80 font-medium">
+                  Koorlap: <strong>{nearestKoorlapNames}</strong>
+                </span>
+              </div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                {assignedOfficersForNearest.map(off => (
+                  <div key={off.id} className="bg-white/10 hover:bg-white/20 border border-white/15 rounded-2xl p-2.5 flex items-center gap-2.5 transition-all">
+                    <img src={off.avatarUrl} alt={off.name} className="w-9 h-9 rounded-xl object-cover border border-amber-300/50 shrink-0" />
+                    <div className="min-w-0">
+                      <span className="text-[10px] font-mono font-bold text-amber-300 block">#{off.id.padStart(3, '0')}</span>
+                      <p className="text-xs font-bold text-white truncate">{off.name}</p>
+                      <span className="text-[9px] text-white/70 truncate block">{off.wilayah}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
 
         {/* ========================================================================= */}
         {/* CARDS CONTAINER (Kiosk Mode & Administrasi Admin Card)                    */}
