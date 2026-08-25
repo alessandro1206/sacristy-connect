@@ -1,7 +1,8 @@
 export interface Officer {
-  id: string; // e.g. "001", "145", "210", "089", "011"
-  name: string; // e.g. "Antonius Budiarjo", "Maria Susanti"
-  shortName: string; // e.g. "Antonius B.", "Maria S."
+  id: string; // e.g. "001", "035", "054", "089", "145", "170"
+  name: string; // e.g. "Gatot Chrishariyono", "Hartanto Chandra"
+  shortName: string; // e.g. "Gatot C.", "Hartanto C."
+
   initials?: string; // e.g. "AL", "MB", "YK", "SA"
   role: string; // "Asisten Imam", "Asisten Imam - Koordinator Lapangan (Koorlap)", etc.
   phone: string;

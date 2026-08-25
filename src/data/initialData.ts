@@ -2750,7 +2750,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "063",
       "089",
       "145",
-      "210",
+      "062",
+
       "016",
       "027",
       "049",

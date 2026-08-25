@@ -28,7 +28,8 @@ export const HelpModal: React.FC<HelpModalProps> = ({ isOpen, onClose }) => {
             </h4>
             <ul className="list-disc list-inside space-y-1 text-on-surface-variant text-xs md:text-sm mt-2">
               <li>Lihat 4 kartu petugas yang bertugas pada sesi misa aktif.</li>
-              <li>Ketik 3 digit nomor ID Anda pada Keypad numerik (contoh: <strong>145</strong> untuk Bpk. Damianus Slamet, <strong>210</strong> untuk Antonius W., <strong>089</strong> untuk Ibu Maria S., <strong>104</strong> untuk Heru P.).</li>
+              <li>Ketik 3 digit nomor ID Anda pada Keypad numerik (contoh: <strong>145</strong> untuk Bpk. Damianus Slamet, <strong>062</strong> untuk Bpk. Antonius Wibowo, <strong>089</strong> untuk Bpk. Hanjaya Kurniawan).</li>
+
               <li>Tekan tombol <strong>Kirim</strong> atau tombol Enter pada keypad.</li>
               <li>Anda juga dapat langsung <strong>menekan kartu foto</strong> Anda untuk mengisi ID secara instan.</li>
             </ul>

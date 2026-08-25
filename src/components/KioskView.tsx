@@ -642,16 +642,14 @@ export const KioskView: React.FC<KioskViewProps> = ({
     const defaultForSession: Record<string, string[]> = {
       'misa-harian-pagi': ['001', '002', '003', '042'],
       'misa-harian-sore': ['002', '056', '057', '042'],
-      'misa-sabtu-1800': ['145', '210', '089', '001', '002', '003', '055'],
+      'misa-sabtu-1800': ['145', '062', '089', '001', '002', '003', '055'],
       'misa-minggu-0600': ['002', '003', '042', '015', '089', '104'],
-      'misa-minggu-0830': ['057', '001', '210', '145', '003', '055'],
-      'misa-minggu-1700': ['055', '002', '104', '042', '089', '210'],
-      'misa-natal-malam': ['001', '055', '057', '002', '003', '042', '089', '210'],
-      'misa-paskah-vigili': ['001', '055', '003', '057', '042', '089', '145', '210'],
-      'misa-natal-pagi': ['001', '057', '002', '003', '042', '089']
+      'misa-minggu-0830': ['057', '001', '062', '145', '003', '055'],
+      'misa-minggu-1700': ['055', '002', '104', '042', '089', '062']
     };
 
-    return defaultForSession[selectedSession.id] || ['001', '002', '003', '042', '089', '145', '210', '055', '057'];
+    return defaultForSession[selectedSession.id] || ['001', '002', '003', '042', '089', '145', '062', '055', '057'];
+
   }, [selectedSession, currentSlot, allSlots]);
 
   // Scheduled officers for this Misa session in Schedule Generator
