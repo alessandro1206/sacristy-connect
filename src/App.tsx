@@ -301,8 +301,10 @@ export default function App() {
               onSelectAdmin={(view = 'admin-dashboard') => handleNavigate(view)}
               officersCount={officers.length}
               activeMassTime={currentSlot.massTime}
+              userSession={userSession}
             />
           )}
+
 
           {/* 1. KIOSK MODE: Absensi mandiri dengan keypad */}
           {isKioskMode && (

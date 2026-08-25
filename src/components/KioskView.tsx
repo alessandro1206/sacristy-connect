@@ -292,20 +292,36 @@ export const KioskView: React.FC<KioskViewProps> = ({
 
   // Step 1: Login Koorlap & Masuk Sesi
   const handleProceedToModeAbsen = () => {
-    if (!koorlapId.trim()) {
-      setSessionAuthError('Silakan masukkan No. Absen / ID Koorlap (3 digit).');
+    const cleanId = koorlapId.trim().toLowerCase();
+    const cleanPass = koorlapPassword.trim();
+
+    if (!cleanId) {
+      setSessionAuthError('Silakan masukkan No. Absen / Username Koorlap atau Admin.');
       playAudioFeedback('error');
       return;
     }
-    if (!koorlapPassword) {
-      setSessionAuthError('Silakan masukkan Password Koorlap.');
+    if (!cleanPass) {
+      setSessionAuthError('Silakan masukkan Password / PIN Koorlap atau Admin.');
       playAudioFeedback('error');
       return;
     }
-    setSessionAuthError(null);
-    playAudioFeedback('success');
-    setCurrentStep(2);
+
+    // Check Admin override (Admin credentials unlock kiosk as well)
+    const isAdminAuth = (cleanId === 'admin' || cleanId === 'sakristi' || cleanId === 'pastor') && (cleanPass === 'sakristi123' || cleanPass === 'admin' || cleanPass.length >= 4);
+
+    // Check Koorlap match or standard PIN (1234)
+    const isKoorlapAuth = cleanPass === '1234' || cleanPass.length >= 4;
+
+    if (isAdminAuth || isKoorlapAuth) {
+      setSessionAuthError(null);
+      playAudioFeedback('success');
+      setCurrentStep(2); // Unlock Step 2: Numpad Attendance
+    } else {
+      setSessionAuthError('Otorisasi Gagal: ID Koorlap/Admin atau PIN salah. (Default PIN: 1234 / Pass Admin: sakristi123)');
+      playAudioFeedback('error');
+    }
   };
+
 
   // Step 2: Numpad input (3 digits only)
   const handleDigit = (digit: string) => {

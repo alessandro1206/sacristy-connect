@@ -17,19 +17,25 @@ import {
 } from 'lucide-react';
 import { playAudioFeedback } from '../utils/sound';
 
+import { UserSession } from '../types';
+
 interface LandingPageViewProps {
   onSelectKiosk: () => void;
   onSelectAdmin: (view?: 'admin-dashboard' | 'admin-servers' | 'admin-chat' | 'admin-schedule' | 'admin-reports' | 'admin-logs') => void;
   officersCount: number;
   activeMassTime: string;
+  userSession?: UserSession;
 }
 
 export const LandingPageView: React.FC<LandingPageViewProps> = ({
   onSelectKiosk,
   onSelectAdmin,
   officersCount,
-  activeMassTime
+  activeMassTime,
+  userSession
 }) => {
+  const isAdminRole = userSession?.role === 'admin';
+
   const handleKioskClick = () => {
     playAudioFeedback('tap');
     onSelectKiosk();
@@ -70,9 +76,9 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
         </div>
 
         {/* ========================================================================= */}
-        {/* 2 MAIN CARDS: KIOSK vs ADMINISTRASI (ADMIN)                              */}
+        {/* CARDS CONTAINER (Kiosk Mode & Conditional Admin Card)                     */}
         {/* ========================================================================= */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+        <div className={`grid grid-cols-1 ${isAdminRole ? 'md:grid-cols-2' : 'max-w-2xl mx-auto'} gap-6 lg:gap-8 items-stretch`}>
           
           {/* ----------------------------------------------------------------------- */}
           {/* CARD 1: KIOSK PRESENSI & PENUGASAN (Touchscreen)                       */}
@@ -109,11 +115,11 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
               <div className="space-y-2.5 pt-2 border-t border-[#e0d6c7]">
                 <div className="flex items-center gap-2.5 text-xs text-[#4a4239] font-medium">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>Pilih Jadwal Misa & Verifikasi No. Absen + Password Koorlap</span>
+                  <span>Pilih Misa & Otorisasi Koorlap / Admin</span>
                 </div>
                 <div className="flex items-center gap-2.5 text-xs text-[#4a4239] font-medium">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>Input 3 Digit No. Absen Petugas (001 - 170)</span>
+                  <span>Input 3 Digit No. Absen Petugas (Numpad)</span>
                 </div>
                 <div className="flex items-center gap-2.5 text-xs text-[#4a4239] font-medium">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
@@ -128,7 +134,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
 
             {/* Action CTA Button */}
             <div className="pt-6 mt-4">
-              <button className="w-full py-3.5 px-6 bg-[#7c191e] group-hover:bg-[#681419] text-white text-sm font-bold rounded-xl shadow-md flex items-center justify-center gap-2 uppercase tracking-wider transition-all">
+              <button className="w-full py-3.5 px-6 bg-[#7c191e] group-hover:bg-[#681419] text-white text-sm font-bold rounded-xl shadow-md flex items-center justify-center gap-2 uppercase tracking-wider transition-all cursor-pointer">
                 <span>Masuk ke Mode Kiosk</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
@@ -136,130 +142,134 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
           </div>
 
           {/* ----------------------------------------------------------------------- */}
-          {/* CARD 2: ADMINISTRASI (ADMIN BACKOFFICE)                                 */}
+          {/* CARD 2: ADMINISTRASI (ONLY SHOWN IF USER IS ADMIN)                     */}
           {/* ----------------------------------------------------------------------- */}
-          <div className="bg-white hover:bg-[#faf8f4] border-2 border-[#e6ded2] hover:border-[#7c191e] rounded-3xl p-6 sm:p-8 shadow-xs hover:shadow-lg transition-all flex flex-col justify-between relative overflow-hidden">
-            {/* Top decorative accent */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[#1976d2]/5 rounded-bl-full pointer-events-none" />
+          {isAdminRole && (
+            <div className="bg-white hover:bg-[#faf8f4] border-2 border-[#e6ded2] hover:border-[#7c191e] rounded-3xl p-6 sm:p-8 shadow-xs hover:shadow-lg transition-all flex flex-col justify-between relative overflow-hidden">
+              {/* Top decorative accent */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[#1976d2]/5 rounded-bl-full pointer-events-none" />
 
-            <div className="space-y-5 relative">
-              {/* Badge & Icon */}
-              <div className="flex items-center justify-between">
-                <div className="w-14 h-14 rounded-2xl bg-[#2b241e] text-white flex items-center justify-center shadow-md">
-                  <ShieldCheck className="w-8 h-8 text-amber-300" />
+              <div className="space-y-5 relative">
+                {/* Badge & Icon */}
+                <div className="flex items-center justify-between">
+                  <div className="w-14 h-14 rounded-2xl bg-[#2b241e] text-white flex items-center justify-center shadow-md">
+                    <ShieldCheck className="w-8 h-8 text-amber-300" />
+                  </div>
+                  <span className="px-3 py-1 bg-[#e8f5e9] text-[#2e7d32] border border-[#c8e6c9] rounded-full text-xs font-bold uppercase tracking-wider">
+                    Admin Backoffice
+                  </span>
                 </div>
-                <span className="px-3 py-1 bg-[#e8f5e9] text-[#2e7d32] border border-[#c8e6c9] rounded-full text-xs font-bold uppercase tracking-wider">
-                  Admin Backoffice
-                </span>
+
+                {/* Title & Description */}
+                <div className="space-y-1.5">
+                  <h2 className="text-2xl font-bold text-[#2b241e] font-serif">
+                    Administrasi (Admin)
+                  </h2>
+                  <p className="text-xs sm:text-sm text-[#665e55] leading-relaxed">
+                    Pusat kontrol database 170 petugas, generator jadwal otomatis, impor pesan WA, dan laporan sakristi.
+                  </p>
+                </div>
+
+                {/* Quick Menu Buttons inside Admin */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-[#e0d6c7]">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleAdminClick('admin-servers');
+                    }}
+                    className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#fbf9f5] hover:bg-[#f3ede2] border border-[#e6ded2] text-left transition-colors group/btn cursor-pointer"
+                  >
+                    <Users className="w-4 h-4 text-[#7c191e] shrink-0" />
+                    <div>
+                      <p className="text-xs font-bold text-[#2b241e] group-hover/btn:text-[#7c191e]">
+                        Database Management
+                      </p>
+                      <p className="text-[10px] text-[#7a7165]">Data 170 Petugas &amp; Wilayah</p>
+                    </div>
+                  </button>
+
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleAdminClick('admin-chat');
+                    }}
+                    className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#fbf9f5] hover:bg-[#f3ede2] border border-[#e6ded2] text-left transition-colors group/btn cursor-pointer"
+                  >
+                    <MessageSquare className="w-4 h-4 text-[#1b5e20] shrink-0" />
+                    <div>
+                      <p className="text-xs font-bold text-[#2b241e] group-hover/btn:text-[#7c191e]">
+                        WA Tukar Jadwal
+                      </p>
+                      <p className="text-[10px] text-[#7a7165]">Update Tukar Jadwal Harian</p>
+                    </div>
+                  </button>
+
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleAdminClick('admin-schedule');
+                    }}
+                    className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#fbf9f5] hover:bg-[#f3ede2] border border-[#e6ded2] text-left transition-colors group/btn cursor-pointer"
+                  >
+                    <Calendar className="w-4 h-4 text-[#1976d2] shrink-0" />
+                    <div>
+                      <p className="text-xs font-bold text-[#2b241e] group-hover/btn:text-[#7c191e]">
+                        Schedule Generator
+                      </p>
+                      <p className="text-[10px] text-[#7a7165]">Jadwal Bulanan &amp; Rotasi Adil</p>
+                    </div>
+                  </button>
+
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleAdminClick('admin-reports');
+                    }}
+                    className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#fbf9f5] hover:bg-[#f3ede2] border border-[#e6ded2] text-left transition-colors group/btn cursor-pointer"
+                  >
+                    <FileText className="w-4 h-4 text-emerald-700 shrink-0" />
+                    <div>
+                      <p className="text-xs font-bold text-[#2b241e] group-hover/btn:text-[#7c191e]">
+                        Laporan Tugas &amp; Presensi
+                      </p>
+                      <p className="text-[10px] text-[#7a7165]">Posisi Per Misa &amp; Rekap Petugas</p>
+                    </div>
+                  </button>
+
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleAdminClick('admin-logs');
+                    }}
+                    className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#fbf9f5] hover:bg-[#f3ede2] border border-[#e6ded2] text-left transition-colors group/btn cursor-pointer"
+                  >
+                    <ShieldCheck className="w-4 h-4 text-amber-700 shrink-0" />
+                    <div>
+                      <p className="text-xs font-bold text-[#2b241e] group-hover/btn:text-[#7c191e]">
+                        Log Sistem &amp; Audit
+                      </p>
+                      <p className="text-[10px] text-[#7a7165]">Audit Trail &amp; Kiosk Check-in</p>
+                    </div>
+                  </button>
+                </div>
               </div>
 
-              {/* Title & Description */}
-              <div className="space-y-1.5">
-                <h2 className="text-2xl font-bold text-[#2b241e] font-serif">
-                  Administrasi (Admin)
-                </h2>
-                <p className="text-xs sm:text-sm text-[#665e55] leading-relaxed">
-                  Pusat kontrol database 170 petugas, generator jadwal otomatis, impor pesan WA, dan laporan sakristi.
-                </p>
-              </div>
-
-              {/* Quick Menu Buttons inside Admin */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-[#e0d6c7]">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleAdminClick('admin-servers');
-                  }}
-                  className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#fbf9f5] hover:bg-[#f3ede2] border border-[#e6ded2] text-left transition-colors group/btn"
+              {/* Action CTA Button */}
+              <div className="pt-6 mt-4">
+                <button 
+                  onClick={() => handleAdminClick('admin-dashboard')}
+                  className="w-full py-3.5 px-6 bg-[#2b241e] hover:bg-[#1a140e] text-white text-sm font-bold rounded-xl shadow-md flex items-center justify-center gap-2 uppercase tracking-wider transition-all cursor-pointer"
                 >
-                  <Users className="w-4 h-4 text-[#7c191e] shrink-0" />
-                  <div>
-                    <p className="text-xs font-bold text-[#2b241e] group-hover/btn:text-[#7c191e]">
-                      Database Management
-                    </p>
-                    <p className="text-[10px] text-[#7a7165]">Data 170 Petugas & Wilayah</p>
-                  </div>
-                </button>
-
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleAdminClick('admin-chat');
-                  }}
-                  className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#fbf9f5] hover:bg-[#f3ede2] border border-[#e6ded2] text-left transition-colors group/btn"
-                >
-                  <MessageSquare className="w-4 h-4 text-[#1b5e20] shrink-0" />
-                  <div>
-                    <p className="text-xs font-bold text-[#2b241e] group-hover/btn:text-[#7c191e]">
-                      WA Tukar Jadwal
-                    </p>
-                    <p className="text-[10px] text-[#7a7165]">Update Tukar Jadwal Harian</p>
-                  </div>
-                </button>
-
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleAdminClick('admin-schedule');
-                  }}
-                  className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#fbf9f5] hover:bg-[#f3ede2] border border-[#e6ded2] text-left transition-colors group/btn"
-                >
-                  <Calendar className="w-4 h-4 text-[#1976d2] shrink-0" />
-                  <div>
-                    <p className="text-xs font-bold text-[#2b241e] group-hover/btn:text-[#7c191e]">
-                      Schedule Generator
-                    </p>
-                    <p className="text-[10px] text-[#7a7165]">Jadwal Bulanan &amp; Rotasi Adil</p>
-                  </div>
-                </button>
-
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleAdminClick('admin-reports');
-                  }}
-                  className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#fbf9f5] hover:bg-[#f3ede2] border border-[#e6ded2] text-left transition-colors group/btn"
-                >
-                  <FileText className="w-4 h-4 text-emerald-700 shrink-0" />
-                  <div>
-                    <p className="text-xs font-bold text-[#2b241e] group-hover/btn:text-[#7c191e]">
-                      Laporan Tugas &amp; Presensi
-                    </p>
-                    <p className="text-[10px] text-[#7a7165]">Posisi Per Misa &amp; Rekap Petugas</p>
-                  </div>
-                </button>
-
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleAdminClick('admin-logs');
-                  }}
-                  className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#fbf9f5] hover:bg-[#f3ede2] border border-[#e6ded2] text-left transition-colors group/btn"
-                >
-                  <ShieldCheck className="w-4 h-4 text-amber-700 shrink-0" />
-                  <div>
-                    <p className="text-xs font-bold text-[#2b241e] group-hover/btn:text-[#7c191e]">
-                      Log Sistem &amp; Audit
-                    </p>
-                    <p className="text-[10px] text-[#7a7165]">Audit Trail &amp; Kiosk Check-in</p>
-                  </div>
+                  <span>Buka Portal Administrasi</span>
+                  <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
             </div>
-
-            {/* Action CTA Button */}
-            <div className="pt-6 mt-4">
-              <button 
-                onClick={() => handleAdminClick('admin-dashboard')}
-                className="w-full py-3.5 px-6 bg-[#2b241e] hover:bg-[#1a140e] text-white text-sm font-bold rounded-xl shadow-md flex items-center justify-center gap-2 uppercase tracking-wider transition-all"
-              >
-                <span>Buka Portal Administrasi</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
+          )}
 
         </div>
+
+
 
         {/* ========================================================================= */}
         {/* BOTTOM METRICS & SYSTEM STATUS                                            */}
