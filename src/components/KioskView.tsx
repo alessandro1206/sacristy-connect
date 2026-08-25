@@ -181,10 +181,10 @@ const MASS_SESSIONS: MassSessionChoice[] = [
     dateDisplay: "13 September 2026",
     timeDisplay: "06:00 WIB",
     koorlaps: [
-      { id: "054", name: "Hartanto Chandra" }
+      { id: "053", name: "Edward Luntungan" }
     ],
     koorlapCount: 1,
-    koorlapDisplay: "Hartanto Chandra",
+    koorlapDisplay: "Edward Luntungan",
     location: "GEREJA UTAMA",
     description: "Misa Minggu Pagi I (8 Petugas Scheduled)"
   },
@@ -196,10 +196,10 @@ const MASS_SESSIONS: MassSessionChoice[] = [
     dateDisplay: "13 September 2026",
     timeDisplay: "08:00 WIB",
     koorlaps: [
-      { id: "054", name: "Hartanto Chandra" }
+      { id: "050", name: "Tjio Johansyah" }
     ],
     koorlapCount: 1,
-    koorlapDisplay: "Hartanto Chandra",
+    koorlapDisplay: "Tjio Johansyah",
     location: "GEREJA UTAMA",
     description: "Misa Minggu Pagi II (10 Petugas Scheduled)"
   },
@@ -262,11 +262,11 @@ const MASS_SESSIONS: MassSessionChoice[] = [
     dateDisplay: "20 September 2026",
     timeDisplay: "06:00 WIB",
     koorlaps: [
-      { id: "054", name: "Hartanto Chandra" },
+      { id: "053", name: "Edward Luntungan" },
       { id: "145", name: "Damianus Slamet Subagio" }
     ],
     koorlapCount: 2,
-    koorlapDisplay: "Hartanto C. & Damianus S.",
+    koorlapDisplay: "Edward L. & Damianus S.",
     location: "GEREJA UTAMA",
     description: "Misa Minggu Pagi I (8 Petugas Scheduled)"
   },
@@ -278,11 +278,11 @@ const MASS_SESSIONS: MassSessionChoice[] = [
     dateDisplay: "20 September 2026",
     timeDisplay: "08:00 WIB",
     koorlaps: [
-      { id: "055", name: "Agustinus S." },
-      { id: "056", name: "Antonius David Tjung" }
+      { id: "057", name: "Andrew Firmansyah L." },
+      { id: "058", name: "Bambang Susilo" }
     ],
     koorlapCount: 2,
-    koorlapDisplay: "Agustinus S. & Antonius David Tjung",
+    koorlapDisplay: "Andrew F. & Bambang S.",
     location: "GEREJA UTAMA",
     description: "Misa Minggu Pagi II (10 Petugas Scheduled)"
   },
@@ -345,14 +345,15 @@ const MASS_SESSIONS: MassSessionChoice[] = [
     dateDisplay: "27 September 2026",
     timeDisplay: "06:00 WIB",
     koorlaps: [
-      { id: "054", name: "Hartanto Chandra" },
+      { id: "053", name: "Edward Luntungan" },
       { id: "145", name: "Damianus Slamet Subagio" }
     ],
     koorlapCount: 2,
-    koorlapDisplay: "Hartanto C. & Damianus S.",
+    koorlapDisplay: "Edward L. & Damianus S.",
     location: "GEREJA UTAMA",
     description: "Misa Minggu Pagi I (8 Petugas Scheduled)"
   },
+
   {
     id: "sch-sep-18",
     category: "mingguan",
@@ -453,7 +454,8 @@ export const KioskView: React.FC<KioskViewProps> = ({
     { positionId: 'belakang_koor', positionName: 'Belakang Koor', assignedOfficerId: null, assignedOfficerName: null },
     { positionId: 'suster_1', positionName: 'Suster 1', assignedOfficerId: null, assignedOfficerName: null },
     { positionId: 'suster_2', positionName: 'Suster 2', assignedOfficerId: null, assignedOfficerName: null },
-    { positionId: 'belakang_bunda', positionName: 'Belakang Bunda', assignedOfficerId: '055', assignedOfficerName: 'Hartanto Chandra', assignedOfficerAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=300&fit=crop&crop=face' },
+    { positionId: 'belakang_bunda', positionName: 'Belakang Bunda', assignedOfficerId: null, assignedOfficerName: null },
+
     { positionId: 'balkon', positionName: 'Balkon', assignedOfficerId: null, assignedOfficerName: null },
   ]);
   const [selectedAssignPosition, setSelectedAssignPosition] = useState<string | null>(null);
