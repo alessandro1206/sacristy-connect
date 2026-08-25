@@ -19,13 +19,14 @@ import { ServerManagementView } from './components/ServerManagementView';
 import { SystemLogsView } from './components/SystemLogsView';
 import { ReportsDutyView } from './components/ReportsDutyView';
 import { MultiLevelLoginModal } from './components/MultiLevelLoginModal';
+import { OfficerPersonalScheduleModal } from './components/OfficerPersonalScheduleModal';
 import { CodeExportModal } from './components/CodeExportModal';
 import { HelpModal } from './components/HelpModal';
 
 export default function App() {
   const [officers, setOfficers] = useState<Officer[]>(INITIAL_OFFICERS);
   const [schedule, setSchedule] = useState<ScheduleSlot[]>(INITIAL_SCHEDULE);
-  const [currentSlotId, setCurrentSlotId] = useState<string>('sch-0');
+  const [currentSlotId, setCurrentSlotId] = useState<string>('sch-sep-01');
   const [logs, setLogs] = useState<SystemLog[]>(INITIAL_LOGS);
   const [leaveRecords, setLeaveRecords] = useState<LeaveRecord[]>(INITIAL_LEAVE_RECORDS);
   const [patternConfig, setPatternConfig] = useState<SchedulePatternConfig>(INITIAL_PATTERN_CONFIG);
@@ -38,6 +39,7 @@ export default function App() {
     name: 'Tamu / Guest'
   });
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
+  const [isOfficerScheduleModalOpen, setIsOfficerScheduleModalOpen] = useState<boolean>(false);
   const [initialModalRole, setInitialModalRole] = useState<UserRole>('officer');
   const [pendingAdminView, setPendingAdminView] = useState<string>('admin-dashboard');
 
@@ -46,6 +48,7 @@ export default function App() {
   const [currentView, setCurrentView] = useState<string>('landing');
   const [isCodeExportOpen, setIsCodeExportOpen] = useState<boolean>(false);
   const [isHelpOpen, setIsHelpOpen] = useState<boolean>(false);
+
 
   // Active slot for Kiosk mode
   const currentSlot = schedule.find(s => s.id === currentSlotId) || schedule[0];
@@ -107,8 +110,9 @@ export default function App() {
     } else if (session.role === 'koorlap') {
       setCurrentView('admin-schedule');
     } else {
-      setCurrentView('kiosk');
+      setIsOfficerScheduleModalOpen(true);
     }
+
 
     const roleLabel = session.role === 'admin' ? 'Administrator (Highest Level)' : session.role === 'koorlap' ? 'Koorlap' : 'Petugas';
     handleAddLog({
@@ -272,7 +276,9 @@ export default function App() {
           setIsLoginModalOpen(true);
         }}
         onLogout={handleLogout}
+        onOpenOfficerSchedule={() => setIsOfficerScheduleModalOpen(true)}
       />
+
 
       {/* Main Viewport Container */}
       <div className="flex-1 flex overflow-hidden">
@@ -389,6 +395,18 @@ export default function App() {
         targetViewLabel={getAdminViewTitle(pendingAdminView)}
       />
 
+      {/* Officer Personal Schedule Modal (Jadwal Saya) */}
+      <OfficerPersonalScheduleModal
+        isOpen={isOfficerScheduleModalOpen}
+        onClose={() => setIsOfficerScheduleModalOpen(false)}
+        userSession={userSession}
+        officers={officers}
+        schedule={schedule}
+        onOpenLeaveModal={() => alert('Form Pengajuan Cuti / Izin disinkronkan dengan Google Form Paroki.')}
+        onOpenSwapChat={() => handleNavigate('admin-chat')}
+        onLogout={handleLogout}
+      />
+
       {/* Standalone Code Exporter Modal */}
       <CodeExportModal
         isOpen={isCodeExportOpen}
@@ -403,4 +421,5 @@ export default function App() {
     </div>
   );
 }
+
 

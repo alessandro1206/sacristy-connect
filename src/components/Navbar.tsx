@@ -1,7 +1,8 @@
 import React from 'react';
 import { CHURCH_LOGO } from '../data/initialData';
-import { Settings, HelpCircle, Sparkles, Home, Shield, Touchpad, LogIn, LogOut, UserCheck, Award, KeyRound } from 'lucide-react';
+import { Settings, HelpCircle, Sparkles, Home, Shield, Touchpad, LogIn, LogOut, UserCheck, Award, KeyRound, Calendar } from 'lucide-react';
 import { UserSession } from '../types';
+
 
 interface NavbarProps {
   currentView: string;
@@ -11,6 +12,7 @@ interface NavbarProps {
   userSession?: UserSession;
   onOpenLoginModal?: () => void;
   onLogout?: () => void;
+  onOpenOfficerSchedule?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -18,10 +20,12 @@ export const Navbar: React.FC<NavbarProps> = ({
   onNavigate,
   onOpenCodeExport,
   onOpenHelp,
-  userSession,
+  userSession = { isAuthenticated: false, role: 'guest', name: 'Tamu / Guest' },
   onOpenLoginModal,
-  onLogout
+  onLogout,
+  onOpenOfficerSchedule
 }) => {
+
   const isLanding = currentView === 'landing';
   const isKiosk = currentView === 'kiosk';
   const isAdmin = currentView.startsWith('admin') || currentView === 'schedules' || currentView === 'servers';
@@ -140,6 +144,19 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className="hidden md:inline">{isAuthed ? 'Ganti Level' : 'Masuk Akun'}</span>
           </button>
         )}
+
+        {/* Officers My Schedule Button */}
+        {userSession.role === 'officer' && onOpenOfficerSchedule && (
+          <button
+            onClick={onOpenOfficerSchedule}
+            className="flex items-center gap-1.5 bg-amber-400 hover:bg-amber-300 text-[#4A0E17] px-3 py-1.5 rounded-xl text-xs font-extrabold shadow-sm transition-all cursor-pointer"
+            title="Lihat Jadwal Tugas Misa Saya"
+          >
+            <Calendar className="w-4 h-4" />
+            <span>Jadwal Saya</span>
+          </button>
+        )}
+
 
         {/* Logout if authenticated */}
         {isAuthed && onLogout && (
