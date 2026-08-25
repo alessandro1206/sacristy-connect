@@ -354,6 +354,7 @@ export const KioskView: React.FC<KioskViewProps> = ({
 
   // Step 2: Numpad input (3 digits only)
   const handleDigit = (digit: string) => {
+    setNumpadError(null);
     if (pinInput.length < 3) {
       playAudioFeedback('tap');
       setPinInput(prev => prev + digit);
@@ -361,6 +362,7 @@ export const KioskView: React.FC<KioskViewProps> = ({
   };
 
   const handleBackspace = () => {
+    setNumpadError(null);
     playAudioFeedback('delete');
     setPinInput(prev => prev.slice(0, -1));
   };
@@ -371,38 +373,37 @@ export const KioskView: React.FC<KioskViewProps> = ({
       return;
     }
 
-    // Match officer in database by 3-digit ID
     const normalized3Digit = pinInput.padStart(3, '0');
-    const matched = officers.find(o => 
+
+    // Strict validation: Only allow officers who are in the Belum Absen list for this Misa session
+    const matchedInBelumAbsen = unattendedOfficers.find(o => 
       o.id === normalized3Digit || 
       o.id === pinInput || 
-      o.id === pinInput.padStart(4, '0') ||
-      o.id.endsWith(normalized3Digit)
+      o.id.padStart(3, '0') === normalized3Digit
     );
 
-    if (matched) {
+    if (matchedInBelumAbsen) {
       playAudioFeedback('tap');
-      setPendingOfficer(matched);
-      setCurrentStep(3); // Go to Step 3: Konfirmasi Identitas
+      setNumpadError(null);
+      setPendingOfficer(matchedInBelumAbsen);
+      setCurrentStep(3); // Show identity confirmation
+      setPinInput('');
     } else {
-      // Create fallback officer for demonstration
-      playAudioFeedback('tap');
-      const fallbackOfficer: Officer = {
-        id: normalized3Digit,
-        name: `Petugas No. ${normalized3Digit}`,
-        shortName: `Petugas ${normalized3Digit}`,
-        initials: 'PT',
-        role: 'Asisten Imam',
-        phone: '0812-0000-0000',
-        avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=300&fit=crop&crop=face',
-        dutyCount: 1,
-        status: 'Aktif'
-      };
-      setPendingOfficer(fallbackOfficer);
-      setCurrentStep(3);
+      // Check if officer already checked in (in Sudah Absen list)
+      const alreadyAttended = attendedOfficersList.find(o => 
+        o.id === normalized3Digit || o.id === pinInput || o.id.padStart(3, '0') === normalized3Digit
+      );
+
+      playAudioFeedback('error');
+      if (alreadyAttended) {
+        setNumpadError(`Petugas No. ${normalized3Digit} (${alreadyAttended.shortName || alreadyAttended.name}) SUDAH presensi untuk Misa ini.`);
+      } else {
+        setNumpadError(`Presensi Ditolak: No. Absen ${normalized3Digit} TIDAK TERDAFTAR dalam jadwal Misa ini. Hanya petugas di daftar BELUM ABSEN yang diperbolehkan presensi.`);
+      }
+      setPinInput('');
     }
-    setPinInput('');
   };
+
 
   // Step 3: Confirm Identity ("YA, SAYA HADIR")
   const handleConfirmAttendance = () => {
@@ -425,11 +426,47 @@ export const KioskView: React.FC<KioskViewProps> = ({
     }, 2000);
   };
 
-  // Calculations for Step 2 & Step 4
+  // Step 2 Numpad Error State
+  const [numpadError, setNumpadError] = useState<string | null>(null);
+
+  // Calculations for Step 2 & Step 4: Connect Belum Absen list directly to Schedule Generator
   const attendedOfficerIds = new Set(currentSlot.attendedServerIds);
-  // Unattended officers (officers in database that have NOT checked in yet)
-  const unattendedOfficers = officers.filter(o => !attendedOfficerIds.has(o.id));
+
+  // Map assigned officer IDs from the active ScheduleSlot in Schedule Generator
+  const scheduledOfficerIds = React.useMemo(() => {
+    // Match currentSlot or matching slot in allSlots
+    const slot = allSlots.find(s => s.id === selectedSession.id || s.massTime.includes(selectedSession.timeDisplay.replace(' WIB', ''))) || currentSlot;
+    const serverIdsFromSlot = (slot?.serverIds || []).filter((id): id is string => typeof id === 'string' && id.trim().length > 0);
+    
+    if (serverIdsFromSlot.length > 0) {
+      return serverIdsFromSlot.map(id => id.padStart(3, '0'));
+    }
+
+    // Default assigned roster per session from Schedule Generator
+    const defaultForSession: Record<string, string[]> = {
+      'misa-harian-pagi': ['001', '002', '003', '042'],
+      'misa-harian-sore': ['002', '056', '057', '042'],
+      'misa-sabtu-1800': ['145', '210', '089', '001', '002', '003', '055'],
+      'misa-minggu-0600': ['002', '003', '042', '015', '089', '104'],
+      'misa-minggu-0830': ['057', '001', '210', '145', '003', '055'],
+      'misa-minggu-1700': ['055', '002', '104', '042', '089', '210'],
+      'misa-natal-malam': ['001', '055', '057', '002', '003', '042', '089', '210'],
+      'misa-paskah-vigili': ['001', '055', '003', '057', '042', '089', '145', '210'],
+      'misa-natal-pagi': ['001', '057', '002', '003', '042', '089']
+    };
+
+    return defaultForSession[selectedSession.id] || ['001', '002', '003', '042', '089', '145', '210', '055', '057'];
+  }, [selectedSession, currentSlot, allSlots]);
+
+  // Scheduled officers for this Misa session in Schedule Generator
+  const scheduledOfficersList = officers.filter(o => 
+    scheduledOfficerIds.includes(o.id.padStart(3, '0')) || scheduledOfficerIds.includes(o.id)
+  );
+
+  // Belum Absen list: Scheduled officers for this Misa who have NOT checked in yet
+  const unattendedOfficers = scheduledOfficersList.filter(o => !attendedOfficerIds.has(o.id));
   const attendedOfficersList = officers.filter(o => attendedOfficerIds.has(o.id));
+
 
   // Filtered lists for Step 2 Sidebars
   const filteredUnattendedStep2 = unattendedOfficers.filter(o => {
@@ -950,7 +987,7 @@ export const KioskView: React.FC<KioskViewProps> = ({
               </div>
 
               {/* 3 Digit Boxes Display */}
-              <div className="flex items-center justify-center gap-3.5 mb-5">
+              <div className="flex items-center justify-center gap-3.5 mb-3">
                 {[0, 1, 2].map(slotIdx => {
                   const digit = pinInput[slotIdx];
                   return (
@@ -963,6 +1000,15 @@ export const KioskView: React.FC<KioskViewProps> = ({
                   );
                 })}
               </div>
+
+              {/* Numpad Rejection / Error Banner */}
+              {numpadError && (
+                <div className="mb-4 max-w-xs w-full p-3 bg-red-100 border border-red-300 rounded-xl text-xs font-bold text-red-900 flex items-center gap-2 animate-in fade-in shadow-xs">
+                  <AlertCircle className="w-4 h-4 text-red-700 shrink-0" />
+                  <span className="leading-tight">{numpadError}</span>
+                </div>
+              )}
+
 
               {/* Numpad Keypad 3x4 */}
               <div className="grid grid-cols-3 gap-2.5 sm:gap-3 w-full max-w-xs mb-4">
