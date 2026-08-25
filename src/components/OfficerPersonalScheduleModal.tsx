@@ -12,8 +12,10 @@ import {
   AlertCircle,
   Sparkles,
   ArrowRight,
-  LogOut
+  LogOut,
+  User
 } from 'lucide-react';
+
 import { Officer, ScheduleSlot, UserSession } from '../types';
 import { playAudioFeedback } from '../utils/sound';
 
@@ -41,35 +43,26 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
   onOpenLoginModal
 }) => {
   const [activeTab, setActiveTab] = useState<'duties' | 'profile'>('duties');
-  const [selectedOfficerId, setSelectedOfficerId] = useState<string>(userSession.officerId || '001');
+  const [selectedOfficerId, setSelectedOfficerId] = useState<string>(
+    userSession.officerId || (userSession.isAuthenticated ? '001' : '')
+  );
   const [searchDateQuery, setSearchDateQuery] = useState<string>('');
 
   if (!isOpen) {
     return null;
   }
 
-
-  // Find selected officer details
-  const officer = officers.find(o => o.id === selectedOfficerId || o.id.padStart(3, '0') === selectedOfficerId.padStart(3, '0')) || officers[0] || {
-    id: '001',
-    name: 'Gatot Christhariyono',
-    shortName: 'Gatot Christhariyono',
-    initials: 'GC',
-    role: 'Asisten Imam - Koordinator Lapangan (Koorlap)',
-    wilayah: 'Wilayah Agustinus',
-    phone: '0812-3456-7890',
-    avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face',
-    dutyCount: 12,
-    status: 'Aktif' as const
-  };
-
+  // Find selected officer details if any
+  const officer = selectedOfficerId
+    ? officers.find(o => o.id === selectedOfficerId || o.id.padStart(3, '0') === selectedOfficerId.padStart(3, '0'))
+    : null;
 
   // Find all schedule slots assigned to this officer in September 2026
-  const officerId3 = officer.id.padStart(3, '0');
-  const myAssignedSlots = schedule.filter(slot => {
+  const officerId3 = officer ? officer.id.padStart(3, '0') : '';
+  const myAssignedSlots = officer ? schedule.filter(slot => {
     if (!slot.serverIds) return false;
     return slot.serverIds.some(sid => sid && (sid === officer.id || sid.padStart(3, '0') === officerId3));
-  });
+  }) : [];
 
   const filteredDutySlots = myAssignedSlots.filter(slot => {
     if (!searchDateQuery.trim()) return true;
@@ -92,22 +85,29 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
           <div className="absolute top-0 right-0 w-32 h-32 bg-amber-400/10 rounded-bl-full pointer-events-none" />
           
           <div className="flex items-center gap-3.5 z-10">
-            <img 
-              src={officer.avatarUrl} 
-              alt={officer.name}
-              className="w-14 h-14 rounded-2xl object-cover border-2 border-amber-300 shadow-md"
-            />
+            {officer ? (
+              <img 
+                src={officer.avatarUrl} 
+                alt={officer.name}
+                className="w-14 h-14 rounded-2xl object-cover border-2 border-amber-300 shadow-md"
+              />
+            ) : (
+              <div className="w-14 h-14 rounded-2xl bg-white/10 border-2 border-amber-300 flex items-center justify-center shadow-md">
+                <User className="w-7 h-7 text-amber-300" />
+              </div>
+            )}
+
             <div>
               <div className="flex items-center gap-2">
                 <span className="px-2 py-0.5 rounded bg-amber-400 text-[#4A0E17] text-[10px] font-black uppercase tracking-wider font-mono">
-                  No. {officer.id.padStart(3, '0')}
+                  {officer ? `No. ${officer.id.padStart(3, '0')}` : 'Tamu / Belum Login'}
                 </span>
                 <span className="text-xs font-semibold text-white/80">
-                  {officer.wilayah || 'Asisten Imam'}
+                  {officer ? (officer.wilayah || 'Asisten Imam') : 'Paroki Santo Yakobus'}
                 </span>
               </div>
               <h2 className="text-lg sm:text-xl font-extrabold font-headline text-white mt-0.5">
-                {officer.name}
+                {officer ? officer.name : 'Profil & Tanggal Tugas Saya'}
               </h2>
             </div>
           </div>
@@ -124,6 +124,7 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
             </button>
           </div>
         </div>
+
 
         {/* Quick Navigation Sub-header with Officer Selector */}
         <div className="bg-white border-b border-[#E8DFC8] px-5 py-3 flex flex-wrap items-center justify-between gap-3 text-xs shrink-0">
@@ -155,14 +156,16 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
             <select
               value={selectedOfficerId}
               onChange={(e) => setSelectedOfficerId(e.target.value)}
-              className="px-2.5 py-1.5 bg-[#FAF7F2] border border-[#D9CEBA] rounded-xl text-xs font-bold text-[#5B1414] focus:outline-none cursor-pointer"
+              className="px-2.5 py-1.5 bg-[#FAF7F2] border border-[#D9CEBA] rounded-xl text-xs font-bold text-[#5B1414] focus:outline-none cursor-pointer max-w-[240px] truncate"
             >
+              <option value="">-- Pilih ID / Nama Petugas Anda --</option>
               {officers.map(o => (
                 <option key={o.id} value={o.id}>
                   #{o.id.padStart(3, '0')} — {o.name} ({o.wilayah || 'Asisten Imam'})
                 </option>
               ))}
             </select>
+
           </div>
 
           {onLogout && (

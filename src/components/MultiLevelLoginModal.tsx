@@ -91,13 +91,15 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
       return;
     }
 
+    const isKoorlapAssigned = officer.isKoorlap || officer.role.toLowerCase().includes('koorlap');
+
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
       playAudioFeedback('success');
       onLoginSuccess({
         isAuthenticated: true,
-        role: 'officer',
+        role: isKoorlapAssigned ? 'koorlap' : 'officer',
         officerId: officer.id,
         name: officer.name,
         avatarUrl: officer.avatarUrl,
@@ -105,6 +107,7 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
       });
     }, 400);
   };
+
 
   const handleKoorlapLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -287,37 +290,24 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
 
           {/* Level Tabs selector - Hidden if Admin Login */}
           {initialRole !== 'admin' && (
-            <div className="mt-5 grid grid-cols-4 gap-1 bg-[#420D0D] p-1.5 rounded-2xl border border-white/10">
+            <div className="mt-5 grid grid-cols-3 gap-1 bg-[#420D0D] p-1.5 rounded-2xl border border-white/10">
               <button
                 type="button"
                 onClick={() => handleTabChange('officer')}
-                className={`py-2 px-1.5 rounded-xl text-[11px] font-bold transition-all flex items-center justify-center gap-1 ${
-                  activeTab === 'officer' 
+                className={`py-2 px-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                  activeTab === 'officer' || activeTab === 'koorlap'
                     ? 'bg-[#FAF7F2] text-[#5B1414] shadow-md font-extrabold' 
                     : 'text-white/70 hover:text-white hover:bg-white/5'
                 }`}
               >
                 <UserCheck className="w-3.5 h-3.5" />
-                <span>Petugas</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleTabChange('koorlap')}
-                className={`py-2 px-1.5 rounded-xl text-[11px] font-bold transition-all flex items-center justify-center gap-1 ${
-                  activeTab === 'koorlap' 
-                    ? 'bg-[#FAF7F2] text-[#5B1414] shadow-md font-extrabold' 
-                    : 'text-white/70 hover:text-white hover:bg-white/5'
-                }`}
-              >
-                <Award className="w-3.5 h-3.5" />
-                <span>Koorlap</span>
+                <span>Petugas / Koorlap</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => handleTabChange('register')}
-                className={`py-2 px-1.5 rounded-xl text-[11px] font-bold transition-all flex items-center justify-center gap-1 ${
+                className={`py-2 px-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
                   activeTab === 'register' 
                     ? 'bg-[#FAF7F2] text-[#5B1414] shadow-md font-extrabold' 
                     : 'text-white/70 hover:text-white hover:bg-white/5'
@@ -330,7 +320,7 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
               <button
                 type="button"
                 onClick={() => handleTabChange('admin')}
-                className={`py-2 px-1.5 rounded-xl text-[11px] font-bold transition-all flex items-center justify-center gap-1 ${
+                className={`py-2 px-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
                   activeTab === 'admin' 
                     ? 'bg-[#FAF7F2] text-[#5B1414] shadow-md font-extrabold' 
                     : 'text-white/70 hover:text-white hover:bg-white/5'
@@ -341,6 +331,7 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
               </button>
             </div>
           )}
+
         </div>
 
 
