@@ -19,12 +19,14 @@ import { playAudioFeedback } from '../utils/sound';
 interface ServerManagementViewProps {
   officers: Officer[];
   onAddOfficer: (officer: Officer) => void;
+  onUpdateOfficer?: (updatedOfficer: Officer) => void;
   onToggleStatus: (id: string) => void;
 }
 
 export const ServerManagementView: React.FC<ServerManagementViewProps> = ({
   officers,
   onAddOfficer,
+  onUpdateOfficer,
   onToggleStatus
 }) => {
   // Form fields state (exact match to Google Stitch design)
@@ -37,10 +39,57 @@ export const ServerManagementView: React.FC<ServerManagementViewProps> = ({
   const [lokasiPelayanan, setLokasiPelayanan] = useState<string>('');
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
+  // Edit Officer Modal State
+  const [editingOfficer, setEditingOfficer] = useState<Officer | null>(null);
+  const [editName, setEditName] = useState<string>('');
+  const [editWilayah, setEditWilayah] = useState<string>('');
+  const [editRole, setEditRole] = useState<'Asisten Imam' | 'Koorlap'>('Asisten Imam');
+  const [editPhone, setEditPhone] = useState<string>('');
+  const [editStatus, setEditStatus] = useState<'Aktif' | 'Cuti' | 'Tidak Aktif'>('Aktif');
+
   // Search and filter for registered list
   const [search, setSearch] = useState<string>('');
   const [filterRole, setFilterRole] = useState<string>('all');
   const [filterLokasi, setFilterLokasi] = useState<string>('all');
+
+  const openEditModal = (officer: Officer) => {
+    setEditingOfficer(officer);
+    setEditName(officer.name);
+    setEditWilayah(officer.wilayah);
+    setEditRole(officer.isKoorlap ? 'Koorlap' : 'Asisten Imam');
+    setEditPhone(officer.phone || '0812-0000-0000');
+    setEditStatus(officer.status);
+  };
+
+  const handleSaveEdit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingOfficer) return;
+
+    const isKoor = editRole === 'Koorlap';
+    const nameTrim = editName.trim();
+    const nameParts = nameTrim.split(' ');
+    const shortName = nameParts.length <= 2 ? nameTrim : `${nameParts[0]} ${nameParts.slice(1).map(p => p[0] + '.').join(' ')}`;
+
+    const updated: Officer = {
+      ...editingOfficer,
+      name: nameTrim,
+      shortName,
+      wilayah: editWilayah.trim(),
+      isKoorlap: isKoor,
+      role: isKoor ? 'Asisten Imam - Koordinator Lapangan (Koorlap)' : 'Asisten Imam',
+      phone: editPhone.trim(),
+      status: editStatus
+    };
+
+    if (onUpdateOfficer) {
+      onUpdateOfficer(updated);
+    }
+    playAudioFeedback('success');
+    setSuccessMessage(`Profil ${nameTrim} (ID #${editingOfficer.id}) berhasil diperbarui!`);
+    setTimeout(() => setSuccessMessage(null), 4000);
+    setEditingOfficer(null);
+  };
+
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -327,12 +376,13 @@ export const ServerManagementView: React.FC<ServerManagementViewProps> = ({
                   <th className="px-4 py-3">Lokasi</th>
                   <th className="px-4 py-3 text-center">Masa Bakti</th>
                   <th className="px-4 py-3 text-center">Status</th>
+                  <th className="px-4 py-3 text-center">Aksi / Edit</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#f2ecdf]">
                 {filteredOfficers.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className="px-4 py-8 text-center text-[#8f857a] italic">
+                    <td colSpan={8} className="px-4 py-8 text-center text-[#8f857a] italic">
                       Tidak ada data petugas yang cocok dengan pencarian.
                     </td>
                   </tr>
@@ -381,6 +431,15 @@ export const ServerManagementView: React.FC<ServerManagementViewProps> = ({
                             {officer.status}
                           </button>
                         </td>
+                        <td className="px-4 py-3 text-center">
+                          <button
+                            onClick={() => openEditModal(officer)}
+                            className="px-2.5 py-1 bg-[#FAF7F2] hover:bg-[#F3EDE2] text-[#5B1414] border border-[#D9CEBA] rounded-lg text-xs font-bold transition-all inline-flex items-center gap-1 cursor-pointer"
+                          >
+                            <Edit3 className="w-3.5 h-3.5 text-[#5B1414]" />
+                            <span>Edit</span>
+                          </button>
+                        </td>
                       </tr>
                     );
                   })
@@ -391,6 +450,123 @@ export const ServerManagementView: React.FC<ServerManagementViewProps> = ({
         </div>
 
       </div>
+
+      {/* ========================================================================= */}
+      {/* MODAL EDIT DATA PETUGAS ASISTEN IMAM                                     */}
+      {/* ========================================================================= */}
+      {editingOfficer && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-in fade-in">
+          <div className="bg-[#f7f3eb] border-2 border-[#e6ded2] rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl space-y-6">
+            <div className="flex items-center justify-between border-b border-[#e0d6c7] pb-4">
+              <div>
+                <span className="text-[11px] font-mono font-bold text-[#7c191e] uppercase tracking-wider block">
+                  ID Absen #{editingOfficer.id}
+                </span>
+                <h3 className="text-xl font-bold text-[#2b241e] font-serif">
+                  Edit Profil Petugas
+                </h3>
+              </div>
+              <button
+                onClick={() => setEditingOfficer(null)}
+                className="w-8 h-8 rounded-full bg-[#e8dfd1] text-[#554d44] flex items-center justify-center font-bold hover:bg-[#d6cbbe]"
+              >
+                ✕
+              </button>
+            </div>
+
+            <form onSubmit={handleSaveEdit} className="space-y-4">
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-[#4a4239] uppercase tracking-wider">
+                  Nama Lengkap
+                </label>
+                <input
+                  type="text"
+                  value={editName}
+                  onChange={(e) => setEditName(e.target.value)}
+                  required
+                  className="w-full px-4 py-2.5 bg-white border border-[#d6cbbe] rounded-xl text-sm font-semibold text-[#2b241e]"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-[#4a4239] uppercase tracking-wider">
+                    Wilayah Paroki
+                  </label>
+                  <input
+                    type="text"
+                    value={editWilayah}
+                    onChange={(e) => setEditWilayah(e.target.value)}
+                    required
+                    className="w-full px-3 py-2 bg-white border border-[#d6cbbe] rounded-xl text-xs text-[#2b241e]"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-[#4a4239] uppercase tracking-wider">
+                    Peran Petugas
+                  </label>
+                  <select
+                    value={editRole}
+                    onChange={(e) => setEditRole(e.target.value as any)}
+                    className="w-full px-3 py-2 bg-white border border-[#d6cbbe] rounded-xl text-xs font-bold text-[#2b241e]"
+                  >
+                    <option value="Asisten Imam">Asisten Imam</option>
+                    <option value="Koorlap">Asisten Imam + Koorlap</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-[#4a4239] uppercase tracking-wider">
+                    No. WhatsApp / Telepon
+                  </label>
+                  <input
+                    type="text"
+                    value={editPhone}
+                    onChange={(e) => setEditPhone(e.target.value)}
+                    className="w-full px-3 py-2 bg-white border border-[#d6cbbe] rounded-xl text-xs text-[#2b241e]"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-[#4a4239] uppercase tracking-wider">
+                    Status Aktivasi
+                  </label>
+                  <select
+                    value={editStatus}
+                    onChange={(e) => setEditStatus(e.target.value as any)}
+                    className="w-full px-3 py-2 bg-white border border-[#d6cbbe] rounded-xl text-xs font-bold text-[#2b241e]"
+                  >
+                    <option value="Aktif">Aktif</option>
+                    <option value="Cuti">Cuti</option>
+                    <option value="Tidak Aktif">Tidak Aktif</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="pt-4 flex items-center justify-end gap-3 border-t border-[#e0d6c7]">
+                <button
+                  type="button"
+                  onClick={() => setEditingOfficer(null)}
+                  className="px-4 py-2 bg-[#e0d6c7] hover:bg-[#d6cbbe] text-[#554d44] text-xs font-bold rounded-xl"
+                >
+                  Batal
+                </button>
+                <button
+                  type="submit"
+                  className="px-5 py-2 bg-[#7c191e] hover:bg-[#681419] text-white text-xs font-bold rounded-xl shadow-xs"
+                >
+                  Simpan Perubahan Database
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };
+

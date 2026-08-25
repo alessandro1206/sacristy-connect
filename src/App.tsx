@@ -245,6 +245,18 @@ export default function App() {
     );
   };
 
+  const handleUpdateOfficer = (updatedOfficer: Officer) => {
+    setOfficers(prev =>
+      prev.map(o => (o.id === updatedOfficer.id ? updatedOfficer : o))
+    );
+    handleAddLog({
+      type: 'admin',
+      description: `Data Petugas Diperbarui: ${updatedOfficer.name} (ID: ${updatedOfficer.id}) - ${updatedOfficer.role} (${updatedOfficer.wilayah})`,
+      actor: 'Admin Database'
+    });
+  };
+
+
   const isLandingMode = currentView === 'landing';
   const isKioskMode = currentView === 'kiosk';
   const isAdminMode = !isLandingMode && !isKioskMode;
@@ -366,8 +378,10 @@ export default function App() {
             <ServerManagementView
               officers={officers}
               onAddOfficer={handleAddOfficer}
+              onUpdateOfficer={handleUpdateOfficer}
               onToggleStatus={handleToggleOfficerStatus}
             />
+
           )}
 
           {/* 6. REPORTS: Laporan Tugas & Rekapitulasi Presensi */}

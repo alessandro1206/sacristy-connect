@@ -63,26 +63,29 @@ export const AdminBackoffice: React.FC<AdminBackofficeProps> = ({
     }
   ]);
 
-  // Preset templates from real WhatsApp parish group screenshot
+  // Generic template formats for WhatsApp Tukar Jadwal (No specific names)
   const PRESET_TUKAR = `Lapor Tukar Tugas
 
-Hengky #105 tugas tgl 13 Sept di KJP2 jam 17.00..
+[Nama Petugas 1] #[No ID 1] tugas tgl [Tanggal] di [Lokasi 1] jam [Jam 1]..
 
-Tukar dgn pak @~cecep condro #092 tgl 13 Sept di Gereja jam 18.00
+Tukar dgn pak @~[Nama Petugas 2] #[No ID 2] tgl [Tanggal] di [Lokasi 2] jam [Jam 2]
 
-CC @~Richard Dharyanto`;
+CC @~[Nama Koorlap]`;
 
   const PRESET_DIGANTIKAN = `Lapor tukar jadwal tugas :
 
-Tjoendianto#103 Tugas gereja minggu 30 agust jam 18.00.
+[Nama Petugas 1] #[No ID 1] Tugas [Lokasi] [Hari] [Tanggal] jam [Jam].
 
 Digantikan oleh:
-Alex #099
+[Nama Petugas 2] #[No ID 2]
 
 Terima kasih . 🙏`;
 
-  const [inputMessage, setInputMessage] = useState<string>(PRESET_TUKAR);
+  const [inputMessage, setInputMessage] = useState<string>(
+    `Lapor Tukar Tugas\n\nPetugas A #001 tugas tgl 13 Sept di KJP2 jam 17.00..\n\nTukar dgn pak @~Petugas B #002 tgl 13 Sept di Gereja jam 18.00\n\nCC @~Koorlap Jaga`
+  );
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
+
 
   // Detected change state for Live Preview
   const [detectedChange, setDetectedChange] = useState<{
