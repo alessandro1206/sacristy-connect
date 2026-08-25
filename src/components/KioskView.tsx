@@ -86,9 +86,9 @@ const MASS_SESSIONS: MassSessionChoice[] = [
     description: "Misa Harian Sore / Jumat Pertama (1 Koorlap Jaga)"
   },
 
-  // 2. MISA SABTU SORE & MINGGU (SEPTEMBER 2026)
+  // 2. MISA SABTU SORE & MINGGU (SEPTEMBER 2026 - MINGGU I)
   {
-    id: "misa-sabtu-1800",
+    id: "sch-sep-01",
     category: "mingguan",
     categoryLabel: "Sabtu & Minggu (2 Koorlap)",
     dayLabel: "SABTU",
@@ -101,10 +101,10 @@ const MASS_SESSIONS: MassSessionChoice[] = [
     koorlapCount: 2,
     koorlapDisplay: "Johanes Ignasius Totok & Yudi Wijaya",
     location: "GEREJA UTAMA",
-    description: "Misa Sabtu Sore (2 Koorlap Jaga)"
+    description: "Misa Sabtu Sore (16 Petugas Scheduled)"
   },
   {
-    id: "misa-minggu-0600",
+    id: "sch-sep-02",
     category: "mingguan",
     categoryLabel: "Sabtu & Minggu (2 Koorlap)",
     dayLabel: "MINGGU",
@@ -117,10 +117,10 @@ const MASS_SESSIONS: MassSessionChoice[] = [
     koorlapCount: 2,
     koorlapDisplay: "Agustinus Cahyono & Adinanda Condrowibowo",
     location: "GEREJA UTAMA",
-    description: "Misa Minggu Pagi I (2 Koorlap Jaga)"
+    description: "Misa Minggu Pagi I (8 Petugas Scheduled)"
   },
   {
-    id: "misa-minggu-0830",
+    id: "sch-sep-03",
     category: "mingguan",
     categoryLabel: "Sabtu & Minggu (2 Koorlap)",
     dayLabel: "MINGGU",
@@ -133,12 +133,29 @@ const MASS_SESSIONS: MassSessionChoice[] = [
     koorlapCount: 2,
     koorlapDisplay: "Adinanda Condrowibowo & Dionisius Donny K.",
     location: "GEREJA UTAMA",
-    description: "Misa Minggu Pagi II (2 Koorlap Jaga)"
+    description: "Misa Minggu Pagi II (10 Petugas Scheduled)"
   },
   {
-    id: "misa-minggu-1700",
+    id: "sch-sep-04",
     category: "mingguan",
-    categoryLabel: "Sabtu & Minggu (2 Koorlap)",
+    categoryLabel: "Sabtu & Minggu (3 Koorlap)",
+    dayLabel: "MINGGU",
+    dateDisplay: "06 September 2026",
+    timeDisplay: "10:00 WIB",
+    koorlaps: [
+      { id: "027", name: "Fransiskus Silvester Windy" },
+      { id: "085", name: "Sugiharto Tanto" },
+      { id: "078", name: "Michael Raphael Hari W." }
+    ],
+    koorlapCount: 3,
+    koorlapDisplay: "Fransiskus W., Sugiharto T., Michael R.",
+    location: "GEREJA UTAMA",
+    description: "Misa Minggu Pagi III / Utama (20 Petugas Scheduled)"
+  },
+  {
+    id: "sch-sep-05",
+    category: "mingguan",
+    categoryLabel: "Sabtu & Minggu (1 Koorlap)",
     dayLabel: "MINGGU",
     dateDisplay: "06 September 2026",
     timeDisplay: "18:00 WIB",
@@ -148,7 +165,251 @@ const MASS_SESSIONS: MassSessionChoice[] = [
     koorlapCount: 1,
     koorlapDisplay: "Tjio Johansyah",
     location: "GEREJA UTAMA",
-    description: "Misa Minggu Sore (Koorlap Jaga)"
+    description: "Misa Minggu Sore (18 Petugas Scheduled)"
+  },
+
+  // MISA SABTU SORE & MINGGU (SEPTEMBER 2026 - MINGGU II)
+  {
+    id: "sch-sep-06",
+    category: "mingguan",
+    categoryLabel: "Sabtu & Minggu (2 Koorlap)",
+    dayLabel: "SABTU",
+    dateDisplay: "12 September 2026",
+    timeDisplay: "18:00 WIB",
+    koorlaps: [
+      { id: "052", name: "Edward Luntungan" },
+      { id: "111", name: "Handi Wirajaya" }
+    ],
+    koorlapCount: 2,
+    koorlapDisplay: "Edward Luntungan & Handi Wirajaya",
+    location: "GEREJA UTAMA",
+    description: "Misa Sabtu Sore (16 Petugas Scheduled)"
+  },
+  {
+    id: "sch-sep-07",
+    category: "mingguan",
+    categoryLabel: "Sabtu & Minggu (1 Koorlap)",
+    dayLabel: "MINGGU",
+    dateDisplay: "13 September 2026",
+    timeDisplay: "06:00 WIB",
+    koorlaps: [
+      { id: "054", name: "Hartanto Chandra" }
+    ],
+    koorlapCount: 1,
+    koorlapDisplay: "Hartanto Chandra",
+    location: "GEREJA UTAMA",
+    description: "Misa Minggu Pagi I (8 Petugas Scheduled)"
+  },
+  {
+    id: "sch-sep-08",
+    category: "mingguan",
+    categoryLabel: "Sabtu & Minggu (1 Koorlap)",
+    dayLabel: "MINGGU",
+    dateDisplay: "13 September 2026",
+    timeDisplay: "08:00 WIB",
+    koorlaps: [
+      { id: "054", name: "Hartanto Chandra" }
+    ],
+    koorlapCount: 1,
+    koorlapDisplay: "Hartanto Chandra",
+    location: "GEREJA UTAMA",
+    description: "Misa Minggu Pagi II (10 Petugas Scheduled)"
+  },
+  {
+    id: "sch-sep-09",
+    category: "mingguan",
+    categoryLabel: "Sabtu & Minggu (3 Koorlap)",
+    dayLabel: "MINGGU",
+    dateDisplay: "13 September 2026",
+    timeDisplay: "10:00 WIB",
+    koorlaps: [
+      { id: "097", name: "Budi Purnomo" },
+      { id: "098", name: "Alex Santoso" },
+      { id: "112", name: "Aloysius Ari Senoaji L." }
+    ],
+    koorlapCount: 3,
+    koorlapDisplay: "Budi P., Alex S., Aloysius Ari Senoaji L.",
+    location: "GEREJA UTAMA",
+    description: "Misa Minggu Pagi III / Utama (20 Petugas Scheduled)"
+  },
+  {
+    id: "sch-sep-10",
+    category: "mingguan",
+    categoryLabel: "Sabtu & Minggu (3 Koorlap)",
+    dayLabel: "MINGGU",
+    dateDisplay: "13 September 2026",
+    timeDisplay: "18:00 WIB",
+    koorlaps: [
+      { id: "089", name: "Hanjaya Kurniawan" },
+      { id: "124", name: "Julius Agus Prajitno" },
+      { id: "125", name: "Donatus Sri Tur Prawinoto" }
+    ],
+    koorlapCount: 3,
+    koorlapDisplay: "Hanjaya K., Julius A., Donatus S.",
+    location: "GEREJA UTAMA",
+    description: "Misa Minggu Sore (18 Petugas Scheduled)"
+  },
+
+  // MISA SABTU SORE & MINGGU (SEPTEMBER 2026 - MINGGU III)
+  {
+    id: "sch-sep-11",
+    category: "mingguan",
+    categoryLabel: "Sabtu & Minggu (1 Koorlap)",
+    dayLabel: "SABTU",
+    dateDisplay: "19 September 2026",
+    timeDisplay: "18:00 WIB",
+    koorlaps: [
+      { id: "145", name: "Damianus Slamet Subagio" }
+    ],
+    koorlapCount: 1,
+    koorlapDisplay: "Damianus Slamet Subagio",
+    location: "GEREJA UTAMA",
+    description: "Misa Sabtu Sore (16 Petugas Scheduled)"
+  },
+  {
+    id: "sch-sep-12",
+    category: "mingguan",
+    categoryLabel: "Sabtu & Minggu (2 Koorlap)",
+    dayLabel: "MINGGU",
+    dateDisplay: "20 September 2026",
+    timeDisplay: "06:00 WIB",
+    koorlaps: [
+      { id: "054", name: "Hartanto Chandra" },
+      { id: "145", name: "Damianus Slamet Subagio" }
+    ],
+    koorlapCount: 2,
+    koorlapDisplay: "Hartanto C. & Damianus S.",
+    location: "GEREJA UTAMA",
+    description: "Misa Minggu Pagi I (8 Petugas Scheduled)"
+  },
+  {
+    id: "sch-sep-13",
+    category: "mingguan",
+    categoryLabel: "Sabtu & Minggu (2 Koorlap)",
+    dayLabel: "MINGGU",
+    dateDisplay: "20 September 2026",
+    timeDisplay: "08:00 WIB",
+    koorlaps: [
+      { id: "055", name: "Agustinus S." },
+      { id: "056", name: "Antonius David Tjung" }
+    ],
+    koorlapCount: 2,
+    koorlapDisplay: "Agustinus S. & Antonius David Tjung",
+    location: "GEREJA UTAMA",
+    description: "Misa Minggu Pagi II (10 Petugas Scheduled)"
+  },
+  {
+    id: "sch-sep-14",
+    category: "mingguan",
+    categoryLabel: "Sabtu & Minggu (1 Koorlap)",
+    dayLabel: "MINGGU",
+    dateDisplay: "20 September 2026",
+    timeDisplay: "10:00 WIB",
+    koorlaps: [
+      { id: "163", name: "Fransiscus Paulus Kuncoro K." }
+    ],
+    koorlapCount: 1,
+    koorlapDisplay: "Fransiscus Paulus Kuncoro Kohar",
+    location: "GEREJA UTAMA",
+    description: "Misa Minggu Pagi III / Utama (20 Petugas Scheduled)"
+  },
+  {
+    id: "sch-sep-15",
+    category: "mingguan",
+    categoryLabel: "Sabtu & Minggu (4 Koorlap)",
+    dayLabel: "MINGGU",
+    dateDisplay: "20 September 2026",
+    timeDisplay: "18:00 WIB",
+    koorlaps: [
+      { id: "089", name: "Hanjaya Kurniawan" },
+      { id: "137", name: "Berti Albertus Nara" },
+      { id: "138", name: "William Antonius Davidson J." },
+      { id: "143", name: "Stefanus Charlie Tjahyono" }
+    ],
+    koorlapCount: 4,
+    koorlapDisplay: "Hanjaya K., Berti A., William A., Stefanus C.",
+    location: "GEREJA UTAMA",
+    description: "Misa Minggu Sore (18 Petugas Scheduled)"
+  },
+
+  // MISA SABTU SORE & MINGGU (SEPTEMBER 2026 - MINGGU IV)
+  {
+    id: "sch-sep-16",
+    category: "mingguan",
+    categoryLabel: "Sabtu & Minggu (2 Koorlap)",
+    dayLabel: "SABTU",
+    dateDisplay: "26 September 2026",
+    timeDisplay: "18:00 WIB",
+    koorlaps: [
+      { id: "149", name: "Richard Dharyanto" },
+      { id: "150", name: "Yohanes Kurniawan Halim" }
+    ],
+    koorlapCount: 2,
+    koorlapDisplay: "Richard Dharyanto & Yohanes K. Halim",
+    location: "GEREJA UTAMA",
+    description: "Misa Sabtu Sore (16 Petugas Scheduled)"
+  },
+  {
+    id: "sch-sep-17",
+    category: "mingguan",
+    categoryLabel: "Sabtu & Minggu (2 Koorlap)",
+    dayLabel: "MINGGU",
+    dateDisplay: "27 September 2026",
+    timeDisplay: "06:00 WIB",
+    koorlaps: [
+      { id: "054", name: "Hartanto Chandra" },
+      { id: "145", name: "Damianus Slamet Subagio" }
+    ],
+    koorlapCount: 2,
+    koorlapDisplay: "Hartanto C. & Damianus S.",
+    location: "GEREJA UTAMA",
+    description: "Misa Minggu Pagi I (8 Petugas Scheduled)"
+  },
+  {
+    id: "sch-sep-18",
+    category: "mingguan",
+    categoryLabel: "Sabtu & Minggu (2 Koorlap)",
+    dayLabel: "MINGGU",
+    dateDisplay: "27 September 2026",
+    timeDisplay: "08:00 WIB",
+    koorlaps: [
+      { id: "057", name: "Andrew Firmansyah L." },
+      { id: "058", name: "Bambang Susilo" }
+    ],
+    koorlapCount: 2,
+    koorlapDisplay: "Andrew F. & Bambang Susilo",
+    location: "GEREJA UTAMA",
+    description: "Misa Minggu Pagi II (10 Petugas Scheduled)"
+  },
+  {
+    id: "sch-sep-19",
+    category: "mingguan",
+    categoryLabel: "Sabtu & Minggu (1 Koorlap)",
+    dayLabel: "MINGGU",
+    dateDisplay: "27 September 2026",
+    timeDisplay: "10:00 WIB",
+    koorlaps: [
+      { id: "163", name: "Fransiscus Paulus Kuncoro K." }
+    ],
+    koorlapCount: 1,
+    koorlapDisplay: "Fransiscus Paulus Kuncoro Kohar",
+    location: "GEREJA UTAMA",
+    description: "Misa Minggu Pagi III / Utama (20 Petugas Scheduled)"
+  },
+  {
+    id: "sch-sep-20",
+    category: "mingguan",
+    categoryLabel: "Sabtu & Minggu (1 Koorlap)",
+    dayLabel: "MINGGU",
+    dateDisplay: "27 September 2026",
+    timeDisplay: "18:00 WIB",
+    koorlaps: [
+      { id: "166", name: "Sukotjo Budiono" }
+    ],
+    koorlapCount: 1,
+    koorlapDisplay: "Sukotjo Budiono",
+    location: "GEREJA UTAMA",
+    description: "Misa Minggu Sore (18 Petugas Scheduled)"
   },
 
   // 3. MISA HARI RAYA BESAR
@@ -187,25 +448,9 @@ const MASS_SESSIONS: MassSessionChoice[] = [
     koorlapDisplay: "Johanes T., Hartanto C., Handi W., Damianus S.",
     location: "GEREJA UTAMA & BALAI PAROKI",
     description: "Misa Vigili Paskah (4 Koorlap Gabungan Gereja & Balai)"
-  },
-  {
-    id: "misa-natal-pagi",
-    category: "hari_raya",
-    categoryLabel: "Hari Besar / Natal & Paskah (Banyak Koorlap)",
-    dayLabel: "HARI RAYA NATAL",
-    dateDisplay: "25 Desember 2026",
-    timeDisplay: "08:30 WIB",
-    koorlaps: [
-      { id: "001", name: "Antonius Budiarjo" },
-      { id: "057", name: "Yohanes Kurniawan" },
-      { id: "002", name: "Maria Susanti" }
-    ],
-    koorlapCount: 3,
-    koorlapDisplay: "Antonius B., Yohanes K., Maria S.",
-    location: "GEREJA UTAMA & BALAI PAROKI",
-    description: "Misa Hari Raya Natal Pagi (3 Koorlap)"
   }
 ];
+
 
 export const KioskView: React.FC<KioskViewProps> = ({
   currentSlot,
