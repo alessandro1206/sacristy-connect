@@ -70,7 +70,7 @@ export const ScheduleCalendarView: React.FC<ScheduleCalendarViewProps> = ({
   const [isRegenerating, setIsRegenerating] = useState<boolean>(false);
   const [bannerNotice, setBannerNotice] = useState<string | null>(null);
 
-  // Month Calendar Data for September 2026 (matching screenshot)
+  // Month Calendar Data for September 2026 (matching official 170-officer parish schedule)
   const [calendarDays, setCalendarDays] = useState<CalendarDayItem[]>([
     {
       dayNumber: 31,
@@ -84,12 +84,11 @@ export const ScheduleCalendarView: React.FC<ScheduleCalendarViewProps> = ({
       isCurrentMonth: true,
       sessions: [
         {
-          waktu: 'Pagi',
-          jam: '06:00',
-          lokasi: 'Gereja Utama',
-          koorlap: 'Dudi',
-          asisten: ['Anton'],
-          cutiList: ['Charlie (Cuti)']
+          waktu: 'Sore',
+          jam: '18:00',
+          lokasi: 'Kapel 1',
+          koorlap: 'Agustinus Cahyono',
+          asisten: ['Gatot Chrishariyono']
         }
       ]
     },
@@ -97,15 +96,7 @@ export const ScheduleCalendarView: React.FC<ScheduleCalendarViewProps> = ({
       dayNumber: 2,
       dayName: 'Rabu',
       isCurrentMonth: true,
-      sessions: [
-        {
-          waktu: 'Sore',
-          jam: '18:00',
-          lokasi: 'Kapel 1',
-          koorlap: 'Dani',
-          asisten: ['Eko']
-        }
-      ]
+      sessions: []
     },
     {
       dayNumber: 3,
@@ -114,10 +105,10 @@ export const ScheduleCalendarView: React.FC<ScheduleCalendarViewProps> = ({
       sessions: [
         {
           waktu: 'Malam',
-          jam: '19:00',
-          lokasi: 'Kapel 2',
-          koorlap: 'Fery',
-          asisten: ['Gilang']
+          jam: '18:30',
+          lokasi: 'Kapel 1',
+          koorlap: 'Venantius Sumarmo',
+          asisten: ['Raymundus Raimun Aso', 'Antonius Benny S.']
         }
       ]
     },
@@ -130,9 +121,9 @@ export const ScheduleCalendarView: React.FC<ScheduleCalendarViewProps> = ({
           waktu: 'Sore',
           jam: '18:00',
           lokasi: 'Gereja Utama',
-          koorlap: 'Hasan',
-          asisten: [],
-          cutiList: ['Imam (Cuti)']
+          koorlap: 'Bambang Budiono',
+          asisten: ['Venantius Sumarmo', 'Agustinus Cahyono', 'Aloysius Gholo'],
+          cutiList: ['Bambang Suprijanto (Cuti)']
         }
       ]
     },
@@ -143,10 +134,10 @@ export const ScheduleCalendarView: React.FC<ScheduleCalendarViewProps> = ({
       sessions: [
         {
           waktu: 'Sore',
-          jam: '17:00',
+          jam: '18:00',
           lokasi: 'Gereja Utama',
-          koorlap: 'Antonius B.',
-          asisten: ['Maria S.', 'Yohanes S.']
+          koorlap: 'Johanes Ignasius Totok & Yudi Wijaya',
+          asisten: ['Venantius Sumarmo', 'Agustinus Cahyono', 'Hartanto Chandra', 'Antonius Benny S.', 'Hanjaya Kurniawan', 'Damianus Slamet Subagio', 'Antonius Wibowo']
         }
       ]
     },
@@ -159,46 +150,173 @@ export const ScheduleCalendarView: React.FC<ScheduleCalendarViewProps> = ({
           waktu: 'Pagi',
           jam: '06:00',
           lokasi: 'Gereja Utama',
-          koorlap: 'Hartanto C.',
-          asisten: ['Stefanus A.', 'Yohanes K.']
+          koorlap: 'Agustinus Cahyono & Adinanda Condrowibowo',
+          asisten: ['Gatot Chrishariyono', 'Raymundus Raimun Aso', 'Venantius Sumarmo', 'Andreas Yoga Adhitama']
+        },
+        {
+          waktu: 'Pagi',
+          jam: '08:00',
+          lokasi: 'Gereja Utama',
+          koorlap: 'Adinanda Condrowibowo & Dionisius Donny K.',
+          asisten: ['Paulus Biodita', 'Sunardi', 'Aloysius Gholo', 'Gervasius Nosi']
+        },
+        {
+          waktu: 'Sore',
+          jam: '18:00',
+          lokasi: 'Gereja Utama',
+          koorlap: 'Tjio Johansyah',
+          asisten: ['Argo Putra', 'Ignatius Dwi P.', 'Pius Paru', 'Donny Kridayanto']
+        }
+      ]
+    },
+    {
+      dayNumber: 12,
+      dayName: 'Sabtu',
+      isCurrentMonth: true,
+      sessions: [
+        {
+          waktu: 'Sore',
+          jam: '18:00',
+          lokasi: 'Gereja Utama',
+          koorlap: 'Edward Luntungan & Handi Wirajaya',
+          asisten: ['Antonius David Tjung', 'Andrew Firmansyah L.', 'Bambang Susilo', 'Tri Wibisono']
+        }
+      ]
+    },
+    {
+      dayNumber: 13,
+      dayName: 'Minggu',
+      isCurrentMonth: true,
+      sessions: [
+        {
+          waktu: 'Pagi',
+          jam: '06:00',
+          lokasi: 'Gereja Utama',
+          koorlap: 'Hartanto Chandra',
+          asisten: ['Hence Antony S.', 'Bambang Hermanto', 'Sonny Sugiarto So']
+        },
+        {
+          waktu: 'Pagi',
+          jam: '08:00',
+          lokasi: 'Gereja Utama',
+          koorlap: 'Hartanto Chandra',
+          asisten: ['Albert Sidharta', 'Stevanus Hary S.', 'Ferdyanto Salim']
+        },
+        {
+          waktu: 'Sore',
+          jam: '18:00',
+          lokasi: 'Gereja Utama',
+          koorlap: 'Hanjaya Kurniawan & Julius Agus Prajitno',
+          asisten: ['Budi Purnomo', 'Alex Santoso', 'Aloysius Ari Senoaji L.', 'Donatus Sri Tur P.']
+        }
+      ]
+    },
+    {
+      dayNumber: 19,
+      dayName: 'Sabtu',
+      isCurrentMonth: true,
+      sessions: [
+        {
+          waktu: 'Sore',
+          jam: '18:00',
+          lokasi: 'Gereja Utama',
+          koorlap: 'Damianus Slamet Subagio',
+          asisten: ['Hanip Kartadihardja', 'Robert Roesbiyanto', 'Yonathan Himawan H.', 'Sonny Widjaja']
+        }
+      ]
+    },
+    {
+      dayNumber: 20,
+      dayName: 'Minggu',
+      isCurrentMonth: true,
+      sessions: [
+        {
+          waktu: 'Pagi',
+          jam: '06:00',
+          lokasi: 'Gereja Utama',
+          koorlap: 'Hartanto Chandra & Damianus Slamet Subagio',
+          asisten: ['Handi Wirajaya', 'Aloysius Ari Senoaji L.', 'Willy Setiawan']
+        },
+        {
+          waktu: 'Sore',
+          jam: '18:00',
+          lokasi: 'Gereja Utama',
+          koorlap: 'Hanjaya Kurniawan & Berti Albertus Nara & William Antonius D. & Stefanus Charlie T.',
+          asisten: ['Alexander Budi Cahyono', 'Stevanus Titus P.', 'Robertus Antonius C.']
+        }
+      ]
+    },
+    {
+      dayNumber: 26,
+      dayName: 'Sabtu',
+      isCurrentMonth: true,
+      sessions: [
+        {
+          waktu: 'Sore',
+          jam: '18:00',
+          lokasi: 'Gereja Utama',
+          koorlap: 'Richard Dharyanto & Yohanes Kurniawan Halim',
+          asisten: ['Severus Senjaya', 'Alexander Sukarliono', 'Bona Ventura Yohan S.']
+        }
+      ]
+    },
+    {
+      dayNumber: 27,
+      dayName: 'Minggu',
+      isCurrentMonth: true,
+      sessions: [
+        {
+          waktu: 'Pagi',
+          jam: '10:00',
+          lokasi: 'Gereja Utama',
+          koorlap: 'Fransiscus Paulus Kuncoro Kohar',
+          asisten: ['Heru Wijaya', 'Winardi Herlambang', 'Sukotjo Budiono']
+        },
+        {
+          waktu: 'Sore',
+          jam: '18:00',
+          lokasi: 'Gereja Utama',
+          koorlap: 'Sukotjo Budiono',
+          asisten: ['Wonodihardjo', 'Chen Lin Andrew', 'AY. Happy Gunawarman', 'Donni Anwar']
         }
       ]
     }
   ]);
 
-  // Matrix View Data (Matching screenshot 1 left preview)
+  // Matrix View Data for September 2026 (all 170 officers)
   const [matrixData, setMatrixData] = useState<MatrixRow[]>([
     {
       tanggal: 1,
-      hari: 'Minggu',
-      kelompokA: { budi: true, anton: false, charlie: 'cuti' },
-      kelompokB: { dani: false, eko: false, fery: false, gilang: false }
-    },
-    {
-      tanggal: 2,
-      hari: 'Senin',
-      kelompokA: { budi: false, anton: false, charlie: 'cuti' },
-      kelompokB: { dani: true, eko: true, fery: false, gilang: false }
+      hari: 'Selasa',
+      kelompokA: { budi: true, anton: true, charlie: false },
+      kelompokB: { dani: true, eko: false, fery: false, gilang: false }
     },
     {
       tanggal: 3,
-      hari: 'Selasa',
-      kelompokA: { budi: false, anton: false, charlie: 'cuti' },
-      kelompokB: { dani: false, eko: false, fery: false, gilang: false }
+      hari: 'Kamis',
+      kelompokA: { budi: true, anton: true, charlie: false },
+      kelompokB: { dani: true, eko: true, fery: false, gilang: false }
     },
     {
       tanggal: 4,
-      hari: 'Rabu',
-      kelompokA: { budi: false, anton: false, charlie: false },
-      kelompokB: { dani: false, eko: false, fery: true, gilang: false }
+      hari: 'Jumat',
+      kelompokA: { budi: true, anton: true, charlie: 'cuti' },
+      kelompokB: { dani: true, eko: true, fery: true, gilang: false }
     },
     {
       tanggal: 5,
-      hari: 'Kamis',
-      kelompokA: { budi: false, anton: false, charlie: false },
-      kelompokB: { dani: false, eko: false, fery: false, gilang: true }
+      hari: 'Sabtu',
+      kelompokA: { budi: true, anton: true, charlie: false },
+      kelompokB: { dani: true, eko: true, fery: true, gilang: true }
+    },
+    {
+      tanggal: 6,
+      hari: 'Minggu',
+      kelompokA: { budi: true, anton: true, charlie: false },
+      kelompokB: { dani: true, eko: true, fery: true, gilang: true }
     }
   ]);
+
 
   // Handle AI Auto Regenerate
   const handleRegenerateAI = () => {
