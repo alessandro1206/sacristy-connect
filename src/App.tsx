@@ -80,15 +80,16 @@ export default function App() {
         setIsLoginModalOpen(true);
       }
     } else if (isKoorlapOrAdminView(view)) {
-      // Koorlap or Admin can access
+      // Admin access required
       if (userSession.role === 'admin' || userSession.role === 'koorlap') {
         setCurrentView(view);
       } else {
         setPendingAdminView(view);
-        setInitialModalRole('koorlap');
+        setInitialModalRole('admin');
         setIsLoginModalOpen(true);
       }
-    } else {
+    }
+ else {
       setCurrentView(view);
     }
   };

@@ -8,7 +8,8 @@ import {
   AssignmentRulesConfig 
 } from '../types';
 
-export const CHURCH_LOGO = "https://lh3.googleusercontent.com/aida/AP1WRLvwXCerLKRDg4cWt33KuVdaqdEScm-qb7Tonx3aXw8K9hHV-NMtzYgwKH4Nf5dD4kFiAT3aN9JvbdAb25SNoAzRCGtIbKk1k_S7T6JF78KIh26zAH_KKVOKVqTcUMao_qce-Gin9e55vfP5kJ77CdkG8iSKS1dzrczl09pkHeEWscI8ne3nSO-4QeRLuK6v9s18ljzwSrtHFnA-DruAB1dkyKM3bFK4bExXQAU18i390Rt3z-vttCaZxaTX";
+export const CHURCH_LOGO = "/parish-logo.png";
+
 
 export const INITIAL_OFFICERS: Officer[] = [
   {

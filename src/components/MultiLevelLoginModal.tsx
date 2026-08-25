@@ -207,53 +207,58 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
           </div>
 
           <h3 className="text-xl font-extrabold font-headline tracking-tight">
-            Portal Masuk Multi-Level
+            {initialRole === 'admin' ? 'Login Administrator' : 'Portal Masuk Sakristi'}
           </h3>
           <p className="text-xs text-white/80 mt-1">
-            {targetViewLabel ? `Akses ${targetViewLabel} - ` : ''}Pilih tingkatan otorisasi akun Anda
+            {initialRole === 'admin' 
+              ? 'Masuk ke Backoffice Pengelola Paroki Santo Yakobus' 
+              : targetViewLabel ? `Akses ${targetViewLabel}` : 'Otorisasi Akun'}
           </p>
 
-          {/* Level Tabs selector */}
-          <div className="mt-5 grid grid-cols-3 gap-1 bg-[#420D0D] p-1.5 rounded-2xl border border-white/10">
-            <button
-              type="button"
-              onClick={() => handleTabChange('officer')}
-              className={`py-2 px-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
-                activeTab === 'officer' 
-                  ? 'bg-[#FAF7F2] text-[#5B1414] shadow-md font-extrabold' 
-                  : 'text-white/70 hover:text-white hover:bg-white/5'
-              }`}
-            >
-              <UserCheck className="w-3.5 h-3.5" />
-              <span>Petugas</span>
-            </button>
+          {/* Level Tabs selector - Hidden if Admin Login */}
+          {initialRole !== 'admin' && (
+            <div className="mt-5 grid grid-cols-3 gap-1 bg-[#420D0D] p-1.5 rounded-2xl border border-white/10">
+              <button
+                type="button"
+                onClick={() => handleTabChange('officer')}
+                className={`py-2 px-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                  activeTab === 'officer' 
+                    ? 'bg-[#FAF7F2] text-[#5B1414] shadow-md font-extrabold' 
+                    : 'text-white/70 hover:text-white hover:bg-white/5'
+                }`}
+              >
+                <UserCheck className="w-3.5 h-3.5" />
+                <span>Petugas</span>
+              </button>
 
-            <button
-              type="button"
-              onClick={() => handleTabChange('koorlap')}
-              className={`py-2 px-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
-                activeTab === 'koorlap' 
-                  ? 'bg-[#FAF7F2] text-[#5B1414] shadow-md font-extrabold' 
-                  : 'text-white/70 hover:text-white hover:bg-white/5'
-              }`}
-            >
-              <Award className="w-3.5 h-3.5" />
-              <span>Koorlap</span>
-            </button>
+              <button
+                type="button"
+                onClick={() => handleTabChange('koorlap')}
+                className={`py-2 px-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                  activeTab === 'koorlap' 
+                    ? 'bg-[#FAF7F2] text-[#5B1414] shadow-md font-extrabold' 
+                    : 'text-white/70 hover:text-white hover:bg-white/5'
+                }`}
+              >
+                <Award className="w-3.5 h-3.5" />
+                <span>Koorlap</span>
+              </button>
 
-            <button
-              type="button"
-              onClick={() => handleTabChange('admin')}
-              className={`py-2 px-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
-                activeTab === 'admin' 
-                  ? 'bg-[#FAF7F2] text-[#5B1414] shadow-md font-extrabold' 
-                  : 'text-white/70 hover:text-white hover:bg-white/5'
-              }`}
-            >
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span>Admin</span>
-            </button>
-          </div>
+              <button
+                type="button"
+                onClick={() => handleTabChange('admin')}
+                className={`py-2 px-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                  activeTab === 'admin' 
+                    ? 'bg-[#FAF7F2] text-[#5B1414] shadow-md font-extrabold' 
+                    : 'text-white/70 hover:text-white hover:bg-white/5'
+                }`}
+              >
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>Admin</span>
+              </button>
+            </div>
+          )}
+
         </div>
 
         {/* Tab Descriptions & Form Content */}
