@@ -516,7 +516,7 @@ export const KioskView: React.FC<KioskViewProps> = ({
           <div className="flex items-center gap-1.5 bg-black/20 p-1 rounded-xl">
             <button
               onClick={() => handleStepNavigationClick(1)}
-              className={`px-3 py-1 rounded-lg font-bold transition-all flex items-center gap-1 cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-lg font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
                 currentStep === 1 ? 'bg-amber-400 text-[#4A0E17] shadow-xs' : 'text-white/80 hover:text-white'
               }`}
             >
@@ -525,42 +525,22 @@ export const KioskView: React.FC<KioskViewProps> = ({
 
             <button
               onClick={() => handleStepNavigationClick(2)}
-              className={`px-3 py-1 rounded-lg font-bold transition-all flex items-center gap-1 cursor-pointer ${
-                currentStep === 2 
+              className={`px-3.5 py-1.5 rounded-lg font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                currentStep === 2 || currentStep === 3
                   ? 'bg-amber-400 text-[#4A0E17] shadow-xs' 
                   : isSessionUnlocked 
                   ? 'text-white/80 hover:text-white' 
                   : 'text-white/40 cursor-not-allowed'
               }`}
-              title={!isSessionUnlocked ? 'Terkunci! Pilih Misa & isi Password Koorlap/Admin terlebih dahulu' : 'Input Numpad Absen'}
+              title={!isSessionUnlocked ? 'Terkunci! Pilih Misa & isi Password terlebih dahulu' : 'Input Numpad Absen'}
             >
-              {!isSessionUnlocked && <Lock className="w-3 h-3 text-amber-300" />}
+              {!isSessionUnlocked && <Lock className="w-3.5 h-3.5 text-amber-300" />}
               <span>2. Mode Absen (Numpad)</span>
             </button>
 
             <button
-              onClick={() => {
-                if (isSessionUnlocked && !pendingOfficer) {
-                  setPendingOfficer(officers[0]);
-                }
-                handleStepNavigationClick(3);
-              }}
-              className={`px-3 py-1 rounded-lg font-bold transition-all flex items-center gap-1 cursor-pointer ${
-                currentStep === 3 
-                  ? 'bg-amber-400 text-[#4A0E17] shadow-xs' 
-                  : isSessionUnlocked 
-                  ? 'text-white/80 hover:text-white' 
-                  : 'text-white/40 cursor-not-allowed'
-              }`}
-              title={!isSessionUnlocked ? 'Terkunci!' : 'Konfirmasi Identitas'}
-            >
-              {!isSessionUnlocked && <Lock className="w-3 h-3 text-amber-300" />}
-              <span>3. Konfirmasi</span>
-            </button>
-
-            <button
               onClick={() => handleStepNavigationClick(4)}
-              className={`px-3 py-1 rounded-lg font-bold transition-all flex items-center gap-1 cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-lg font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
                 currentStep === 4 
                   ? 'bg-amber-400 text-[#4A0E17] shadow-xs' 
                   : isSessionUnlocked 
@@ -569,10 +549,11 @@ export const KioskView: React.FC<KioskViewProps> = ({
               }`}
               title={!isSessionUnlocked ? 'Terkunci!' : 'Penempatan 8 Posisi'}
             >
-              {!isSessionUnlocked && <Lock className="w-3 h-3 text-amber-300" />}
-              <span>4. Penempatan Posisi</span>
+              {!isSessionUnlocked && <Lock className="w-3.5 h-3.5 text-amber-300" />}
+              <span>3. Penempatan Posisi</span>
             </button>
           </div>
+
 
         </div>
 
