@@ -26,6 +26,7 @@ interface OfficerPersonalScheduleModalProps {
   onOpenLeaveModal?: () => void;
   onOpenSwapChat?: () => void;
   onLogout?: () => void;
+  onOpenLoginModal?: (role?: 'officer' | 'register') => void;
 }
 
 export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModalProps> = ({
@@ -36,7 +37,8 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
   schedule,
   onOpenLeaveModal,
   onOpenSwapChat,
-  onLogout
+  onLogout,
+  onOpenLoginModal
 }) => {
   const [activeTab, setActiveTab] = useState<'duties' | 'profile'>('duties');
   const [selectedOfficerId, setSelectedOfficerId] = useState<string>(userSession.officerId || '001');
@@ -45,6 +47,7 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
   if (!isOpen) {
     return null;
   }
+
 
   // Find selected officer details
   const officer = officers.find(o => o.id === selectedOfficerId || o.id.padStart(3, '0') === selectedOfficerId.padStart(3, '0')) || officers[0] || {
@@ -180,7 +183,43 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
         {/* Modal Content Body */}
         <div className="p-5 overflow-y-auto flex-1 space-y-4">
 
+          {/* Unauthenticated Login Prompt Banner */}
+          {!userSession.isAuthenticated && (
+            <div className="p-4 bg-[#FAF3E6] border border-[#E6D6BD] rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 text-xs shadow-2xs">
+              <div className="flex items-center gap-2.5">
+                <AlertCircle className="w-5 h-5 text-amber-700 shrink-0" />
+                <div>
+                  <p className="font-bold text-[#5B1414]">Anda belum masuk akun (Tamu / Guest)</p>
+                  <p className="text-[#6E5A4B] text-[11px]">Masuk akun atau daftarkan akun baru untuk mengakses profil resmi Anda.</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                <button
+                  onClick={() => {
+                    playAudioFeedback('tap');
+                    onClose();
+                    onOpenLoginModal?.('officer');
+                  }}
+                  className="px-3.5 py-1.5 bg-[#5B1414] hover:bg-[#420D0D] text-white font-bold rounded-xl shadow-xs transition-all cursor-pointer"
+                >
+                  🔑 Masuk
+                </button>
+                <button
+                  onClick={() => {
+                    playAudioFeedback('tap');
+                    onClose();
+                    onOpenLoginModal?.('register');
+                  }}
+                  className="px-3.5 py-1.5 bg-amber-400 hover:bg-amber-300 text-[#4A0E17] font-bold rounded-xl shadow-xs transition-all cursor-pointer"
+                >
+                  ➕ Buat Akun
+                </button>
+              </div>
+            </div>
+          )}
+
           {activeTab === 'duties' && (
+
             <div className="space-y-3">
               {/* Header & Date Search Filter */}
               <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2">

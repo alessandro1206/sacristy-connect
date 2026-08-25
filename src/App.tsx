@@ -405,7 +405,7 @@ export default function App() {
         </main>
       </div>
 
-      {/* Multi-Level Login Modal (Petugas, Koorlap, Admin) */}
+      {/* Multi-Level Login Modal (Petugas, Koorlap, Admin, Register) */}
       <MultiLevelLoginModal
         isOpen={isLoginModalOpen}
         onClose={() => setIsLoginModalOpen(false)}
@@ -413,6 +413,7 @@ export default function App() {
         officers={officers}
         initialRole={initialModalRole}
         targetViewLabel={getAdminViewTitle(pendingAdminView)}
+        onRegisterOfficer={handleAddOfficer}
       />
 
       {/* Officer Personal Schedule Modal (Jadwal Saya) */}
@@ -425,7 +426,12 @@ export default function App() {
         onOpenLeaveModal={() => alert('Form Pengajuan Cuti / Izin disinkronkan dengan Google Form Paroki.')}
         onOpenSwapChat={() => handleNavigate('admin-chat')}
         onLogout={handleLogout}
+        onOpenLoginModal={(role = 'officer') => {
+          setInitialModalRole(role);
+          setIsLoginModalOpen(true);
+        }}
       />
+
 
       {/* Standalone Code Exporter Modal */}
       <CodeExportModal

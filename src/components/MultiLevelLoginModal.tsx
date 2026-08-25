@@ -24,8 +24,9 @@ interface MultiLevelLoginModalProps {
   onClose: () => void;
   onLoginSuccess: (session: UserSession) => void;
   officers: Officer[];
-  initialRole?: UserRole;
+  initialRole?: UserRole | 'register';
   targetViewLabel?: string;
+  onRegisterOfficer?: (officer: Omit<Officer, 'id' | 'shortName' | 'initials'>) => void;
 }
 
 export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
@@ -34,9 +35,10 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
   onLoginSuccess,
   officers,
   initialRole = 'officer',
-  targetViewLabel
+  targetViewLabel,
+  onRegisterOfficer
 }) => {
-  const [activeTab, setActiveTab] = useState<UserRole>(initialRole === 'guest' ? 'officer' : initialRole);
+  const [activeTab, setActiveTab] = useState<UserRole | 'register'>(initialRole === 'guest' ? 'officer' : initialRole);
   
   // Officer Level Form State
   const [selectedOfficerId, setSelectedOfficerId] = useState<string>('001');
@@ -50,6 +52,13 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
   const [adminUser, setAdminUser] = useState<string>('admin');
   const [adminPass, setAdminPass] = useState<string>('sakristi123');
 
+  // Register Form State
+  const [regName, setRegName] = useState<string>('');
+  const [regWilayah, setRegWilayah] = useState<string>('Wilayah Agustinus');
+  const [regRole, setRegRole] = useState<'Asisten Imam' | 'Koorlap'>('Asisten Imam');
+  const [regPhone, setRegPhone] = useState<string>('');
+  const [regPin, setRegPin] = useState<string>('1234');
+
   const [showPass, setShowPass] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -58,11 +67,12 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
 
   const koorlaps = officers.filter(o => o.isKoorlap || o.role.toLowerCase().includes('koorlap'));
 
-  const handleTabChange = (role: UserRole) => {
+  const handleTabChange = (role: UserRole | 'register') => {
     playAudioFeedback('tap');
     setActiveTab(role);
     setErrorMsg(null);
   };
+
 
   const handleOfficerLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -164,6 +174,61 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
     }, 400);
   };
 
+  const handleRegisterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMsg(null);
+
+    if (!regName.trim()) {
+      setErrorMsg('Nama Lengkap harus diisi.');
+      playAudioFeedback('error');
+      return;
+    }
+
+    if (regPin.trim().length < 4) {
+      setErrorMsg('PIN Keamanan minimal 4 digit.');
+      playAudioFeedback('error');
+      return;
+    }
+
+    const maxIdNum = officers.reduce((max, o) => {
+      const num = parseInt(o.id, 10);
+      return !isNaN(num) && num > max ? num : max;
+    }, 170);
+    const nextId = String(maxIdNum + 1).padStart(3, '0');
+
+    const newOfficerData = {
+      name: regName.trim(),
+      role: regRole === 'Koorlap' ? 'Asisten Imam - Koordinator Lapangan (Koorlap)' : 'Asisten Imam',
+      isKoorlap: regRole === 'Koorlap',
+      wilayah: regWilayah,
+      phone: regPhone.trim() || '0812-3456-7890',
+      avatarUrl: `https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=300&fit=crop&crop=face`,
+      dutyCount: 0,
+      status: 'Aktif' as const,
+      lokasiPelayanan: 'Gereja Utama Santo Yakobus',
+      masaBakti: '2024 - 2027'
+    };
+
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      playAudioFeedback('success');
+
+      if (onRegisterOfficer) {
+        onRegisterOfficer(newOfficerData);
+      }
+
+      onLoginSuccess({
+        isAuthenticated: true,
+        role: regRole === 'Koorlap' ? 'koorlap' : 'officer',
+        officerId: nextId,
+        name: regName.trim(),
+        avatarUrl: newOfficerData.avatarUrl,
+        loginTime: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
+      });
+    }, 500);
+  };
+
   const fillDemoCredentials = () => {
     playAudioFeedback('tap');
     setErrorMsg(null);
@@ -175,6 +240,10 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
       const koorlap = koorlaps[0] || { id: '145' };
       setKoorlapUser(koorlap.id);
       setKoorlapPin('1234');
+    } else if (activeTab === 'register') {
+      setRegName('Petugas Baru Sakristi');
+      setRegPhone('0812-9988-7766');
+      setRegPin('1234');
     } else {
       setAdminUser('admin');
       setAdminPass('sakristi123');
@@ -182,6 +251,7 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
   };
 
   return (
+
     <div className="fixed inset-0 z-50 bg-black/65 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200">
       <div className="bg-[#FAF7F2] border-2 border-[#D9CEBA] rounded-3xl max-w-lg w-full shadow-2xl overflow-hidden relative flex flex-col">
         
@@ -206,23 +276,22 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
             />
           </div>
 
-
           <h3 className="text-xl font-extrabold font-headline tracking-tight">
-            {initialRole === 'admin' ? 'Login Administrator' : 'Portal Masuk Sakristi'}
+            {initialRole === 'admin' ? 'Login Administrator' : 'Portal Masuk & Pendaftaran Sakristi'}
           </h3>
           <p className="text-xs text-white/80 mt-1">
             {initialRole === 'admin' 
               ? 'Masuk ke Backoffice Pengelola Paroki Santo Yakobus' 
-              : targetViewLabel ? `Akses ${targetViewLabel}` : 'Otorisasi Akun'}
+              : targetViewLabel ? `Akses ${targetViewLabel}` : 'Otorisasi & Pendaftaran Akun'}
           </p>
 
           {/* Level Tabs selector - Hidden if Admin Login */}
           {initialRole !== 'admin' && (
-            <div className="mt-5 grid grid-cols-3 gap-1 bg-[#420D0D] p-1.5 rounded-2xl border border-white/10">
+            <div className="mt-5 grid grid-cols-4 gap-1 bg-[#420D0D] p-1.5 rounded-2xl border border-white/10">
               <button
                 type="button"
                 onClick={() => handleTabChange('officer')}
-                className={`py-2 px-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                className={`py-2 px-1.5 rounded-xl text-[11px] font-bold transition-all flex items-center justify-center gap-1 ${
                   activeTab === 'officer' 
                     ? 'bg-[#FAF7F2] text-[#5B1414] shadow-md font-extrabold' 
                     : 'text-white/70 hover:text-white hover:bg-white/5'
@@ -235,7 +304,7 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
               <button
                 type="button"
                 onClick={() => handleTabChange('koorlap')}
-                className={`py-2 px-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                className={`py-2 px-1.5 rounded-xl text-[11px] font-bold transition-all flex items-center justify-center gap-1 ${
                   activeTab === 'koorlap' 
                     ? 'bg-[#FAF7F2] text-[#5B1414] shadow-md font-extrabold' 
                     : 'text-white/70 hover:text-white hover:bg-white/5'
@@ -247,8 +316,21 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
 
               <button
                 type="button"
+                onClick={() => handleTabChange('register')}
+                className={`py-2 px-1.5 rounded-xl text-[11px] font-bold transition-all flex items-center justify-center gap-1 ${
+                  activeTab === 'register' 
+                    ? 'bg-[#FAF7F2] text-[#5B1414] shadow-md font-extrabold' 
+                    : 'text-white/70 hover:text-white hover:bg-white/5'
+                }`}
+              >
+                <Users className="w-3.5 h-3.5" />
+                <span>Buat Akun</span>
+              </button>
+
+              <button
+                type="button"
                 onClick={() => handleTabChange('admin')}
-                className={`py-2 px-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                className={`py-2 px-1.5 rounded-xl text-[11px] font-bold transition-all flex items-center justify-center gap-1 ${
                   activeTab === 'admin' 
                     ? 'bg-[#FAF7F2] text-[#5B1414] shadow-md font-extrabold' 
                     : 'text-white/70 hover:text-white hover:bg-white/5'
@@ -259,8 +341,8 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
               </button>
             </div>
           )}
-
         </div>
+
 
         {/* Tab Descriptions & Form Content */}
         <div className="p-6 space-y-4 overflow-y-auto max-h-[70vh]">
@@ -422,6 +504,110 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
               </button>
             </form>
           )}
+
+          {/* REGISTER NEW ACCOUNT FORM */}
+          {activeTab === 'register' && (
+            <form onSubmit={handleRegisterSubmit} className="space-y-3.5 animate-in fade-in duration-200">
+              <div className="space-y-1">
+                <label className="block text-xs font-black text-[#5B1414] uppercase tracking-wider">
+                  Nama Lengkap Petugas
+                </label>
+                <input
+                  type="text"
+                  value={regName}
+                  onChange={(e) => setRegName(e.target.value)}
+                  placeholder="Masukkan Nama Lengkap Sesuai KTP / Paroki"
+                  required
+                  className="w-full px-3.5 py-2.5 bg-white border-2 border-[#D9CEBA] focus:border-[#5B1414] rounded-xl text-sm font-semibold text-[#2C2420] outline-hidden transition-all"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1">
+                  <label className="block text-xs font-black text-[#5B1414] uppercase tracking-wider">
+                    Wilayah Paroki
+                  </label>
+                  <select
+                    value={regWilayah}
+                    onChange={(e) => setRegWilayah(e.target.value)}
+                    className="w-full px-3 py-2.5 bg-white border-2 border-[#D9CEBA] focus:border-[#5B1414] rounded-xl text-xs font-bold text-[#2C2420] outline-hidden cursor-pointer"
+                  >
+                    <option value="Wilayah Agustinus">Wilayah Agustinus</option>
+                    <option value="Wilayah Anna">Wilayah Anna</option>
+                    <option value="Wilayah Fransiskus Asisi">Wilayah Fransiskus Asisi</option>
+                    <option value="Wilayah Joachim">Wilayah Joachim</option>
+                    <option value="Wilayah Joseph">Wilayah Joseph</option>
+                    <option value="Wilayah Maria">Wilayah Maria</option>
+                    <option value="Wilayah Paulus">Wilayah Paulus</option>
+                    <option value="Wilayah Petrus">Wilayah Petrus</option>
+                    <option value="Wilayah Thomas More">Wilayah Thomas More</option>
+                    <option value="Wilayah Timotius">Wilayah Timotius</option>
+                    <option value="Wilayah Yohanes Rasul">Wilayah Yohanes Rasul</option>
+                  </select>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="block text-xs font-black text-[#5B1414] uppercase tracking-wider">
+                    Peran Petugas
+                  </label>
+                  <select
+                    value={regRole}
+                    onChange={(e) => setRegRole(e.target.value as any)}
+                    className="w-full px-3 py-2.5 bg-white border-2 border-[#D9CEBA] focus:border-[#5B1414] rounded-xl text-xs font-bold text-[#2C2420] outline-hidden cursor-pointer"
+                  >
+                    <option value="Asisten Imam">Asisten Imam</option>
+                    <option value="Koorlap">Asisten Imam + Koorlap</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1">
+                  <label className="block text-xs font-black text-[#5B1414] uppercase tracking-wider">
+                    No. WhatsApp / HP
+                  </label>
+                  <input
+                    type="text"
+                    value={regPhone}
+                    onChange={(e) => setRegPhone(e.target.value)}
+                    placeholder="0812-xxxx-xxxx"
+                    className="w-full px-3 py-2.5 bg-[#ffffff] border-2 border-[#D9CEBA] focus:border-[#5B1414] rounded-xl text-xs font-semibold text-[#2C2420] outline-hidden"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="block text-xs font-black text-[#5B1414] uppercase tracking-wider">
+                    PIN Keamanan (4 Digit)
+                  </label>
+                  <input
+                    type="password"
+                    value={regPin}
+                    onChange={(e) => setRegPin(e.target.value)}
+                    placeholder="Buat PIN 4 Digit"
+                    maxLength={6}
+                    required
+                    className="w-full px-3 py-2.5 bg-white border-2 border-[#D9CEBA] focus:border-[#5B1414] rounded-xl text-xs font-semibold text-[#2C2420] outline-hidden font-mono tracking-widest"
+                  />
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full py-3.5 px-4 rounded-xl bg-[#5B1414] hover:bg-[#450e0e] text-white text-xs font-extrabold uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-50 mt-3 cursor-pointer"
+              >
+                {isLoading ? (
+                  <span>Mendaftarkan Akun...</span>
+                ) : (
+                  <>
+                    <Users className="w-4 h-4" />
+                    <span>Daftar &amp; Buat Akun Petugas Baru</span>
+                  </>
+                )}
+              </button>
+            </form>
+          )}
+
 
           {/* 3. ADMIN LOGIN FORM */}
           {activeTab === 'admin' && (
