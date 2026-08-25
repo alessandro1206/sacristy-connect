@@ -223,11 +223,14 @@ export const KioskView: React.FC<KioskViewProps> = ({
   // 4: Penempatan Tugas (8 Posisi Area Gereja + Area Balai)
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3 | 4>(1);
 
+  // Strict session lock guard
+  const [isSessionUnlocked, setIsSessionUnlocked] = useState<boolean>(false);
+
   // Step 1 States (Verifikasi Koorlap)
   const [selectedCategoryTab, setSelectedCategoryTab] = useState<'all' | 'harian' | 'mingguan' | 'hari_raya'>('all');
   const [selectedSession, setSelectedSession] = useState<MassSessionChoice>(MASS_SESSIONS[0]);
   const [koorlapId, setKoorlapId] = useState<string>('001');
-  const [koorlapPassword, setKoorlapPassword] = useState<string>('••••••••');
+  const [koorlapPassword, setKoorlapPassword] = useState<string>(''); // Requires user to fill out password!
   const [sessionAuthError, setSessionAuthError] = useState<string | null>(null);
 
   // Step 2 States (3-Digit Numpad & Sidebars)
@@ -295,6 +298,12 @@ export const KioskView: React.FC<KioskViewProps> = ({
     const cleanId = koorlapId.trim().toLowerCase();
     const cleanPass = koorlapPassword.trim();
 
+    if (!selectedSession) {
+      setSessionAuthError('Silakan pilih salah satu Jadwal Misa terlebih dahulu.');
+      playAudioFeedback('error');
+      return;
+    }
+
     if (!cleanId) {
       setSessionAuthError('Silakan masukkan No. Absen / Username Koorlap atau Admin.');
       playAudioFeedback('error');
@@ -314,13 +323,33 @@ export const KioskView: React.FC<KioskViewProps> = ({
 
     if (isAdminAuth || isKoorlapAuth) {
       setSessionAuthError(null);
+      setIsSessionUnlocked(true); // Unlock all kiosk steps!
       playAudioFeedback('success');
-      setCurrentStep(2); // Unlock Step 2: Numpad Attendance
+      setCurrentStep(2); // Move to Step 2: Numpad Attendance
     } else {
-      setSessionAuthError('Otorisasi Gagal: ID Koorlap/Admin atau PIN salah. (Default PIN: 1234 / Pass Admin: sakristi123)');
+      setSessionAuthError('Otorisasi Gagal: Password/PIN Koorlap atau Admin salah. (Gunakan PIN Koorlap 1234 atau Password Admin)');
       playAudioFeedback('error');
     }
   };
+
+  const handleStepNavigationClick = (targetStep: 1 | 2 | 3 | 4) => {
+    if (targetStep === 1) {
+      playAudioFeedback('tap');
+      setCurrentStep(1);
+      return;
+    }
+
+    if (!isSessionUnlocked) {
+      setSessionAuthError('Akses Terkunci! Harap pilih Misa dan isi Password Koorlap/Admin terlebih dahulu.');
+      playAudioFeedback('error');
+      setCurrentStep(1);
+      return;
+    }
+
+    playAudioFeedback('tap');
+    setCurrentStep(targetStep);
+  };
+
 
 
   // Step 2: Numpad input (3 digits only)
@@ -486,41 +515,65 @@ export const KioskView: React.FC<KioskViewProps> = ({
           <span className="font-bold tracking-wider uppercase opacity-80">Alur Kiosk Google Stitch:</span>
           <div className="flex items-center gap-1.5 bg-black/20 p-1 rounded-xl">
             <button
-              onClick={() => setCurrentStep(1)}
-              className={`px-3 py-1 rounded-lg font-bold transition-all ${
+              onClick={() => handleStepNavigationClick(1)}
+              className={`px-3 py-1 rounded-lg font-bold transition-all flex items-center gap-1 cursor-pointer ${
                 currentStep === 1 ? 'bg-amber-400 text-[#4A0E17] shadow-xs' : 'text-white/80 hover:text-white'
               }`}
             >
-              1. Pilih Jadwal (Koorlap)
+              <span>1. Pilih Misa &amp; Password</span>
             </button>
+
             <button
-              onClick={() => setCurrentStep(2)}
-              className={`px-3 py-1 rounded-lg font-bold transition-all ${
-                currentStep === 2 ? 'bg-amber-400 text-[#4A0E17] shadow-xs' : 'text-white/80 hover:text-white'
+              onClick={() => handleStepNavigationClick(2)}
+              className={`px-3 py-1 rounded-lg font-bold transition-all flex items-center gap-1 cursor-pointer ${
+                currentStep === 2 
+                  ? 'bg-amber-400 text-[#4A0E17] shadow-xs' 
+                  : isSessionUnlocked 
+                  ? 'text-white/80 hover:text-white' 
+                  : 'text-white/40 cursor-not-allowed'
               }`}
+              title={!isSessionUnlocked ? 'Terkunci! Pilih Misa & isi Password Koorlap/Admin terlebih dahulu' : 'Input Numpad Absen'}
             >
-              2. Input ID (Numpad)
+              {!isSessionUnlocked && <Lock className="w-3 h-3 text-amber-300" />}
+              <span>2. Mode Absen (Numpad)</span>
             </button>
+
             <button
               onClick={() => {
-                setPendingOfficer(officers[0]);
-                setCurrentStep(3);
+                if (isSessionUnlocked && !pendingOfficer) {
+                  setPendingOfficer(officers[0]);
+                }
+                handleStepNavigationClick(3);
               }}
-              className={`px-3 py-1 rounded-lg font-bold transition-all ${
-                currentStep === 3 ? 'bg-amber-400 text-[#4A0E17] shadow-xs' : 'text-white/80 hover:text-white'
+              className={`px-3 py-1 rounded-lg font-bold transition-all flex items-center gap-1 cursor-pointer ${
+                currentStep === 3 
+                  ? 'bg-amber-400 text-[#4A0E17] shadow-xs' 
+                  : isSessionUnlocked 
+                  ? 'text-white/80 hover:text-white' 
+                  : 'text-white/40 cursor-not-allowed'
               }`}
+              title={!isSessionUnlocked ? 'Terkunci!' : 'Konfirmasi Identitas'}
             >
-              3. Konfirmasi Identitas
+              {!isSessionUnlocked && <Lock className="w-3 h-3 text-amber-300" />}
+              <span>3. Konfirmasi</span>
             </button>
+
             <button
-              onClick={() => setCurrentStep(4)}
-              className={`px-3 py-1 rounded-lg font-bold transition-all ${
-                currentStep === 4 ? 'bg-amber-400 text-[#4A0E17] shadow-xs' : 'text-white/80 hover:text-white'
+              onClick={() => handleStepNavigationClick(4)}
+              className={`px-3 py-1 rounded-lg font-bold transition-all flex items-center gap-1 cursor-pointer ${
+                currentStep === 4 
+                  ? 'bg-amber-400 text-[#4A0E17] shadow-xs' 
+                  : isSessionUnlocked 
+                  ? 'text-white/80 hover:text-white' 
+                  : 'text-white/40 cursor-not-allowed'
               }`}
+              title={!isSessionUnlocked ? 'Terkunci!' : 'Penempatan 8 Posisi'}
             >
-              4. Penempatan Tugas
+              {!isSessionUnlocked && <Lock className="w-3 h-3 text-amber-300" />}
+              <span>4. Penempatan Posisi</span>
             </button>
           </div>
+
         </div>
 
         <div className="flex items-center gap-3 opacity-90 text-[11px]">
