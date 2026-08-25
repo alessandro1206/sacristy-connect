@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --primary: #4a0000;
+    --primary-container: #720000;
+    --on-primary: #ffffff;
+    --on-primary-container: #ff725e;
+    --background: #fef9eb;
+    --surface: #fef9eb;
+    --surface-container-lowest: #ffffff;
+    --surface-container-low: #f9f3e5;
+    --surface-container: #f3eedf;
+    --surface-container-high: #ede8da;
+    --surface-container-highest: #e7e2d4;
+    --on-surface: #1d1c13;
+    --on-surface-variant: #59413d;
+    --outline: #8d716c;
+    --outline-variant: #e1bfba;
+    --secondary-container: #f3ded5;
+    --on-secondary-container: #70615a;
+    --error-container: #ffdad6;
+    --on-error-container: #93000a;
+  }
+
+  body {
+    background-color: #fef9eb;
+    color: #1d1c13;
+    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  h1, h2, h3, h4, .font-headline {
+    font-family: 'Raleway', sans-serif;
+  }
+
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    vertical-align: middle;
+  }
+}
+
+/* Custom classes matching design specifications */
+.bg-primary { background-color: #4a0000; }
+.bg-primary-container { background-color: #720000; }
+.text-primary { color: #4a0000; }
+.text-on-primary { color: #ffffff; }
+.text-on-primary-container { color: #ff725e; }
+.border-primary { border-color: #4a0000; }
+
+.bg-surface { background-color: #fef9eb; }
+.bg-surface-container { background-color: #f3eedf; }
+.bg-surface-container-high { background-color: #ede8da; }
+.bg-surface-container-highest { background-color: #e7e2d4; }
+.bg-surface-container-lowest { background-color: #ffffff; }
+.bg-surface-container-low { background-color: #f9f3e5; }
+.bg-surface-bright { background-color: #fef9eb; }
+
+.text-on-surface { color: #1d1c13; }
+.text-on-surface-variant { color: #59413d; }
+.border-outline-variant { border-color: #e1bfba; }
+.border-outline { border-color: #8d716c; }
+
+.bg-secondary-container { background-color: #f3ded5; }
+.text-on-secondary-container { color: #70615a; }
+
+.bg-error-container { background-color: #ffdad6; }
+.text-on-error-container { color: #93000a; }

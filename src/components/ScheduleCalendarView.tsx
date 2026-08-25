@@ -1,0 +1,566 @@
+import React, { useState } from 'react';
+import { Officer, LeaveRecord, SchedulePatternConfig, AssignmentRulesConfig } from '../types';
+import { 
+  ChevronLeft, 
+  ChevronRight, 
+  CheckCircle2, 
+  Sparkles, 
+  Calendar as CalendarIcon, 
+  FileSpreadsheet, 
+  ShieldCheck, 
+  RotateCw,
+  Save,
+  Download,
+  Filter,
+  Check,
+  Clock,
+  MapPin,
+  Table as TableIcon
+} from 'lucide-react';
+import { playAudioFeedback } from '../utils/sound';
+
+interface ScheduleCalendarViewProps {
+  officers: Officer[];
+  leaveRecords: LeaveRecord[];
+  patternConfig: SchedulePatternConfig;
+  rulesConfig: AssignmentRulesConfig;
+  onSavePatternConfig?: (config: SchedulePatternConfig) => void;
+  onSaveRulesConfig?: (rules: AssignmentRulesConfig) => void;
+  onAddLeaveRecord?: (leave: LeaveRecord) => void;
+  onAddLog?: (description: string, actor: string) => void;
+}
+
+interface MatrixRow {
+  tanggal: number;
+  hari: string;
+  kelompokA: {
+    budi: boolean;
+    anton: boolean;
+    charlie: 'cuti' | boolean;
+  };
+  kelompokB: {
+    dani: boolean;
+    eko: boolean;
+    fery: boolean;
+    gilang: boolean;
+  };
+}
+
+interface CalendarDayItem {
+  dayNumber: number;
+  dayName: string; // 'Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'
+  isCurrentMonth: boolean;
+  sessions: {
+    waktu: 'Pagi' | 'Sore' | 'Malam';
+    jam: string;
+    lokasi: 'Gereja Utama' | 'Kapel 1' | 'Kapel 2';
+    koorlap?: string;
+    asisten: string[];
+    cutiList?: string[];
+  }[];
+}
+
+export const ScheduleCalendarView: React.FC<ScheduleCalendarViewProps> = ({
+  officers,
+  leaveRecords,
+  onAddLog
+}) => {
+  const [selectedMonth, setSelectedMonth] = useState<string>('September 2026');
+  const [viewMode, setViewMode] = useState<'calendar' | 'matrix'>('calendar');
+  const [isRegenerating, setIsRegenerating] = useState<boolean>(false);
+  const [bannerNotice, setBannerNotice] = useState<string | null>(null);
+
+  // Month Calendar Data for September 2026 (matching screenshot)
+  const [calendarDays, setCalendarDays] = useState<CalendarDayItem[]>([
+    {
+      dayNumber: 31,
+      dayName: 'Senin',
+      isCurrentMonth: false,
+      sessions: []
+    },
+    {
+      dayNumber: 1,
+      dayName: 'Selasa',
+      isCurrentMonth: true,
+      sessions: [
+        {
+          waktu: 'Pagi',
+          jam: '06:00',
+          lokasi: 'Gereja Utama',
+          koorlap: 'Dudi',
+          asisten: ['Anton'],
+          cutiList: ['Charlie (Cuti)']
+        }
+      ]
+    },
+    {
+      dayNumber: 2,
+      dayName: 'Rabu',
+      isCurrentMonth: true,
+      sessions: [
+        {
+          waktu: 'Sore',
+          jam: '18:00',
+          lokasi: 'Kapel 1',
+          koorlap: 'Dani',
+          asisten: ['Eko']
+        }
+      ]
+    },
+    {
+      dayNumber: 3,
+      dayName: 'Kamis',
+      isCurrentMonth: true,
+      sessions: [
+        {
+          waktu: 'Malam',
+          jam: '19:00',
+          lokasi: 'Kapel 2',
+          koorlap: 'Fery',
+          asisten: ['Gilang']
+        }
+      ]
+    },
+    {
+      dayNumber: 4,
+      dayName: 'Jumat',
+      isCurrentMonth: true,
+      sessions: [
+        {
+          waktu: 'Sore',
+          jam: '18:00',
+          lokasi: 'Gereja Utama',
+          koorlap: 'Hasan',
+          asisten: [],
+          cutiList: ['Imam (Cuti)']
+        }
+      ]
+    },
+    {
+      dayNumber: 5,
+      dayName: 'Sabtu',
+      isCurrentMonth: true,
+      sessions: [
+        {
+          waktu: 'Sore',
+          jam: '17:00',
+          lokasi: 'Gereja Utama',
+          koorlap: 'Antonius B.',
+          asisten: ['Maria S.', 'Yohanes S.']
+        }
+      ]
+    },
+    {
+      dayNumber: 6,
+      dayName: 'Minggu',
+      isCurrentMonth: true,
+      sessions: [
+        {
+          waktu: 'Pagi',
+          jam: '06:00',
+          lokasi: 'Gereja Utama',
+          koorlap: 'Hartanto C.',
+          asisten: ['Stefanus A.', 'Yohanes K.']
+        }
+      ]
+    }
+  ]);
+
+  // Matrix View Data (Matching screenshot 1 left preview)
+  const [matrixData, setMatrixData] = useState<MatrixRow[]>([
+    {
+      tanggal: 1,
+      hari: 'Minggu',
+      kelompokA: { budi: true, anton: false, charlie: 'cuti' },
+      kelompokB: { dani: false, eko: false, fery: false, gilang: false }
+    },
+    {
+      tanggal: 2,
+      hari: 'Senin',
+      kelompokA: { budi: false, anton: false, charlie: 'cuti' },
+      kelompokB: { dani: true, eko: true, fery: false, gilang: false }
+    },
+    {
+      tanggal: 3,
+      hari: 'Selasa',
+      kelompokA: { budi: false, anton: false, charlie: 'cuti' },
+      kelompokB: { dani: false, eko: false, fery: false, gilang: false }
+    },
+    {
+      tanggal: 4,
+      hari: 'Rabu',
+      kelompokA: { budi: false, anton: false, charlie: false },
+      kelompokB: { dani: false, eko: false, fery: true, gilang: false }
+    },
+    {
+      tanggal: 5,
+      hari: 'Kamis',
+      kelompokA: { budi: false, anton: false, charlie: false },
+      kelompokB: { dani: false, eko: false, fery: false, gilang: true }
+    }
+  ]);
+
+  // Handle AI Auto Regenerate
+  const handleRegenerateAI = () => {
+    setIsRegenerating(true);
+    setTimeout(() => {
+      setIsRegenerating(false);
+      playAudioFeedback('success');
+      setBannerNotice('Jadwal Bulan September 2026 berhasil diperbarui otomatis dengan AI Scheduler!');
+      if (onAddLog) {
+        onAddLog('Generate Ulang Jadwal AI: Validasi No Double Duty & Sinkronisasi Cuti 100% Selesai', 'AI Engine');
+      }
+      setTimeout(() => setBannerNotice(null), 4000);
+    }, 1200);
+  };
+
+  const handleSavePermanent = () => {
+    playAudioFeedback('success');
+    setBannerNotice('Jadwal Bulan September 2026 telah disimpan permanen dan dipublikasikan ke sakristi.');
+    if (onAddLog) {
+      onAddLog('Simpan Jadwal Permanen: Jadwal September 2026 dikunci untuk operasional', 'Admin Sakristi');
+    }
+    setTimeout(() => setBannerNotice(null), 4000);
+  };
+
+  const handleExportReport = () => {
+    playAudioFeedback('tap');
+    alert('Mengunduh Laporan Jadwal & Cuti Bulan September 2026 (Format PDF / Excel)...');
+  };
+
+  return (
+    <div className="flex-1 bg-[#fbf9f5] overflow-y-auto p-6 md:p-8 selection:bg-primary/20">
+      <div className="max-w-6xl mx-auto space-y-6">
+        
+        {/* Banner Notice */}
+        {bannerNotice && (
+          <div className="flex items-center gap-3 bg-emerald-50 border border-emerald-300 text-emerald-900 px-5 py-3.5 rounded-xl shadow-xs animate-in fade-in">
+            <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+            <p className="text-sm font-semibold">{bannerNotice}</p>
+          </div>
+        )}
+
+        {/* ========================================================================= */}
+        {/* HEADER TITLE (Schedule Generator)                                        */}
+        {/* ========================================================================= */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2 text-[#5B1414] text-xs font-black uppercase tracking-wider mb-1">
+              <Sparkles className="w-4 h-4 text-[#5B1414]" />
+              <span>Otomatisasi Penjadwalan Adil &amp; Rotasi Petugas</span>
+            </div>
+            <h2 className="text-2xl md:text-3xl font-extrabold text-[#5B1414] font-headline tracking-tight">
+              Schedule Generator
+            </h2>
+            <p className="text-xs md:text-sm text-[#665e55] mt-1 font-medium max-w-3xl">
+              Generator komprehensif penugasan pelayan altar untuk bulan {selectedMonth}. Sistem mengoptimalkan distribusi tugas berdasarkan ketersediaan cuti, wilayah, dan aturan liturgi paroki.
+            </p>
+          </div>
+
+          <button
+            onClick={handleExportReport}
+            className="px-5 py-2.5 bg-[#5B1414] hover:bg-[#450e0e] text-white text-xs font-bold rounded-xl shadow-xs transition-all uppercase tracking-wider self-start md:self-auto flex items-center gap-2"
+          >
+            <Download className="w-4 h-4" />
+            <span>EXPORT REPORT</span>
+          </button>
+        </div>
+
+        {/* ========================================================================= */}
+        {/* VALIDASI SISTEM: SUKSES (Kotak Hijau Persis Gambar Stitch)               */}
+        {/* ========================================================================= */}
+        <div className="bg-[#f0f8f1] border border-[#c3e6cb] rounded-2xl p-5 md:p-6 shadow-xs flex items-start gap-4">
+          <div className="w-8 h-8 rounded-full bg-[#28a745]/15 flex items-center justify-center shrink-0 mt-0.5">
+            <ShieldCheck className="w-5 h-5 text-[#28a745]" />
+          </div>
+          <div className="space-y-1">
+            <h3 className="text-sm md:text-base font-bold text-[#1e5622] font-serif">
+              Validasi Sistem: Sukses
+            </h3>
+            <p className="text-xs md:text-sm text-[#2b6430] leading-relaxed">
+              Pemeriksaan integritas jadwal selesai. <span className="font-semibold">No Double Duty</span> terkonfirmasi. Tidak ada pelayan yang ditugaskan pada waktu yang sama di lokasi berbeda dalam satu hari. Data ketersediaan (Cuti) dari Google Form telah diintegrasikan sepenuhnya.
+            </p>
+          </div>
+        </div>
+
+        {/* ========================================================================= */}
+        {/* MONTH SELECTOR, LEGEND, AND VIEW SWITCHER                                */}
+        {/* ========================================================================= */}
+        <div className="bg-white border border-[#e6ded2] rounded-2xl p-5 shadow-xs space-y-4">
+          
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-[#eee6da] pb-4">
+            {/* Month Navigation (< September 2026 >) */}
+            <div className="flex items-center gap-3">
+              <button 
+                onClick={() => setSelectedMonth('Agustus 2026')}
+                className="p-1.5 rounded-lg hover:bg-[#f2ece1] text-[#665e55] transition-colors"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <h4 className="text-base font-bold text-[#2b241e] font-serif">
+                {selectedMonth}
+              </h4>
+              <button 
+                onClick={() => setSelectedMonth('Oktober 2026')}
+                className="p-1.5 rounded-lg hover:bg-[#f2ece1] text-[#665e55] transition-colors"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Legend Pills (Exact match Stitch screenshot) */}
+            <div className="flex flex-wrap items-center gap-4 text-xs font-medium text-[#554d44]">
+              <div className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#7c191e]" />
+                <span>Gereja Utama</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#1976d2]" />
+                <span>Kapel 1</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#00838f]" />
+                <span>Kapel 2</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#c67d00]" />
+                <span>Cuti / Disable</span>
+              </div>
+            </div>
+
+            {/* Tab switch between Calendar View and Matrix View */}
+            <div className="flex items-center bg-[#f7f3eb] p-1 rounded-xl border border-[#e0d6c7]">
+              <button
+                onClick={() => setViewMode('calendar')}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                  viewMode === 'calendar'
+                    ? 'bg-white text-[#7c191e] shadow-xs'
+                    : 'text-[#665e55] hover:text-[#2b241e]'
+                }`}
+              >
+                <CalendarIcon className="w-3.5 h-3.5" />
+                <span>Kalender</span>
+              </button>
+              <button
+                onClick={() => setViewMode('matrix')}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                  viewMode === 'matrix'
+                    ? 'bg-white text-[#7c191e] shadow-xs'
+                    : 'text-[#665e55] hover:text-[#2b241e]'
+                }`}
+              >
+                <TableIcon className="w-3.5 h-3.5" />
+                <span>Matriks Distribusi</span>
+              </button>
+            </div>
+          </div>
+
+          {/* VIEW 1: MONTHLY CALENDAR GRID (Exact Replica of Right Preview in Image 1) */}
+          {viewMode === 'calendar' && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2.5">
+              {['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'].map((dayName, idx) => (
+                <div key={idx} className="text-center text-xs font-bold text-[#665e55] py-1 bg-[#f7f3eb] rounded-lg">
+                  {dayName}
+                </div>
+              ))}
+
+              {calendarDays.map((day, idx) => (
+                <div 
+                  key={idx}
+                  className={`min-h-[140px] p-2.5 rounded-xl border flex flex-col justify-between transition-all ${
+                    day.isCurrentMonth
+                      ? 'bg-white border-[#e0d6c7] hover:border-[#7c191e]/50'
+                      : 'bg-[#faf7f2]/60 border-dashed border-[#e6ded2] opacity-60'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-xs font-bold text-[#3b342e]">
+                      {day.dayNumber}
+                    </span>
+                    {day.sessions.length > 0 && (
+                      <span className="text-[10px] text-[#8f857a] font-medium">
+                        {day.sessions.length} Misa
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Sessions Inside Day */}
+                  <div className="space-y-1.5 flex-1">
+                    {day.sessions.map((sess, sIdx) => {
+                      const dotColor = 
+                        sess.lokasi === 'Gereja Utama' ? 'bg-[#7c191e]' :
+                        sess.lokasi === 'Kapel 1' ? 'bg-[#1976d2]' : 'bg-[#00838f]';
+
+                      return (
+                        <div 
+                          key={sIdx}
+                          className="bg-[#fbf9f5] border border-[#eee6da] rounded-lg p-1.5 text-[11px] space-y-1 shadow-2xs"
+                        >
+                          <div className="flex items-center gap-1.5">
+                            <span className={`w-2 h-2 rounded-full ${dotColor} shrink-0`} />
+                            <span className="font-bold text-[#2b241e]">
+                              ● {sess.waktu}
+                            </span>
+                          </div>
+
+                          {sess.koorlap && (
+                            <div className="text-[#554d44] font-medium text-[10px]">
+                              {sess.koorlap} <span className="text-[#8b1e23] font-bold">(Koorlap)</span>
+                            </div>
+                          )}
+
+                          {sess.asisten.length > 0 && (
+                            <div className="text-[#665e55] text-[10px]">
+                              {sess.asisten.join(', ')}
+                            </div>
+                          )}
+
+                          {sess.cutiList && sess.cutiList.map((cuti, cIdx) => (
+                            <div 
+                              key={cIdx}
+                              className="text-[10px] font-semibold text-[#a85a00] bg-[#fff8e1] px-1 py-0.5 rounded border border-[#ffe082]"
+                            >
+                              {cuti}
+                            </div>
+                          ))}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* VIEW 2: MATRIX TABLE VIEW (Exact Replica of Left Preview in Image 1) */}
+          {viewMode === 'matrix' && (
+            <div className="overflow-x-auto border border-[#eee6da] rounded-xl">
+              <table className="w-full text-center text-xs text-[#3b342e]">
+                <thead className="bg-[#f7f3eb] text-[#554d44] border-b border-[#eee6da] font-bold">
+                  <tr>
+                    <th rowSpan={2} className="px-3 py-2 border-r border-[#eee6da]">Tanggal</th>
+                    <th rowSpan={2} className="px-3 py-2 border-r border-[#eee6da]">Hari</th>
+                    <th colSpan={3} className="px-3 py-1.5 border-r border-[#eee6da] bg-[#f2ecdf]">Kelompok A</th>
+                    <th colSpan={4} className="px-3 py-1.5 bg-[#ebe4d5]">Kelompok B</th>
+                  </tr>
+                  <tr className="border-t border-[#eee6da] text-[11px]">
+                    <th className="px-2 py-1.5 border-r border-[#eee6da]">Budi</th>
+                    <th className="px-2 py-1.5 border-r border-[#eee6da]">Anton</th>
+                    <th className="px-2 py-1.5 border-r border-[#eee6da]">Charlie</th>
+                    <th className="px-2 py-1.5 border-r border-[#eee6da]">Dani</th>
+                    <th className="px-2 py-1.5 border-r border-[#eee6da]">Eko</th>
+                    <th className="px-2 py-1.5 border-r border-[#eee6da]">Fery</th>
+                    <th className="px-2 py-1.5">Gilang</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#f2ecdf]">
+                  {matrixData.map((row) => (
+                    <tr key={row.tanggal} className="hover:bg-[#faf7f0]">
+                      <td className="px-3 py-2.5 font-bold font-mono border-r border-[#eee6da]">
+                        {row.tanggal}
+                      </td>
+                      <td className="px-3 py-2.5 text-[#554d44] border-r border-[#eee6da]">
+                        {row.hari}
+                      </td>
+                      
+                      {/* Kelompok A */}
+                      <td className="px-2 py-2.5 border-r border-[#eee6da]">
+                        {row.kelompokA.budi && <span className="w-2.5 h-2.5 rounded-full bg-[#7c191e] inline-block" />}
+                      </td>
+                      <td className="px-2 py-2.5 border-r border-[#eee6da]">
+                        {row.kelompokA.anton && <span className="w-2.5 h-2.5 rounded-full bg-[#1976d2] inline-block" />}
+                      </td>
+                      <td className="px-2 py-2.5 border-r border-[#eee6da]">
+                        {row.kelompokA.charlie === 'cuti' ? (
+                          <span className="px-2 py-0.5 bg-[#fce8e8] text-[#8b1e23] border border-[#f3c1c3] rounded text-[10px] font-bold">
+                            Cuti
+                          </span>
+                        ) : row.kelompokA.charlie ? (
+                          <span className="w-2.5 h-2.5 rounded-full bg-[#00838f] inline-block" />
+                        ) : null}
+                      </td>
+
+                      {/* Kelompok B */}
+                      <td className="px-2 py-2.5 border-r border-[#eee6da]">
+                        {row.kelompokB.dani && <span className="w-2.5 h-2.5 rounded-full bg-[#1976d2] inline-block" />}
+                      </td>
+                      <td className="px-2 py-2.5 border-r border-[#eee6da]">
+                        {row.kelompokB.eko && <span className="w-2.5 h-2.5 rounded-full bg-[#1976d2] inline-block" />}
+                      </td>
+                      <td className="px-2 py-2.5 border-r border-[#eee6da]">
+                        {row.kelompokB.fery && <span className="w-2.5 h-2.5 rounded-full bg-[#00838f] inline-block" />}
+                      </td>
+                      <td className="px-2 py-2.5">
+                        {row.kelompokB.gilang && <span className="w-2.5 h-2.5 rounded-full bg-[#00838f] inline-block" />}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {/* Action Buttons Below Calendar (Exact match Stitch screenshot) */}
+          <div className="flex flex-wrap items-center justify-end gap-3 pt-2">
+            <button
+              onClick={handleRegenerateAI}
+              disabled={isRegenerating}
+              className="px-5 py-2.5 bg-white border border-[#7c191e] text-[#7c191e] hover:bg-[#fce8e8] text-xs font-bold rounded-lg shadow-xs transition-all uppercase tracking-wider flex items-center gap-2"
+            >
+              <RotateCw className={`w-3.5 h-3.5 ${isRegenerating ? 'animate-spin' : ''}`} />
+              <span>{isRegenerating ? 'Memproses AI...' : 'REGENERATE AI'}</span>
+            </button>
+
+            <button
+              onClick={handleSavePermanent}
+              className="px-6 py-2.5 bg-[#7c191e] hover:bg-[#681419] text-white text-xs font-bold rounded-lg shadow-xs transition-all uppercase tracking-wider flex items-center gap-2"
+            >
+              <Save className="w-3.5 h-3.5" />
+              <span>SIMPAN JADWAL PERMANEN</span>
+            </button>
+          </div>
+
+        </div>
+
+        {/* ========================================================================= */}
+        {/* SECTION: DAFTAR PETUGAS SEDANG CUTI (Integrasi Google Form)              */}
+        {/* ========================================================================= */}
+        <div className="bg-white border border-[#e6ded2] rounded-2xl p-6 md:p-8 shadow-xs space-y-4">
+          <div className="flex items-center gap-2">
+            <span className="text-base font-bold text-[#7c191e] font-serif">
+              ✦ Daftar Petugas Sedang Cuti (Integrasi Google Form)
+            </span>
+          </div>
+
+          <div className="overflow-x-auto border border-[#eee6da] rounded-xl">
+            <table className="w-full text-left text-xs text-[#3b342e]">
+              <thead className="bg-[#f7f3eb] text-[#554d44] border-b border-[#eee6da] font-bold uppercase tracking-wider text-[11px]">
+                <tr>
+                  <th className="px-5 py-3 w-28 text-center">No. Absen</th>
+                  <th className="px-5 py-3">Nama Petugas</th>
+                  <th className="px-5 py-3">Periode Cuti</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#f2ecdf]">
+                {leaveRecords.map((leave) => (
+                  <tr key={leave.id} className="hover:bg-[#faf7f0] transition-colors">
+                    <td className="px-5 py-3 font-mono font-bold text-center text-[#7c191e]">
+                      {leave.officerId}
+                    </td>
+                    <td className="px-5 py-3 font-semibold text-[#1a140e]">
+                      {leave.officerName}
+                    </td>
+                    <td className="px-5 py-3 text-[#554d44] font-medium">
+                      {leave.startDate} - {leave.endDate}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+};

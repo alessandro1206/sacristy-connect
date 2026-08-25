@@ -1,0 +1,7 @@
+{
+  "name": "SacristyConnect",
+  "description": "Sistem Presensi Kiosk & Manajemen Jadwal Petugas Sakristi Gereja Paroki Santo Yakobus",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
