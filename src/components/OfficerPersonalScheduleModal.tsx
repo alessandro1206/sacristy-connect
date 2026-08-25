@@ -51,7 +51,8 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
     shortName: userSession.name || 'Petugas',
     initials: 'PT',
     role: 'Asisten Imam',
-    wilayah: 'Kelompok Agustinus',
+    wilayah: 'Wilayah Agustinus',
+
     phone: '0812-3456-7890',
     avatarUrl: userSession.avatarUrl || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face',
     dutyCount: 12,
@@ -241,7 +242,8 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
                   <span className="font-bold text-[#5B1414] font-mono text-sm">No. {officer.id.padStart(3, '0')}</span>
                 </div>
                 <div className="p-3 bg-[#FAF7F2] rounded-xl border border-[#E8DFC8]">
-                  <span className="text-[#8C7662] block mb-0.5">Kelompok / Wilayah</span>
+                  <span className="text-[#8C7662] block mb-0.5">Wilayah Paroki</span>
+
                   <span className="font-bold text-[#2C2420]">{officer.wilayah}</span>
                 </div>
                 <div className="p-3 bg-[#FAF7F2] rounded-xl border border-[#E8DFC8]">

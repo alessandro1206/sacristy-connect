@@ -117,7 +117,8 @@ export const ReportsDutyView: React.FC<ReportsDutyViewProps> = ({
             roleNote: 'Altar Paroki',
             officerId: '001',
             officerName: 'Gatot Chrishariyono',
-            wilayah: 'Kelompok Agustinus',
+            wilayah: 'Wilayah Agustinus',
+
             status: 'Belum Absen' as const,
             avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face'
           }
