@@ -484,9 +484,10 @@ export const KioskView: React.FC<KioskViewProps> = ({
     return o.name.toLowerCase().includes(term) || o.id.includes(term) || id3.includes(term);
   });
   
-  const totalOfficersCount = officers.length;
-  const attendedCount = currentSlot.attendedServerIds.length;
-  const unattendedCount = totalOfficersCount - attendedCount;
+  const totalOfficersCount = scheduledOfficersList.length;
+  const attendedCount = attendedOfficersList.length;
+  const unattendedCount = unattendedOfficers.length;
+
 
   // Filtered list for left sidebar in Step 4 (100% interconnected with Schedule Generator & Step 2)
   const displayedOfficersList = scheduledOfficersList.filter(o => {
