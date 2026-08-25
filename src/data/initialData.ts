@@ -2759,18 +2759,9 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "085",
       "111"
     ],
-    "status": "Berlangsung",
-    "attendedServerIds": [
-      "035",
-      "038",
-      "003",
-      "004",
-      "054",
-      "063",
-      "089",
-      "145",
-      "210"
-    ],
+    "status": "Scheduled",
+    "attendedServerIds": [],
+
     "serverNames": [
       "Johanes D.",
       "Agustinus W.",
