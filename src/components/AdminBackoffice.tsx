@@ -63,9 +63,25 @@ export const AdminBackoffice: React.FC<AdminBackofficeProps> = ({
     }
   ]);
 
-  const [inputMessage, setInputMessage] = useState<string>(
-    'Hartanto Chandra tidak bisa tugas misa 08:00, diganti Venantius Sumarmo'
-  );
+  // Preset templates from real WhatsApp parish group screenshot
+  const PRESET_TUKAR = `Lapor Tukar Tugas
+
+Hengky #105 tugas tgl 13 Sept di KJP2 jam 17.00..
+
+Tukar dgn pak @~cecep condro #092 tgl 13 Sept di Gereja jam 18.00
+
+CC @~Richard Dharyanto`;
+
+  const PRESET_DIGANTIKAN = `Lapor tukar jadwal tugas :
+
+Tjoendianto#103 Tugas gereja minggu 30 agust jam 18.00.
+
+Digantikan oleh:
+Alex #099
+
+Terima kasih . 🙏`;
+
+  const [inputMessage, setInputMessage] = useState<string>(PRESET_TUKAR);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
 
   // Detected change state for Live Preview
@@ -74,118 +90,145 @@ export const AdminBackoffice: React.FC<AdminBackofficeProps> = ({
     pengganti: string;
     jamMisa: string;
     action: string;
+    swapType: 'TUKAR' | 'DIGANTIKAN';
+    detailNotes: string;
   }>({
-    original: 'Hartanto Chandra',
-    pengganti: 'Venantius Sumarmo',
-    jamMisa: '08:00',
-    action: 'menggantikan'
+    original: 'Mikael Hengky Pratama (#105)',
+    pengganti: 'Widyanto Setiawan Wijaya (#092)',
+    jamMisa: '17:00 & 18:00 WIB',
+    action: 'Tukar Jadwal (Mutual Switch)',
+    swapType: 'TUKAR',
+    detailNotes: 'Bpk. Hengky (#105) bertukar jadwal hari/jam Misa dengan Bpk. Cecep Condro (#092).'
   });
 
-  // Table rows for "Jadwal Hari Ini"
+  // Table rows for "Jadwal Hari Ini / Rekap Tukar"
   const [todayRows, setTodayRows] = useState<TodayScheduleRow[]>([
     {
       id: 't-1',
-      jamMisa: '06:00 WIB',
-      lokasi: 'Gereja Utama',
-      petugasOriginal: 'Agustinus Cahyono',
-      petugasPengganti: null,
-      status: 'Terjadwal'
+      jamMisa: '17:00 WIB',
+      lokasi: 'Kapel 2',
+      petugasOriginal: 'Mikael Hengky Pratama (#105)',
+      petugasPengganti: 'Widyanto Setiawan Wijaya (#092)',
+      status: 'Swapped'
     },
     {
       id: 't-2',
-      jamMisa: '08:00 WIB',
-      lokasi: 'Gereja Utama',
-      petugasOriginal: 'Hartanto Chandra',
-      petugasPengganti: 'Venantius Sumarmo',
-      status: 'Swapped'
-    },
-    {
-      id: 't-3',
       jamMisa: '18:00 WIB',
       lokasi: 'Gereja Utama',
-      petugasOriginal: 'Gatot Chrishariyono',
-      petugasPengganti: 'Raymundus Raimun Aso',
-      status: 'Swapped'
+      petugasOriginal: 'Wey Tjoendianto (#103)',
+      petugasPengganti: 'Gunarjo Tanurijanto (#099)',
+      status: 'Updated'
     }
   ]);
 
   const [importLogText, setImportLogText] = useState<string>(
-    'Batch #102: Berhasil sinkronisasi 2 pesan WhatsApp grup ke jadwal September 2026.'
+    'Batch #104: Berhasil memproses 2 format WhatsApp (Tukar & Digantikan) ke jadwal September 2026.'
   );
-
 
   const handleProcessMessage = async () => {
     if (!inputMessage.trim()) return;
     setIsProcessing(true);
 
     try {
-      // Call backend API if available, or smart fallback
-      const response = await fetch('/api/parse-chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: inputMessage })
-      }).catch(() => null);
+      const text = inputMessage;
 
-      let original = 'Budi Utomo';
-      let pengganti = 'Hartanto Chandra';
-      let jam = '08:00';
+      // 1. Detect Swap Type: 'TUKAR' (Mutual Switch) vs 'DIGANTIKAN' (One-Way Replacement)
+      const isMutualSwap = /tukar\s+dgn|tukar\s+dengan|bertukar/i.test(text);
+      const swapType: 'TUKAR' | 'DIGANTIKAN' = isMutualSwap ? 'TUKAR' : 'DIGANTIKAN';
 
-      if (response && response.ok) {
-        const resJson = await response.json();
-        const data = resJson.data;
-        if (data.originalServer) original = data.originalServer;
-        if (data.substituteServer) pengganti = data.substituteServer;
-        if (data.time) jam = data.time;
-      } else {
-        // Local intelligent regex parser
-        const text = inputMessage;
-        const timeMatch = text.match(/(\d{1,2}[:.]\d{2})/);
-        if (timeMatch) jam = timeMatch[1].replace('.', ':');
+      // 2. Extract Officer IDs (#105, #092, #103, #099, etc.)
+      const idMatches = text.match(/#(\d{1,3})/g) || [];
+      const extractedIds = idMatches.map(m => m.replace('#', '').padStart(3, '0'));
 
-        const names = text.match(/([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)/g) || [];
-        if (names.length >= 2) {
-          pengganti = names[0];
-          original = names[1];
-        } else if (names.length === 1) {
-          pengganti = names[0];
+      let officerA = officers.find(o => o.id === extractedIds[0]);
+      let officerB = officers.find(o => o.id === extractedIds[1]);
+
+      // Fallback name extraction if no #ID found
+      if (!officerA || !officerB) {
+        const nameMatches = text.match(/([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)/g) || [];
+        if (!officerA && nameMatches[0]) {
+          officerA = officers.find(o => o.name.toLowerCase().includes(nameMatches[0].toLowerCase())) || officers[0];
+        }
+        if (!officerB && nameMatches[1]) {
+          officerB = officers.find(o => o.name.toLowerCase().includes(nameMatches[1].toLowerCase())) || officers[1];
         }
       }
 
-      // Update Detected Change box
+      const nameA = officerA ? `${officerA.name} (#${officerA.id.padStart(3, '0')})` : 'Petugas A';
+      const nameB = officerB ? `${officerB.name} (#${officerB.id.padStart(3, '0')})` : 'Petugas B';
+
+      // 3. Extract Times (17.00, 18.00, 06:00, etc.)
+      const timeMatches = text.match(/(\d{1,2}[:.]\d{2})/g) || [];
+      const timeA = timeMatches[0] ? timeMatches[0].replace('.', ':') + ' WIB' : '18:00 WIB';
+      const timeB = timeMatches[1] ? timeMatches[1].replace('.', ':') + ' WIB' : timeA;
+
+      const actionLabel = swapType === 'TUKAR' ? 'Tukar Jadwal (Mutual Switch)' : 'Digantikan (One-Way Replacement)';
+      const detailNotes = swapType === 'TUKAR'
+        ? `${nameA} bertukar jadwal Misa dengan ${nameB} (Saling tukar jam/hari bertugas).`
+        : `${nameA} tidak bisa bertugas, digantikan sepenuhnya oleh ${nameB}.`;
+
+      // 4. Update Live Preview Box
       setDetectedChange({
-        original,
-        pengganti,
-        jamMisa: jam,
-        action: 'menggantikan'
+        original: nameA,
+        pengganti: nameB,
+        jamMisa: swapType === 'TUKAR' ? `${timeA} ⇄ ${timeB}` : timeA,
+        action: actionLabel,
+        swapType,
+        detailNotes
       });
 
-      // Update Today's Schedule Table
-      setTodayRows(prev => {
-        const existingIndex = prev.findIndex(r => r.jamMisa.includes(jam) || jam.includes(r.jamMisa));
-        if (existingIndex !== -1) {
-          const updated = [...prev];
-          updated[existingIndex] = {
-            ...updated[existingIndex],
-            petugasPengganti: pengganti,
-            status: 'Swapped'
-          };
-          return updated;
-        } else {
-          return [
-            ...prev,
-            {
-              id: 't-' + Date.now(),
-              jamMisa: jam,
-              lokasi: 'Gereja Utama',
-              petugasOriginal: original,
-              petugasPengganti: pengganti,
-              status: 'Swapped'
+      // 5. Apply Changes to Real Schedule State (onUpdateSchedule)
+      if (schedule && schedule.length > 0) {
+        const updatedSchedule = schedule.map(slot => {
+          if (swapType === 'DIGANTIKAN') {
+            // Replace officerA with officerB in matching slot
+            if (officerA && officerB && slot.serverIds.includes(officerA.id)) {
+              const newServerIds = slot.serverIds.map(id => id === officerA!.id ? officerB!.id : id);
+              const newServerNames = slot.serverNames.map(n => n === officerA!.shortName || n === officerA!.name ? officerB!.shortName : n);
+              return {
+                ...slot,
+                serverIds: newServerIds,
+                serverNames: newServerNames,
+                status: 'Berlangsung' as const
+              };
             }
-          ];
-        }
-      });
+          } else if (swapType === 'TUKAR') {
+            // Swap officerA and officerB positions
+            if (officerA && officerB) {
+              const hasA = slot.serverIds.includes(officerA.id);
+              const hasB = slot.serverIds.includes(officerB.id);
 
-      // Add to messages list
+              if (hasA && !hasB) {
+                const newServerIds = slot.serverIds.map(id => id === officerA!.id ? officerB!.id : id);
+                const newServerNames = slot.serverNames.map(n => n === officerA!.shortName ? officerB!.shortName : n);
+                return { ...slot, serverIds: newServerIds, serverNames: newServerNames };
+              } else if (hasB && !hasA) {
+                const newServerIds = slot.serverIds.map(id => id === officerB!.id ? officerA!.id : id);
+                const newServerNames = slot.serverNames.map(n => n === officerB!.shortName ? officerA!.shortName : n);
+                return { ...slot, serverIds: newServerIds, serverNames: newServerNames };
+              }
+            }
+          }
+          return slot;
+        });
+
+        onUpdateSchedule(updatedSchedule);
+      }
+
+      // 6. Update Today's Schedule Table
+      setTodayRows(prev => [
+        {
+          id: 't-' + Date.now(),
+          jamMisa: timeA,
+          lokasi: 'Gereja Utama',
+          petugasOriginal: nameA,
+          petugasPengganti: nameB,
+          status: swapType === 'TUKAR' ? 'Swapped' : 'Updated'
+        },
+        ...prev
+      ]);
+
+      // 7. Add to Feed & System Log
       const now = new Date();
       const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
       setMessages(prev => [
@@ -198,14 +241,13 @@ export const AdminBackoffice: React.FC<AdminBackofficeProps> = ({
         ...prev
       ]);
 
-      // Add to system log
       onAddLog({
         type: 'ai_import',
-        description: `WhatsApp Importer: ${pengganti} menggantikan ${original} (Misa ${jam})`,
-        actor: 'WhatsApp Importer'
+        description: `WA Converter [${actionLabel}]: ${nameA} -> ${nameB} (${timeA})`,
+        actor: 'WhatsApp AI Parser'
       });
 
-      setImportLogText(`Batch #${Math.floor(100 + Math.random() * 50)}: Terdeteksi perubahan jadwal Misa ${jam}. Database jadwal berhasil diperbarui.`);
+      setImportLogText(`Berhasil memproses permohonan [${actionLabel}]. Data disinkronkan ke Rekap Tugas.`);
       playAudioFeedback('success');
     } catch (err) {
       console.error(err);
@@ -213,6 +255,7 @@ export const AdminBackoffice: React.FC<AdminBackofficeProps> = ({
       setIsProcessing(false);
     }
   };
+
 
   return (
     <div className="flex-1 bg-[#fbf9f5] overflow-y-auto p-6 md:p-8 selection:bg-primary/20">
@@ -278,25 +321,51 @@ export const AdminBackoffice: React.FC<AdminBackofficeProps> = ({
                 ))}
               </div>
 
+              {/* Quick Preset Format Buttons */}
+              <div className="space-y-1.5 pt-1">
+                <span className="text-[11px] font-bold text-[#5B1414] uppercase tracking-wider block">
+                  Contoh Format WA Resmi Paroki (Klik untuk Isi):
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setInputMessage(PRESET_TUKAR)}
+                    className="px-2.5 py-1.5 bg-[#FAF7F2] hover:bg-[#F3EDE2] text-[#5B1414] border border-[#D9CEBA] rounded-lg text-[11px] font-bold transition-all flex items-center gap-1 cursor-pointer"
+                  >
+                    <ArrowRightLeft className="w-3 h-3 text-[#5B1414]" />
+                    <span>Format 1: Tukar Tugas (Mutual Swap)</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setInputMessage(PRESET_DIGANTIKAN)}
+                    className="px-2.5 py-1.5 bg-[#FAF7F2] hover:bg-[#F3EDE2] text-[#5B1414] border border-[#D9CEBA] rounded-lg text-[11px] font-bold transition-all flex items-center gap-1 cursor-pointer"
+                  >
+                    <RotateCw className="w-3 h-3 text-[#5B1414]" />
+                    <span>Format 2: Digantikan (Replacement)</span>
+                  </button>
+                </div>
+              </div>
+
               {/* Textarea for pasting new message */}
-              <div className="space-y-2 pt-2">
+              <div className="space-y-2 pt-1">
                 <textarea
                   value={inputMessage}
                   onChange={(e) => setInputMessage(e.target.value)}
-                  placeholder="Paste new messages here... e.g."
-                  rows={3}
-                  className="w-full p-3.5 bg-white border border-[#d6cbbe] rounded-xl text-xs text-[#2b241e] placeholder:text-[#9e9488] focus:outline-none focus:ring-2 focus:ring-[#7c191e]/40 focus:border-[#7c191e] transition-all resize-none leading-relaxed"
+                  placeholder="Tempelkan pesan WA grup tukar tugas di sini..."
+                  rows={6}
+                  className="w-full p-3.5 bg-white border border-[#d6cbbe] rounded-xl text-xs text-[#2b241e] placeholder:text-[#9e9488] focus:outline-none focus:ring-2 focus:ring-[#7c191e]/40 focus:border-[#7c191e] transition-all resize-none leading-relaxed font-mono"
                 />
 
                 <button
                   onClick={handleProcessMessage}
                   disabled={isProcessing || !inputMessage.trim()}
-                  className="w-full py-3 bg-[#7c191e] hover:bg-[#681419] disabled:opacity-50 text-white text-xs font-bold rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 uppercase tracking-wider"
+                  className="w-full py-3 bg-[#7c191e] hover:bg-[#681419] disabled:opacity-50 text-white text-xs font-bold rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 uppercase tracking-wider cursor-pointer"
                 >
                   <RotateCw className={`w-4 h-4 ${isProcessing ? 'animate-spin' : ''}`} />
-                  <span>{isProcessing ? 'Memproses Pesan...' : 'PROSES & UPDATE JADWAL'}</span>
+                  <span>{isProcessing ? 'Memproses Pesan...' : 'PROSES & UPDATE JADWAL SAKRISTI'}</span>
                 </button>
               </div>
+
 
             </div>
 
@@ -326,29 +395,39 @@ export const AdminBackoffice: React.FC<AdminBackofficeProps> = ({
                 </div>
               </div>
 
-              {/* Detected Change Box (Exact match Stitch image 2) */}
-              <div className="bg-white border border-[#e0d6c7] rounded-xl p-4 shadow-xs space-y-2 relative">
+              {/* Detected Change Box */}
+              <div className="bg-white border border-[#e0d6c7] rounded-xl p-4 shadow-xs space-y-2.5 relative">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center">
                       <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                     </div>
                     <span className="text-xs font-bold text-[#2b241e]">
-                      Detected Change
+                      Terdeteksi Perubahan WA:
                     </span>
                   </div>
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+
+                  <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider ${
+                    detectedChange.swapType === 'TUKAR'
+                      ? 'bg-purple-100 text-purple-900 border border-purple-300'
+                      : 'bg-amber-100 text-amber-900 border border-amber-300'
+                  }`}>
+                    {detectedChange.action}
+                  </span>
                 </div>
 
-                <p className="text-xs md:text-sm text-[#3b342e] leading-relaxed pt-1">
-                  <span className="font-semibold text-[#1a140e]">{detectedChange.pengganti}</span>{' '}
-                  <span className="font-bold text-[#7c191e] underline decoration-[#7c191e]/40 underline-offset-4">
-                    {detectedChange.action}
-                  </span>{' '}
-                  <span className="font-semibold text-[#1a140e]">{detectedChange.original}</span> di Misa{' '}
-                  <span className="font-bold text-[#1a140e]">{detectedChange.jamMisa}</span>.
+                <p className="text-xs md:text-sm text-[#3b342e] leading-relaxed">
+                  <span className="font-bold text-[#5B1414]">{detectedChange.original}</span>
+                  <span className="mx-1 text-[#8C7662]">↔</span>
+                  <span className="font-bold text-emerald-800">{detectedChange.pengganti}</span>
+                  <span className="ml-2 text-xs font-mono text-[#6E5A4B]">({detectedChange.jamMisa})</span>
+                </p>
+
+                <p className="text-xs text-[#6E5A4B] bg-[#FAF7F2] p-2 rounded-lg border border-[#E8DFC8] italic">
+                  💡 {detectedChange.detailNotes}
                 </p>
               </div>
+
             </div>
 
             {/* Box 2: Jadwal Hari Ini (Table exact match Stitch image 2) */}
