@@ -112,12 +112,10 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
         {/* HERO CARD: MISA TERDEKAT & DAFTAR PETUGAS JAGA                             */}
         {/* ========================================================================= */}
         {currentSlot && (
-          <div className="bg-gradient-to-br from-[#5B1414] via-[#7C191E] to-[#420D0D] text-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/25 relative overflow-hidden backdrop-blur-md">
-            {/* Top metallic glow accent */}
-            <div className="absolute -top-12 -right-12 w-48 h-48 bg-amber-400/10 rounded-full blur-2xl pointer-events-none" />
-
+          <div className="bg-gradient-to-br from-[#5B1414] via-[#7C191E] to-[#420D0D] text-white rounded-3xl p-6 sm:p-8 shadow-xl border border-white/20 relative overflow-hidden">
             {/* Header / Date & Time */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-6 border-b border-white/20 relative z-10">
+
               <div>
                 <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-amber-400 text-[#4A0E17] rounded-full text-xs font-black uppercase tracking-wider mb-2 shadow-xs">
                   <Flame className="w-3.5 h-3.5" />

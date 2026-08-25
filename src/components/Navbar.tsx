@@ -66,14 +66,14 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="docked full-width top-0 border-b border-[#5c1317] flex justify-between items-center w-full h-[72px] px-4 md:px-8 bg-gradient-to-r from-[#6e1418] via-[#7c191e] to-[#541014] text-white shadow-lg select-none shrink-0 z-20 backdrop-blur-md">
+    <header className="docked full-width top-0 border-b border-[#5c1317] flex justify-between items-center w-full h-[72px] px-4 md:px-8 bg-gradient-to-r from-[#6e1418] via-[#7c191e] to-[#541014] text-white shadow-lg select-none shrink-0 z-20">
       {/* Brand & Logo */}
       <div 
         onClick={() => onNavigate('landing')}
         className="flex items-center gap-3.5 cursor-pointer group"
         title="Kembali ke Halaman Utama"
       >
-        <div className="h-11 w-11 bg-white rounded-full p-0.5 flex items-center justify-center border-2 border-white/50 shadow-md group-hover:scale-105 group-hover:border-amber-300 transition-all overflow-hidden">
+        <div className="h-11 w-11 bg-white rounded-full p-0.5 flex items-center justify-center border-2 border-white/50 shadow-md group-hover:scale-105 group-hover:border-amber-300 transition-transform overflow-hidden">
           <img 
             alt="Santo Yakobus Logo" 
             className="w-full h-full object-cover rounded-full" 
@@ -89,12 +89,11 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
       </div>
 
-
       {/* Center Nav Links: Menu Utama | Kiosk | Administrasi */}
       <nav className="hidden sm:flex gap-1 sm:gap-4 md:gap-6 h-full items-center">
         <button
           onClick={() => onNavigate('landing')}
-          className={`flex items-center gap-1.5 h-full px-3 text-xs md:text-sm font-bold tracking-wide transition-all ${
+          className={`flex items-center gap-1.5 h-full px-3 text-xs md:text-sm font-bold tracking-wide transition-colors ${
             isLanding
               ? 'border-b-4 border-white text-white opacity-100'
               : 'text-white/75 hover:text-white hover:opacity-100'
@@ -106,7 +105,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         <button
           onClick={() => onNavigate('kiosk')}
-          className={`flex items-center gap-1.5 h-full px-3 text-xs md:text-sm font-bold tracking-wide transition-all ${
+          className={`flex items-center gap-1.5 h-full px-3 text-xs md:text-sm font-bold tracking-wide transition-colors ${
             isKiosk
               ? 'border-b-4 border-white text-white opacity-100'
               : 'text-white/75 hover:text-white hover:opacity-100'
@@ -119,7 +118,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Administrasi entry point: Visible to all, protected by handleNavigate security guard */}
         <button
           onClick={() => onNavigate('admin-dashboard')}
-          className={`flex items-center gap-1.5 h-full px-3 text-xs md:text-sm font-bold tracking-wide transition-all cursor-pointer ${
+          className={`flex items-center gap-1.5 h-full px-3 text-xs md:text-sm font-bold tracking-wide transition-colors cursor-pointer ${
             isAdmin
               ? 'border-b-4 border-white text-white opacity-100'
               : 'text-white/75 hover:text-white hover:opacity-100'
@@ -139,7 +138,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         {onOpenLoginModal && (
           <button
             onClick={onOpenLoginModal}
-            className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-xl text-xs font-extrabold border border-white/20 transition-all shadow-xs cursor-pointer"
+            className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-xl text-xs font-extrabold border border-white/20 transition-colors shadow-xs cursor-pointer"
             title="Masuk / Ganti Tingkat Akses Akun"
           >
             <LogIn className="w-4 h-4 text-amber-300" />
@@ -151,15 +150,13 @@ export const Navbar: React.FC<NavbarProps> = ({
         {onOpenOfficerSchedule && (
           <button
             onClick={onOpenOfficerSchedule}
-            className="flex items-center gap-1.5 bg-amber-400 hover:bg-amber-300 text-[#4A0E17] px-3.5 py-1.5 rounded-xl text-xs font-extrabold shadow-sm transition-all cursor-pointer"
+            className="flex items-center gap-1.5 bg-amber-400 hover:bg-amber-300 text-[#4A0E17] px-3.5 py-1.5 rounded-xl text-xs font-extrabold shadow-sm transition-colors cursor-pointer"
             title="Lihat Profil & Tanggal Tugas Misa Saya"
           >
             <UserCheck className="w-4 h-4" />
             <span>Profil Saya</span>
           </button>
         )}
-
-
 
         {/* Logout if authenticated */}
         {isAuthed && onLogout && (
@@ -171,16 +168,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             <LogOut className="w-4 h-4" />
           </button>
         )}
-
-        {/* Code Exporter */}
-        <button
-          onClick={onOpenCodeExport}
-          title="Ekspor File kiosk.html, admin.html, & app.py"
-          className="hidden lg:flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-xl text-xs font-semibold border border-white/20 transition-all shadow-xs cursor-pointer"
-        >
-          <Sparkles className="w-4 h-4 text-amber-300" />
-          <span>Ekspor Kode</span>
-        </button>
 
         {/* Help button */}
         <button
@@ -200,6 +187,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <Settings className="w-5 h-5" />
         </button>
       </div>
+
 
     </header>
 
