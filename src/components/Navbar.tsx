@@ -110,18 +110,22 @@ export const Navbar: React.FC<NavbarProps> = ({
           <span>Kiosk Mode</span>
         </button>
 
-        <button
-          onClick={() => onNavigate('admin-dashboard')}
-          className={`flex items-center gap-1.5 h-full px-3 text-xs md:text-sm font-bold tracking-wide transition-all ${
-            isAdmin
-              ? 'border-b-4 border-white text-white opacity-100'
-              : 'text-white/75 hover:text-white hover:opacity-100'
-          }`}
-        >
-          <Shield className="w-4 h-4" />
-          <span>Administrasi</span>
-        </button>
+        {/* Admin entry point: ONLY visible when authenticated as Admin */}
+        {role === 'admin' && (
+          <button
+            onClick={() => onNavigate('admin-dashboard')}
+            className={`flex items-center gap-1.5 h-full px-3 text-xs md:text-sm font-bold tracking-wide transition-all ${
+              isAdmin
+                ? 'border-b-4 border-white text-white opacity-100'
+                : 'text-white/75 hover:text-white hover:opacity-100'
+            }`}
+          >
+            <Shield className="w-4 h-4 text-amber-300" />
+            <span>Administrasi (Admin)</span>
+          </button>
+        )}
       </nav>
+
 
       {/* Right Controls & Role Badge */}
       <div className="flex items-center gap-2">
@@ -170,16 +174,19 @@ export const Navbar: React.FC<NavbarProps> = ({
           <HelpCircle className="w-5 h-5" />
         </button>
 
-        {/* Settings button */}
-        <button
-          onClick={() => onNavigate('admin-dashboard')}
-          className="p-2 hover:bg-white/10 rounded-xl transition-colors h-[38px] w-[38px] flex items-center justify-center text-white"
-          title="Pengaturan Admin"
-        >
-          <Settings className="w-5 h-5" />
-        </button>
+        {/* Settings button: ONLY for Admin */}
+        {role === 'admin' && (
+          <button
+            onClick={() => onNavigate('admin-dashboard')}
+            className="p-2 hover:bg-white/10 rounded-xl transition-colors h-[38px] w-[38px] flex items-center justify-center text-white"
+            title="Pengaturan Admin"
+          >
+            <Settings className="w-5 h-5" />
+          </button>
+        )}
       </div>
     </header>
+
   );
 };
 
