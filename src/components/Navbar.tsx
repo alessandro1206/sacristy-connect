@@ -110,22 +110,19 @@ export const Navbar: React.FC<NavbarProps> = ({
           <span>Kiosk Mode</span>
         </button>
 
-        {/* Admin entry point: ONLY visible when authenticated as Admin */}
-        {role === 'admin' && (
-          <button
-            onClick={() => onNavigate('admin-dashboard')}
-            className={`flex items-center gap-1.5 h-full px-3 text-xs md:text-sm font-bold tracking-wide transition-all ${
-              isAdmin
-                ? 'border-b-4 border-white text-white opacity-100'
-                : 'text-white/75 hover:text-white hover:opacity-100'
-            }`}
-          >
-            <Shield className="w-4 h-4 text-amber-300" />
-            <span>Administrasi (Admin)</span>
-          </button>
-        )}
+        {/* Administrasi entry point: Visible to all, protected by handleNavigate security guard */}
+        <button
+          onClick={() => onNavigate('admin-dashboard')}
+          className={`flex items-center gap-1.5 h-full px-3 text-xs md:text-sm font-bold tracking-wide transition-all cursor-pointer ${
+            isAdmin
+              ? 'border-b-4 border-white text-white opacity-100'
+              : 'text-white/75 hover:text-white hover:opacity-100'
+          }`}
+        >
+          <Shield className="w-4 h-4 text-amber-300" />
+          <span>Administrasi</span>
+        </button>
       </nav>
-
 
       {/* Right Controls & Role Badge */}
       <div className="flex items-center gap-2">
@@ -148,7 +145,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         {isAuthed && onLogout && (
           <button
             onClick={onLogout}
-            className="p-2 hover:bg-white/10 rounded-xl transition-colors h-[38px] w-[38px] flex items-center justify-center text-white/80 hover:text-white"
+            className="p-2 hover:bg-white/10 rounded-xl transition-colors h-[38px] w-[38px] flex items-center justify-center text-white/80 hover:text-white cursor-pointer"
             title="Keluar Akun"
           >
             <LogOut className="w-4 h-4" />
@@ -159,7 +156,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <button
           onClick={onOpenCodeExport}
           title="Ekspor File kiosk.html, admin.html, & app.py"
-          className="hidden lg:flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-xl text-xs font-semibold border border-white/20 transition-all shadow-xs"
+          className="hidden lg:flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-xl text-xs font-semibold border border-white/20 transition-all shadow-xs cursor-pointer"
         >
           <Sparkles className="w-4 h-4 text-amber-300" />
           <span>Ekspor Kode</span>
@@ -168,23 +165,22 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Help button */}
         <button
           onClick={onOpenHelp}
-          className="p-2 hover:bg-white/10 rounded-xl transition-colors h-[38px] w-[38px] flex items-center justify-center text-white"
+          className="p-2 hover:bg-white/10 rounded-xl transition-colors h-[38px] w-[38px] flex items-center justify-center text-white cursor-pointer"
           title="Bantuan & Panduan Sistem"
         >
           <HelpCircle className="w-5 h-5" />
         </button>
 
-        {/* Settings button: ONLY for Admin */}
-        {role === 'admin' && (
-          <button
-            onClick={() => onNavigate('admin-dashboard')}
-            className="p-2 hover:bg-white/10 rounded-xl transition-colors h-[38px] w-[38px] flex items-center justify-center text-white"
-            title="Pengaturan Admin"
-          >
-            <Settings className="w-5 h-5" />
-          </button>
-        )}
+        {/* Settings button */}
+        <button
+          onClick={() => onNavigate('admin-dashboard')}
+          className="p-2 hover:bg-white/10 rounded-xl transition-colors h-[38px] w-[38px] flex items-center justify-center text-white cursor-pointer"
+          title="Pengaturan Admin"
+        >
+          <Settings className="w-5 h-5" />
+        </button>
       </div>
+
     </header>
 
   );

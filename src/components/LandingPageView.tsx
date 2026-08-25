@@ -76,9 +76,9 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
         </div>
 
         {/* ========================================================================= */}
-        {/* CARDS CONTAINER (Kiosk Mode & Conditional Admin Card)                     */}
+        {/* CARDS CONTAINER (Kiosk Mode & Administrasi Admin Card)                    */}
         {/* ========================================================================= */}
-        <div className={`grid grid-cols-1 ${isAdminRole ? 'md:grid-cols-2' : 'max-w-2xl mx-auto'} gap-6 lg:gap-8 items-stretch`}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
           
           {/* ----------------------------------------------------------------------- */}
           {/* CARD 1: KIOSK PRESENSI & PENUGASAN (Touchscreen)                       */}
@@ -142,23 +142,23 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
           </div>
 
           {/* ----------------------------------------------------------------------- */}
-          {/* CARD 2: ADMINISTRASI (ONLY SHOWN IF USER IS ADMIN)                     */}
+          {/* CARD 2: ADMINISTRASI (ADMIN BACKOFFICE)                                 */}
           {/* ----------------------------------------------------------------------- */}
-          {isAdminRole && (
-            <div className="bg-white hover:bg-[#faf8f4] border-2 border-[#e6ded2] hover:border-[#7c191e] rounded-3xl p-6 sm:p-8 shadow-xs hover:shadow-lg transition-all flex flex-col justify-between relative overflow-hidden">
-              {/* Top decorative accent */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[#1976d2]/5 rounded-bl-full pointer-events-none" />
+          <div className="bg-white hover:bg-[#faf8f4] border-2 border-[#e6ded2] hover:border-[#7c191e] rounded-3xl p-6 sm:p-8 shadow-xs hover:shadow-lg transition-all flex flex-col justify-between relative overflow-hidden">
+            {/* Top decorative accent */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#1976d2]/5 rounded-bl-full pointer-events-none" />
 
-              <div className="space-y-5 relative">
-                {/* Badge & Icon */}
-                <div className="flex items-center justify-between">
-                  <div className="w-14 h-14 rounded-2xl bg-[#2b241e] text-white flex items-center justify-center shadow-md">
-                    <ShieldCheck className="w-8 h-8 text-amber-300" />
-                  </div>
-                  <span className="px-3 py-1 bg-[#e8f5e9] text-[#2e7d32] border border-[#c8e6c9] rounded-full text-xs font-bold uppercase tracking-wider">
-                    Admin Backoffice
-                  </span>
+            <div className="space-y-5 relative">
+              {/* Badge & Icon */}
+              <div className="flex items-center justify-between">
+                <div className="w-14 h-14 rounded-2xl bg-[#2b241e] text-white flex items-center justify-center shadow-md">
+                  <ShieldCheck className="w-8 h-8 text-amber-300" />
                 </div>
+                <span className="px-3 py-1 bg-[#e8f5e9] text-[#2e7d32] border border-[#c8e6c9] rounded-full text-xs font-bold uppercase tracking-wider">
+                  Admin Backoffice
+                </span>
+              </div>
+
 
                 {/* Title & Description */}
                 <div className="space-y-1.5">
@@ -265,9 +265,9 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                 </button>
               </div>
             </div>
-          )}
 
-        </div>
+          </div>
+
 
 
 
