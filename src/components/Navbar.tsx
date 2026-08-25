@@ -66,14 +66,14 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="docked full-width top-0 border-b border-[#5c1317] flex justify-between items-center w-full h-[72px] px-4 md:px-8 bg-[#7c191e] text-white shadow-md select-none shrink-0 z-20">
+    <header className="docked full-width top-0 border-b border-[#5c1317] flex justify-between items-center w-full h-[72px] px-4 md:px-8 bg-gradient-to-r from-[#6e1418] via-[#7c191e] to-[#541014] text-white shadow-lg select-none shrink-0 z-20 backdrop-blur-md">
       {/* Brand & Logo */}
       <div 
         onClick={() => onNavigate('landing')}
-        className="flex items-center gap-3 cursor-pointer group"
+        className="flex items-center gap-3.5 cursor-pointer group"
         title="Kembali ke Halaman Utama"
       >
-        <div className="h-11 w-11 bg-white rounded-full p-0.5 flex items-center justify-center border-2 border-white/40 shadow-sm group-hover:scale-105 transition-transform overflow-hidden">
+        <div className="h-11 w-11 bg-white rounded-full p-0.5 flex items-center justify-center border-2 border-white/50 shadow-md group-hover:scale-105 group-hover:border-amber-300 transition-all overflow-hidden">
           <img 
             alt="Santo Yakobus Logo" 
             className="w-full h-full object-cover rounded-full" 
@@ -82,12 +82,13 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         <div>
-          <span className="text-lg md:text-xl font-extrabold uppercase tracking-wider font-headline text-white flex items-center gap-1.5">
+          <span className="text-lg md:text-xl font-extrabold uppercase tracking-wider font-headline text-white flex items-center gap-1.5 drop-shadow-xs">
             SACRISTYCONNECT
           </span>
-          <p className="text-[10px] text-white/80 tracking-wide">Paroki Santo Yakobus</p>
+          <p className="text-[10px] text-white/85 tracking-wide font-medium">Paroki Santo Yakobus</p>
         </div>
       </div>
+
 
       {/* Center Nav Links: Menu Utama | Kiosk | Administrasi */}
       <nav className="hidden sm:flex gap-1 sm:gap-4 md:gap-6 h-full items-center">

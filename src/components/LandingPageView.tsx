@@ -112,18 +112,21 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
         {/* HERO CARD: MISA TERDEKAT & DAFTAR PETUGAS JAGA                             */}
         {/* ========================================================================= */}
         {currentSlot && (
-          <div className="bg-gradient-to-br from-[#5B1414] via-[#7C191E] to-[#420D0D] text-white rounded-3xl p-6 sm:p-8 shadow-xl border border-white/20 relative overflow-hidden">
+          <div className="bg-gradient-to-br from-[#5B1414] via-[#7C191E] to-[#420D0D] text-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/25 relative overflow-hidden backdrop-blur-md">
+            {/* Top metallic glow accent */}
+            <div className="absolute -top-12 -right-12 w-48 h-48 bg-amber-400/10 rounded-full blur-2xl pointer-events-none" />
+
             {/* Header / Date & Time */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-6 border-b border-white/20">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-6 border-b border-white/20 relative z-10">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-400 text-[#4A0E17] rounded-full text-xs font-black uppercase tracking-wider mb-2">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-amber-400 text-[#4A0E17] rounded-full text-xs font-black uppercase tracking-wider mb-2 shadow-xs">
                   <Flame className="w-3.5 h-3.5" />
                   <span>Misa Terdekat &amp; Jadwal Sesi Aktif</span>
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-extrabold font-headline">
+                <h2 className="text-2xl sm:text-3xl font-extrabold font-headline tracking-tight text-white drop-shadow-xs">
                   {currentSlot.displayDate} — {currentSlot.massTime}
                 </h2>
-                <p className="text-xs sm:text-sm text-white/80 flex items-center gap-1.5 mt-1 font-medium">
+                <p className="text-xs sm:text-sm text-white/90 flex items-center gap-1.5 mt-1 font-medium">
                   <MapPin className="w-4 h-4 text-amber-300 shrink-0" />
                   <span>{currentSlot.location}</span>
                 </p>
@@ -131,7 +134,7 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
 
               <button
                 onClick={handleKioskClick}
-                className="px-5 py-2.5 bg-white text-[#5B1414] hover:bg-amber-100 rounded-2xl text-xs font-extrabold shadow-md transition-all flex items-center gap-2 cursor-pointer shrink-0"
+                className="px-5 py-2.5 bg-white text-[#5B1414] hover:bg-amber-100 rounded-2xl text-xs font-extrabold shadow-md hover:shadow-lg transition-all flex items-center gap-2 cursor-pointer shrink-0 border border-white/40"
               >
                 <Touchpad className="w-4 h-4 text-[#5B1414]" />
                 <span>Absen Kiosk Misa Ini</span>
@@ -139,32 +142,32 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
             </div>
 
             {/* Who Will Be The Tugas (Daftar Petugas Jaga) */}
-            <div className="pt-6 space-y-3">
+            <div className="pt-6 space-y-3 relative z-10">
               <div className="flex items-center justify-between">
                 <h3 className="text-xs uppercase tracking-wider font-extrabold text-amber-300 flex items-center gap-2">
                   <Users className="w-4 h-4" />
                   <span>Petugas Misa Terdekat ({assignedOfficersForNearest.length} Asisten Imam)</span>
                 </h3>
-                <span className="text-[11px] text-white/80 font-medium">
-                  Koorlap: <strong>{nearestKoorlapNames}</strong>
+                <span className="text-[11px] text-white/85 font-medium">
+                  Koorlap: <strong className="text-amber-200">{nearestKoorlapNames}</strong>
                 </span>
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5">
                 {assignedOfficersForNearest.map(off => (
-                  <div key={off.id} className="bg-white/10 hover:bg-white/20 border border-white/15 rounded-xl px-3 py-2 text-left transition-all">
+                  <div key={off.id} className="bg-white/10 hover:bg-white/20 border border-white/20 hover:border-amber-300/50 rounded-xl px-3 py-2.5 text-left transition-all shadow-xs hover:scale-[1.02] cursor-default">
                     <div className="flex items-center gap-1.5 min-w-0">
                       <span className="text-[10px] font-mono font-bold text-amber-300 shrink-0">#{off.id.padStart(3, '0')}</span>
                       <p className="text-xs font-bold text-white truncate">{off.name}</p>
                     </div>
-                    <span className="text-[10px] text-white/75 block truncate mt-0.5">{off.wilayah || 'Asisten Imam'}</span>
+                    <span className="text-[10px] text-white/80 block truncate mt-0.5 font-medium">{off.wilayah || 'Asisten Imam'}</span>
                   </div>
                 ))}
               </div>
-
             </div>
           </div>
         )}
+
 
 
         {/* ========================================================================= */}
