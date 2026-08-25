@@ -465,7 +465,8 @@ export const KioskView: React.FC<KioskViewProps> = ({
 
   // Belum Absen list: Scheduled officers for this Misa who have NOT checked in yet
   const unattendedOfficers = scheduledOfficersList.filter(o => !attendedOfficerIds.has(o.id));
-  const attendedOfficersList = officers.filter(o => attendedOfficerIds.has(o.id));
+  const attendedOfficersList = scheduledOfficersList.filter(o => attendedOfficerIds.has(o.id));
+
 
 
   // Filtered lists for Step 2 Sidebars
@@ -487,14 +488,16 @@ export const KioskView: React.FC<KioskViewProps> = ({
   const attendedCount = currentSlot.attendedServerIds.length;
   const unattendedCount = totalOfficersCount - attendedCount;
 
-  // Filtered list for left sidebar in Step 4
-  const displayedOfficersList = officers.filter(o => {
-    const matchesSearch = o.name.toLowerCase().includes(searchOfficer.toLowerCase()) || o.id.includes(searchOfficer);
+  // Filtered list for left sidebar in Step 4 (100% interconnected with Schedule Generator & Step 2)
+  const displayedOfficersList = scheduledOfficersList.filter(o => {
+    const term = searchOfficer.toLowerCase();
+    const matchesSearch = !term || o.name.toLowerCase().includes(term) || o.id.includes(term) || o.id.padStart(3, '0').includes(term);
     if (!matchesSearch) return false;
     if (filterListTab === 'attended') return attendedOfficerIds.has(o.id);
     if (filterListTab === 'unattended') return !attendedOfficerIds.has(o.id);
     return true;
   });
+
 
   // Assign officer to position in Step 4 (Strictly only attended officers!)
   const handleAssignToPosition = (positionId: string, officer: Officer) => {
@@ -539,9 +542,10 @@ export const KioskView: React.FC<KioskViewProps> = ({
     } : p));
   };
 
-  // Remaining officers assigned to Balai Paroki
+  // Remaining officers assigned to Balai Paroki (from the scheduled roster for this Misa)
   const assignedPositionOfficerIds = new Set(positions.map(p => p.assignedOfficerId).filter(Boolean));
-  const balaiOfficers = officers.filter(o => !assignedPositionOfficerIds.has(o.id));
+  const balaiOfficers = scheduledOfficersList.filter(o => !assignedPositionOfficerIds.has(o.id));
+
 
   return (
     <div className="flex-1 flex flex-col h-full bg-[#FAF7F2] text-[#2C2420] overflow-y-auto font-sans">
