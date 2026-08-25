@@ -60,19 +60,6 @@ interface MassSessionChoice {
 const MASS_SESSIONS: MassSessionChoice[] = [
   // 1. MISA HARIAN (1 KOORLAP)
   {
-    id: "misa-harian-pagi",
-    category: "harian",
-    categoryLabel: "Misa Harian (1 Koorlap)",
-    dayLabel: "SENIN - JUMAT",
-    dateDisplay: "Setiap Hari Kerja",
-    timeDisplay: "06:00 WIB",
-    koorlaps: [{ id: "004", name: "Agustinus Cahyono" }],
-    koorlapCount: 1,
-    koorlapDisplay: "Agustinus Cahyono",
-    location: "GEREJA UTAMA",
-    description: "Misa Harian Pagi (1 Koorlap Jaga)"
-  },
-  {
     id: "misa-harian-sore",
     category: "harian",
     categoryLabel: "Misa Harian (1 Koorlap)",
@@ -85,6 +72,7 @@ const MASS_SESSIONS: MassSessionChoice[] = [
     location: "GEREJA UTAMA",
     description: "Misa Harian Sore / Jumat Pertama (1 Koorlap Jaga)"
   },
+
 
   // 2. MISA SABTU SORE & MINGGU (SEPTEMBER 2026 - MINGGU I)
   {
@@ -410,46 +398,10 @@ const MASS_SESSIONS: MassSessionChoice[] = [
     koorlapDisplay: "Sukotjo Budiono",
     location: "GEREJA UTAMA",
     description: "Misa Minggu Sore (18 Petugas Scheduled)"
-  },
-
-  // 3. MISA HARI RAYA BESAR
-  {
-    id: "misa-natal-malam",
-    category: "hari_raya",
-    categoryLabel: "Hari Besar / Natal & Paskah (Banyak Koorlap)",
-    dayLabel: "HARI RAYA NATAL",
-    dateDisplay: "24 Desember 2026",
-    timeDisplay: "19:00 WIB",
-    koorlaps: [
-      { id: "004", name: "Agustinus Cahyono" },
-      { id: "054", name: "Hartanto Chandra" },
-      { id: "145", name: "Damianus Slamet Subagio" },
-      { id: "089", name: "Hanjaya Kurniawan" }
-    ],
-    koorlapCount: 4,
-    koorlapDisplay: "Agustinus C., Hartanto C., Damianus S., Hanjaya K.",
-    location: "GEREJA UTAMA & BALAI PAROKI",
-    description: "Misa Malam Natal (4 Koorlap Gabungan Gereja & Balai)"
-  },
-  {
-    id: "misa-paskah-vigili",
-    category: "hari_raya",
-    categoryLabel: "Hari Besar / Natal & Paskah (Banyak Koorlap)",
-    dayLabel: "VIGILI PASKAH",
-    dateDisplay: "Sabtu Suci 2026",
-    timeDisplay: "18:30 WIB",
-    koorlaps: [
-      { id: "035", name: "Johanes Ignasius Totok" },
-      { id: "054", name: "Hartanto Chandra" },
-      { id: "111", name: "Handi Wirajaya" },
-      { id: "145", name: "Damianus Slamet Subagio" }
-    ],
-    koorlapCount: 4,
-    koorlapDisplay: "Johanes T., Hartanto C., Handi W., Damianus S.",
-    location: "GEREJA UTAMA & BALAI PAROKI",
-    description: "Misa Vigili Paskah (4 Koorlap Gabungan Gereja & Balai)"
   }
 ];
+
+
 
 
 export const KioskView: React.FC<KioskViewProps> = ({
@@ -910,9 +862,9 @@ export const KioskView: React.FC<KioskViewProps> = ({
                 {[
                   { key: 'all', label: 'Semua Sesi' },
                   { key: 'harian', label: 'Misa Harian (1 Koorlap)' },
-                  { key: 'mingguan', label: 'Sabtu & Minggu (2 Koorlap)' },
-                  { key: 'hari_raya', label: 'Hari Besar / Natal & Paskah (Banyak)' },
+                  { key: 'mingguan', label: 'Sabtu & Minggu' },
                 ].map(tab => (
+
                   <button
                     key={tab.key}
                     onClick={() => {
