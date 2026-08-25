@@ -3670,31 +3670,11 @@ export const INITIAL_RULES_CONFIG: AssignmentRulesConfig = {
 
 export const INITIAL_LOGS: SystemLog[] = [
   {
-    id: "log-1",
-    timestamp: "2026-09-05 17:42:10 WIB",
-    type: "attendance",
-    description: "Presensi Mandiri ID: 035 (Johanes Ignasius Totok) - Hadir",
-    actor: "Kiosk Numpad",
-  },
-  {
-    id: "log-2",
-    timestamp: "2026-09-05 17:45:04 WIB",
-    type: "attendance",
-    description: "Presensi Mandiri ID: 038 (Yudi Wijaya) - Hadir",
-    actor: "Kiosk Numpad",
-  },
-  {
-    id: "log-3",
-    timestamp: "2026-09-05 17:48:33 WIB",
-    type: "attendance",
-    description: "Presensi Mandiri ID: 003 (Venantius Sumarmo) - Hadir",
-    actor: "Kiosk Numpad",
-  },
-  {
-    id: "log-4",
-    timestamp: "2026-09-04 10:15:00 WIB",
+    id: "log-sys-1",
+    timestamp: "2026-09-01 00:00:00 WIB",
     type: "ai_import",
-    description: "AI Chat Converter: Import Jadwal Tugas Asisten Imam September 2026 (170 Petugas)",
-    actor: "Admin Backoffice",
+    description: "Sistem Sakristi Connect Aktif: Inisialisasi Jadwal Tugas & Database Resmi 170 Asisten Imam September 2026",
+    actor: "System Audit",
   }
 ];
+

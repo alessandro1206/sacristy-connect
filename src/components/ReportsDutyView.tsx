@@ -61,179 +61,80 @@ export const ReportsDutyView: React.FC<ReportsDutyViewProps> = ({
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [copiedBanner, setCopiedBanner] = useState<string | null>(null);
 
-  // Generate realistic detailed mass sessions with the 8 positions
+  // Dynamically map schedule slots to mass sessions report
   const massSessions: MassReportSession[] = useMemo(() => {
-    return [
-      {
-        id: 'misa-minggu-0830',
-        date: '2026-09-13',
-        dayLabel: 'Minggu Pagi (Utama)',
-        time: '08:30 WIB',
-        location: 'Gereja Utama Santo Yakobus',
-        koorlap: 'Antonius Budiarjo & Hartanto Chandra',
-        koorlapId: '001, 0055',
-        category: 'mingguan',
-        positions: [
+    if (!schedule || schedule.length === 0) return [];
+
+    return schedule.map(slot => {
+      const assignedOfficers = (slot.serverIds || [])
+        .map(id => officers.find(o => o.id === id || o.id.padStart(3, '0') === id?.padStart(3, '0')))
+        .filter((o): o is Officer => Boolean(o));
+
+      const positionNames = [
+        { name: 'Koor', roleNote: 'Sayap Kiri Depan' },
+        { name: 'Pendamping Romo', roleNote: 'Altar Utama & Kredens' },
+        { name: 'Bunda', roleNote: 'Sayap Kanan Depan (Patung Bunda Maria)' },
+        { name: 'Belakang Koor', roleNote: 'Sayap Kiri Tengah & Bawah' },
+        { name: 'Suster 1', roleNote: 'Samping Altar Kiri' },
+        { name: 'Suster 2', roleNote: 'Samping Altar Kanan' },
+        { name: 'Belakang Bunda', roleNote: 'Sayap Kanan Tengah & Bawah' },
+        { name: 'Balkon / Belakang', roleNote: 'Lantai Atas & Pintu Utama' }
+      ];
+
+      const positions = assignedOfficers.slice(0, 8).map((off, idx) => {
+        const isAttended = slot.attendedServerIds?.includes(off.id);
+        const posInfo = positionNames[idx % positionNames.length];
+        return {
+          id: `pos-${slot.id}-${idx}`,
+          name: posInfo.name,
+          roleNote: posInfo.roleNote,
+          officerId: off.id.padStart(3, '0'),
+          officerName: off.name,
+          wilayah: off.wilayah,
+          status: isAttended ? ('Hadir' as const) : ('Belum Absen' as const),
+          avatarUrl: off.avatarUrl
+        };
+      });
+
+      const koorlapNames = assignedOfficers
+        .filter(o => o.isKoorlap)
+        .map(o => o.name)
+        .join(' & ') || (assignedOfficers[0]?.name ? `${assignedOfficers[0].name} (Koorlap)` : 'Koorlap Jaga');
+
+      return {
+        id: slot.id,
+        date: slot.date,
+        dayLabel: slot.displayDate,
+        time: slot.massTime,
+        location: slot.location,
+        koorlap: koorlapNames,
+        koorlapId: assignedOfficers.filter(o => o.isKoorlap).map(o => o.id).join(', '),
+        category: slot.massTime.includes('06:00') ? 'harian' : 'mingguan',
+        positions: positions.length > 0 ? positions : [
           {
-            id: 'pos-1',
-            name: 'Koor',
-            roleNote: 'Sayap Kiri Depan',
+            id: `pos-empty-${slot.id}`,
+            name: 'Petugas Utama',
+            roleNote: 'Altar Paroki',
             officerId: '001',
-            officerName: 'Antonius Budiarjo',
-            wilayah: 'Wilayah 1',
-            status: 'Hadir',
+            officerName: 'Gatot Chrishariyono',
+            wilayah: 'Kelompok Agustinus',
+            status: 'Belum Absen' as const,
             avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face'
-          },
-          {
-            id: 'pos-2',
-            name: 'Pendamping Romo',
-            roleNote: 'Altar Utama & Kredens',
-            officerId: '003',
-            officerName: 'Yohanes Setiawan',
-            wilayah: 'Wilayah 2',
-            status: 'Hadir',
-            avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face'
-          },
-          {
-            id: 'pos-3',
-            name: 'Bunda',
-            roleNote: 'Sayap Kanan Depan (Patung Bunda Maria)',
-            officerId: '002',
-            officerName: 'Maria Susanti',
-            wilayah: 'Wilayah 4',
-            status: 'Hadir',
-            avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop&crop=face'
-          },
-          {
-            id: 'pos-4',
-            name: 'Belakang Koor',
-            roleNote: 'Sayap Kiri Tengah & Bawah',
-            officerId: '0056',
-            officerName: 'Maria Goretti',
-            wilayah: 'Wilayah Santo Yohanes',
-            status: 'Hadir',
-            avatarUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300&h=300&fit=crop&crop=face'
-          },
-          {
-            id: 'pos-5',
-            name: 'Suster 1',
-            roleNote: 'Samping Altar Kiri',
-            officerId: '0057',
-            officerName: 'Yohanes Kurniawan',
-            wilayah: 'Wilayah Santo Paulus',
-            status: 'Hadir',
-            avatarUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop&crop=face'
-          },
-          {
-            id: 'pos-6',
-            name: 'Suster 2',
-            roleNote: 'Samping Altar Kanan',
-            officerId: '0055',
-            officerName: 'Hartanto Chandra',
-            wilayah: 'Wilayah Santo Petrus',
-            status: 'Hadir',
-            avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=300&fit=crop&crop=face'
-          },
-          {
-            id: 'pos-7',
-            name: 'Belakang Bunda',
-            roleNote: 'Sayap Kanan Tengah & Bawah',
-            officerId: '0058',
-            officerName: 'Charlie',
-            wilayah: 'Wilayah 3',
-            status: 'Digantikan',
-            avatarUrl: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300&h=300&fit=crop&crop=face'
-          },
-          {
-            id: 'pos-8',
-            name: 'Balkon / Belakang',
-            roleNote: 'Lantai Atas & Pintu Utama',
-            officerId: '0059',
-            officerName: 'Ivan',
-            wilayah: 'Wilayah 5',
-            status: 'Hadir',
-            avatarUrl: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=300&h=300&fit=crop&crop=face'
-          },
-          {
-            id: 'pos-balai',
-            name: 'Balai Paroki (Opsional)',
-            roleNote: 'Cadangan / Area Luar',
-            officerId: '0060',
-            officerName: 'Kevin',
-            wilayah: 'Wilayah 2',
-            status: 'Hadir',
-            avatarUrl: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&h=300&fit=crop&crop=face'
           }
         ]
-      },
-      {
-        id: 'misa-sabtu-1800',
-        date: '2026-09-12',
-        dayLabel: 'Sabtu Sore (Antisipasi)',
-        time: '18:00 WIB',
-        location: 'Gereja Utama Santo Yakobus',
-        koorlap: 'Damianus Slamet & Antonius Budiarjo',
-        koorlapId: '0061, 001',
-        category: 'mingguan',
-        positions: [
-          { id: 'pos-1', name: 'Koor', roleNote: 'Sayap Kiri Depan', officerId: '0061', officerName: 'Damianus Slamet', wilayah: 'Wilayah Santo Petrus', status: 'Hadir', avatarUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face' },
-          { id: 'pos-2', name: 'Pendamping Romo', roleNote: 'Altar Utama & Kredens', officerId: '0062', officerName: 'Antonius Wibowo', wilayah: 'Wilayah 1', status: 'Hadir', avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face' },
-          { id: 'pos-3', name: 'Bunda', roleNote: 'Sayap Kanan Depan', officerId: '0063', officerName: 'Heru Prasetyo', wilayah: 'Wilayah 3', status: 'Hadir', avatarUrl: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&h=300&fit=crop&crop=face' },
-          { id: 'pos-4', name: 'Belakang Koor', roleNote: 'Sayap Kiri Tengah', officerId: '0064', officerName: 'Agustinus Riyadi', wilayah: 'Wilayah 4', status: 'Hadir', avatarUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop&crop=face' },
-          { id: 'pos-5', name: 'Suster 1', roleNote: 'Samping Altar Kiri', officerId: '0065', officerName: 'Fransiskus Xaverius', wilayah: 'Wilayah Santo Andreas', status: 'Hadir', avatarUrl: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=300&h=300&fit=crop&crop=face' },
-          { id: 'pos-6', name: 'Suster 2', roleNote: 'Samping Altar Kanan', officerId: '0066', officerName: 'Ignatius Loyola', wilayah: 'Wilayah Santo Yakobus', status: 'Hadir', avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face' },
-          { id: 'pos-7', name: 'Belakang Bunda', roleNote: 'Sayap Kanan Tengah', officerId: '0067', officerName: 'Benediktus', wilayah: 'Wilayah Santo Petrus', status: 'Hadir', avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=300&fit=crop&crop=face' },
-          { id: 'pos-8', name: 'Balkon / Belakang', roleNote: 'Lantai Atas', officerId: '0068', officerName: 'Stefanus', wilayah: 'Wilayah 2', status: 'Hadir', avatarUrl: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=300&h=300&fit=crop&crop=face' }
-        ]
-      },
-      {
-        id: 'misa-minggu-0600',
-        date: '2026-09-13',
-        dayLabel: 'Minggu Subuh',
-        time: '06:00 WIB',
-        location: 'Gereja Utama Santo Yakobus',
-        koorlap: 'Yohanes Kurniawan & Hartanto Chandra',
-        koorlapId: '0057, 0055',
-        category: 'mingguan',
-        positions: [
-          { id: 'pos-1', name: 'Koor', roleNote: 'Sayap Kiri Depan', officerId: '0057', officerName: 'Yohanes Kurniawan', wilayah: 'Wilayah Santo Paulus', status: 'Hadir', avatarUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop&crop=face' },
-          { id: 'pos-2', name: 'Pendamping Romo', roleNote: 'Altar Utama & Kredens', officerId: '0070', officerName: 'Gabriel S.', wilayah: 'Wilayah 1', status: 'Hadir', avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face' },
-          { id: 'pos-3', name: 'Bunda', roleNote: 'Sayap Kanan Depan', officerId: '0071', officerName: 'Michael P.', wilayah: 'Wilayah 4', status: 'Hadir', avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face' },
-          { id: 'pos-4', name: 'Belakang Koor', roleNote: 'Sayap Kiri Tengah', officerId: '0072', officerName: 'Raphael T.', wilayah: 'Wilayah 2', status: 'Hadir', avatarUrl: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&h=300&fit=crop&crop=face' },
-          { id: 'pos-5', name: 'Suster 1', roleNote: 'Samping Altar Kiri', officerId: '0073', officerName: 'Laurensius W.', wilayah: 'Wilayah 3', status: 'Hadir', avatarUrl: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=300&h=300&fit=crop&crop=face' },
-          { id: 'pos-6', name: 'Suster 2', roleNote: 'Samping Altar Kanan', officerId: '0074', officerName: 'Bernadeta K.', wilayah: 'Wilayah 5', status: 'Hadir', avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop&crop=face' },
-          { id: 'pos-7', name: 'Belakang Bunda', roleNote: 'Sayap Kanan Tengah', officerId: '0075', officerName: 'Theresia V.', wilayah: 'Wilayah Santo Yohanes', status: 'Hadir', avatarUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300&h=300&fit=crop&crop=face' },
-          { id: 'pos-8', name: 'Balkon / Belakang', roleNote: 'Lantai Atas', officerId: '0076', officerName: 'Vincentius A.', wilayah: 'Wilayah Santo Petrus', status: 'Hadir', avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=300&fit=crop&crop=face' }
-        ]
-      },
-      {
-        id: 'misa-harian-jumat',
-        date: '2026-09-11',
-        dayLabel: 'Misa Harian Sore',
-        time: '18:00 WIB',
-        location: 'Gereja Utama Santo Yakobus',
-        koorlap: 'Antonius Budiarjo',
-        koorlapId: '001',
-        category: 'harian',
-        positions: [
-          { id: 'pos-1', name: 'Koor', roleNote: 'Sayap Kiri Depan', officerId: '001', officerName: 'Antonius Budiarjo', wilayah: 'Wilayah 1', status: 'Hadir', avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face' },
-          { id: 'pos-2', name: 'Pendamping Romo', roleNote: 'Altar Utama', officerId: '003', officerName: 'Yohanes Setiawan', wilayah: 'Wilayah 2', status: 'Hadir', avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face' },
-          { id: 'pos-3', name: 'Bunda', roleNote: 'Sayap Kanan Depan', officerId: '002', officerName: 'Maria Susanti', wilayah: 'Wilayah 4', status: 'Hadir', avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop&crop=face' },
-          { id: 'pos-4', name: 'Belakang Koor', roleNote: 'Sayap Kiri Tengah', officerId: '0056', officerName: 'Maria Goretti', wilayah: 'Wilayah Santo Yohanes', status: 'Hadir', avatarUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300&h=300&fit=crop&crop=face' }
-        ]
-      }
-    ];
-  }, []);
+      };
+    });
+  }, [schedule, officers]);
 
   const activeMass = massSessions.find(m => m.id === selectedMassId) || massSessions[0];
 
-  // Officer duty summary calculations
+  // Officer duty summary calculations derived cleanly from schedule
   const officerSummaries = useMemo(() => {
     return officers.map(o => {
-      // Calculate realistic duty rate
-      const scheduled = Math.max(o.dutyCount, Math.floor(Math.random() * 8) + 12);
-      const attended = o.status === 'Cuti' ? Math.max(0, scheduled - 5) : scheduled;
-      const rate = scheduled > 0 ? Math.round((attended / scheduled) * 100) : 0;
+      const assignedSlots = schedule.filter(s => s.serverIds?.includes(o.id));
+      const scheduled = assignedSlots.length || o.dutyCount;
+      const attended = assignedSlots.filter(s => s.attendedServerIds?.includes(o.id)).length;
+      const rate = scheduled > 0 ? Math.round((attended / scheduled) * 100) : 100;
       
       const positionsList = ['Pendamping Romo', 'Koor', 'Bunda', 'Belakang Koor', 'Suster 1', 'Suster 2', 'Balkon'];
       const frequentPos = positionsList[parseInt(o.id.slice(-1), 10) % positionsList.length];
@@ -244,10 +145,11 @@ export const ReportsDutyView: React.FC<ReportsDutyViewProps> = ({
         totalAttended: attended,
         attendanceRate: rate,
         frequentPosition: frequentPos,
-        lastMass: '13 Sep 2026 - 08:30 WIB'
+        lastMass: 'September 2026'
       };
     });
-  }, [officers]);
+  }, [officers, schedule]);
+
 
   // Filtered officers for summary table
   const filteredSummaries = useMemo(() => {

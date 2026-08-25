@@ -47,24 +47,24 @@ export const AdminBackoffice: React.FC<AdminBackofficeProps> = ({
   onUpdateSchedule,
   onAddLog
 }) => {
-  // Feed of WhatsApp messages matching screenshot
+  // Feed of WhatsApp messages matching real parish officers
   const [messages, setMessages] = useState<MessageItem[]>([
     {
       id: 'msg-1',
       time: '09:45 AM',
-      text: 'Hartanto Chandra tidak bisa tugas misa 08:00, diganti Budi Utomo',
+      text: 'Hartanto Chandra tidak bisa tugas misa 08:00, diganti Venantius Sumarmo',
       status: 'UPDATED'
     },
     {
       id: 'msg-2',
       time: '10:12 AM',
-      text: 'Silvia requesting swap with Andi for 17:00 Mass',
+      text: 'Gatot Chrishariyono bertukar jadwal dengan Raymundus Raimun Aso untuk Misa 18:00',
       status: 'UPDATED'
     }
   ]);
 
   const [inputMessage, setInputMessage] = useState<string>(
-    'Hartanto Chandra tidak bisa tugas misa 08:00, diganti Budi Utomo'
+    'Hartanto Chandra tidak bisa tugas misa 08:00, diganti Venantius Sumarmo'
   );
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
 
@@ -75,8 +75,8 @@ export const AdminBackoffice: React.FC<AdminBackofficeProps> = ({
     jamMisa: string;
     action: string;
   }>({
-    original: 'Budi Utomo',
-    pengganti: 'Hartanto Chandra',
+    original: 'Hartanto Chandra',
+    pengganti: 'Venantius Sumarmo',
     jamMisa: '08:00',
     action: 'menggantikan'
   });
@@ -85,33 +85,34 @@ export const AdminBackoffice: React.FC<AdminBackofficeProps> = ({
   const [todayRows, setTodayRows] = useState<TodayScheduleRow[]>([
     {
       id: 't-1',
-      jamMisa: '06:00',
+      jamMisa: '06:00 WIB',
       lokasi: 'Gereja Utama',
-      petugasOriginal: 'Agus Setiawan',
+      petugasOriginal: 'Agustinus Cahyono',
       petugasPengganti: null,
       status: 'Terjadwal'
     },
     {
       id: 't-2',
-      jamMisa: '08:00',
+      jamMisa: '08:00 WIB',
       lokasi: 'Gereja Utama',
-      petugasOriginal: 'Budi Utomo',
-      petugasPengganti: 'Hartanto Chandra',
+      petugasOriginal: 'Hartanto Chandra',
+      petugasPengganti: 'Venantius Sumarmo',
       status: 'Swapped'
     },
     {
       id: 't-3',
-      jamMisa: '17:00',
-      lokasi: 'Kapel',
-      petugasOriginal: 'Silvia Maria',
-      petugasPengganti: 'Andi Kurnia',
+      jamMisa: '18:00 WIB',
+      lokasi: 'Gereja Utama',
+      petugasOriginal: 'Gatot Chrishariyono',
+      petugasPengganti: 'Raymundus Raimun Aso',
       status: 'Swapped'
     }
   ]);
 
   const [importLogText, setImportLogText] = useState<string>(
-    'Batch #102: Berhasil sinkronisasi 2 pesan WhatsApp grup ke jadwal harian.'
+    'Batch #102: Berhasil sinkronisasi 2 pesan WhatsApp grup ke jadwal September 2026.'
   );
+
 
   const handleProcessMessage = async () => {
     if (!inputMessage.trim()) return;
