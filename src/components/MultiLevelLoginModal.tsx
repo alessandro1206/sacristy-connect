@@ -198,13 +198,14 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
             <X className="w-5 h-5" />
           </button>
 
-          <div className="w-14 h-14 rounded-2xl bg-white/10 p-2 mx-auto mb-2 flex items-center justify-center border border-white/20 shadow-inner">
+          <div className="w-14 h-14 rounded-full bg-white p-0.5 mx-auto mb-2 flex items-center justify-center border-2 border-white/40 shadow-sm overflow-hidden">
             <img
               src={CHURCH_LOGO}
               alt="Logo Paroki"
-              className="w-10 h-10 object-contain"
+              className="w-full h-full object-cover rounded-full"
             />
           </div>
+
 
           <h3 className="text-xl font-extrabold font-headline tracking-tight">
             {initialRole === 'admin' ? 'Login Administrator' : 'Portal Masuk Sakristi'}

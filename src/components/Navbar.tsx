@@ -73,13 +73,14 @@ export const Navbar: React.FC<NavbarProps> = ({
         className="flex items-center gap-3 cursor-pointer group"
         title="Kembali ke Halaman Utama"
       >
-        <div className="h-11 w-11 bg-white/10 rounded-full p-1 flex items-center justify-center border border-white/20 group-hover:scale-105 transition-transform">
+        <div className="h-11 w-11 bg-white rounded-full p-0.5 flex items-center justify-center border-2 border-white/40 shadow-sm group-hover:scale-105 transition-transform overflow-hidden">
           <img 
             alt="Santo Yakobus Logo" 
-            className="h-9 w-auto object-contain" 
+            className="w-full h-full object-cover rounded-full" 
             src={CHURCH_LOGO} 
           />
         </div>
+
         <div>
           <span className="text-lg md:text-xl font-extrabold uppercase tracking-wider font-headline text-white flex items-center gap-1.5">
             SACRISTYCONNECT

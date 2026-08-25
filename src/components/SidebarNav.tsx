@@ -51,13 +51,14 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({
         className="px-1 mb-6 flex items-center gap-3.5 cursor-pointer group"
         title="Kembali ke Menu Utama"
       >
-        <div className="w-12 h-12 rounded-full bg-[#5B1414] flex items-center justify-center overflow-hidden border border-[#D9CEBA] shrink-0 p-1 shadow-inner group-hover:scale-105 transition-transform">
+        <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center overflow-hidden border-2 border-[#D9CEBA] shrink-0 p-0.5 shadow-sm group-hover:scale-105 transition-transform">
           <img 
-            className="w-10 h-10 object-contain" 
+            className="w-full h-full object-cover rounded-full" 
             alt="Santo Yakobus Logo" 
             src={CHURCH_LOGO} 
           />
         </div>
+
         <div>
           <h1 className="text-sm font-extrabold text-[#5B1414] font-headline tracking-tight group-hover:underline">
             SacristyConnect
