@@ -66,9 +66,9 @@ const MASS_SESSIONS: MassSessionChoice[] = [
     dayLabel: "SENIN - JUMAT",
     dateDisplay: "Setiap Hari Kerja",
     timeDisplay: "06:00 WIB",
-    koorlaps: [{ id: "001", name: "Antonius Budiarjo" }],
+    koorlaps: [{ id: "004", name: "Agustinus Cahyono" }],
     koorlapCount: 1,
-    koorlapDisplay: "Antonius Budiarjo",
+    koorlapDisplay: "Agustinus Cahyono",
     location: "GEREJA UTAMA",
     description: "Misa Harian Pagi (1 Koorlap Jaga)"
   },
@@ -77,29 +77,29 @@ const MASS_SESSIONS: MassSessionChoice[] = [
     category: "harian",
     categoryLabel: "Misa Harian (1 Koorlap)",
     dayLabel: "JUMAT PERTAMA",
-    dateDisplay: "Jumat Pertama",
+    dateDisplay: "Jumat Pertama (04 Sep 2026)",
     timeDisplay: "18:00 WIB",
-    koorlaps: [{ id: "002", name: "Maria Susanti" }],
+    koorlaps: [{ id: "065", name: "Bambang Budiono" }],
     koorlapCount: 1,
-    koorlapDisplay: "Maria Susanti",
+    koorlapDisplay: "Bambang Budiono",
     location: "GEREJA UTAMA",
     description: "Misa Harian Sore / Jumat Pertama (1 Koorlap Jaga)"
   },
 
-  // 2. MISA SABTU SORE & MINGGU (2 KOORLAP)
+  // 2. MISA SABTU SORE & MINGGU (SEPTEMBER 2026)
   {
     id: "misa-sabtu-1800",
     category: "mingguan",
     categoryLabel: "Sabtu & Minggu (2 Koorlap)",
     dayLabel: "SABTU",
-    dateDisplay: "15 Agustus 2026",
+    dateDisplay: "05 September 2026",
     timeDisplay: "18:00 WIB",
     koorlaps: [
-      { id: "001", name: "Antonius Budiarjo" },
-      { id: "055", name: "Hartanto Chandra" }
+      { id: "035", name: "Johanes Ignasius Totok" },
+      { id: "038", name: "Yudi Wijaya" }
     ],
     koorlapCount: 2,
-    koorlapDisplay: "Antonius Budiarjo & Hartanto Chandra",
+    koorlapDisplay: "Johanes Ignasius Totok & Yudi Wijaya",
     location: "GEREJA UTAMA",
     description: "Misa Sabtu Sore (2 Koorlap Jaga)"
   },
@@ -108,14 +108,14 @@ const MASS_SESSIONS: MassSessionChoice[] = [
     category: "mingguan",
     categoryLabel: "Sabtu & Minggu (2 Koorlap)",
     dayLabel: "MINGGU",
-    dateDisplay: "16 Agustus 2026",
+    dateDisplay: "06 September 2026",
     timeDisplay: "06:00 WIB",
     koorlaps: [
-      { id: "002", name: "Maria Susanti" },
-      { id: "003", name: "Yohanes Setiawan" }
+      { id: "004", name: "Agustinus Cahyono" },
+      { id: "021", name: "Adinanda Condrowibowo" }
     ],
     koorlapCount: 2,
-    koorlapDisplay: "Maria Susanti & Yohanes Setiawan",
+    koorlapDisplay: "Agustinus Cahyono & Adinanda Condrowibowo",
     location: "GEREJA UTAMA",
     description: "Misa Minggu Pagi I (2 Koorlap Jaga)"
   },
@@ -124,35 +124,34 @@ const MASS_SESSIONS: MassSessionChoice[] = [
     category: "mingguan",
     categoryLabel: "Sabtu & Minggu (2 Koorlap)",
     dayLabel: "MINGGU",
-    dateDisplay: "16 Agustus 2026",
-    timeDisplay: "08:30 WIB",
+    dateDisplay: "06 September 2026",
+    timeDisplay: "08:00 WIB",
     koorlaps: [
-      { id: "057", name: "Yohanes Kurniawan" },
-      { id: "001", name: "Antonius Budiarjo" }
+      { id: "021", name: "Adinanda Condrowibowo" },
+      { id: "044", name: "Dionisius Donny Kamadjaja" }
     ],
     koorlapCount: 2,
-    koorlapDisplay: "Yohanes Kurniawan & Antonius Budiarjo",
+    koorlapDisplay: "Adinanda Condrowibowo & Dionisius Donny K.",
     location: "GEREJA UTAMA",
-    description: "Misa Minggu Pagi II / Utama (2 Koorlap Jaga)"
+    description: "Misa Minggu Pagi II (2 Koorlap Jaga)"
   },
   {
     id: "misa-minggu-1700",
     category: "mingguan",
     categoryLabel: "Sabtu & Minggu (2 Koorlap)",
     dayLabel: "MINGGU",
-    dateDisplay: "16 Agustus 2026",
-    timeDisplay: "17:00 WIB",
+    dateDisplay: "06 September 2026",
+    timeDisplay: "18:00 WIB",
     koorlaps: [
-      { id: "055", name: "Hartanto Chandra" },
-      { id: "002", name: "Maria Susanti" }
+      { id: "049", name: "Tjio Johansyah" }
     ],
-    koorlapCount: 2,
-    koorlapDisplay: "Hartanto Chandra & Maria Susanti",
+    koorlapCount: 1,
+    koorlapDisplay: "Tjio Johansyah",
     location: "GEREJA UTAMA",
-    description: "Misa Minggu Sore (2 Koorlap Jaga)"
+    description: "Misa Minggu Sore (Koorlap Jaga)"
   },
 
-  // 3. MISA HARI RAYA BESAR (NATAL, PEKAN SUCI, PASKAH - BANYAK KOORLAP / 3-4 ORANG)
+  // 3. MISA HARI RAYA BESAR
   {
     id: "misa-natal-malam",
     category: "hari_raya",
@@ -161,13 +160,13 @@ const MASS_SESSIONS: MassSessionChoice[] = [
     dateDisplay: "24 Desember 2026",
     timeDisplay: "19:00 WIB",
     koorlaps: [
-      { id: "001", name: "Antonius Budiarjo" },
-      { id: "055", name: "Hartanto Chandra" },
-      { id: "057", name: "Yohanes Kurniawan" },
-      { id: "002", name: "Maria Susanti" }
+      { id: "004", name: "Agustinus Cahyono" },
+      { id: "054", name: "Hartanto Chandra" },
+      { id: "145", name: "Damianus Slamet Subagio" },
+      { id: "089", name: "Hanjaya Kurniawan" }
     ],
     koorlapCount: 4,
-    koorlapDisplay: "Antonius B., Hartanto C., Yohanes K., Maria S.",
+    koorlapDisplay: "Agustinus C., Hartanto C., Damianus S., Hanjaya K.",
     location: "GEREJA UTAMA & BALAI PAROKI",
     description: "Misa Malam Natal (4 Koorlap Gabungan Gereja & Balai)"
   },
@@ -179,15 +178,15 @@ const MASS_SESSIONS: MassSessionChoice[] = [
     dateDisplay: "Sabtu Suci 2026",
     timeDisplay: "18:30 WIB",
     koorlaps: [
-      { id: "001", name: "Antonius Budiarjo" },
-      { id: "055", name: "Hartanto Chandra" },
-      { id: "003", name: "Yohanes Setiawan" },
-      { id: "057", name: "Yohanes Kurniawan" }
+      { id: "035", name: "Johanes Ignasius Totok" },
+      { id: "054", name: "Hartanto Chandra" },
+      { id: "111", name: "Handi Wirajaya" },
+      { id: "145", name: "Damianus Slamet Subagio" }
     ],
     koorlapCount: 4,
-    koorlapDisplay: "Antonius B., Hartanto C., Yohanes S., Yohanes K.",
+    koorlapDisplay: "Johanes T., Hartanto C., Handi W., Damianus S.",
     location: "GEREJA UTAMA & BALAI PAROKI",
-    description: "Misa Malam Paskah / Vigili Paskah (4 Koorlap)"
+    description: "Misa Vigili Paskah (4 Koorlap Gabungan Gereja & Balai)"
   },
   {
     id: "misa-natal-pagi",
