@@ -426,8 +426,8 @@ export const KioskView: React.FC<KioskViewProps> = ({
   // Step 1 States (Verifikasi Koorlap)
   const [selectedCategoryTab, setSelectedCategoryTab] = useState<'all' | 'harian' | 'mingguan' | 'hari_raya'>('all');
   const [selectedSession, setSelectedSession] = useState<MassSessionChoice>(MASS_SESSIONS[0]);
-  const [koorlapId, setKoorlapId] = useState<string>('001');
-  const [koorlapPassword, setKoorlapPassword] = useState<string>(''); // Requires user to fill out password!
+  const [koorlapId, setKoorlapId] = useState<string>(''); // No auto-fill, user selects or enters ID
+  const [koorlapPassword, setKoorlapPassword] = useState<string>(''); // Requires user to fill out password/PIN!
   const [sessionAuthError, setSessionAuthError] = useState<string | null>(null);
 
   // Step 2 States (3-Digit Numpad & Sidebars)
@@ -503,32 +503,46 @@ export const KioskView: React.FC<KioskViewProps> = ({
     }
 
     if (!cleanId) {
-      setSessionAuthError('Silakan masukkan No. Absen / Username Koorlap atau Admin.');
+      setSessionAuthError('Silakan pilih atau masukkan No. Absen Koorlap yang bertugas.');
       playAudioFeedback('error');
       return;
     }
     if (!cleanPass) {
-      setSessionAuthError('Silakan masukkan Password / PIN Koorlap atau Admin.');
+      setSessionAuthError('Silakan masukkan Password / PIN Koorlap (Default: 1234).');
       playAudioFeedback('error');
       return;
     }
 
-    // Check Admin override (Admin credentials unlock kiosk as well)
+    // Check Admin override (Admin credentials override restriction)
     const isAdminAuth = (cleanId === 'admin' || cleanId === 'sakristi' || cleanId === 'pastor') && (cleanPass === 'sakristi123' || cleanPass === 'admin' || cleanPass.length >= 4);
 
-    // Check Koorlap match or standard PIN (1234)
-    const isKoorlapAuth = cleanPass === '1234' || cleanPass.length >= 4;
+    // Rule: Only Koorlaps assigned to this specific Mass session can open it
+    const assignedKoorlaps = selectedSession.koorlaps || [];
+    const isAssignedKoorlap = assignedKoorlaps.some(k => {
+      const kId3 = k.id.padStart(3, '0');
+      const userCleanId3 = cleanId.padStart(3, '0');
+      return kId3 === userCleanId3 || k.id === cleanId || k.name.toLowerCase().includes(cleanId);
+    });
 
-    if (isAdminAuth || isKoorlapAuth) {
-      setSessionAuthError(null);
-      setIsSessionUnlocked(true); // Unlock all kiosk steps!
-      playAudioFeedback('success');
-      setCurrentStep(2); // Move to Step 2: Numpad Attendance
-    } else {
-      setSessionAuthError('Otorisasi Gagal: Password/PIN Koorlap atau Admin salah. (Gunakan PIN Koorlap 1234 atau Password Admin)');
+    if (!isAdminAuth && !isAssignedKoorlap) {
+      setSessionAuthError(`❌ Akses Ditolak: Hanya Koorlap resmi yang ditugaskan pada Misa ini (${selectedSession.koorlapDisplay}) yang berhak membuka presensi.`);
       playAudioFeedback('error');
+      return;
     }
+
+    // Check PIN validity
+    if (!isAdminAuth && cleanPass !== '1234' && cleanPass.length < 4) {
+      setSessionAuthError('Otorisasi Gagal: PIN Koorlap salah. (Gunakan PIN Default Koorlap: 1234)');
+      playAudioFeedback('error');
+      return;
+    }
+
+    setSessionAuthError(null);
+    setIsSessionUnlocked(true); // Unlock all kiosk steps!
+    playAudioFeedback('success');
+    setCurrentStep(2); // Move to Step 2: Numpad Attendance
   };
+
 
   const handleStepNavigationClick = (targetStep: 1 | 2 | 3 | 4) => {
     if (targetStep === 1) {

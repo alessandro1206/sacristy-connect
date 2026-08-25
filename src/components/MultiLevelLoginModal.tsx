@@ -41,23 +41,24 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
   const [activeTab, setActiveTab] = useState<UserRole | 'register'>(initialRole === 'guest' ? 'officer' : initialRole);
   
   // Officer Level Form State
-  const [selectedOfficerId, setSelectedOfficerId] = useState<string>('001');
-  const [officerPin, setOfficerPin] = useState<string>('1234');
+  const [selectedOfficerId, setSelectedOfficerId] = useState<string>('');
+  const [officerPin, setOfficerPin] = useState<string>('');
   
   // Koorlap Level Form State
-  const [koorlapUser, setKoorlapUser] = useState<string>('koorlap');
-  const [koorlapPin, setKoorlapPin] = useState<string>('1234');
+  const [koorlapUser, setKoorlapUser] = useState<string>('');
+  const [koorlapPin, setKoorlapPin] = useState<string>('');
 
   // Admin Level Form State
-  const [adminUser, setAdminUser] = useState<string>('admin');
-  const [adminPass, setAdminPass] = useState<string>('sakristi123');
+  const [adminUser, setAdminUser] = useState<string>('');
+  const [adminPass, setAdminPass] = useState<string>('');
 
   // Register Form State
   const [regName, setRegName] = useState<string>('');
   const [regWilayah, setRegWilayah] = useState<string>('Wilayah Agustinus');
   const [regRole, setRegRole] = useState<'Asisten Imam' | 'Koorlap'>('Asisten Imam');
   const [regPhone, setRegPhone] = useState<string>('');
-  const [regPin, setRegPin] = useState<string>('1234');
+  const [regPin, setRegPin] = useState<string>('');
+
 
   const [showPass, setShowPass] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -381,12 +382,14 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
                     onChange={(e) => setSelectedOfficerId(e.target.value)}
                     className="w-full pl-10 pr-4 py-3 bg-white border-2 border-[#D9CEBA] focus:border-[#5B1414] rounded-xl text-sm font-semibold text-[#2C2420] outline-hidden transition-all appearance-none cursor-pointer"
                   >
+                    <option value="">-- Pilih Nama / ID Petugas Anda --</option>
                     {officers.map((o) => (
                       <option key={o.id} value={o.id}>
                         [{o.id}] {o.name} ({o.role})
                       </option>
                     ))}
                   </select>
+
                 </div>
               </div>
 
