@@ -815,10 +815,9 @@ export const KioskView: React.FC<KioskViewProps> = ({
   return (
     <div className="flex-1 flex flex-col h-full bg-[#FAF7F2] text-[#2C2420] overflow-y-auto font-sans">
       
-      {/* Interactive Step Navigator Bar (for testing/previewing all 4 Stitch screens) */}
+      {/* Interactive Step Navigator Bar */}
       <div className="bg-[#5B1414] text-white px-4 py-2 flex flex-wrap items-center justify-between text-xs border-b border-[#4A0E17] shadow-sm shrink-0">
         <div className="flex items-center gap-2">
-          <span className="font-bold tracking-wider uppercase opacity-80">Alur Kiosk Google Stitch:</span>
           <div className="flex items-center gap-1.5 bg-black/20 p-1 rounded-xl">
             <button
               onClick={() => handleStepNavigationClick(1)}
