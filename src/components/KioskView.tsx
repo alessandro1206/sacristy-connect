@@ -813,16 +813,16 @@ export const KioskView: React.FC<KioskViewProps> = ({
 
 
   return (
-    <div className="flex-1 flex flex-col h-full bg-[#FAF7F2] text-[#2C2420] overflow-y-auto font-sans">
+    <div className="flex-1 flex flex-col h-full bg-slate-100/80 text-slate-900 overflow-y-auto font-sans">
       
       {/* Interactive Step Navigator Bar */}
-      <div className="bg-[#5B1414] text-white px-4 py-2 flex flex-wrap items-center justify-between text-xs border-b border-[#4A0E17] shadow-sm shrink-0">
+      <div className="bg-slate-900 text-white px-4 py-2 flex flex-wrap items-center justify-between text-xs border-b border-slate-800 shadow-sm shrink-0">
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1.5 bg-black/20 p-1 rounded-xl">
+          <div className="flex items-center gap-1.5 bg-slate-800/80 p-1 rounded-2xl border border-slate-700/60">
             <button
               onClick={() => handleStepNavigationClick(1)}
-              className={`px-3.5 py-1.5 rounded-lg font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
-                currentStep === 1 ? 'bg-amber-400 text-[#4A0E17] shadow-xs' : 'text-white/80 hover:text-white'
+              className={`px-3.5 py-1.5 rounded-xl font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                currentStep === 1 ? 'bg-amber-400 text-slate-950 font-black shadow-xs' : 'text-slate-300 hover:text-white'
               }`}
             >
               <span>1. Pilih Misa &amp; Password</span>
@@ -830,48 +830,46 @@ export const KioskView: React.FC<KioskViewProps> = ({
 
             <button
               onClick={() => handleStepNavigationClick(2)}
-              className={`px-3.5 py-1.5 rounded-lg font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-xl font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
                 currentStep === 2 || currentStep === 3
-                  ? 'bg-amber-400 text-[#4A0E17] shadow-xs' 
+                  ? 'bg-amber-400 text-slate-950 font-black shadow-xs' 
                   : isSessionUnlocked 
-                  ? 'text-white/80 hover:text-white' 
-                  : 'text-white/40 cursor-not-allowed'
+                  ? 'text-slate-300 hover:text-white' 
+                  : 'text-slate-500 cursor-not-allowed'
               }`}
               title={!isSessionUnlocked ? 'Terkunci! Pilih Misa & isi Password terlebih dahulu' : 'Input Numpad Absen'}
             >
-              {!isSessionUnlocked && <Lock className="w-3.5 h-3.5 text-amber-300" />}
+              {!isSessionUnlocked && <Lock className="w-3.5 h-3.5 text-amber-400" />}
               <span>2. Mode Absen (Numpad)</span>
             </button>
 
             <button
               onClick={() => handleStepNavigationClick(4)}
-              className={`px-3.5 py-1.5 rounded-lg font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-xl font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
                 currentStep === 4 
-                  ? 'bg-amber-400 text-[#4A0E17] shadow-xs' 
+                  ? 'bg-amber-400 text-slate-950 font-black shadow-xs' 
                   : isSessionUnlocked 
-                  ? 'text-white/80 hover:text-white' 
-                  : 'text-white/40 cursor-not-allowed'
+                  ? 'text-slate-300 hover:text-white' 
+                  : 'text-slate-500 cursor-not-allowed'
               }`}
               title={!isSessionUnlocked ? 'Terkunci!' : 'Penempatan 8 Posisi'}
             >
-              {!isSessionUnlocked && <Lock className="w-3.5 h-3.5 text-amber-300" />}
+              {!isSessionUnlocked && <Lock className="w-3.5 h-3.5 text-amber-400" />}
               <span>3. Penempatan Posisi</span>
             </button>
           </div>
-
-
         </div>
 
-        <div className="flex items-center gap-3 opacity-90 text-[11px]">
-          <span>Misa: <strong>{selectedSession.dayLabel}, {selectedSession.timeDisplay}</strong></span>
+        <div className="flex items-center gap-3 text-slate-300 text-[11px]">
+          <span>Misa: <strong className="text-white">{selectedSession.dayLabel}, {selectedSession.timeDisplay}</strong></span>
           <span>&bull;</span>
-          <span>Koorlap: <strong>{selectedSession.koorlap}</strong></span>
+          <span>Koorlap: <strong className="text-amber-300">{selectedSession.koorlap}</strong></span>
           {onBackToLanding && (
             <button
               onClick={onBackToLanding}
-              className="ml-2 bg-white/15 hover:bg-white/25 text-white px-2.5 py-1 rounded-md font-semibold text-[11px] transition-colors flex items-center gap-1"
+              className="ml-2 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white px-3 py-1 rounded-xl font-bold text-[11px] transition-colors flex items-center gap-1.5 border border-slate-700 cursor-pointer"
             >
-              <LogOut className="w-3 h-3" />
+              <LogOut className="w-3.5 h-3.5 text-rose-400" />
               <span>Menu Utama</span>
             </button>
           )}

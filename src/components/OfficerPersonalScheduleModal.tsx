@@ -77,36 +77,34 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in">
       <div 
-        className="bg-[#FAF7F2] border-2 border-[#D9CEBA] w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+        className="bg-white border border-slate-200 w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
         onClick={e => e.stopPropagation()}
       >
         {/* Header Banner */}
-        <div className="bg-[#5B1414] text-white p-5 flex items-center justify-between relative overflow-hidden shrink-0">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-amber-400/10 rounded-bl-full pointer-events-none" />
-          
+        <div className="bg-slate-900 text-white p-5 flex items-center justify-between relative overflow-hidden shrink-0 border-b border-slate-800">
           <div className="flex items-center gap-3.5 z-10">
             {officer ? (
               <img 
                 src={officer.avatarUrl} 
                 alt={officer.name}
-                className="w-14 h-14 rounded-2xl object-cover border-2 border-amber-300 shadow-md"
+                className="w-14 h-14 rounded-2xl object-cover border-2 border-amber-400 shadow-md bg-white"
               />
             ) : (
-              <div className="w-14 h-14 rounded-2xl bg-white/10 border-2 border-amber-300 flex items-center justify-center shadow-md">
-                <User className="w-7 h-7 text-amber-300" />
+              <div className="w-14 h-14 rounded-2xl bg-slate-800 border-2 border-amber-400 flex items-center justify-center shadow-md">
+                <User className="w-7 h-7 text-amber-400" />
               </div>
             )}
 
             <div>
               <div className="flex items-center gap-2">
-                <span className="px-2 py-0.5 rounded bg-amber-400 text-[#4A0E17] text-[10px] font-black uppercase tracking-wider font-mono">
+                <span className="px-2.5 py-0.5 rounded-full bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-wider font-mono">
                   {officer ? `No. ${officer.id.padStart(3, '0')}` : 'Tamu / Belum Login'}
                 </span>
-                <span className="text-xs font-semibold text-white/80">
+                <span className="text-xs font-semibold text-slate-300">
                   {officer ? (officer.wilayah || 'Asisten Imam') : 'Paroki Santo Yakobus'}
                 </span>
               </div>
-              <h2 className="text-lg sm:text-xl font-extrabold font-headline text-white mt-0.5">
+              <h2 className="text-lg sm:text-xl font-black font-headline text-white mt-1">
                 {officer ? officer.name : 'Profil & Tanggal Tugas Saya'}
               </h2>
             </div>
@@ -118,33 +116,32 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
                 playAudioFeedback('tap');
                 onClose();
               }}
-              className="w-9 h-9 rounded-full bg-black/20 hover:bg-black/40 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer"
+              className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-slate-300 hover:text-white transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
         </div>
 
-
         {/* Quick Navigation Sub-header with Officer Selector */}
-        <div className="bg-white border-b border-[#E8DFC8] px-5 py-3 flex flex-wrap items-center justify-between gap-3 text-xs shrink-0">
+        <div className="bg-slate-50 border-b border-slate-200 px-5 py-3 flex flex-wrap items-center justify-between gap-3 text-xs shrink-0">
           <div className="flex items-center gap-2">
             <button
               onClick={() => setActiveTab('duties')}
-              className={`px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
                 activeTab === 'duties' 
-                  ? 'bg-[#5B1414] text-white shadow-xs' 
-                  : 'bg-[#FAF7F2] text-[#6E5A4B] hover:bg-[#F3EDE2]'
+                  ? 'bg-slate-900 text-white shadow-xs font-black' 
+                  : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
               }`}
             >
-              📅 Tanggal Tugas Saya ({myAssignedSlots.length})
+              📅 Tanggal Tugas ({myAssignedSlots.length})
             </button>
             <button
               onClick={() => setActiveTab('profile')}
-              className={`px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
                 activeTab === 'profile' 
-                  ? 'bg-[#5B1414] text-white shadow-xs' 
-                  : 'bg-[#FAF7F2] text-[#6E5A4B] hover:bg-[#F3EDE2]'
+                  ? 'bg-slate-900 text-white shadow-xs font-black' 
+                  : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
               }`}
             >
               👤 Profil &amp; Status
@@ -152,11 +149,11 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-[11px] font-bold text-[#6E5A4B]">Pilih Petugas:</span>
+            <span className="text-[11px] font-bold text-slate-500">Pilih Petugas:</span>
             <select
               value={selectedOfficerId}
               onChange={(e) => setSelectedOfficerId(e.target.value)}
-              className="px-2.5 py-1.5 bg-[#FAF7F2] border border-[#D9CEBA] rounded-xl text-xs font-bold text-[#5B1414] focus:outline-none cursor-pointer max-w-[240px] truncate"
+              className="px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-800 focus:outline-none cursor-pointer max-w-[240px] truncate shadow-2xs"
             >
               <option value="">-- Pilih ID / Nama Petugas Anda --</option>
               {officers.map(o => (
@@ -165,7 +162,6 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
                 </option>
               ))}
             </select>
-
           </div>
 
           {onLogout && (
@@ -175,7 +171,7 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
                 onLogout();
                 onClose();
               }}
-              className="text-red-700 hover:text-red-900 font-bold flex items-center gap-1 cursor-pointer"
+              className="text-rose-600 hover:text-rose-800 font-bold flex items-center gap-1 cursor-pointer"
             >
               <LogOut className="w-3.5 h-3.5" />
               <span>Keluar Sesi</span>
@@ -184,16 +180,16 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
         </div>
 
         {/* Modal Content Body */}
-        <div className="p-5 overflow-y-auto flex-1 space-y-4">
+        <div className="p-5 overflow-y-auto flex-1 space-y-4 bg-slate-50/50">
 
           {/* Unauthenticated Login Prompt Banner */}
           {!userSession.isAuthenticated && (
-            <div className="p-4 bg-[#FAF3E6] border border-[#E6D6BD] rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 text-xs shadow-2xs">
+            <div className="p-4 bg-amber-50 border border-amber-200 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 text-xs shadow-2xs">
               <div className="flex items-center gap-2.5">
                 <AlertCircle className="w-5 h-5 text-amber-700 shrink-0" />
                 <div>
-                  <p className="font-bold text-[#5B1414]">Anda belum masuk akun (Tamu / Guest)</p>
-                  <p className="text-[#6E5A4B] text-[11px]">Masuk akun atau daftarkan akun baru untuk mengakses profil resmi Anda.</p>
+                  <p className="font-bold text-amber-950">Anda belum masuk akun (Tamu / Guest)</p>
+                  <p className="text-amber-800 text-[11px]">Masuk akun atau daftarkan akun baru untuk mengakses profil resmi Anda.</p>
                 </div>
               </div>
               <div className="flex items-center gap-2 shrink-0">
@@ -203,7 +199,7 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
                     onClose();
                     onOpenLoginModal?.('officer');
                   }}
-                  className="px-3.5 py-1.5 bg-[#5B1414] hover:bg-[#420D0D] text-white font-bold rounded-xl shadow-xs transition-all cursor-pointer"
+                  className="px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl shadow-xs transition-all cursor-pointer"
                 >
                   🔑 Masuk
                 </button>
@@ -213,7 +209,7 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
                     onClose();
                     onOpenLoginModal?.('register');
                   }}
-                  className="px-3.5 py-1.5 bg-amber-400 hover:bg-amber-300 text-[#4A0E17] font-bold rounded-xl shadow-xs transition-all cursor-pointer"
+                  className="px-3.5 py-1.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold rounded-xl shadow-xs transition-all cursor-pointer"
                 >
                   ➕ Buat Akun
                 </button>
@@ -222,15 +218,14 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
           )}
 
           {activeTab === 'duties' && (
-
             <div className="space-y-3">
               {/* Header & Date Search Filter */}
               <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
-                <h3 className="text-xs font-black text-[#5B1414] uppercase tracking-wider flex items-center gap-1.5">
-                  <Calendar className="w-4 h-4 text-[#5B1414]" />
+                <h3 className="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+                  <Calendar className="w-4 h-4 text-amber-600" />
                   <span>JADWAL TUGAS MISA</span>
                 </h3>
-                <span className="text-[11px] font-bold text-[#8C7662]">
+                <span className="text-[11px] font-bold text-slate-500">
                   Total: {filteredDutySlots.length} Misa Terdaftar
                 </span>
               </div>
@@ -242,12 +237,12 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
                   value={searchDateQuery}
                   onChange={(e) => setSearchDateQuery(e.target.value)}
                   placeholder="🔍 Cari tanggal tugas (contoh: 06 Sep, Minggu, 18:00)..."
-                  className="w-full px-4 py-2 bg-white border border-[#D9CEBA] rounded-xl text-xs font-semibold text-[#2C2420] focus:outline-none focus:border-[#5B1414] shadow-2xs"
+                  className="w-full px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-semibold text-slate-900 focus:outline-none focus:border-slate-400 shadow-2xs"
                 />
                 {searchDateQuery && (
                   <button
                     onClick={() => setSearchDateQuery('')}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-[#8C7662] hover:text-[#5B1414]"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 hover:text-slate-700"
                   >
                     ✕ Hapus
                   </button>
@@ -255,36 +250,36 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
               </div>
 
               {filteredDutySlots.length === 0 ? (
-                <div className="p-8 text-center bg-white border border-[#E8DFC8] rounded-2xl text-[#8C7662]">
+                <div className="p-8 text-center bg-white border border-slate-200 rounded-2xl text-slate-500">
                   <CheckCircle2 className="w-10 h-10 mx-auto text-emerald-600 mb-2 opacity-80" />
-                  <p className="text-sm font-bold text-[#2C2420]">Tidak ada jadwal tugas yang cocok</p>
+                  <p className="text-sm font-bold text-slate-900">Tidak ada jadwal tugas yang cocok</p>
                   <p className="text-xs mt-1">Coba kata kunci pencarian tanggal yang lain.</p>
                 </div>
               ) : (
                 <div className="space-y-2.5">
                   {filteredDutySlots.map((slot, idx) => {
-                    const isAttended = slot.attendedServerIds?.includes(officer.id);
+                    const isAttended = slot.attendedServerIds?.includes(officer ? officer.id : '');
                     const slotKoorlapSet = new Set((slot.koorlapIds || []).map(id => id.padStart(3, '0')));
-                    const isKoorlapForThisSlot = slotKoorlapSet.has(officer.id.padStart(3, '0'));
+                    const isKoorlapForThisSlot = officer && slotKoorlapSet.has(officer.id.padStart(3, '0'));
 
                     return (
                       <div 
                         key={slot.id || idx}
-                        className={`bg-white border-2 rounded-2xl p-4 shadow-2xs hover:border-[#5B1414] transition-all ${
-                          isKoorlapForThisSlot ? 'border-amber-400/80 bg-amber-50/20' : 'border-[#D9CEBA]'
+                        className={`bg-white border rounded-2xl p-4 shadow-2xs hover:border-slate-400 transition-all ${
+                          isKoorlapForThisSlot ? 'border-amber-300 bg-amber-50/20' : 'border-slate-200'
                         }`}
                       >
                         <div className="space-y-1.5">
                           <div className="flex items-center gap-2 flex-wrap justify-between">
                             <div className="flex items-center gap-2 flex-wrap">
-                              <span className="px-2.5 py-0.5 rounded-full bg-[#5B1414]/10 text-[#5B1414] text-xs font-bold uppercase font-mono">
+                              <span className="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-800 text-xs font-bold uppercase font-mono">
                                 📅 {slot.displayDate}
                               </span>
-                              <span className="text-xs font-extrabold text-[#5B1414]">
+                              <span className="text-xs font-black text-slate-900">
                                 ⏰ {slot.massTime}
                               </span>
                               {isAttended && (
-                                <span className="text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded-full">
+                                <span className="text-[10px] font-black bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded-full">
                                   ✓ Hadir
                                 </span>
                               )}
@@ -292,17 +287,17 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
 
                             {/* Slot-specific Role Badge */}
                             {isKoorlapForThisSlot ? (
-                              <span className="text-[10px] font-black bg-amber-200 text-amber-950 border border-amber-400 px-2 py-0.5 rounded-full flex items-center gap-1 shadow-2xs">
+                              <span className="text-[10px] font-black bg-amber-100 text-amber-950 border border-amber-300 px-2.5 py-0.5 rounded-full flex items-center gap-1 shadow-2xs">
                                 👑 Koorlap Bertugas
                               </span>
                             ) : (
-                              <span className="text-[10px] font-bold bg-[#F3EDE2] text-[#6E5A4B] border border-[#D9CEBA] px-2 py-0.5 rounded-full">
+                              <span className="text-[10px] font-bold bg-slate-100 text-slate-600 border border-slate-200 px-2.5 py-0.5 rounded-full">
                                 Asisten Imam (AI)
                               </span>
                             )}
                           </div>
-                          <h4 className="text-sm font-extrabold text-[#2C2420] flex items-center gap-1.5">
-                            <MapPin className="w-3.5 h-3.5 text-[#7C191E]" />
+                          <h4 className="text-sm font-bold text-slate-900 flex items-center gap-1.5 mt-1">
+                            <MapPin className="w-3.5 h-3.5 text-rose-600" />
                             <span>{slot.location}</span>
                           </h4>
                         </div>
@@ -314,30 +309,28 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
             </div>
           )}
 
-          {activeTab === 'profile' && (
-
-            <div className="bg-white border border-[#E8DFC8] rounded-2xl p-5 space-y-4">
-              <h3 className="text-xs font-black text-[#5B1414] uppercase tracking-wider">
+          {activeTab === 'profile' && officer && (
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4 shadow-2xs">
+              <h3 className="text-xs font-black text-slate-900 uppercase tracking-wider">
                 Informasi Pelayanan Asisten Imam
               </h3>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                <div className="p-3 bg-[#FAF7F2] rounded-xl border border-[#E8DFC8]">
-                  <span className="text-[#8C7662] block mb-0.5">Nama Lengkap</span>
-                  <span className="font-bold text-[#2C2420] text-sm">{officer.name}</span>
+                <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                  <span className="text-slate-500 block mb-0.5">Nama Lengkap</span>
+                  <span className="font-bold text-slate-900 text-sm">{officer.name}</span>
                 </div>
-                <div className="p-3 bg-[#FAF7F2] rounded-xl border border-[#E8DFC8]">
-                  <span className="text-[#8C7662] block mb-0.5">No. Absen Petugas</span>
-                  <span className="font-bold text-[#5B1414] font-mono text-sm">No. {officer.id.padStart(3, '0')}</span>
+                <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                  <span className="text-slate-500 block mb-0.5">No. Absen Petugas</span>
+                  <span className="font-black text-slate-900 font-mono text-sm">No. {officer.id.padStart(3, '0')}</span>
                 </div>
-                <div className="p-3 bg-[#FAF7F2] rounded-xl border border-[#E8DFC8]">
-                  <span className="text-[#8C7662] block mb-0.5">Wilayah Paroki</span>
-
-                  <span className="font-bold text-[#2C2420]">{officer.wilayah}</span>
+                <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                  <span className="text-slate-500 block mb-0.5">Wilayah Paroki</span>
+                  <span className="font-bold text-slate-900">{officer.wilayah}</span>
                 </div>
-                <div className="p-3 bg-[#FAF7F2] rounded-xl border border-[#E8DFC8]">
-                  <span className="text-[#8C7662] block mb-0.5">Status Akses</span>
-                  <span className="font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded text-[11px]">
+                <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                  <span className="text-slate-500 block mb-0.5">Status Akses</span>
+                  <span className="font-black text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded text-[11px]">
                     ✓ Aktif Terverifikasi
                   </span>
                 </div>
@@ -348,7 +341,7 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
         </div>
 
         {/* Modal Footer Actions */}
-        <div className="bg-white border-t border-[#E8DFC8] p-4 flex flex-wrap items-center justify-between gap-3 shrink-0">
+        <div className="bg-white border-t border-slate-200 p-4 flex flex-wrap items-center justify-between gap-3 shrink-0">
           <div className="flex items-center gap-2">
             {onOpenLeaveModal && (
               <button
@@ -357,9 +350,9 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
                   onClose();
                   onOpenLeaveModal();
                 }}
-                className="px-3.5 py-2 bg-[#FAF7F2] hover:bg-[#F3EDE2] text-[#5B1414] border border-[#D9CEBA] rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer"
+                className="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer"
               >
-                <FileText className="w-4 h-4" />
+                <FileText className="w-4 h-4 text-slate-600" />
                 <span>Ajukan Cuti / Izin</span>
               </button>
             )}
@@ -370,7 +363,7 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
               playAudioFeedback('tap');
               onClose();
             }}
-            className="px-5 py-2 bg-[#5B1414] hover:bg-[#4A0E17] text-white text-xs font-bold rounded-xl transition-all shadow-xs cursor-pointer"
+            className="px-5 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition-all shadow-xs cursor-pointer"
           >
             Tutup
           </button>

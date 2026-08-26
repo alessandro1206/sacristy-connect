@@ -66,65 +66,65 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="docked full-width top-0 border-b border-[#5c1317] flex justify-between items-center w-full h-[72px] px-4 md:px-8 bg-gradient-to-r from-[#6e1418] via-[#7c191e] to-[#541014] text-white shadow-lg select-none shrink-0 z-20">
+    <header className="docked full-width top-0 border-b border-slate-800/80 flex justify-between items-center w-full h-[72px] px-4 md:px-8 bg-slate-900/95 backdrop-blur-md text-white shadow-md select-none shrink-0 z-30">
       {/* Brand & Logo */}
       <div 
         onClick={() => onNavigate('landing')}
         className="flex items-center gap-3.5 cursor-pointer group"
         title="Kembali ke Halaman Utama"
       >
-        <div className="h-11 w-11 bg-white rounded-full p-0.5 flex items-center justify-center border-2 border-white/50 shadow-md group-hover:scale-105 group-hover:border-amber-300 transition-transform overflow-hidden">
+        <div className="h-10 w-10 bg-gradient-to-tr from-amber-400 to-amber-200 rounded-2xl p-0.5 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform overflow-hidden">
           <img 
             alt="Santo Yakobus Logo" 
-            className="w-full h-full object-cover rounded-full" 
+            className="w-full h-full object-cover rounded-[14px] bg-white" 
             src={CHURCH_LOGO} 
           />
         </div>
 
         <div>
-          <span className="text-lg md:text-xl font-extrabold uppercase tracking-wider font-headline text-white flex items-center gap-1.5 drop-shadow-xs">
-            SACRISTYCONNECT
+          <span className="text-base md:text-lg font-black uppercase tracking-wider font-headline text-white flex items-center gap-1.5 drop-shadow-xs">
+            Sacristy<span className="text-amber-400">Connect</span>
           </span>
-          <p className="text-[10px] text-white/85 tracking-wide font-medium">Paroki Santo Yakobus</p>
+          <p className="text-[10px] text-slate-400 tracking-wide font-medium">Paroki Santo Yakobus</p>
         </div>
       </div>
 
       {/* Center Nav Links: Menu Utama | Kiosk | Administrasi */}
-      <nav className="hidden sm:flex gap-1 sm:gap-4 md:gap-6 h-full items-center">
+      <nav className="hidden sm:flex gap-2 h-full items-center">
         <button
           onClick={() => onNavigate('landing')}
-          className={`flex items-center gap-1.5 h-full px-3 text-xs md:text-sm font-bold tracking-wide transition-colors ${
+          className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs md:text-sm font-bold tracking-wide transition-all ${
             isLanding
-              ? 'border-b-4 border-white text-white opacity-100'
-              : 'text-white/75 hover:text-white hover:opacity-100'
+              ? 'bg-white/15 text-white shadow-xs font-black'
+              : 'text-slate-400 hover:text-white hover:bg-white/5'
           }`}
         >
-          <Home className="w-4 h-4" />
+          <Home className="w-4 h-4 text-slate-300" />
           <span>Menu Utama</span>
         </button>
 
         <button
           onClick={() => onNavigate('kiosk')}
-          className={`flex items-center gap-1.5 h-full px-3 text-xs md:text-sm font-bold tracking-wide transition-colors ${
+          className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs md:text-sm font-bold tracking-wide transition-all ${
             isKiosk
-              ? 'border-b-4 border-white text-white opacity-100'
-              : 'text-white/75 hover:text-white hover:opacity-100'
+              ? 'bg-amber-400 text-slate-950 shadow-md font-black'
+              : 'text-slate-400 hover:text-white hover:bg-white/5'
           }`}
         >
           <Touchpad className="w-4 h-4" />
           <span>Kiosk Mode</span>
         </button>
 
-        {/* Administrasi entry point: Visible to all, protected by handleNavigate security guard */}
+        {/* Administrasi entry point */}
         <button
           onClick={() => onNavigate('admin-dashboard')}
-          className={`flex items-center gap-1.5 h-full px-3 text-xs md:text-sm font-bold tracking-wide transition-colors cursor-pointer ${
+          className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs md:text-sm font-bold tracking-wide transition-all cursor-pointer ${
             isAdmin
-              ? 'border-b-4 border-white text-white opacity-100'
-              : 'text-white/75 hover:text-white hover:opacity-100'
+              ? 'bg-rose-900/90 text-amber-200 border border-rose-700/60 shadow-md font-black'
+              : 'text-slate-400 hover:text-white hover:bg-white/5'
           }`}
         >
-          <Shield className="w-4 h-4 text-amber-300" />
+          <Shield className="w-4 h-4 text-amber-400" />
           <span>Administrasi</span>
         </button>
       </nav>
@@ -138,10 +138,10 @@ export const Navbar: React.FC<NavbarProps> = ({
         {!isAuthed && onOpenLoginModal && (
           <button
             onClick={onOpenLoginModal}
-            className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-xl text-xs font-extrabold border border-white/20 transition-colors shadow-xs cursor-pointer"
+            className="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white px-3.5 py-1.5 rounded-xl text-xs font-bold border border-slate-700 transition-all shadow-xs cursor-pointer"
             title="Masuk Akun"
           >
-            <LogIn className="w-4 h-4 text-amber-300" />
+            <LogIn className="w-3.5 h-3.5 text-amber-400" />
             <span className="hidden md:inline">Masuk Akun</span>
           </button>
         )}
@@ -150,7 +150,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         {onOpenOfficerSchedule && (
           <button
             onClick={onOpenOfficerSchedule}
-            className="flex items-center gap-1.5 bg-amber-400 hover:bg-amber-300 text-[#4A0E17] px-3.5 py-1.5 rounded-xl text-xs font-extrabold shadow-sm transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-slate-950 px-3.5 py-1.5 rounded-xl text-xs font-extrabold shadow-sm transition-all cursor-pointer"
             title="Lihat Profil & Tanggal Tugas Misa Saya"
           >
             <UserCheck className="w-4 h-4" />
@@ -162,7 +162,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         {isAuthed && onLogout && (
           <button
             onClick={onLogout}
-            className="p-2 hover:bg-white/10 rounded-xl transition-colors h-[38px] w-[38px] flex items-center justify-center text-white/80 hover:text-white cursor-pointer"
+            className="p-2 hover:bg-white/10 rounded-xl transition-colors h-[38px] w-[38px] flex items-center justify-center text-slate-400 hover:text-white cursor-pointer"
             title="Keluar Akun"
           >
             <LogOut className="w-4 h-4" />
@@ -172,25 +172,13 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Help button */}
         <button
           onClick={onOpenHelp}
-          className="p-2 hover:bg-white/10 rounded-xl transition-colors h-[38px] w-[38px] flex items-center justify-center text-white cursor-pointer"
+          className="p-2 hover:bg-white/10 rounded-xl transition-colors h-[38px] w-[38px] flex items-center justify-center text-slate-400 hover:text-white cursor-pointer"
           title="Bantuan & Panduan Sistem"
         >
-          <HelpCircle className="w-5 h-5" />
-        </button>
-
-        {/* Settings button */}
-        <button
-          onClick={() => onNavigate('admin-dashboard')}
-          className="p-2 hover:bg-white/10 rounded-xl transition-colors h-[38px] w-[38px] flex items-center justify-center text-white cursor-pointer"
-          title="Pengaturan Admin"
-        >
-          <Settings className="w-5 h-5" />
+          <HelpCircle className="w-4 h-4" />
         </button>
       </div>
-
-
     </header>
-
   );
 };
 
