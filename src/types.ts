@@ -35,8 +35,10 @@ export interface ScheduleSlot {
   massTime: string; // "17:00 PM"
   location: string; // "GEREJA UTAMA"
   targetTotal: number; // 4
-  serverIds: (string | null)[]; // array of 4 officer IDs
-  serverNames: (string | null)[]; // array of 4 officer names
+  serverIds: (string | null)[]; // array of officer IDs
+  serverNames: (string | null)[]; // array of officer names
+  koorlapIds?: string[]; // exact officer IDs who act as Koorlap specifically for this slot
+  serverRoles?: ('KORLAP' | 'AI')[]; // per-officer role for this slot
   serverNotes?: (string | null)[]; // e.g. ["(Sub)", null, null, null]
   isSubstituted?: boolean[]; // [true, false, false, false]
   originalServerNames?: (string | null)[]; // ["Damianus S.", null, null, null]

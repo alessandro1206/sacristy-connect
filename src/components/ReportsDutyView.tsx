@@ -96,10 +96,13 @@ export const ReportsDutyView: React.FC<ReportsDutyViewProps> = ({
         };
       });
 
-      const koorlapNames = assignedOfficers
-        .filter(o => o.isKoorlap)
-        .map(o => o.name)
-        .join(' & ') || (assignedOfficers[0]?.name ? `${assignedOfficers[0].name} (Koorlap)` : 'Koorlap Jaga');
+      const slotKoorlapSet = new Set((slot.koorlapIds || []).map(id => id.padStart(3, '0')));
+      const koorlapsList = assignedOfficers.filter(o => slotKoorlapSet.has(o.id.padStart(3, '0')));
+      const koorlapNames = koorlapsList.length > 0
+        ? koorlapsList.map(o => o.name).join(' & ')
+        : (slot.koorlapIds && slot.koorlapIds.length > 0
+            ? slot.koorlapIds.map(id => officers.find(o => o.id === id || o.id.padStart(3, '0') === id.padStart(3, '0'))?.name || `Petugas ${id}`).join(' & ')
+            : '-');
 
       return {
         id: slot.id,
@@ -108,7 +111,7 @@ export const ReportsDutyView: React.FC<ReportsDutyViewProps> = ({
         time: slot.massTime,
         location: slot.location,
         koorlap: koorlapNames,
-        koorlapId: assignedOfficers.filter(o => o.isKoorlap).map(o => o.id).join(', '),
+        koorlapId: slot.koorlapIds && slot.koorlapIds.length > 0 ? slot.koorlapIds.map(id => id.padStart(3, '0')).join(', ') : '-',
         category: slot.massTime.includes('06:00') ? 'harian' : 'mingguan',
         positions: positions.length > 0 ? positions : [
           {

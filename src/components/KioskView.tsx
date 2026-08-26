@@ -435,13 +435,21 @@ export const KioskView: React.FC<KioskViewProps> = ({
         .map(id => officers.find(o => o.id === id || o.id.padStart(3, '0') === id?.padStart(3, '0')))
         .filter((o): o is Officer => Boolean(o));
       
-      const koorlapsList = assignedOfficers.filter(o => o.isKoorlap);
+      const slotKoorlapSet = new Set((slot.koorlapIds || []).map(id => id.padStart(3, '0')));
+      const koorlapsList = assignedOfficers.filter(o => slotKoorlapSet.has(o.id.padStart(3, '0')));
       const koorlaps = koorlapsList.length > 0
         ? koorlapsList.map(o => ({ id: o.id.padStart(3, '0'), name: o.name }))
-        : assignedOfficers.slice(0, 1).map(o => ({ id: o.id.padStart(3, '0'), name: o.name }));
+        : (slot.koorlapIds && slot.koorlapIds.length > 0
+            ? slot.koorlapIds.map(id => {
+                const off = officers.find(o => o.id === id || o.id.padStart(3, '0') === id.padStart(3, '0'));
+                return { id: id.padStart(3, '0'), name: off ? off.name : `Petugas ${id}` };
+              })
+            : []);
 
       const dayPart = slot.displayDate.split(',')[0] || 'MISA';
-      const koorlapDisplay = koorlaps.map(k => k.name).join(' & ') || 'Koorlap Bertugas';
+      const koorlapDisplay = koorlaps.length > 0
+        ? koorlaps.map(k => k.name).join(' & ')
+        : 'Tidak Ada Koorlap Khusus';
 
       return {
         id: slot.id,

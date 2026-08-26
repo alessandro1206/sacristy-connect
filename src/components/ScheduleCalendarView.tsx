@@ -100,8 +100,9 @@ export const ScheduleCalendarView: React.FC<ScheduleCalendarViewProps> = ({
             .map(id => officers.find(o => o.id === id || o.id.padStart(3, '0') === id?.padStart(3, '0')))
             .filter((o): o is Officer => Boolean(o));
 
-          const koorlaps = assignedOfficers.filter(o => o.isKoorlap).map(o => o.shortName || o.name);
-          const asisten = assignedOfficers.filter(o => !o.isKoorlap).map(o => o.shortName || o.name);
+          const slotKoorlapSet = new Set((slot.koorlapIds || []).map(id => id.padStart(3, '0')));
+          const koorlaps = assignedOfficers.filter(o => slotKoorlapSet.has(o.id.padStart(3, '0'))).map(o => o.shortName || o.name);
+          const asisten = assignedOfficers.filter(o => !slotKoorlapSet.has(o.id.padStart(3, '0'))).map(o => o.shortName || o.name);
 
           const timeClean = slot.massTime.replace(' WIB', '').trim();
           const hour = parseInt(timeClean.split(':')[0], 10) || 18;

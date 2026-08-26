@@ -264,22 +264,40 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
                 <div className="space-y-2.5">
                   {filteredDutySlots.map((slot, idx) => {
                     const isAttended = slot.attendedServerIds?.includes(officer.id);
+                    const slotKoorlapSet = new Set((slot.koorlapIds || []).map(id => id.padStart(3, '0')));
+                    const isKoorlapForThisSlot = slotKoorlapSet.has(officer.id.padStart(3, '0'));
+
                     return (
                       <div 
                         key={slot.id || idx}
-                        className="bg-white border-2 border-[#D9CEBA] rounded-2xl p-4 shadow-2xs hover:border-[#5B1414] transition-all"
+                        className={`bg-white border-2 rounded-2xl p-4 shadow-2xs hover:border-[#5B1414] transition-all ${
+                          isKoorlapForThisSlot ? 'border-amber-400/80 bg-amber-50/20' : 'border-[#D9CEBA]'
+                        }`}
                       >
                         <div className="space-y-1.5">
-                          <div className="flex items-center gap-2 flex-wrap">
-                            <span className="px-2.5 py-0.5 rounded-full bg-[#5B1414]/10 text-[#5B1414] text-xs font-bold uppercase font-mono">
-                              📅 {slot.displayDate}
-                            </span>
-                            <span className="text-xs font-extrabold text-[#5B1414]">
-                              ⏰ {slot.massTime}
-                            </span>
-                            {isAttended && (
-                              <span className="text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded-full">
-                                ✓ Hadir
+                          <div className="flex items-center gap-2 flex-wrap justify-between">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <span className="px-2.5 py-0.5 rounded-full bg-[#5B1414]/10 text-[#5B1414] text-xs font-bold uppercase font-mono">
+                                📅 {slot.displayDate}
+                              </span>
+                              <span className="text-xs font-extrabold text-[#5B1414]">
+                                ⏰ {slot.massTime}
+                              </span>
+                              {isAttended && (
+                                <span className="text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 rounded-full">
+                                  ✓ Hadir
+                                </span>
+                              )}
+                            </div>
+
+                            {/* Slot-specific Role Badge */}
+                            {isKoorlapForThisSlot ? (
+                              <span className="text-[10px] font-black bg-amber-200 text-amber-950 border border-amber-400 px-2 py-0.5 rounded-full flex items-center gap-1 shadow-2xs">
+                                👑 Koorlap Bertugas
+                              </span>
+                            ) : (
+                              <span className="text-[10px] font-bold bg-[#F3EDE2] text-[#6E5A4B] border border-[#D9CEBA] px-2 py-0.5 rounded-full">
+                                Asisten Imam (AI)
                               </span>
                             )}
                           </div>

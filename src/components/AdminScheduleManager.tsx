@@ -165,12 +165,12 @@ export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
     const rawTime = slot.massTime.replace(' WIB', '').trim();
     const timeFormatted = rawTime.length === 4 ? `0${rawTime}` : rawTime;
 
-    // Detect koorlaps among assigned officers
+    // Detect koorlaps specifically for this slot
     const assignedIds = slot.serverIds.filter((id): id is string => Boolean(id));
-    const koorlaps = assignedIds.filter(id => {
-      const off = officers.find(o => o.id === id || o.id.padStart(3, '0') === id.padStart(3, '0'));
-      return off?.isKoorlap;
-    });
+    const slotKoorlapSet = new Set((slot.koorlapIds || []).map(id => id.padStart(3, '0')));
+    const koorlaps = slot.koorlapIds && slot.koorlapIds.length > 0 
+      ? slot.koorlapIds 
+      : assignedIds.filter(id => slotKoorlapSet.has(id.padStart(3, '0')));
 
     setFormData({
       id: slot.id,
@@ -186,7 +186,7 @@ export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
   };
 
   // Toggle Officer selection in Modal
-  const toggleOfficerSelection = (officerId: string) => {
+  const handleToggleOfficerSelection = (officerId: string) => {
     playAudioFeedback('tap');
     setFormData(prev => {
       const exists = prev.selectedOfficerIds.includes(officerId);
@@ -197,12 +197,9 @@ export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
           koorlapOfficerIds: prev.koorlapOfficerIds.filter(id => id !== officerId)
         };
       } else {
-        const off = officers.find(o => o.id === officerId);
-        const shouldBeKoorlap = off?.isKoorlap;
         return {
           ...prev,
-          selectedOfficerIds: [...prev.selectedOfficerIds, officerId],
-          koorlapOfficerIds: shouldBeKoorlap ? [...prev.koorlapOfficerIds, officerId] : prev.koorlapOfficerIds
+          selectedOfficerIds: [...prev.selectedOfficerIds, officerId]
         };
       }
     });
@@ -246,6 +243,8 @@ export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
       targetTotal: Math.max(formData.targetTotal, formData.selectedOfficerIds.length),
       serverIds: formData.selectedOfficerIds,
       serverNames: serverNames,
+      koorlapIds: formData.koorlapOfficerIds,
+      serverRoles: formData.selectedOfficerIds.map(id => formData.koorlapOfficerIds.includes(id) ? 'KORLAP' : 'AI'),
       status: formData.status,
       attendedServerIds: []
     };
@@ -277,6 +276,8 @@ export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
       targetTotal: Math.max(formData.targetTotal, formData.selectedOfficerIds.length),
       serverIds: formData.selectedOfficerIds,
       serverNames: serverNames,
+      koorlapIds: formData.koorlapOfficerIds,
+      serverRoles: formData.selectedOfficerIds.map(id => formData.koorlapOfficerIds.includes(id) ? 'KORLAP' : 'AI'),
       status: formData.status
     };
 
@@ -560,7 +561,8 @@ export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
                           {slot.serverIds && slot.serverIds.length > 0 ? (
                             slot.serverIds.map((sid, idx) => {
                               const off = officers.find(o => o.id === sid || o.id.padStart(3, '0') === sid?.padStart(3, '0'));
-                              const isKoorlap = off?.isKoorlap;
+                              const slotKoorlapSet = new Set((slot.koorlapIds || []).map(id => id.padStart(3, '0')));
+                              const isKoorlap = sid ? slotKoorlapSet.has(sid.padStart(3, '0')) : false;
                               const displayName = off ? (off.shortName || off.name) : (slot.serverNames?.[idx] || `ID ${sid}`);
 
                               return (

@@ -2738,23 +2738,27 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
   {
     "id": "sch-sep-01",
     "date": "2026-09-01",
-    "displayDate": "Selasa, 01 Sep 2026",
+    "displayDate": "Selasa, 01 September 2026",
     "massTime": "18:00 WIB",
     "location": "Kapel John Paul II",
     "targetTotal": 1,
     "serverIds": [
       "029"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
       "Hadi Santoso"
-    ]
+    ],
+    "koorlapIds": [],
+    "serverRoles": [
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-02",
     "date": "2026-09-03",
-    "displayDate": "Kamis, 03 Sep 2026",
+    "displayDate": "Kamis, 03 September 2026",
     "massTime": "18:30 WIB",
     "location": "Kapel John Paul II",
     "targetTotal": 2,
@@ -2762,39 +2766,55 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "062",
       "065"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
       "Rizal Kristanto",
       "Bambang Budiono"
-    ]
+    ],
+    "koorlapIds": [
+      "062"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-03",
     "date": "2026-09-04",
-    "displayDate": "Jumat, 04 Sep 2026",
+    "displayDate": "Jumat, 04 September 2026",
     "massTime": "18:00 WIB",
     "location": "Kapel John Paul II",
     "targetTotal": 4,
     "serverIds": [
+      "063",
       "056",
       "059",
-      "063",
       "067"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
-      "Antonius D. T.",
+      "Antonius Benny Sukamto",
+      "Antonius David Tjung",
       "Tri Wibisono",
-      "Antonius B. S.",
       "Raymond Hanjaya"
-    ]
+    ],
+    "koorlapIds": [
+      "063"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-04",
     "date": "2026-09-04",
-    "displayDate": "Jumat, 04 Sep 2026",
+    "displayDate": "Jumat, 04 September 2026",
     "massTime": "19:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 4,
@@ -2804,30 +2824,39 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "011",
       "016"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
-      "Gatot Christhariyono",
+      "Gatot Chrishariyono",
       "Agustinus Cahyono",
       "Argo Putra",
-      "Cliff P. S."
-    ]
+      "Cliff Patrisangga Sabarbudiman"
+    ],
+    "koorlapIds": [
+      "001"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-05",
     "date": "2026-09-05",
-    "displayDate": "Sabtu, 05 Sep 2026",
+    "displayDate": "Sabtu, 05 September 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 17,
     "serverIds": [
+      "035",
+      "038",
+      "046",
       "003",
       "005",
       "027",
-      "035",
-      "038",
       "045",
-      "046",
       "050",
       "051",
       "054",
@@ -2839,32 +2868,56 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "164",
       "166"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
-      "Venantius Sumarmo",
-      "Andreas Y. A.",
-      "Fransiskus S. W. W.",
       "Stevanus Budianto",
       "Yudi Wijaya",
-      "Dionisius D. K.",
-      "Mario C. C.",
-      "Tjo Johansyah",
-      "Paulus A. J.",
-      "Ivan C. C.",
+      "Mario Christiano Chandra",
+      "Venantius Sumarmo",
+      "Andreas Yoga Adhitama",
+      "Fransiskus Silvester Windy Wibisono",
+      "Dionisius Donny Kamadjaja",
+      "Tjio Johansyah",
+      "Paulus Agus Juwono",
+      "Ivan Christian Cahyadi",
       "Sugiharto Tanto",
-      "Laurensius R. S.",
+      "Laurensius Rony Setyawan",
       "Richard Gharyanto",
       "Jeffrey Tanuhardjo",
-      "Imanuel H. K.",
+      "Imanuel Herry Kosok",
       "Heru Wijaya",
-      "Sutedjo B. W."
-    ]
+      "Sutedjo Budiono Wonodihardjo"
+    ],
+    "koorlapIds": [
+      "035",
+      "038",
+      "046"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "KORLAP",
+      "KORLAP",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-06",
     "date": "2026-09-05",
-    "displayDate": "Sabtu, 05 Sep 2026",
+    "displayDate": "Sabtu, 05 September 2026",
     "massTime": "18:00 WIB",
     "location": "Kapel John Paul II",
     "targetTotal": 9,
@@ -2879,30 +2932,42 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "159",
       "168"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
-      "Edwin A. T.",
-      "Andy u. w.",
-      "Hence A. S.",
-      "Denny S. J.",
-      "Damianus S. S.",
+      "Edwin Ardianto Tedjosaputro",
+      "Andy untoyo wibowo",
+      "Hence Antony Suawah",
+      "Denny Sentosa Johann",
+      "Damianus Slamet Subagio",
       "Eddy Soedjatmiko",
-      "Rheza R. A.",
+      "Rheza Ricardo Alex",
       "Rudy Effendy",
-      "AY. H. G."
-    ]
+      "AY. Happy Gunawanman"
+    ],
+    "koorlapIds": [],
+    "serverRoles": [
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-07",
     "date": "2026-09-06",
-    "displayDate": "Minggu, 06 Sep 2026",
+    "displayDate": "Minggu, 06 September 2026",
     "massTime": "06:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 8,
     "serverIds": [
-      "002",
       "006",
+      "002",
       "007",
       "040",
       "043",
@@ -2910,23 +2975,36 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "081",
       "087"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
-      "Raymundus R. A.",
-      "Paulus B. P.",
-      "Paulus L. U.",
-      "Vincent W. T.",
+      "Paulus Blodito Pujoasyogyo",
+      "Raymundus Raimun Aso",
+      "Paulus Leto Udjan",
+      "Vincent Winardi Tan",
       "Bambang Suprijanto",
-      "Andi w. t.",
+      "Andi widjaja tirtoprodjo",
       "Eric Saputro",
       "Budi Santosa"
-    ]
+    ],
+    "koorlapIds": [
+      "006"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-08",
     "date": "2026-09-06",
-    "displayDate": "Minggu, 06 Sep 2026",
+    "displayDate": "Minggu, 06 September 2026",
     "massTime": "08:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 10,
@@ -2942,29 +3020,46 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "163",
       "170"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
-      "Yohanes V. J.",
-      "FX J. H.",
-      "Lerenzo T. O.",
-      "Yeremia S. h.",
+      "Yohanes Valentinus Jimmy",
+      "FX Johni Hidayat",
+      "Lorenzo Tjaeyahdy Oeitomo",
+      "Yeremia Santoso Halim",
       "Fredy Susanto",
       "Jonas Angkawidjaja",
       "Bambang Hermanto",
-      "Alexander M. P.",
-      "Fransiscus P. K. K.",
+      "Alexander Mario Pribadi",
+      "Fransiscus Paulus Kuncoro Kohar",
       "Budi Santoso"
-    ]
+    ],
+    "koorlapIds": [
+      "022"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-09",
     "date": "2026-09-06",
-    "displayDate": "Minggu, 06 Sep 2026",
+    "displayDate": "Minggu, 06 September 2026",
     "massTime": "10:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 18,
     "serverIds": [
+      "079",
+      "085",
       "010",
       "012",
       "024",
@@ -2973,8 +3068,6 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "033",
       "036",
       "042",
-      "079",
-      "085",
       "122",
       "123",
       "131",
@@ -2984,37 +3077,63 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "156",
       "161"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
+      "Michael Raphael Hari Wiryawan",
+      "Paulus Tedjadharma",
       "Gervasius Nosi",
-      "Ignatius D. P.",
+      "Ignatius Dwi Prasetyo",
       "Hendra Utama",
       "Andi Singgih",
-      "Victor K. H.",
+      "Victor Kardiana Hardjomoeljo",
       "Satrio Soetikno",
-      "Johanes I. T. S. D.",
-      "Rudy D. S.",
-      "Michael R. H. W.",
-      "Paulus Tedjadharma",
-      "FX D. I.",
+      "Johanes Ignasius Totok Sukarno",
+      "Rudy Djaja Siaputra",
+      "FX Doddy Isdayanto",
       "Fidelis Sutatyo",
-      "Stevanus T. P.",
-      "Robertus A. C.",
-      "Andreas S. H.",
-      "Ton W. T.",
+      "Stevanus Titus Purdijojo",
+      "Robertus Antonius Christmowanto",
+      "Andreas Suteja Hantono",
+      "Ton Wernalia Tante",
       "Adhika Wardhana",
-      "Edward S. S."
-    ]
+      "Edward Siswanto Santoso"
+    ],
+    "koorlapIds": [
+      "079",
+      "085"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "KORLAP",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-10",
     "date": "2026-09-06",
-    "displayDate": "Minggu, 06 Sep 2026",
+    "displayDate": "Minggu, 06 September 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 16,
     "serverIds": [
+      "089",
+      "100",
       "008",
       "009",
       "013",
@@ -3025,80 +3144,108 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "082",
       "083",
       "088",
-      "089",
       "095",
-      "100",
       "101",
       "128",
       "133"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
+      "Raymond Michael",
+      "Gunarjo Tanurijanto",
       "Sunardi",
       "Aloysius Gholo",
       "Pius Paru",
-      "Agustinus R. W.",
-      "Widjanarko Tjandra",
-      "Sonny S. S.",
+      "Agustinus Redy Wibisono",
+      "Widjanarko Tjandra Soejatno",
+      "Sonny Sugiarto So",
       "Albert Sidharta",
       "Bambang Purnomo",
       "Rudianto Hartanta",
       "Michael Kristanto",
-      "Raymond Michael",
-      "Yohanes A. K.",
-      "Gunarjo Tanurijanto",
+      "Yohanes Agus Kartakusuma",
       "Wongso Budi",
-      "Leo W. L.",
-      "Febrianto D. I."
-    ]
+      "Leo Wismer Lolo",
+      "Febrianto Dwi Istiawan"
+    ],
+    "koorlapIds": [
+      "089",
+      "100"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "KORLAP",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-11",
     "date": "2026-09-08",
-    "displayDate": "Selasa, 08 Sep 2026",
+    "displayDate": "Selasa, 08 September 2026",
     "massTime": "18:00 WIB",
     "location": "Kapel John Paul II",
     "targetTotal": 1,
     "serverIds": [
       "023"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
-      "FX J. H."
-    ]
+      "FX Johni Hidayat"
+    ],
+    "koorlapIds": [],
+    "serverRoles": [
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-12",
     "date": "2026-09-11",
-    "displayDate": "Jumat, 11 Sep 2026",
+    "displayDate": "Jumat, 11 September 2026",
     "massTime": "18:00 WIB",
     "location": "Kapel John Paul II",
     "targetTotal": 1,
     "serverIds": [
       "020"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
-      "Edwin A. T."
-    ]
+      "Edwin Ardianto Tedjosaputro"
+    ],
+    "koorlapIds": [],
+    "serverRoles": [
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-13",
     "date": "2026-09-12",
-    "displayDate": "Sabtu, 12 Sep 2026",
+    "displayDate": "Sabtu, 12 September 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 14,
     "serverIds": [
+      "054",
+      "064",
       "025",
       "026",
       "034",
       "048",
-      "054",
-      "064",
       "094",
       "106",
       "136",
@@ -3108,63 +3255,97 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "147",
       "165"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
-      "Leonardus c. a. p.",
+      "Ivan Christian Cahyadi",
+      "Andy untoyo wibowo",
+      "Leonardus christian adi putra",
       "Eddy Suwanto",
-      "Henrikus H. A. H.",
+      "Henrikus Henry Arvian Hady",
       "Fredy Susanto",
-      "Ivan C. C.",
-      "Andy u. w.",
-      "Fx T. S.",
-      "Jap Y. B.",
+      "Fx Tanno Sugiharto",
+      "Jap Yohanes Baptista",
       "Mikael Nono",
-      "Berti A. H.",
-      "William A. D. J.",
-      "Andreas S. H.",
+      "Berti Albertus Hara",
+      "William Antonius Davidson Jonto",
+      "Andreas Suteja Hantono",
       "Bayu",
       "Winardi Hartambang"
-    ]
+    ],
+    "koorlapIds": [
+      "054",
+      "064"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "KORLAP",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-14",
     "date": "2026-09-13",
-    "displayDate": "Minggu, 13 Sep 2026",
+    "displayDate": "Minggu, 13 September 2026",
     "massTime": "06:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 8,
     "serverIds": [
+      "090",
       "007",
       "038",
       "044",
       "047",
       "070",
-      "090",
       "163",
       "167"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
-      "Paulus L. U.",
-      "Yudi Wijaya",
-      "Sebastianus N. H.",
-      "Yeremia S. h.",
-      "Nio E. S.",
       "Hanjaya Kurniawan",
-      "Fransiscus P. K. K.",
-      "Chen L. A."
-    ]
+      "Paulus Leto Udjan",
+      "Yudi Wijaya",
+      "Sebastianus Nicholas Handoso",
+      "Yeremia Santoso Halim",
+      "Nio Eko Susilo",
+      "Fransiscus Paulus Kuncoro Kohar",
+      "Chen Lin Andrew"
+    ],
+    "koorlapIds": [
+      "090"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-15",
     "date": "2026-09-13",
-    "displayDate": "Minggu, 13 Sep 2026",
+    "displayDate": "Minggu, 13 September 2026",
     "massTime": "08:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 9,
     "serverIds": [
+      "097",
       "001",
       "004",
       "011",
@@ -3172,31 +3353,45 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "039",
       "056",
       "058",
-      "097",
       "168"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
-      "Gatot Christhariyono",
+      "Irwan Afandi",
+      "Gatot Chrishariyono",
       "Agustinus Cahyono",
       "Argo Putra",
-      "Ignatius D. P.",
-      "Agustinus R. W.",
-      "Antonius D. T.",
+      "Ignatius Dwi Prasetyo",
+      "Agustinus Redy Wibisono",
+      "Antonius David Tjung",
       "Bambang susilo",
-      "Irwan Afandi",
-      "AY. H. G."
-    ]
+      "AY. Happy Gunawanman"
+    ],
+    "koorlapIds": [
+      "097"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-16",
     "date": "2026-09-13",
-    "displayDate": "Minggu, 13 Sep 2026",
+    "displayDate": "Minggu, 13 September 2026",
     "massTime": "10:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 18,
     "serverIds": [
+      "096",
       "005",
       "015",
       "028",
@@ -3206,7 +3401,6 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "068",
       "078",
       "086",
-      "096",
       "122",
       "126",
       "128",
@@ -3216,33 +3410,56 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "153",
       "161"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
-      "Andreas Y. A.",
-      "Yohanes H. S.",
+      "Laurensius Rony Setyawan",
+      "Andreas Yoga Adhitama",
+      "Yohanes Herman Saputra",
       "Tjoa Tjandrapradja",
       "Satrio Soetikno",
-      "Paulus A. J.",
+      "Paulus Agus Juwono",
       "Jonas Angkawidjaja",
       "Untung Sutikno",
       "Yohanes Gunawan",
       "Sugiharto Tanto",
-      "Laurensius R. S.",
-      "FX D. I.",
-      "Silvester A. R. P.",
-      "Leo W. L.",
-      "Petrus Y. s.",
+      "FX Doddy Isdayanto",
+      "Silvester Agus Riyanto Pamuji",
+      "Leo Wismer Lolo",
+      "Petrus Yuni setyawan",
       "Eka Sisario",
       "Iwan Sutanto",
-      "Agustinus D. S.",
-      "Edward S. S."
-    ]
+      "Agustinus Djoko Soetoyo",
+      "Edward Siswanto Santoso"
+    ],
+    "koorlapIds": [
+      "096"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-17",
     "date": "2026-09-13",
-    "displayDate": "Minggu, 13 Sep 2026",
+    "displayDate": "Minggu, 13 September 2026",
     "massTime": "17:00 WIB",
     "location": "Kapel John Paul II",
     "targetTotal": 12,
@@ -3260,31 +3477,48 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "169",
       "170"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
       "Ferdyanto Salim",
       "Paulus Tedjadharma",
       "Budi Purnomo",
       "Alex Santoso",
-      "Mikael H. P.",
+      "Mikael Hengky Pratama",
       "Alexander Sukarliono",
-      "Damianus S. S.",
+      "Damianus Slamet Subagio",
       "Adhika Wardhana",
-      "Vincentius F. L.",
-      "Alexander M. P.",
+      "Vincentius Fidelis Lucky",
+      "Alexander Mario Pribadi",
       "Donni Anwar",
       "Budi Santoso"
-    ]
+    ],
+    "koorlapIds": [],
+    "serverRoles": [
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-18",
     "date": "2026-09-13",
-    "displayDate": "Minggu, 13 Sep 2026",
+    "displayDate": "Minggu, 13 September 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 16,
     "serverIds": [
+      "123",
+      "143",
       "008",
       "018",
       "019",
@@ -3296,73 +3530,103 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "092",
       "093",
       "104",
-      "123",
       "127",
       "132",
-      "141",
-      "143"
+      "141"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
+      "Fidelis Sutatyo",
+      "Stefanus Charlie Tjahyono",
       "Sunardi",
-      "Antonis B. M.",
-      "Januar D. S.",
-      "FX J. H.",
+      "Antonis Brian Mursidi",
+      "Januar Dwiputra Sutandi",
+      "FX Johni Hidayat",
       "Hadi Santoso",
       "Hary Suwanda",
       "Tandra Gunawan",
       "Bambang Purnomo",
-      "Tjetjep T. O.",
-      "Widyanto S. W.",
+      "Tjetjep Tjondro Oetomo",
+      "Widyanto Setiawan Wijaya",
       "Tanuddin Rustan",
-      "Fidelis Sutatyo",
       "Nadianus Sukaryadi",
-      "Robertus A. C.",
-      "Bona v. Y. S.",
-      "Stefanus C. T."
-    ]
+      "Robertus Antonius Christmowanto",
+      "Bona ventura Yohan Soenyoto"
+    ],
+    "koorlapIds": [
+      "123",
+      "143"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "KORLAP",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-19",
     "date": "2026-09-15",
-    "displayDate": "Selasa, 15 Sep 2026",
+    "displayDate": "Selasa, 15 September 2026",
     "massTime": "18:00 WIB",
     "location": "Kapel John Paul II",
     "targetTotal": 1,
     "serverIds": [
       "021"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
       "Adinanda Condrowibowo"
-    ]
+    ],
+    "koorlapIds": [],
+    "serverRoles": [
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-20",
     "date": "2026-09-18",
-    "displayDate": "Jumat, 18 Sep 2026",
+    "displayDate": "Jumat, 18 September 2026",
     "massTime": "18:00 WIB",
     "location": "Kapel John Paul II",
     "targetTotal": 1,
     "serverIds": [
       "026"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
       "Eddy Suwanto"
-    ]
+    ],
+    "koorlapIds": [],
+    "serverRoles": [
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-21",
     "date": "2026-09-19",
-    "displayDate": "Sabtu, 19 Sep 2026",
+    "displayDate": "Sabtu, 19 September 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 16,
     "serverIds": [
+      "125",
+      "152",
       "009",
       "017",
       "037",
@@ -3372,43 +3636,64 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "084",
       "102",
       "122",
-      "125",
       "126",
       "132",
       "136",
       "150",
-      "152",
       "166"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
+      "Donatus Sri Tar Prawinoto",
+      "Jeffrey Tanuhardjo",
       "Aloysius Gholo",
-      "Yohanes A. Y.",
-      "Alfred S. M.",
+      "Yohanes Arishka Yudarana",
+      "Alfred Stephanus Metekohy",
       "Edward Luntungan",
       "Hartanto Chandra",
-      "Andi w. t.",
+      "Andi widjaja tirtoprodjo",
       "Soehadi",
-      "Denny S. J.",
-      "FX D. I.",
-      "Donatus S. T. P.",
-      "Silvester A. R. P.",
-      "Robertus A. C.",
+      "Denny Sentosa Johann",
+      "FX Doddy Isdayanto",
+      "Silvester Agus Riyanto Pamuji",
+      "Robertus Antonius Christmowanto",
       "Mikael Nono",
-      "Yohanes K. H.",
-      "Jeffrey Tanuhardjo",
-      "Sutedjo B. W."
-    ]
+      "Yohanes Kurniawan Halim",
+      "Sutedjo Budiono Wonodihardjo"
+    ],
+    "koorlapIds": [
+      "125",
+      "152"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "KORLAP",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-22",
     "date": "2026-09-19",
-    "displayDate": "Sabtu, 19 Sep 2026",
+    "displayDate": "Sabtu, 19 September 2026",
     "massTime": "18:00 WIB",
     "location": "Kapel John Paul II",
     "targetTotal": 14,
     "serverIds": [
+      "139",
       "046",
       "057",
       "061",
@@ -3419,66 +3704,97 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "097",
       "103",
       "138",
-      "139",
       "147",
       "148",
       "158"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
-      "Mario C. C.",
-      "Andrew F. L.",
-      "Stevanus L. H.",
+      "Severus senjoyo",
+      "Mario Christiano Chandra",
+      "Andrew Firmansyah Limantoro",
+      "Stevanus Leohanes Halim",
       "Raymond Hanjaya",
       "Raymond Michael",
       "Hanjaya Kurniawan",
-      "Joseph T. R.",
+      "Joseph Thomas Raynanto",
       "Irwan Afandi",
       "Wey Tjoendianto",
-      "William A. D. J.",
-      "Severus senjoyo",
+      "William Antonius Davidson Jonto",
       "Bayu",
-      "Fredy T. P.",
-      "Rheza R. A."
-    ]
+      "Fredy Teguh Prasetyo",
+      "Rheza Ricardo Alex"
+    ],
+    "koorlapIds": [
+      "139"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-23",
     "date": "2026-09-20",
-    "displayDate": "Minggu, 20 Sep 2026",
+    "displayDate": "Minggu, 20 September 2026",
     "massTime": "06:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 7,
     "serverIds": [
+      "045",
       "002",
       "003",
       "032",
-      "045",
       "082",
       "137",
       "165"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
-      "Raymundus R. A.",
+      "Dionisius Donny Kamadjaja",
+      "Raymundus Raimun Aso",
       "Venantius Sumarmo",
       "Edward Kusuma",
-      "Dionisius D. K.",
       "Bambang Purnomo",
-      "Berti A. H.",
+      "Berti Albertus Hara",
       "Winardi Hartambang"
-    ]
+    ],
+    "koorlapIds": [
+      "045"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-24",
     "date": "2026-09-20",
-    "displayDate": "Minggu, 20 Sep 2026",
+    "displayDate": "Minggu, 20 September 2026",
     "massTime": "08:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 10,
     "serverIds": [
+      "164",
       "006",
       "015",
       "016",
@@ -3487,34 +3803,49 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "068",
       "130",
       "131",
-      "154",
-      "164"
+      "154"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
-      "Paulus B. P.",
-      "Yohanes H. S.",
-      "Cliff P. S.",
+      "Heru Wijaya",
+      "Paulus Blodito Pujoasyogyo",
+      "Yohanes Herman Saputra",
+      "Cliff Patrisangga Sabarbudiman",
       "Satrio Soetikno",
       "Bambang susilo",
       "Untung Sutikno",
-      "Alexander B. C.",
-      "Stevanus T. P.",
-      "Ton W. T.",
-      "Heru Wijaya"
-    ]
+      "Alexander Budi Cahyono",
+      "Stevanus Titus Purdijojo",
+      "Ton Wernalia Tante"
+    ],
+    "koorlapIds": [
+      "164"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-25",
     "date": "2026-09-20",
-    "displayDate": "Minggu, 20 Sep 2026",
+    "displayDate": "Minggu, 20 September 2026",
     "massTime": "10:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 18,
     "serverIds": [
-      "011",
       "022",
+      "167",
+      "011",
       "070",
       "075",
       "076",
@@ -3529,46 +3860,69 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "143",
       "146",
       "155",
-      "159",
-      "167"
+      "159"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
+      "Yohanes Valentinus Jimmy",
+      "Chen Lin Andrew",
       "Argo Putra",
-      "Yohanes V. J.",
-      "Nio E. S.",
+      "Nio Eko Susilo",
       "Stevanus",
       "Hary Suwanda",
       "Ferdyanto Salim",
       "Budi Santosa",
-      "Fx T. S.",
-      "Yohanes A. K.",
+      "Fx Tanno Sugiharto",
+      "Yohanes Agus Kartakusuma",
       "Gunarjo Tanurijanto",
-      "Johanes E. S. N.",
-      "Febrianto D. I.",
-      "Bona v. Y. S.",
-      "Stefanus C. T.",
+      "Johanes Efendi Sapto Nugroho",
+      "Febrianto Dwi Istiawan",
+      "Bona ventura Yohan Soenyoto",
+      "Stefanus Charlie Tjahyono",
       "Eddy Soedjatmiko",
-      "Eko G. K.",
-      "Rudy Effendy",
-      "Chen L. A."
-    ]
+      "Eko Gunawan Kusjanto",
+      "Rudy Effendy"
+    ],
+    "koorlapIds": [
+      "022",
+      "167"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "KORLAP",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-26",
     "date": "2026-09-20",
-    "displayDate": "Minggu, 20 Sep 2026",
+    "displayDate": "Minggu, 20 September 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 16,
     "serverIds": [
+      "072",
       "004",
       "005",
       "013",
       "030",
       "066",
-      "072",
       "080",
       "081",
       "088",
@@ -3580,73 +3934,103 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "145",
       "153"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
+      "Bambang Hermanto",
       "Agustinus Cahyono",
-      "Andreas Y. A.",
+      "Andreas Yoga Adhitama",
       "Pius Paru",
       "Andi Singgih",
-      "Berce s. a.",
-      "Bambang Hermanto",
+      "Berce suisa abraham",
       "Tandra Gunawan",
       "Eric Saputro",
       "Michael Kristanto",
-      "Tjetjep T. O.",
+      "Tjetjep Tjondro Oetomo",
       "Alex Santoso",
       "Nadianus Sukaryadi",
       "Dominikus Anas",
       "Alexander Sukarliono",
-      "Damianus S. S.",
-      "Agustinus D. S."
-    ]
+      "Damianus Slamet Subagio",
+      "Agustinus Djoko Soetoyo"
+    ],
+    "koorlapIds": [
+      "072"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-27",
     "date": "2026-09-22",
-    "displayDate": "Selasa, 22 Sep 2026",
+    "displayDate": "Selasa, 22 September 2026",
     "massTime": "18:00 WIB",
     "location": "Kapel John Paul II",
     "targetTotal": 1,
     "serverIds": [
       "024"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
       "Hendra Utama"
-    ]
+    ],
+    "koorlapIds": [],
+    "serverRoles": [
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-28",
     "date": "2026-09-25",
-    "displayDate": "Jumat, 25 Sep 2026",
+    "displayDate": "Jumat, 25 September 2026",
     "massTime": "18:00 WIB",
     "location": "Kapel John Paul II",
     "targetTotal": 1,
     "serverIds": [
       "025"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
-      "Leonardus c. a. p."
-    ]
+      "Leonardus christian adi putra"
+    ],
+    "koorlapIds": [],
+    "serverRoles": [
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-29",
     "date": "2026-09-26",
-    "displayDate": "Sabtu, 26 Sep 2026",
+    "displayDate": "Sabtu, 26 September 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 16,
     "serverIds": [
+      "079",
+      "149",
       "042",
       "043",
       "049",
       "053",
       "078",
-      "079",
       "101",
       "103",
       "104",
@@ -3654,69 +4038,104 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "139",
       "143",
       "148",
-      "149",
       "150",
       "151"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
-      "Rudy D. S.",
+      "Michael Raphael Hari Wiryawan",
+      "Richard Gharyanto",
+      "Rudy Djaja Siaputra",
       "Bambang Suprijanto",
-      "Widjanarko Tjandra",
+      "Widjanarko Tjandra Soejatno",
       "Edward Luntungan",
       "Yohanes Gunawan",
-      "Michael R. H. W.",
       "Wongso Budi",
       "Wey Tjoendianto",
       "Tanuddin Rustan",
-      "Petrus Y. s.",
+      "Petrus Yuni setyawan",
       "Severus senjoyo",
-      "Stefanus C. T.",
-      "Fredy T. P.",
-      "Richard Gharyanto",
-      "Yohanes K. H.",
+      "Stefanus Charlie Tjahyono",
+      "Fredy Teguh Prasetyo",
+      "Yohanes Kurniawan Halim",
       "Iwan Sutanto"
-    ]
+    ],
+    "koorlapIds": [
+      "079",
+      "149"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "KORLAP",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-30",
     "date": "2026-09-27",
-    "displayDate": "Minggu, 27 Sep 2026",
+    "displayDate": "Minggu, 27 September 2026",
     "massTime": "06:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 8,
     "serverIds": [
+      "071",
       "016",
       "031",
       "035",
       "057",
-      "071",
       "091",
       "155",
       "160"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
-      "Cliff P. S.",
-      "Victor K. H.",
+      "Hence Antony Suawah",
+      "Cliff Patrisangga Sabarbudiman",
+      "Victor Kardiana Hardjomoeljo",
       "Stevanus Budianto",
-      "Andrew F. L.",
-      "Hence A. S.",
-      "Joseph T. R.",
-      "Eko G. K.",
-      "Imanuel H. K."
-    ]
+      "Andrew Firmansyah Limantoro",
+      "Joseph Thomas Raynanto",
+      "Eko Gunawan Kusjanto",
+      "Imanuel Herry Kosok"
+    ],
+    "koorlapIds": [
+      "071"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-31",
     "date": "2026-09-27",
-    "displayDate": "Minggu, 27 Sep 2026",
+    "displayDate": "Minggu, 27 September 2026",
     "massTime": "08:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 10,
     "serverIds": [
+      "085",
       "010",
       "012",
       "017",
@@ -3724,33 +4143,49 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "041",
       "050",
       "064",
-      "085",
       "156",
       "168"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
-      "Gervasius Nosi",
-      "Ignatius D. P.",
-      "Yohanes A. Y.",
-      "Antonis B. M.",
-      "Lerenzo T. O.",
-      "Tjo Johansyah",
-      "Andy u. w.",
       "Paulus Tedjadharma",
+      "Gervasius Nosi",
+      "Ignatius Dwi Prasetyo",
+      "Yohanes Arishka Yudarana",
+      "Antonis Brian Mursidi",
+      "Lorenzo Tjaeyahdy Oeitomo",
+      "Tjio Johansyah",
+      "Andy untoyo wibowo",
       "Adhika Wardhana",
-      "AY. H. G."
-    ]
+      "AY. Happy Gunawanman"
+    ],
+    "koorlapIds": [
+      "085"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-32",
     "date": "2026-09-27",
-    "displayDate": "Minggu, 27 Sep 2026",
+    "displayDate": "Minggu, 27 September 2026",
     "massTime": "10:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 19,
     "serverIds": [
+      "106",
+      "164",
       "003",
       "028",
       "058",
@@ -3759,7 +4194,6 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "075",
       "093",
       "105",
-      "106",
       "125",
       "129",
       "130",
@@ -3768,41 +4202,66 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "144",
       "153",
       "157",
-      "164",
       "169"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
+      "Jap Yohanes Baptista",
+      "Heru Wijaya",
       "Venantius Sumarmo",
       "Tjoa Tjandrapradja",
       "Bambang susilo",
-      "Antonius B. S.",
+      "Antonius Benny Sukamto",
       "Bambang Budiono",
       "Stevanus",
-      "Widyanto S. W.",
-      "Mikael H. P.",
-      "Jap Y. B.",
-      "Donatus S. T. P.",
-      "Johanes E. S. N.",
-      "Alexander B. C.",
+      "Widyanto Setiawan Wijaya",
+      "Mikael Hengky Pratama",
+      "Donatus Sri Tar Prawinoto",
+      "Johanes Efendi Sapto Nugroho",
+      "Alexander Budi Cahyono",
       "Dominikus Anas",
-      "William A. D. J.",
-      "Andreas S. H.",
-      "Agustinus D. S.",
-      "Vincentius F. L.",
-      "Heru Wijaya",
+      "William Antonius Davidson Jonto",
+      "Andreas Suteja Hantono",
+      "Agustinus Djoko Soetoyo",
+      "Vincentius Fidelis Lucky",
       "Donni Anwar"
-    ]
+    ],
+    "koorlapIds": [
+      "106",
+      "164"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "KORLAP",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-33",
     "date": "2026-09-27",
-    "displayDate": "Minggu, 27 Sep 2026",
+    "displayDate": "Minggu, 27 September 2026",
     "massTime": "17:00 WIB",
     "location": "Kapel John Paul II",
     "targetTotal": 13,
     "serverIds": [
+      "066",
       "021",
       "034",
       "036",
@@ -3810,45 +4269,63 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "040",
       "044",
       "059",
-      "066",
       "070",
       "074",
       "146",
       "163",
       "170"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
+      "Berce suisa abraham",
       "Adinanda Condrowibowo",
-      "Henrikus H. A. H.",
-      "Johanes I. T. S. D.",
-      "Alfred S. M.",
-      "Vincent W. T.",
-      "Sebastianus N. H.",
+      "Henrikus Henry Arvian Hady",
+      "Johanes Ignasius Totok Sukarno",
+      "Alfred Stephanus Metekohy",
+      "Vincent Winardi Tan",
+      "Sebastianus Nicholas Handoso",
       "Tri Wibisono",
-      "Berce s. a.",
-      "Nio E. S.",
+      "Nio Eko Susilo",
       "Albert Sidharta",
       "Eddy Soedjatmiko",
-      "Fransiscus P. K. K.",
+      "Fransiscus Paulus Kuncoro Kohar",
       "Budi Santoso"
-    ]
+    ],
+    "koorlapIds": [
+      "066"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   },
   {
     "id": "sch-sep-34",
     "date": "2026-09-27",
-    "displayDate": "Minggu, 27 Sep 2026",
+    "displayDate": "Minggu, 27 September 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 17,
     "serverIds": [
+      "027",
+      "167",
       "001",
       "009",
       "020",
       "022",
       "025",
-      "027",
       "032",
       "047",
       "055",
@@ -3858,30 +4335,52 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "083",
       "084",
       "098",
-      "142",
-      "167"
+      "142"
     ],
-    "status": "Scheduled",
-    "attendedServerIds": [],
     "serverNames": [
-      "Gatot Christhariyono",
+      "Fransiskus Silvester Windy Wibisono",
+      "Chen Lin Andrew",
+      "Gatot Chrishariyono",
       "Aloysius Gholo",
-      "Edwin A. T.",
-      "Yohanes V. J.",
-      "Leonardus c. a. p.",
-      "Fransiskus S. W. W.",
+      "Edwin Ardianto Tedjosaputro",
+      "Yohanes Valentinus Jimmy",
+      "Leonardus christian adi putra",
       "Edward Kusuma",
-      "Yeremia S. h.",
+      "Yeremia Santoso Halim",
       "Hartanto Chandra",
-      "Stevanus L. H.",
+      "Stevanus Leohanes Halim",
       "Rizal Kristanto",
-      "Sonny S. S.",
+      "Sonny Sugiarto So",
       "Rudianto Hartanta",
       "Soehadi",
       "Budi Purnomo",
-      "Eka Sisario",
-      "Chen L. A."
-    ]
+      "Eka Sisario"
+    ],
+    "koorlapIds": [
+      "027",
+      "167"
+    ],
+    "serverRoles": [
+      "KORLAP",
+      "KORLAP",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI",
+      "AI"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
   }
 ];
 

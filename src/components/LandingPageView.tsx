@@ -60,7 +60,13 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
     return currentSlot.serverIds.includes(o.id) || currentSlot.serverIds.includes(o.id.padStart(3, '0'));
   }).slice(0, 12);
 
-  const nearestKoorlapNames = assignedOfficersForNearest.filter(o => o.isKoorlap).map(o => o.name).join(' & ') || 'Koorlap Jaga';
+  const slotKoorlapSet = new Set((currentSlot?.koorlapIds || []).map(id => id.padStart(3, '0')));
+  const nearestKoorlaps = assignedOfficersForNearest.filter(o => slotKoorlapSet.has(o.id.padStart(3, '0')));
+  const nearestKoorlapNames = nearestKoorlaps.length > 0 
+    ? nearestKoorlaps.map(o => o.name).join(' & ') 
+    : (currentSlot?.koorlapIds && currentSlot.koorlapIds.length > 0
+        ? currentSlot.koorlapIds.map(id => officers.find(o => o.id === id || o.id.padStart(3, '0') === id.padStart(3, '0'))?.name || `Petugas ${id}`).join(' & ')
+        : 'Koorlap Jaga');
 
   return (
     <div className="flex-1 bg-[#fbf9f5] overflow-y-auto p-4 sm:p-6 md:p-10 flex flex-col justify-between selection:bg-primary/20">
