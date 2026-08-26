@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   ShieldCheck, 
   Lock, 
@@ -40,6 +40,21 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
 }) => {
   const [activeTab, setActiveTab] = useState<UserRole | 'register'>(initialRole === 'guest' ? 'officer' : initialRole);
   
+  // Sync activeTab whenever modal opens or initialRole changes
+  useEffect(() => {
+    if (isOpen) {
+      const targetRole = initialRole === 'guest' ? 'officer' : initialRole;
+      setActiveTab(targetRole);
+      setErrorMsg(null);
+      
+      // Auto-prefill admin credentials if opening as admin for smoother experience
+      if (targetRole === 'admin') {
+        setAdminUser('admin');
+        setAdminPass('sakristi123');
+      }
+    }
+  }, [isOpen, initialRole]);
+
   // Officer Level Form State
   const [selectedOfficerId, setSelectedOfficerId] = useState<string>('');
   const [officerPin, setOfficerPin] = useState<string>('');
@@ -49,8 +64,8 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
   const [koorlapPin, setKoorlapPin] = useState<string>('');
 
   // Admin Level Form State
-  const [adminUser, setAdminUser] = useState<string>('');
-  const [adminPass, setAdminPass] = useState<string>('');
+  const [adminUser, setAdminUser] = useState<string>('admin');
+  const [adminPass, setAdminPass] = useState<string>('sakristi123');
 
   // Register Form State
   const [regName, setRegName] = useState<string>('');
@@ -58,7 +73,6 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
   const [regRole, setRegRole] = useState<'Asisten Imam' | 'Koorlap'>('Asisten Imam');
   const [regPhone, setRegPhone] = useState<string>('');
   const [regPin, setRegPin] = useState<string>('');
-
 
   const [showPass, setShowPass] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
