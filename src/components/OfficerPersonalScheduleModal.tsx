@@ -28,7 +28,7 @@ interface OfficerPersonalScheduleModalProps {
   onOpenLeaveModal?: () => void;
   onOpenSwapChat?: () => void;
   onLogout?: () => void;
-  onOpenLoginModal?: (role?: 'officer' | 'register') => void;
+  onOpenLoginModal?: (role?: UserRole) => void;
 }
 
 export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModalProps> = ({
@@ -192,26 +192,16 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
                   <p className="text-amber-800 text-[11px]">Masuk akun atau daftarkan akun baru untuk mengakses profil resmi Anda.</p>
                 </div>
               </div>
-              <div className="flex items-center gap-2 shrink-0">
+              <div className="flex items-center gap-2">
                 <button
                   onClick={() => {
                     playAudioFeedback('tap');
                     onClose();
                     onOpenLoginModal?.('officer');
                   }}
-                  className="px-3.5 py-1.5 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl shadow-xs transition-all cursor-pointer"
+                  className="px-4 py-1.5 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl shadow-xs transition-all cursor-pointer text-xs"
                 >
-                  🔑 Masuk
-                </button>
-                <button
-                  onClick={() => {
-                    playAudioFeedback('tap');
-                    onClose();
-                    onOpenLoginModal?.('register');
-                  }}
-                  className="px-3.5 py-1.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold rounded-xl shadow-xs transition-all cursor-pointer"
-                >
-                  ➕ Buat Akun
+                  🔑 Masuk Akun
                 </button>
               </div>
             </div>
