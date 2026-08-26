@@ -26,13 +26,30 @@ import { HelpModal } from './components/HelpModal';
 
 // Local storage keys for universal persistence
 const STORAGE_KEYS = {
-  OFFICERS: 'sacristy_officers_v2',
-  SCHEDULE: 'sacristy_schedule_v2',
-  LOGS: 'sacristy_logs_v2',
-  LEAVE: 'sacristy_leave_records_v2'
+  OFFICERS: 'sacristy_officers_v6',
+  SCHEDULE: 'sacristy_schedule_v6',
+  LOGS: 'sacristy_logs_v6',
+  LEAVE: 'sacristy_leave_records_v6'
 };
 
 export default function App() {
+  // Helper to ensure every schedule slot has its verified koorlapIds and serverRoles from INITIAL_SCHEDULE
+  const reconcileScheduleWithInitial = (loadedSchedule: ScheduleSlot[]): ScheduleSlot[] => {
+    return loadedSchedule.map(slot => {
+      const initialMatch = INITIAL_SCHEDULE.find(init => 
+        init.id === slot.id || (init.date === slot.date && init.massTime === slot.massTime && init.location === slot.location)
+      );
+      if (initialMatch && (!slot.koorlapIds || slot.koorlapIds.length === 0)) {
+        return {
+          ...slot,
+          koorlapIds: initialMatch.koorlapIds,
+          serverRoles: initialMatch.serverRoles
+        };
+      }
+      return slot;
+    });
+  };
+
   // 1. Unified state initialized from localStorage if available, falling back to initialData
   const [officers, setOfficers] = useState<Officer[]>(() => {
     try {
@@ -46,7 +63,11 @@ export default function App() {
   const [schedule, setSchedule] = useState<ScheduleSlot[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.SCHEDULE);
-      return saved ? JSON.parse(saved) : INITIAL_SCHEDULE;
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        return reconcileScheduleWithInitial(parsed);
+      }
+      return INITIAL_SCHEDULE;
     } catch {
       return INITIAL_SCHEDULE;
     }

@@ -58,347 +58,616 @@ interface MassSessionChoice {
 }
 
 const MASS_SESSIONS: MassSessionChoice[] = [
-  // 1. MISA HARIAN (1 KOORLAP)
   {
-    id: "misa-harian-sore",
-    category: "harian",
-    categoryLabel: "Misa Harian (1 Koorlap)",
-    dayLabel: "JUMAT PERTAMA",
-    dateDisplay: "Jumat Pertama (04 Sep 2026)",
-    timeDisplay: "18:00 WIB",
-    koorlaps: [{ id: "065", name: "Bambang Budiono" }],
-    koorlapCount: 1,
-    koorlapDisplay: "Bambang Budiono",
-    location: "GEREJA UTAMA",
-    description: "Misa Harian Sore / Jumat Pertama (1 Koorlap Jaga)"
-  },
-
-
-  // 2. MISA SABTU SORE & MINGGU (SEPTEMBER 2026 - MINGGU I)
-  {
-    id: "sch-sep-01",
-    category: "mingguan",
-    categoryLabel: "Sabtu & Minggu (2 Koorlap)",
-    dayLabel: "SABTU",
-    dateDisplay: "05 September 2026",
-    timeDisplay: "18:00 WIB",
-    koorlaps: [
-      { id: "035", name: "Johanes Ignasius Totok" },
-      { id: "038", name: "Yudi Wijaya" }
-    ],
-    koorlapCount: 2,
-    koorlapDisplay: "Johanes Ignasius Totok & Yudi Wijaya",
-    location: "GEREJA UTAMA",
-    description: "Misa Sabtu Sore (16 Petugas Scheduled)"
+    "id": "sch-sep-01",
+    "category": "harian",
+    "categoryLabel": "Misa Harian / Wilayah",
+    "dayLabel": "SELASA",
+    "dateDisplay": "Selasa, 01 September 2026",
+    "timeDisplay": "18:00 WIB",
+    "koorlaps": [],
+    "koorlapCount": 0,
+    "koorlapDisplay": "Tidak Ada Koorlap Khusus",
+    "location": "KAPEL JOHN PAUL II",
+    "description": "Misa SELASA (1 Petugas Terjadwal)"
   },
   {
-    id: "sch-sep-02",
-    category: "mingguan",
-    categoryLabel: "Sabtu & Minggu (2 Koorlap)",
-    dayLabel: "MINGGU",
-    dateDisplay: "06 September 2026",
-    timeDisplay: "06:00 WIB",
-    koorlaps: [
-      { id: "004", name: "Agustinus Cahyono" },
-      { id: "021", name: "Adinanda Condrowibowo" }
+    "id": "sch-sep-02",
+    "category": "harian",
+    "categoryLabel": "Misa Harian / Wilayah",
+    "dayLabel": "KAMIS",
+    "dateDisplay": "Kamis, 03 September 2026",
+    "timeDisplay": "18:30 WIB",
+    "koorlaps": [
+      {
+        "id": "062",
+        "name": "Rizal Kristanto"
+      }
     ],
-    koorlapCount: 2,
-    koorlapDisplay: "Agustinus Cahyono & Adinanda Condrowibowo",
-    location: "GEREJA UTAMA",
-    description: "Misa Minggu Pagi I (8 Petugas Scheduled)"
+    "koorlapCount": 1,
+    "koorlapDisplay": "Rizal Kristanto",
+    "location": "KAPEL JOHN PAUL II",
+    "description": "Misa KAMIS (2 Petugas Terjadwal)"
   },
   {
-    id: "sch-sep-03",
-    category: "mingguan",
-    categoryLabel: "Sabtu & Minggu (2 Koorlap)",
-    dayLabel: "MINGGU",
-    dateDisplay: "06 September 2026",
-    timeDisplay: "08:00 WIB",
-    koorlaps: [
-      { id: "021", name: "Adinanda Condrowibowo" },
-      { id: "044", name: "Dionisius Donny Kamadjaja" }
+    "id": "sch-sep-03",
+    "category": "harian",
+    "categoryLabel": "Misa Harian / Wilayah",
+    "dayLabel": "JUMAT",
+    "dateDisplay": "Jumat, 04 September 2026",
+    "timeDisplay": "18:00 WIB",
+    "koorlaps": [
+      {
+        "id": "063",
+        "name": "Antonius Benny Sukamto"
+      }
     ],
-    koorlapCount: 2,
-    koorlapDisplay: "Adinanda Condrowibowo & Dionisius Donny K.",
-    location: "GEREJA UTAMA",
-    description: "Misa Minggu Pagi II (10 Petugas Scheduled)"
+    "koorlapCount": 1,
+    "koorlapDisplay": "Antonius Benny Sukamto",
+    "location": "KAPEL JOHN PAUL II",
+    "description": "Misa JUMAT (4 Petugas Terjadwal)"
   },
   {
-    id: "sch-sep-04",
-    category: "mingguan",
-    categoryLabel: "Sabtu & Minggu (3 Koorlap)",
-    dayLabel: "MINGGU",
-    dateDisplay: "06 September 2026",
-    timeDisplay: "10:00 WIB",
-    koorlaps: [
-      { id: "027", name: "Fransiskus Silvester Windy" },
-      { id: "085", name: "Sugiharto Tanto" },
-      { id: "078", name: "Michael Raphael Hari W." }
+    "id": "sch-sep-04",
+    "category": "harian",
+    "categoryLabel": "Misa Harian / Wilayah",
+    "dayLabel": "JUMAT",
+    "dateDisplay": "Jumat, 04 September 2026",
+    "timeDisplay": "19:00 WIB",
+    "koorlaps": [
+      {
+        "id": "001",
+        "name": "Gatot Chrishariyono"
+      }
     ],
-    koorlapCount: 3,
-    koorlapDisplay: "Fransiskus W., Sugiharto T., Michael R.",
-    location: "GEREJA UTAMA",
-    description: "Misa Minggu Pagi III / Utama (20 Petugas Scheduled)"
+    "koorlapCount": 1,
+    "koorlapDisplay": "Gatot Chrishariyono",
+    "location": "GEREJA PAROKI SANTO YAKOBUS",
+    "description": "Misa JUMAT (4 Petugas Terjadwal)"
   },
   {
-    id: "sch-sep-05",
-    category: "mingguan",
-    categoryLabel: "Sabtu & Minggu (1 Koorlap)",
-    dayLabel: "MINGGU",
-    dateDisplay: "06 September 2026",
-    timeDisplay: "18:00 WIB",
-    koorlaps: [
-      { id: "049", name: "Tjio Johansyah" }
+    "id": "sch-sep-05",
+    "category": "mingguan",
+    "categoryLabel": "Sabtu & Minggu",
+    "dayLabel": "SABTU",
+    "dateDisplay": "Sabtu, 05 September 2026",
+    "timeDisplay": "18:00 WIB",
+    "koorlaps": [
+      {
+        "id": "035",
+        "name": "Stevanus Budianto"
+      },
+      {
+        "id": "038",
+        "name": "Yudi Wijaya"
+      },
+      {
+        "id": "046",
+        "name": "Mario Christiano Chandra"
+      }
     ],
-    koorlapCount: 1,
-    koorlapDisplay: "Tjio Johansyah",
-    location: "GEREJA UTAMA",
-    description: "Misa Minggu Sore (18 Petugas Scheduled)"
-  },
-
-  // MISA SABTU SORE & MINGGU (SEPTEMBER 2026 - MINGGU II)
-  {
-    id: "sch-sep-06",
-    category: "mingguan",
-    categoryLabel: "Sabtu & Minggu (2 Koorlap)",
-    dayLabel: "SABTU",
-    dateDisplay: "12 September 2026",
-    timeDisplay: "18:00 WIB",
-    koorlaps: [
-      { id: "052", name: "Edward Luntungan" },
-      { id: "111", name: "Handi Wirajaya" }
-    ],
-    koorlapCount: 2,
-    koorlapDisplay: "Edward Luntungan & Handi Wirajaya",
-    location: "GEREJA UTAMA",
-    description: "Misa Sabtu Sore (16 Petugas Scheduled)"
+    "koorlapCount": 3,
+    "koorlapDisplay": "Stevanus Budianto & Yudi Wijaya & Mario Christiano Chandra",
+    "location": "GEREJA PAROKI SANTO YAKOBUS",
+    "description": "Misa SABTU (17 Petugas Terjadwal)"
   },
   {
-    id: "sch-sep-07",
-    category: "mingguan",
-    categoryLabel: "Sabtu & Minggu (1 Koorlap)",
-    dayLabel: "MINGGU",
-    dateDisplay: "13 September 2026",
-    timeDisplay: "06:00 WIB",
-    koorlaps: [
-      { id: "053", name: "Edward Luntungan" }
-    ],
-    koorlapCount: 1,
-    koorlapDisplay: "Edward Luntungan",
-    location: "GEREJA UTAMA",
-    description: "Misa Minggu Pagi I (8 Petugas Scheduled)"
+    "id": "sch-sep-06",
+    "category": "mingguan",
+    "categoryLabel": "Sabtu & Minggu",
+    "dayLabel": "SABTU",
+    "dateDisplay": "Sabtu, 05 September 2026",
+    "timeDisplay": "18:00 WIB",
+    "koorlaps": [],
+    "koorlapCount": 0,
+    "koorlapDisplay": "Tidak Ada Koorlap Khusus",
+    "location": "KAPEL JOHN PAUL II",
+    "description": "Misa SABTU (9 Petugas Terjadwal)"
   },
   {
-    id: "sch-sep-08",
-    category: "mingguan",
-    categoryLabel: "Sabtu & Minggu (1 Koorlap)",
-    dayLabel: "MINGGU",
-    dateDisplay: "13 September 2026",
-    timeDisplay: "08:00 WIB",
-    koorlaps: [
-      { id: "050", name: "Tjio Johansyah" }
+    "id": "sch-sep-07",
+    "category": "mingguan",
+    "categoryLabel": "Sabtu & Minggu",
+    "dayLabel": "MINGGU",
+    "dateDisplay": "Minggu, 06 September 2026",
+    "timeDisplay": "06:00 WIB",
+    "koorlaps": [
+      {
+        "id": "006",
+        "name": "Paulus Blodito Pujoasyogyo"
+      }
     ],
-    koorlapCount: 1,
-    koorlapDisplay: "Tjio Johansyah",
-    location: "GEREJA UTAMA",
-    description: "Misa Minggu Pagi II (10 Petugas Scheduled)"
+    "koorlapCount": 1,
+    "koorlapDisplay": "Paulus Blodito Pujoasyogyo",
+    "location": "GEREJA PAROKI SANTO YAKOBUS",
+    "description": "Misa MINGGU (8 Petugas Terjadwal)"
   },
   {
-    id: "sch-sep-09",
-    category: "mingguan",
-    categoryLabel: "Sabtu & Minggu (3 Koorlap)",
-    dayLabel: "MINGGU",
-    dateDisplay: "13 September 2026",
-    timeDisplay: "10:00 WIB",
-    koorlaps: [
-      { id: "097", name: "Budi Purnomo" },
-      { id: "098", name: "Alex Santoso" },
-      { id: "112", name: "Aloysius Ari Senoaji L." }
+    "id": "sch-sep-08",
+    "category": "mingguan",
+    "categoryLabel": "Sabtu & Minggu",
+    "dayLabel": "MINGGU",
+    "dateDisplay": "Minggu, 06 September 2026",
+    "timeDisplay": "08:00 WIB",
+    "koorlaps": [
+      {
+        "id": "022",
+        "name": "Yohanes Valentinus Jimmy"
+      }
     ],
-    koorlapCount: 3,
-    koorlapDisplay: "Budi P., Alex S., Aloysius Ari Senoaji L.",
-    location: "GEREJA UTAMA",
-    description: "Misa Minggu Pagi III / Utama (20 Petugas Scheduled)"
+    "koorlapCount": 1,
+    "koorlapDisplay": "Yohanes Valentinus Jimmy",
+    "location": "GEREJA PAROKI SANTO YAKOBUS",
+    "description": "Misa MINGGU (10 Petugas Terjadwal)"
   },
   {
-    id: "sch-sep-10",
-    category: "mingguan",
-    categoryLabel: "Sabtu & Minggu (3 Koorlap)",
-    dayLabel: "MINGGU",
-    dateDisplay: "13 September 2026",
-    timeDisplay: "18:00 WIB",
-    koorlaps: [
-      { id: "089", name: "Hanjaya Kurniawan" },
-      { id: "124", name: "Julius Agus Prajitno" },
-      { id: "125", name: "Donatus Sri Tur Prawinoto" }
+    "id": "sch-sep-09",
+    "category": "mingguan",
+    "categoryLabel": "Sabtu & Minggu",
+    "dayLabel": "MINGGU",
+    "dateDisplay": "Minggu, 06 September 2026",
+    "timeDisplay": "10:00 WIB",
+    "koorlaps": [
+      {
+        "id": "079",
+        "name": "Michael Raphael Hari Wiryawan"
+      },
+      {
+        "id": "085",
+        "name": "Paulus Tedjadharma"
+      }
     ],
-    koorlapCount: 3,
-    koorlapDisplay: "Hanjaya K., Julius A., Donatus S.",
-    location: "GEREJA UTAMA",
-    description: "Misa Minggu Sore (18 Petugas Scheduled)"
-  },
-
-  // MISA SABTU SORE & MINGGU (SEPTEMBER 2026 - MINGGU III)
-  {
-    id: "sch-sep-11",
-    category: "mingguan",
-    categoryLabel: "Sabtu & Minggu (1 Koorlap)",
-    dayLabel: "SABTU",
-    dateDisplay: "19 September 2026",
-    timeDisplay: "18:00 WIB",
-    koorlaps: [
-      { id: "145", name: "Damianus Slamet Subagio" }
-    ],
-    koorlapCount: 1,
-    koorlapDisplay: "Damianus Slamet Subagio",
-    location: "GEREJA UTAMA",
-    description: "Misa Sabtu Sore (16 Petugas Scheduled)"
+    "koorlapCount": 2,
+    "koorlapDisplay": "Michael Raphael Hari Wiryawan & Paulus Tedjadharma",
+    "location": "GEREJA PAROKI SANTO YAKOBUS",
+    "description": "Misa MINGGU (18 Petugas Terjadwal)"
   },
   {
-    id: "sch-sep-12",
-    category: "mingguan",
-    categoryLabel: "Sabtu & Minggu (2 Koorlap)",
-    dayLabel: "MINGGU",
-    dateDisplay: "20 September 2026",
-    timeDisplay: "06:00 WIB",
-    koorlaps: [
-      { id: "053", name: "Edward Luntungan" },
-      { id: "145", name: "Damianus Slamet Subagio" }
+    "id": "sch-sep-10",
+    "category": "mingguan",
+    "categoryLabel": "Sabtu & Minggu",
+    "dayLabel": "MINGGU",
+    "dateDisplay": "Minggu, 06 September 2026",
+    "timeDisplay": "18:00 WIB",
+    "koorlaps": [
+      {
+        "id": "089",
+        "name": "Raymond Michael"
+      },
+      {
+        "id": "100",
+        "name": "Gunarjo Tanurijanto"
+      }
     ],
-    koorlapCount: 2,
-    koorlapDisplay: "Edward L. & Damianus S.",
-    location: "GEREJA UTAMA",
-    description: "Misa Minggu Pagi I (8 Petugas Scheduled)"
+    "koorlapCount": 2,
+    "koorlapDisplay": "Raymond Michael & Gunarjo Tanurijanto",
+    "location": "GEREJA PAROKI SANTO YAKOBUS",
+    "description": "Misa MINGGU (16 Petugas Terjadwal)"
   },
   {
-    id: "sch-sep-13",
-    category: "mingguan",
-    categoryLabel: "Sabtu & Minggu (2 Koorlap)",
-    dayLabel: "MINGGU",
-    dateDisplay: "20 September 2026",
-    timeDisplay: "08:00 WIB",
-    koorlaps: [
-      { id: "057", name: "Andrew Firmansyah L." },
-      { id: "058", name: "Bambang Susilo" }
-    ],
-    koorlapCount: 2,
-    koorlapDisplay: "Andrew F. & Bambang S.",
-    location: "GEREJA UTAMA",
-    description: "Misa Minggu Pagi II (10 Petugas Scheduled)"
+    "id": "sch-sep-11",
+    "category": "harian",
+    "categoryLabel": "Misa Harian / Wilayah",
+    "dayLabel": "SELASA",
+    "dateDisplay": "Selasa, 08 September 2026",
+    "timeDisplay": "18:00 WIB",
+    "koorlaps": [],
+    "koorlapCount": 0,
+    "koorlapDisplay": "Tidak Ada Koorlap Khusus",
+    "location": "KAPEL JOHN PAUL II",
+    "description": "Misa SELASA (1 Petugas Terjadwal)"
   },
   {
-    id: "sch-sep-14",
-    category: "mingguan",
-    categoryLabel: "Sabtu & Minggu (1 Koorlap)",
-    dayLabel: "MINGGU",
-    dateDisplay: "20 September 2026",
-    timeDisplay: "10:00 WIB",
-    koorlaps: [
-      { id: "163", name: "Fransiscus Paulus Kuncoro K." }
-    ],
-    koorlapCount: 1,
-    koorlapDisplay: "Fransiscus Paulus Kuncoro Kohar",
-    location: "GEREJA UTAMA",
-    description: "Misa Minggu Pagi III / Utama (20 Petugas Scheduled)"
+    "id": "sch-sep-12",
+    "category": "harian",
+    "categoryLabel": "Misa Harian / Wilayah",
+    "dayLabel": "JUMAT",
+    "dateDisplay": "Jumat, 11 September 2026",
+    "timeDisplay": "18:00 WIB",
+    "koorlaps": [],
+    "koorlapCount": 0,
+    "koorlapDisplay": "Tidak Ada Koorlap Khusus",
+    "location": "KAPEL JOHN PAUL II",
+    "description": "Misa JUMAT (1 Petugas Terjadwal)"
   },
   {
-    id: "sch-sep-15",
-    category: "mingguan",
-    categoryLabel: "Sabtu & Minggu (4 Koorlap)",
-    dayLabel: "MINGGU",
-    dateDisplay: "20 September 2026",
-    timeDisplay: "18:00 WIB",
-    koorlaps: [
-      { id: "089", name: "Hanjaya Kurniawan" },
-      { id: "137", name: "Berti Albertus Nara" },
-      { id: "138", name: "William Antonius Davidson J." },
-      { id: "143", name: "Stefanus Charlie Tjahyono" }
+    "id": "sch-sep-13",
+    "category": "mingguan",
+    "categoryLabel": "Sabtu & Minggu",
+    "dayLabel": "SABTU",
+    "dateDisplay": "Sabtu, 12 September 2026",
+    "timeDisplay": "18:00 WIB",
+    "koorlaps": [
+      {
+        "id": "054",
+        "name": "Ivan Christian Cahyadi"
+      },
+      {
+        "id": "064",
+        "name": "Andy untoyo wibowo"
+      }
     ],
-    koorlapCount: 4,
-    koorlapDisplay: "Hanjaya K., Berti A., William A., Stefanus C.",
-    location: "GEREJA UTAMA",
-    description: "Misa Minggu Sore (18 Petugas Scheduled)"
-  },
-
-  // MISA SABTU SORE & MINGGU (SEPTEMBER 2026 - MINGGU IV)
-  {
-    id: "sch-sep-16",
-    category: "mingguan",
-    categoryLabel: "Sabtu & Minggu (2 Koorlap)",
-    dayLabel: "SABTU",
-    dateDisplay: "26 September 2026",
-    timeDisplay: "18:00 WIB",
-    koorlaps: [
-      { id: "149", name: "Richard Dharyanto" },
-      { id: "150", name: "Yohanes Kurniawan Halim" }
-    ],
-    koorlapCount: 2,
-    koorlapDisplay: "Richard Dharyanto & Yohanes K. Halim",
-    location: "GEREJA UTAMA",
-    description: "Misa Sabtu Sore (16 Petugas Scheduled)"
+    "koorlapCount": 2,
+    "koorlapDisplay": "Ivan Christian Cahyadi & Andy untoyo wibowo",
+    "location": "GEREJA PAROKI SANTO YAKOBUS",
+    "description": "Misa SABTU (14 Petugas Terjadwal)"
   },
   {
-    id: "sch-sep-17",
-    category: "mingguan",
-    categoryLabel: "Sabtu & Minggu (2 Koorlap)",
-    dayLabel: "MINGGU",
-    dateDisplay: "27 September 2026",
-    timeDisplay: "06:00 WIB",
-    koorlaps: [
-      { id: "053", name: "Edward Luntungan" },
-      { id: "145", name: "Damianus Slamet Subagio" }
+    "id": "sch-sep-14",
+    "category": "mingguan",
+    "categoryLabel": "Sabtu & Minggu",
+    "dayLabel": "MINGGU",
+    "dateDisplay": "Minggu, 13 September 2026",
+    "timeDisplay": "06:00 WIB",
+    "koorlaps": [
+      {
+        "id": "090",
+        "name": "Hanjaya Kurniawan"
+      }
     ],
-    koorlapCount: 2,
-    koorlapDisplay: "Edward L. & Damianus S.",
-    location: "GEREJA UTAMA",
-    description: "Misa Minggu Pagi I (8 Petugas Scheduled)"
-  },
-
-  {
-    id: "sch-sep-18",
-    category: "mingguan",
-    categoryLabel: "Sabtu & Minggu (2 Koorlap)",
-    dayLabel: "MINGGU",
-    dateDisplay: "27 September 2026",
-    timeDisplay: "08:00 WIB",
-    koorlaps: [
-      { id: "057", name: "Andrew Firmansyah L." },
-      { id: "058", name: "Bambang Susilo" }
-    ],
-    koorlapCount: 2,
-    koorlapDisplay: "Andrew F. & Bambang Susilo",
-    location: "GEREJA UTAMA",
-    description: "Misa Minggu Pagi II (10 Petugas Scheduled)"
+    "koorlapCount": 1,
+    "koorlapDisplay": "Hanjaya Kurniawan",
+    "location": "GEREJA PAROKI SANTO YAKOBUS",
+    "description": "Misa MINGGU (8 Petugas Terjadwal)"
   },
   {
-    id: "sch-sep-19",
-    category: "mingguan",
-    categoryLabel: "Sabtu & Minggu (1 Koorlap)",
-    dayLabel: "MINGGU",
-    dateDisplay: "27 September 2026",
-    timeDisplay: "10:00 WIB",
-    koorlaps: [
-      { id: "163", name: "Fransiscus Paulus Kuncoro K." }
+    "id": "sch-sep-15",
+    "category": "mingguan",
+    "categoryLabel": "Sabtu & Minggu",
+    "dayLabel": "MINGGU",
+    "dateDisplay": "Minggu, 13 September 2026",
+    "timeDisplay": "08:00 WIB",
+    "koorlaps": [
+      {
+        "id": "097",
+        "name": "Irwan Afandi"
+      }
     ],
-    koorlapCount: 1,
-    koorlapDisplay: "Fransiscus Paulus Kuncoro Kohar",
-    location: "GEREJA UTAMA",
-    description: "Misa Minggu Pagi III / Utama (20 Petugas Scheduled)"
+    "koorlapCount": 1,
+    "koorlapDisplay": "Irwan Afandi",
+    "location": "GEREJA PAROKI SANTO YAKOBUS",
+    "description": "Misa MINGGU (9 Petugas Terjadwal)"
   },
   {
-    id: "sch-sep-20",
-    category: "mingguan",
-    categoryLabel: "Sabtu & Minggu (1 Koorlap)",
-    dayLabel: "MINGGU",
-    dateDisplay: "27 September 2026",
-    timeDisplay: "18:00 WIB",
-    koorlaps: [
-      { id: "166", name: "Sukotjo Budiono" }
+    "id": "sch-sep-16",
+    "category": "mingguan",
+    "categoryLabel": "Sabtu & Minggu",
+    "dayLabel": "MINGGU",
+    "dateDisplay": "Minggu, 13 September 2026",
+    "timeDisplay": "10:00 WIB",
+    "koorlaps": [
+      {
+        "id": "096",
+        "name": "Laurensius Rony Setyawan"
+      }
     ],
-    koorlapCount: 1,
-    koorlapDisplay: "Sukotjo Budiono",
-    location: "GEREJA UTAMA",
-    description: "Misa Minggu Sore (18 Petugas Scheduled)"
+    "koorlapCount": 1,
+    "koorlapDisplay": "Laurensius Rony Setyawan",
+    "location": "GEREJA PAROKI SANTO YAKOBUS",
+    "description": "Misa MINGGU (18 Petugas Terjadwal)"
+  },
+  {
+    "id": "sch-sep-17",
+    "category": "mingguan",
+    "categoryLabel": "Sabtu & Minggu",
+    "dayLabel": "MINGGU",
+    "dateDisplay": "Minggu, 13 September 2026",
+    "timeDisplay": "17:00 WIB",
+    "koorlaps": [],
+    "koorlapCount": 0,
+    "koorlapDisplay": "Tidak Ada Koorlap Khusus",
+    "location": "KAPEL JOHN PAUL II",
+    "description": "Misa MINGGU (12 Petugas Terjadwal)"
+  },
+  {
+    "id": "sch-sep-18",
+    "category": "mingguan",
+    "categoryLabel": "Sabtu & Minggu",
+    "dayLabel": "MINGGU",
+    "dateDisplay": "Minggu, 13 September 2026",
+    "timeDisplay": "18:00 WIB",
+    "koorlaps": [
+      {
+        "id": "123",
+        "name": "Fidelis Sutatyo"
+      },
+      {
+        "id": "143",
+        "name": "Stefanus Charlie Tjahyono"
+      }
+    ],
+    "koorlapCount": 2,
+    "koorlapDisplay": "Fidelis Sutatyo & Stefanus Charlie Tjahyono",
+    "location": "GEREJA PAROKI SANTO YAKOBUS",
+    "description": "Misa MINGGU (16 Petugas Terjadwal)"
+  },
+  {
+    "id": "sch-sep-19",
+    "category": "harian",
+    "categoryLabel": "Misa Harian / Wilayah",
+    "dayLabel": "SELASA",
+    "dateDisplay": "Selasa, 15 September 2026",
+    "timeDisplay": "18:00 WIB",
+    "koorlaps": [],
+    "koorlapCount": 0,
+    "koorlapDisplay": "Tidak Ada Koorlap Khusus",
+    "location": "KAPEL JOHN PAUL II",
+    "description": "Misa SELASA (1 Petugas Terjadwal)"
+  },
+  {
+    "id": "sch-sep-20",
+    "category": "harian",
+    "categoryLabel": "Misa Harian / Wilayah",
+    "dayLabel": "JUMAT",
+    "dateDisplay": "Jumat, 18 September 2026",
+    "timeDisplay": "18:00 WIB",
+    "koorlaps": [],
+    "koorlapCount": 0,
+    "koorlapDisplay": "Tidak Ada Koorlap Khusus",
+    "location": "KAPEL JOHN PAUL II",
+    "description": "Misa JUMAT (1 Petugas Terjadwal)"
+  },
+  {
+    "id": "sch-sep-21",
+    "category": "mingguan",
+    "categoryLabel": "Sabtu & Minggu",
+    "dayLabel": "SABTU",
+    "dateDisplay": "Sabtu, 19 September 2026",
+    "timeDisplay": "18:00 WIB",
+    "koorlaps": [
+      {
+        "id": "125",
+        "name": "Donatus Sri Tar Prawinoto"
+      },
+      {
+        "id": "152",
+        "name": "Jeffrey Tanuhardjo"
+      }
+    ],
+    "koorlapCount": 2,
+    "koorlapDisplay": "Donatus Sri Tar Prawinoto & Jeffrey Tanuhardjo",
+    "location": "GEREJA PAROKI SANTO YAKOBUS",
+    "description": "Misa SABTU (16 Petugas Terjadwal)"
+  },
+  {
+    "id": "sch-sep-22",
+    "category": "mingguan",
+    "categoryLabel": "Sabtu & Minggu",
+    "dayLabel": "SABTU",
+    "dateDisplay": "Sabtu, 19 September 2026",
+    "timeDisplay": "18:00 WIB",
+    "koorlaps": [
+      {
+        "id": "139",
+        "name": "Severus senjoyo"
+      }
+    ],
+    "koorlapCount": 1,
+    "koorlapDisplay": "Severus senjoyo",
+    "location": "KAPEL JOHN PAUL II",
+    "description": "Misa SABTU (14 Petugas Terjadwal)"
+  },
+  {
+    "id": "sch-sep-23",
+    "category": "mingguan",
+    "categoryLabel": "Sabtu & Minggu",
+    "dayLabel": "MINGGU",
+    "dateDisplay": "Minggu, 20 September 2026",
+    "timeDisplay": "06:00 WIB",
+    "koorlaps": [
+      {
+        "id": "045",
+        "name": "Dionisius Donny Kamadjaja"
+      }
+    ],
+    "koorlapCount": 1,
+    "koorlapDisplay": "Dionisius Donny Kamadjaja",
+    "location": "GEREJA PAROKI SANTO YAKOBUS",
+    "description": "Misa MINGGU (7 Petugas Terjadwal)"
+  },
+  {
+    "id": "sch-sep-24",
+    "category": "mingguan",
+    "categoryLabel": "Sabtu & Minggu",
+    "dayLabel": "MINGGU",
+    "dateDisplay": "Minggu, 20 September 2026",
+    "timeDisplay": "08:00 WIB",
+    "koorlaps": [
+      {
+        "id": "164",
+        "name": "Heru Wijaya"
+      }
+    ],
+    "koorlapCount": 1,
+    "koorlapDisplay": "Heru Wijaya",
+    "location": "GEREJA PAROKI SANTO YAKOBUS",
+    "description": "Misa MINGGU (10 Petugas Terjadwal)"
+  },
+  {
+    "id": "sch-sep-25",
+    "category": "mingguan",
+    "categoryLabel": "Sabtu & Minggu",
+    "dayLabel": "MINGGU",
+    "dateDisplay": "Minggu, 20 September 2026",
+    "timeDisplay": "10:00 WIB",
+    "koorlaps": [
+      {
+        "id": "022",
+        "name": "Yohanes Valentinus Jimmy"
+      },
+      {
+        "id": "167",
+        "name": "Chen Lin Andrew"
+      }
+    ],
+    "koorlapCount": 2,
+    "koorlapDisplay": "Yohanes Valentinus Jimmy & Chen Lin Andrew",
+    "location": "GEREJA PAROKI SANTO YAKOBUS",
+    "description": "Misa MINGGU (18 Petugas Terjadwal)"
+  },
+  {
+    "id": "sch-sep-26",
+    "category": "mingguan",
+    "categoryLabel": "Sabtu & Minggu",
+    "dayLabel": "MINGGU",
+    "dateDisplay": "Minggu, 20 September 2026",
+    "timeDisplay": "18:00 WIB",
+    "koorlaps": [
+      {
+        "id": "072",
+        "name": "Bambang Hermanto"
+      }
+    ],
+    "koorlapCount": 1,
+    "koorlapDisplay": "Bambang Hermanto",
+    "location": "GEREJA PAROKI SANTO YAKOBUS",
+    "description": "Misa MINGGU (16 Petugas Terjadwal)"
+  },
+  {
+    "id": "sch-sep-27",
+    "category": "harian",
+    "categoryLabel": "Misa Harian / Wilayah",
+    "dayLabel": "SELASA",
+    "dateDisplay": "Selasa, 22 September 2026",
+    "timeDisplay": "18:00 WIB",
+    "koorlaps": [],
+    "koorlapCount": 0,
+    "koorlapDisplay": "Tidak Ada Koorlap Khusus",
+    "location": "KAPEL JOHN PAUL II",
+    "description": "Misa SELASA (1 Petugas Terjadwal)"
+  },
+  {
+    "id": "sch-sep-28",
+    "category": "harian",
+    "categoryLabel": "Misa Harian / Wilayah",
+    "dayLabel": "JUMAT",
+    "dateDisplay": "Jumat, 25 September 2026",
+    "timeDisplay": "18:00 WIB",
+    "koorlaps": [],
+    "koorlapCount": 0,
+    "koorlapDisplay": "Tidak Ada Koorlap Khusus",
+    "location": "KAPEL JOHN PAUL II",
+    "description": "Misa JUMAT (1 Petugas Terjadwal)"
+  },
+  {
+    "id": "sch-sep-29",
+    "category": "mingguan",
+    "categoryLabel": "Sabtu & Minggu",
+    "dayLabel": "SABTU",
+    "dateDisplay": "Sabtu, 26 September 2026",
+    "timeDisplay": "18:00 WIB",
+    "koorlaps": [
+      {
+        "id": "079",
+        "name": "Michael Raphael Hari Wiryawan"
+      },
+      {
+        "id": "149",
+        "name": "Richard Gharyanto"
+      }
+    ],
+    "koorlapCount": 2,
+    "koorlapDisplay": "Michael Raphael Hari Wiryawan & Richard Gharyanto",
+    "location": "GEREJA PAROKI SANTO YAKOBUS",
+    "description": "Misa SABTU (16 Petugas Terjadwal)"
+  },
+  {
+    "id": "sch-sep-30",
+    "category": "mingguan",
+    "categoryLabel": "Sabtu & Minggu",
+    "dayLabel": "MINGGU",
+    "dateDisplay": "Minggu, 27 September 2026",
+    "timeDisplay": "06:00 WIB",
+    "koorlaps": [
+      {
+        "id": "071",
+        "name": "Hence Antony Suawah"
+      }
+    ],
+    "koorlapCount": 1,
+    "koorlapDisplay": "Hence Antony Suawah",
+    "location": "GEREJA PAROKI SANTO YAKOBUS",
+    "description": "Misa MINGGU (8 Petugas Terjadwal)"
+  },
+  {
+    "id": "sch-sep-31",
+    "category": "mingguan",
+    "categoryLabel": "Sabtu & Minggu",
+    "dayLabel": "MINGGU",
+    "dateDisplay": "Minggu, 27 September 2026",
+    "timeDisplay": "08:00 WIB",
+    "koorlaps": [
+      {
+        "id": "085",
+        "name": "Paulus Tedjadharma"
+      }
+    ],
+    "koorlapCount": 1,
+    "koorlapDisplay": "Paulus Tedjadharma",
+    "location": "GEREJA PAROKI SANTO YAKOBUS",
+    "description": "Misa MINGGU (10 Petugas Terjadwal)"
+  },
+  {
+    "id": "sch-sep-32",
+    "category": "mingguan",
+    "categoryLabel": "Sabtu & Minggu",
+    "dayLabel": "MINGGU",
+    "dateDisplay": "Minggu, 27 September 2026",
+    "timeDisplay": "10:00 WIB",
+    "koorlaps": [
+      {
+        "id": "106",
+        "name": "Jap Yohanes Baptista"
+      },
+      {
+        "id": "164",
+        "name": "Heru Wijaya"
+      }
+    ],
+    "koorlapCount": 2,
+    "koorlapDisplay": "Jap Yohanes Baptista & Heru Wijaya",
+    "location": "GEREJA PAROKI SANTO YAKOBUS",
+    "description": "Misa MINGGU (19 Petugas Terjadwal)"
+  },
+  {
+    "id": "sch-sep-33",
+    "category": "mingguan",
+    "categoryLabel": "Sabtu & Minggu",
+    "dayLabel": "MINGGU",
+    "dateDisplay": "Minggu, 27 September 2026",
+    "timeDisplay": "17:00 WIB",
+    "koorlaps": [
+      {
+        "id": "066",
+        "name": "Berce suisa abraham"
+      }
+    ],
+    "koorlapCount": 1,
+    "koorlapDisplay": "Berce suisa abraham",
+    "location": "KAPEL JOHN PAUL II",
+    "description": "Misa MINGGU (13 Petugas Terjadwal)"
+  },
+  {
+    "id": "sch-sep-34",
+    "category": "mingguan",
+    "categoryLabel": "Sabtu & Minggu",
+    "dayLabel": "MINGGU",
+    "dateDisplay": "Minggu, 27 September 2026",
+    "timeDisplay": "18:00 WIB",
+    "koorlaps": [
+      {
+        "id": "027",
+        "name": "Fransiskus Silvester Windy Wibisono"
+      },
+      {
+        "id": "167",
+        "name": "Chen Lin Andrew"
+      }
+    ],
+    "koorlapCount": 2,
+    "koorlapDisplay": "Fransiskus Silvester Windy Wibisono & Chen Lin Andrew",
+    "location": "GEREJA PAROKI SANTO YAKOBUS",
+    "description": "Misa MINGGU (17 Petugas Terjadwal)"
   }
 ];
 
