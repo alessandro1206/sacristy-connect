@@ -349,80 +349,157 @@ export const ScheduleCalendarView: React.FC<ScheduleCalendarViewProps> = ({
             </div>
           </div>
 
-          {/* VIEW 1: MONTHLY CALENDAR GRID (Exact Replica of Right Preview in Image 1) */}
+          {/* VIEW 1: MONTHLY CALENDAR & MOBILE AGENDA */}
           {viewMode === 'calendar' && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2.5">
-              {['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'].map((dayName, idx) => (
-                <div key={idx} className="text-center text-xs font-bold text-[#665e55] py-1 bg-[#f7f3eb] rounded-lg">
-                  {dayName}
-                </div>
-              ))}
-
-              {calendarDays.map((day, idx) => (
-                <div 
-                  key={idx}
-                  className={`min-h-[140px] p-2.5 rounded-xl border flex flex-col justify-between transition-all ${
-                    day.isCurrentMonth
-                      ? 'bg-white border-[#e0d6c7] hover:border-[#7c191e]/50'
-                      : 'bg-[#faf7f2]/60 border-dashed border-[#e6ded2] opacity-60'
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-xs font-bold text-[#3b342e]">
-                      {day.dayNumber}
-                    </span>
-                    {day.sessions.length > 0 && (
-                      <span className="text-[10px] text-[#8f857a] font-medium">
-                        {day.sessions.length} Misa
-                      </span>
-                    )}
+            <div>
+              {/* MOBILE AGENDA LIST (Only shown on mobile devices < md) */}
+              <div className="md:hidden space-y-3">
+                <div className="flex items-center justify-between bg-amber-50 border border-amber-200 p-2.5 rounded-xl text-xs text-amber-900 font-bold">
+                  <div className="flex items-center gap-1.5">
+                    <CalendarIcon className="w-4 h-4 text-amber-700" />
+                    <span>Agenda Misa September 2026</span>
                   </div>
+                  <span className="text-[10px] bg-amber-200/80 px-2 py-0.5 rounded-full font-black">
+                    {schedule.length} Sesi Terjadwal
+                  </span>
+                </div>
 
-                  {/* Sessions Inside Day */}
-                  <div className="space-y-1.5 flex-1">
-                    {day.sessions.map((sess, sIdx) => {
-                      const dotColor = 
-                        sess.lokasi === 'Gereja Utama' ? 'bg-[#7c191e]' :
-                        sess.lokasi === 'Kapel 1' ? 'bg-[#1976d2]' : 'bg-[#00838f]';
-
-                      return (
-                        <div 
-                          key={sIdx}
-                          className="bg-[#fbf9f5] border border-[#eee6da] rounded-lg p-1.5 text-[11px] space-y-1 shadow-2xs"
-                        >
-                          <div className="flex items-center gap-1.5">
-                            <span className={`w-2 h-2 rounded-full ${dotColor} shrink-0`} />
-                            <span className="font-bold text-[#2b241e]">
-                              ● {sess.waktu}
-                            </span>
-                          </div>
-
-                          {sess.koorlap && (
-                            <div className="text-[#554d44] font-medium text-[10px]">
-                              {sess.koorlap} <span className="text-[#8b1e23] font-bold">(Koorlap)</span>
-                            </div>
-                          )}
-
-                          {sess.asisten.length > 0 && (
-                            <div className="text-[#665e55] text-[10px]">
-                              {sess.asisten.join(', ')}
-                            </div>
-                          )}
-
-                          {sess.cutiList && sess.cutiList.map((cuti, cIdx) => (
-                            <div 
-                              key={cIdx}
-                              className="text-[10px] font-semibold text-[#a85a00] bg-[#fff8e1] px-1 py-0.5 rounded border border-[#ffe082]"
-                            >
-                              {cuti}
-                            </div>
-                          ))}
+                {calendarDays.filter(d => d.isCurrentMonth && d.sessions.length > 0).map((day, dIdx) => (
+                  <div 
+                    key={dIdx}
+                    className="bg-white border border-slate-200/90 rounded-2xl p-3.5 shadow-2xs space-y-2.5"
+                  >
+                    <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+                      <div className="flex items-center gap-2">
+                        <span className="w-7 h-7 rounded-xl bg-slate-900 text-white font-black text-xs flex items-center justify-center">
+                          {day.dayNumber}
+                        </span>
+                        <div>
+                          <h4 className="font-bold text-slate-900 text-xs">
+                            {day.dayName}, {day.dayNumber} September 2026
+                          </h4>
+                          <span className="text-[10px] text-slate-500 font-medium">
+                            {day.sessions.length} Jadwal Misa
+                          </span>
                         </div>
-                      );
-                    })}
+                      </div>
+                    </div>
+
+                    {/* Sessions List */}
+                    <div className="space-y-2">
+                      {day.sessions.map((sess, sIdx) => {
+                        const isKapel = sess.lokasi.toLowerCase().includes('kapel');
+                        return (
+                          <div 
+                            key={sIdx}
+                            className="bg-slate-50/80 border border-slate-200/80 rounded-xl p-2.5 space-y-1.5"
+                          >
+                            <div className="flex items-center justify-between">
+                              <span className="px-2 py-0.5 rounded-md font-black text-[11px] bg-slate-900 text-white font-mono">
+                                ⏰ {sess.jam} WIB
+                              </span>
+                              <span className={`px-2 py-0.5 rounded-md font-bold text-[10px] border ${
+                                isKapel 
+                                  ? 'bg-blue-50 text-blue-800 border-blue-200' 
+                                  : 'bg-rose-50 text-rose-800 border-rose-200'
+                              }`}>
+                                {sess.lokasi}
+                              </span>
+                            </div>
+
+                            {sess.koorlap && (
+                              <div className="flex items-center gap-1.5 text-amber-950 bg-amber-100/80 px-2 py-1 rounded-lg border border-amber-200 text-xs font-bold">
+                                <span>👑</span>
+                                <span>Koorlap: <strong>{sess.koorlap}</strong></span>
+                              </div>
+                            )}
+
+                            {sess.asisten.length > 0 && (
+                              <div className="text-[11px] text-slate-700">
+                                <span className="text-[10px] font-bold text-slate-500 block mb-0.5">Petugas Asisten Imam:</span>
+                                <div className="flex flex-wrap gap-1">
+                                  {sess.asisten.map((as, aIdx) => (
+                                    <span key={aIdx} className="bg-white px-2 py-0.5 rounded-md text-[10px] font-semibold border border-slate-200 text-slate-800">
+                                      {as}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+
+              {/* DESKTOP CALENDAR GRID (Hidden on mobile, shown on md+) */}
+              <div className="hidden md:grid md:grid-cols-4 lg:grid-cols-7 gap-2.5">
+                {['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'].map((dayName, idx) => (
+                  <div key={idx} className="text-center text-xs font-black text-slate-600 py-1.5 bg-slate-100 rounded-xl">
+                    {dayName}
+                  </div>
+                ))}
+
+                {calendarDays.map((day, idx) => (
+                  <div 
+                    key={idx}
+                    className={`min-h-[140px] p-2.5 rounded-2xl border flex flex-col justify-between transition-all ${
+                      day.isCurrentMonth
+                        ? 'bg-white border-slate-200 hover:border-slate-400 shadow-2xs'
+                        : 'bg-slate-50 border-dashed border-slate-200 opacity-40'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="text-xs font-black text-slate-900">
+                        {day.dayNumber}
+                      </span>
+                      {day.sessions.length > 0 && (
+                        <span className="text-[10px] text-amber-700 font-bold bg-amber-50 px-1.5 py-0.2 rounded border border-amber-200">
+                          {day.sessions.length} Misa
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Sessions Inside Day */}
+                    <div className="space-y-1.5 flex-1">
+                      {day.sessions.map((sess, sIdx) => {
+                        const isKapel = sess.lokasi.toLowerCase().includes('kapel');
+                        return (
+                          <div 
+                            key={sIdx}
+                            className="bg-slate-50 border border-slate-200/80 rounded-xl p-1.5 text-[11px] space-y-1 shadow-2xs"
+                          >
+                            <div className="flex items-center justify-between">
+                              <span className="font-bold text-slate-900">
+                                ● {sess.waktu} ({sess.jam})
+                              </span>
+                              <span className={`text-[9px] px-1 py-0.2 rounded font-bold ${
+                                isKapel ? 'bg-blue-100 text-blue-800' : 'bg-rose-100 text-rose-800'
+                              }`}>
+                                {isKapel ? 'Kapel' : 'Gereja'}
+                              </span>
+                            </div>
+
+                            {sess.koorlap && (
+                              <div className="text-amber-950 font-bold text-[10px] bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200">
+                                👑 {sess.koorlap}
+                              </div>
+                            )}
+
+                            {sess.asisten.length > 0 && (
+                              <div className="text-slate-600 text-[10px] line-clamp-2">
+                                {sess.asisten.join(', ')}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 

@@ -23,6 +23,7 @@ import { MultiLevelLoginModal } from './components/MultiLevelLoginModal';
 import { OfficerPersonalScheduleModal } from './components/OfficerPersonalScheduleModal';
 import { CodeExportModal } from './components/CodeExportModal';
 import { HelpModal } from './components/HelpModal';
+import { MobileBottomNav } from './components/MobileBottomNav';
 
 // Local storage keys for universal persistence
 const STORAGE_KEYS = {
@@ -454,7 +455,7 @@ export default function App() {
         )}
 
         {/* View Content Router */}
-        <main className="flex-1 flex flex-col h-full overflow-hidden">
+        <main className="flex-1 flex flex-col h-full overflow-hidden pb-16 md:pb-0">
           {/* 0. LANDING PAGE: Pemilihan Portal Kiosk vs Administrasi */}
           {isLandingMode && (
             <LandingPageView
@@ -597,6 +598,18 @@ export default function App() {
       <HelpModal
         isOpen={isHelpOpen}
         onClose={() => setIsHelpOpen(false)}
+      />
+
+      {/* Mobile-Only Bottom Navigation Bar */}
+      <MobileBottomNav
+        currentView={currentView}
+        onNavigate={handleNavigate}
+        userSession={userSession}
+        onOpenOfficerSchedule={() => setIsOfficerScheduleModalOpen(true)}
+        onOpenAdminLogin={() => {
+          setInitialModalRole('admin');
+          setIsLoginModalOpen(true);
+        }}
       />
     </div>
   );
