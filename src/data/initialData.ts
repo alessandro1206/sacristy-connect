@@ -3524,7 +3524,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "019",
       "023",
       "029",
-      "076",
+      "075",
       "080",
       "082",
       "092",
@@ -3843,9 +3843,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 18,
     "serverIds": [
-      "022",
-      "167",
       "011",
+      "022",
       "070",
       "075",
       "076",
@@ -3860,7 +3859,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "143",
       "146",
       "155",
-      "159"
+      "159",
+      "167"
     ],
     "serverNames": [
       "Yohanes Valentinus Jimmy",
@@ -3887,8 +3887,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "167"
     ],
     "serverRoles": [
+      "AI",
       "KORLAP",
-      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -3904,7 +3904,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "AI"
+      "KORLAP"
     ],
     "status": "Scheduled",
     "attendedServerIds": []
