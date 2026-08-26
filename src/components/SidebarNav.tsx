@@ -21,7 +21,7 @@ import { playAudioFeedback } from '../utils/sound';
 
 interface SidebarNavProps {
   activeView: string;
-  onNavigate: (view: 'landing' | 'kiosk' | 'admin-dashboard' | 'admin-chat' | 'admin-servers' | 'admin-logs' | 'admin-reports' | 'admin-schedule' | 'schedules' | 'servers') => void;
+  onNavigate: (view: 'landing' | 'kiosk' | 'admin-dashboard' | 'admin-chat' | 'admin-servers' | 'admin-logs' | 'admin-reports' | 'admin-schedule' | 'admin-schedule-editor' | 'schedules' | 'servers') => void;
   onOpenCodeExport?: () => void;
   onOpenHelp: () => void;
   onAdminLogout?: () => void;
@@ -164,6 +164,27 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({
         >
           <CalendarDays className="w-4 h-4" />
           <span className="text-xs">Schedule Generator</span>
+        </button>
+
+        {/* 4b. Kelola & Editor Jadwal (Admin & Koorlap) */}
+        <button
+          onClick={() => {
+            playAudioFeedback('tap');
+            onNavigate('admin-schedule-editor');
+          }}
+          className={`flex items-center justify-between px-4 py-3 rounded-xl text-left transition-all ${
+            activeView === 'admin-schedule-editor'
+              ? 'bg-[#5B1414] text-white font-bold shadow-xs'
+              : 'text-[#6E5A4B] hover:bg-[#F3EDE2] hover:text-[#2C2420] font-medium'
+          }`}
+        >
+          <div className="flex items-center gap-3.5">
+            <Award className="w-4 h-4 text-amber-500" />
+            <span className="text-xs">Kelola &amp; Edit Jadwal</span>
+          </div>
+          <span className="text-[10px] bg-amber-200 text-amber-900 px-1.5 py-0.5 rounded font-black">
+            Baru
+          </span>
         </button>
 
         {/* 5. Laporan Tugas & Presensi (Admin Only) */}

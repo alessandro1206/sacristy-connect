@@ -14,7 +14,7 @@ export const CHURCH_LOGO = "/parish-logo.png";
 export const INITIAL_OFFICERS: Officer[] = [
   {
     "id": "001",
-    "name": "Gatot Christhariyono",
+    "name": "Gatot Chrishariyono",
     "shortName": "Gatot Christhariyono",
     "initials": "GC",
     "role": "Asisten Imam - Koordinator Lapangan (Koorlap)",
@@ -25,7 +25,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-1017-1031",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 8,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -41,7 +41,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1034-1062",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 11,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -57,7 +57,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1051-1093",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 14,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -73,7 +73,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1068-1124",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 17,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -89,7 +89,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1085-1155",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 20,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -105,7 +105,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-1102-1186",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 23,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -121,7 +121,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1119-1217",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 26,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -137,7 +137,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1136-1248",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 29,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -153,7 +153,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1153-1279",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 7,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -169,7 +169,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1170-1310",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 10,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -185,7 +185,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1187-1341",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 13,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -201,7 +201,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1204-1372",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 16,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -217,7 +217,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1221-1403",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 19,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -233,7 +233,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1238-1434",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 22,
+    "dutyCount": 0,
     "status": "Aktif"
   },
   {
@@ -249,7 +249,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1255-1465",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 25,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -265,7 +265,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1272-1496",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 28,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -281,7 +281,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1289-1527",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 6,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -297,7 +297,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1306-1558",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 9,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -313,7 +313,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1323-1589",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 12,
+    "dutyCount": 1,
     "status": "Aktif"
   },
   {
@@ -329,7 +329,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1340-1620",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 15,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -345,7 +345,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1357-1651",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 18,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -361,7 +361,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-1374-1682",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 21,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -377,7 +377,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1391-1713",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 24,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -393,7 +393,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1408-1744",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 27,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -409,7 +409,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1425-1775",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 5,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -425,7 +425,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1442-1806",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 8,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -441,7 +441,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-1459-1837",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 11,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -457,7 +457,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1476-1868",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 14,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -473,7 +473,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1493-1899",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 17,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -489,7 +489,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1510-1930",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 20,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -505,7 +505,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1527-1961",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 23,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -521,7 +521,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1544-1992",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 26,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -537,7 +537,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1561-2023",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 29,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -553,7 +553,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1578-2054",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 7,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -569,12 +569,12 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-1595-2085",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 10,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
     "id": "036",
-    "name": "Johanes Ignatius Totok Sukarno Darinko",
+    "name": "Johanes Ignasius Totok Sukarno",
     "shortName": "Johanes I. T. S. D.",
     "initials": "JI",
     "role": "Asisten Imam",
@@ -585,7 +585,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1612-2116",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 13,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -601,7 +601,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1629-2147",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 16,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -617,7 +617,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-1646-2178",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 19,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -633,7 +633,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1663-2209",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 22,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -649,12 +649,12 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1680-2240",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 25,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
     "id": "041",
-    "name": "Lerenzo Tjoeyohdy Oetomo",
+    "name": "Lorenzo Tjaeyahdy Oeitomo",
     "shortName": "Lerenzo T. O.",
     "initials": "LT",
     "role": "Asisten Imam",
@@ -665,12 +665,12 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1697-2271",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 28,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
     "id": "042",
-    "name": "Rudy Djaja Saputra",
+    "name": "Rudy Djaja Siaputra",
     "shortName": "Rudy D. S.",
     "initials": "RD",
     "role": "Asisten Imam",
@@ -681,7 +681,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1714-2302",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 6,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -697,7 +697,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1731-2333",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 9,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -713,7 +713,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1748-2364",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 12,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -729,7 +729,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-1765-2395",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 15,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -745,12 +745,12 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-1782-2426",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 18,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
     "id": "047",
-    "name": "Yeremia Santoso halim",
+    "name": "Yeremia Santoso Halim",
     "shortName": "Yeremia S. h.",
     "initials": "YS",
     "role": "Asisten Imam",
@@ -761,7 +761,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1799-2457",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 21,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -777,12 +777,12 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1816-2488",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 24,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
     "id": "049",
-    "name": "Widjanarko Tjandra",
+    "name": "Widjanarko Tjandra Soejatno",
     "shortName": "Widjanarko Tjandra",
     "initials": "WT",
     "role": "Asisten Imam",
@@ -793,12 +793,12 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1833-2519",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 27,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
     "id": "050",
-    "name": "Tjo Johansyah",
+    "name": "Tjio Johansyah",
     "shortName": "Tjo Johansyah",
     "initials": "TJ",
     "role": "Asisten Imam",
@@ -809,7 +809,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1850-2550",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 5,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -825,7 +825,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1867-2581",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 8,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -841,7 +841,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1884-2612",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 11,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -857,7 +857,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1901-2643",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 14,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -873,7 +873,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-1918-2674",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 17,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -889,7 +889,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1935-2705",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 20,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -905,7 +905,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1952-2736",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 23,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -921,7 +921,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1969-2767",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 26,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -937,7 +937,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-1986-2798",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 29,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -953,7 +953,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2003-2829",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 7,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -969,7 +969,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2020-2860",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 10,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -985,7 +985,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2037-2891",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 13,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1001,7 +1001,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-2054-2922",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 16,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1017,7 +1017,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-2071-2953",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 19,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1033,7 +1033,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-2088-2984",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 22,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -1049,7 +1049,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2105-3015",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 25,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1065,7 +1065,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-2122-3046",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 28,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1081,7 +1081,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2139-3077",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 6,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1097,7 +1097,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2156-3108",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 9,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1113,7 +1113,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2173-3139",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 12,
+    "dutyCount": 0,
     "status": "Aktif"
   },
   {
@@ -1129,7 +1129,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2190-3170",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 15,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -1145,7 +1145,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-2207-3201",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 18,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1161,7 +1161,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-2224-3232",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 21,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1177,7 +1177,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2241-3263",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 24,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1193,7 +1193,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2258-3294",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 27,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1209,7 +1209,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2275-3325",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 5,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1225,7 +1225,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2292-3356",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 8,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1241,7 +1241,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2309-3387",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 11,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1257,7 +1257,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2326-3418",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 14,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1273,7 +1273,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-2343-3449",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 17,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1289,7 +1289,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2360-3480",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 20,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1305,7 +1305,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2377-3511",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 23,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1321,7 +1321,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2394-3542",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 26,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -1337,7 +1337,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2411-3573",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 29,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1353,7 +1353,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2428-3604",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 7,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1369,7 +1369,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-2445-3635",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 10,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -1385,7 +1385,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2462-3666",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 13,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1401,7 +1401,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2479-3697",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 16,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1417,7 +1417,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2496-3728",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 19,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1433,7 +1433,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-2513-3759",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 22,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1449,7 +1449,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-2530-3790",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 25,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1465,7 +1465,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2547-3821",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 28,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1481,7 +1481,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2564-3852",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 6,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1497,7 +1497,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2581-3883",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 9,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1513,7 +1513,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2598-3914",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 12,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1529,7 +1529,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2615-3945",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 15,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1545,7 +1545,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-2632-3976",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 18,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1561,7 +1561,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-2649-4007",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 21,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1577,7 +1577,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2666-4038",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 24,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1593,7 +1593,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2683-4069",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 27,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1609,7 +1609,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-2700-4100",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 5,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1625,7 +1625,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2717-4131",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 8,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1641,7 +1641,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2734-4162",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 11,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1657,7 +1657,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2751-4193",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 14,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1673,7 +1673,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2768-4224",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 17,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1689,7 +1689,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2785-4255",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 20,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1705,7 +1705,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-2802-4286",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 23,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1721,7 +1721,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2819-4317",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 26,
+    "dutyCount": 0,
     "status": "Aktif"
   },
   {
@@ -1737,7 +1737,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2836-4348",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 29,
+    "dutyCount": 0,
     "status": "Aktif"
   },
   {
@@ -1753,7 +1753,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2853-4379",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 7,
+    "dutyCount": 0,
     "status": "Aktif"
   },
   {
@@ -1769,7 +1769,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2870-4410",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 10,
+    "dutyCount": 0,
     "status": "Aktif"
   },
   {
@@ -1785,7 +1785,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2887-4441",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 13,
+    "dutyCount": 0,
     "status": "Aktif"
   },
   {
@@ -1793,15 +1793,15 @@ export const INITIAL_OFFICERS: Officer[] = [
     "name": "Aloysius Ari Senoo Loekito",
     "shortName": "Aloysius A. S. L.",
     "initials": "AA",
-    "role": "Asisten Imam - Koordinator Lapangan (Koorlap)",
-    "isKoorlap": true,
+    "role": "Asisten Imam",
+    "isKoorlap": false,
     "wilayah": "Wilayah Petrus",
     "lokasiPelayanan": "Gereja Utama",
     "masaBakti": "2024 - 2027",
     "preferensiMisaHarian": true,
     "phone": "0812-2904-4472",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 16,
+    "dutyCount": 0,
     "status": "Aktif"
   },
   {
@@ -1809,15 +1809,15 @@ export const INITIAL_OFFICERS: Officer[] = [
     "name": "Willy Setiawan",
     "shortName": "Willy Setiawan",
     "initials": "WS",
-    "role": "Asisten Imam - Koordinator Lapangan (Koorlap)",
-    "isKoorlap": true,
+    "role": "Asisten Imam",
+    "isKoorlap": false,
     "wilayah": "Wilayah Petrus",
     "lokasiPelayanan": "Gereja Utama",
     "masaBakti": "2024 - 2027",
     "preferensiMisaHarian": true,
     "phone": "0812-2921-4503",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 19,
+    "dutyCount": 0,
     "status": "Aktif"
   },
   {
@@ -1825,15 +1825,15 @@ export const INITIAL_OFFICERS: Officer[] = [
     "name": "Nicolas Immanuel Derry Nurcahya",
     "shortName": "Nicolas I. D. N.",
     "initials": "NI",
-    "role": "Asisten Imam - Koordinator Lapangan (Koorlap)",
-    "isKoorlap": true,
+    "role": "Asisten Imam",
+    "isKoorlap": false,
     "wilayah": "Wilayah Petrus",
     "lokasiPelayanan": "Gereja Utama",
     "masaBakti": "2024 - 2027",
     "preferensiMisaHarian": true,
     "phone": "0812-2938-4534",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 22,
+    "dutyCount": 0,
     "status": "Aktif"
   },
   {
@@ -1849,7 +1849,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2955-4565",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 25,
+    "dutyCount": 0,
     "status": "Aktif"
   },
   {
@@ -1865,7 +1865,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2972-4596",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 28,
+    "dutyCount": 0,
     "status": "Aktif"
   },
   {
@@ -1881,7 +1881,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2989-4627",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 6,
+    "dutyCount": 0,
     "status": "Aktif"
   },
   {
@@ -1897,7 +1897,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3006-4658",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 9,
+    "dutyCount": 0,
     "status": "Aktif"
   },
   {
@@ -1913,7 +1913,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3023-4689",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 12,
+    "dutyCount": 0,
     "status": "Aktif"
   },
   {
@@ -1929,7 +1929,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3040-4720",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 15,
+    "dutyCount": 0,
     "status": "Aktif"
   },
   {
@@ -1945,7 +1945,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3057-4751",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 18,
+    "dutyCount": 0,
     "status": "Aktif"
   },
   {
@@ -1961,7 +1961,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3074-4782",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 21,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -1977,7 +1977,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-3091-4813",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 24,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -1993,7 +1993,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3108-4844",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 27,
+    "dutyCount": 0,
     "status": "Aktif"
   },
   {
@@ -2009,7 +2009,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-3125-4875",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 5,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2025,7 +2025,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3142-4906",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 8,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2041,7 +2041,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3159-4937",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 11,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2057,7 +2057,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3176-4968",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 14,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2073,7 +2073,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3193-4999",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 17,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2089,7 +2089,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3210-5030",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 20,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2105,7 +2105,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3227-5061",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 23,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2121,7 +2121,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3244-5092",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 26,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -2137,7 +2137,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3261-5123",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 29,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2153,7 +2153,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3278-5154",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 7,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2169,7 +2169,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3295-5185",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 10,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2185,7 +2185,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3312-5216",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 13,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2201,7 +2201,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3329-5247",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 16,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2217,7 +2217,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3346-5278",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 19,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -2233,7 +2233,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-3363-5309",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 22,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2249,7 +2249,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3380-5340",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 25,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2265,7 +2265,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3397-5371",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 28,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2281,7 +2281,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3414-5402",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 6,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2297,7 +2297,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-3431-5433",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 9,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -2313,7 +2313,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3448-5464",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 12,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -2329,7 +2329,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3465-5495",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 15,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -2345,7 +2345,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3482-5526",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 18,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -2361,7 +2361,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3499-5557",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 21,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2377,7 +2377,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3516-5588",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 24,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2393,7 +2393,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-3533-5619",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 27,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2409,7 +2409,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3550-5650",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 5,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2425,7 +2425,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3567-5681",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 8,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2441,7 +2441,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-3584-5712",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 11,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2457,7 +2457,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3601-5743",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 14,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -2473,7 +2473,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3618-5774",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 17,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2489,7 +2489,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3635-5805",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 20,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2505,7 +2505,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3652-5836",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 23,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -2521,7 +2521,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3669-5867",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 26,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2537,7 +2537,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3686-5898",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 29,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2553,7 +2553,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3703-5929",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 7,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2569,7 +2569,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3720-5960",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 10,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2585,7 +2585,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3737-5991",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 13,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2601,7 +2601,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3754-6022",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 16,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2617,7 +2617,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3771-6053",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 19,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -2633,7 +2633,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-3788-6084",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 22,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -2649,7 +2649,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3805-6115",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 25,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2665,7 +2665,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3822-6146",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 28,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2681,7 +2681,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": true,
     "phone": "0812-3839-6177",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 6,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -2697,7 +2697,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3856-6208",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 9,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -2713,7 +2713,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3873-6239",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 12,
+    "dutyCount": 2,
     "status": "Aktif"
   },
   {
@@ -2729,7 +2729,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3890-6270",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 15,
+    "dutyCount": 3,
     "status": "Aktif"
   }
 ];
@@ -2737,860 +2737,1150 @@ export const INITIAL_OFFICERS: Officer[] = [
 export const INITIAL_SCHEDULE: ScheduleSlot[] = [
   {
     "id": "sch-sep-01",
-    "date": "2026-09-05",
-    "displayDate": "Sabtu, 05 Sep 2026",
+    "date": "2026-09-01",
+    "displayDate": "Selasa, 01 Sep 2026",
     "massTime": "18:00 WIB",
-    "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 16,
+    "location": "Kapel John Paul II",
+    "targetTotal": 1,
     "serverIds": [
-      "035",
-      "038",
-      "003",
-      "004",
-      "054",
-      "063",
-      "089",
-      "145",
-      "062",
-
-      "016",
-      "027",
-      "049",
-      "052",
-      "078",
-      "085",
-      "111"
+      "029"
     ],
     "status": "Scheduled",
     "attendedServerIds": [],
-
     "serverNames": [
-      "Johanes D.",
-      "Agustinus W.",
-      "Venantius S.",
-      "Agustinus C.",
-      "Hartanto C.",
-      "Antonius S.",
-      "Hanjaya K.",
-      "Damianus S.",
-      null,
-      "Cliff S.",
-      "Fransiskus W.",
-      "Tjio Johansyah",
-      "Edward L.",
-      "Michael W.",
-      "Sugiharto Tanto",
-      "Handi Wirajaya"
+      "Hadi Santoso"
     ]
   },
   {
     "id": "sch-sep-02",
-    "date": "2026-09-06",
-    "displayDate": "Minggu, 06 Sep 2026",
-    "massTime": "06:00 WIB",
-    "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 8,
+    "date": "2026-09-03",
+    "displayDate": "Kamis, 03 Sep 2026",
+    "massTime": "18:30 WIB",
+    "location": "Kapel John Paul II",
+    "targetTotal": 2,
     "serverIds": [
-      "004",
-      "021",
-      "001",
-      "002",
-      "003",
-      "005",
-      "006",
-      "007"
+      "062",
+      "065"
     ],
     "status": "Scheduled",
     "attendedServerIds": [],
     "serverNames": [
-      "Agustinus C.",
-      "Adinanda C.",
-      "Gatot C.",
-      "Raymundus A.",
-      "Venantius S.",
-      "Andreas A.",
-      "Paulus P.",
-      "Paulus U."
+      "Rizal Kristanto",
+      "Bambang Budiono"
     ]
   },
   {
     "id": "sch-sep-03",
+    "date": "2026-09-04",
+    "displayDate": "Jumat, 04 Sep 2026",
+    "massTime": "18:00 WIB",
+    "location": "Kapel John Paul II",
+    "targetTotal": 4,
+    "serverIds": [
+      "056",
+      "059",
+      "063",
+      "067"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": [],
+    "serverNames": [
+      "Antonius D. T.",
+      "Tri Wibisono",
+      "Antonius B. S.",
+      "Raymond Hanjaya"
+    ]
+  },
+  {
+    "id": "sch-sep-04",
+    "date": "2026-09-04",
+    "displayDate": "Jumat, 04 Sep 2026",
+    "massTime": "19:00 WIB",
+    "location": "Gereja Paroki Santo Yakobus",
+    "targetTotal": 4,
+    "serverIds": [
+      "001",
+      "004",
+      "011",
+      "016"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": [],
+    "serverNames": [
+      "Gatot Christhariyono",
+      "Agustinus Cahyono",
+      "Argo Putra",
+      "Cliff P. S."
+    ]
+  },
+  {
+    "id": "sch-sep-05",
+    "date": "2026-09-05",
+    "displayDate": "Sabtu, 05 Sep 2026",
+    "massTime": "18:00 WIB",
+    "location": "Gereja Paroki Santo Yakobus",
+    "targetTotal": 17,
+    "serverIds": [
+      "003",
+      "005",
+      "027",
+      "035",
+      "038",
+      "045",
+      "046",
+      "050",
+      "051",
+      "054",
+      "086",
+      "096",
+      "149",
+      "152",
+      "160",
+      "164",
+      "166"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": [],
+    "serverNames": [
+      "Venantius Sumarmo",
+      "Andreas Y. A.",
+      "Fransiskus S. W. W.",
+      "Stevanus Budianto",
+      "Yudi Wijaya",
+      "Dionisius D. K.",
+      "Mario C. C.",
+      "Tjo Johansyah",
+      "Paulus A. J.",
+      "Ivan C. C.",
+      "Sugiharto Tanto",
+      "Laurensius R. S.",
+      "Richard Gharyanto",
+      "Jeffrey Tanuhardjo",
+      "Imanuel H. K.",
+      "Heru Wijaya",
+      "Sutedjo B. W."
+    ]
+  },
+  {
+    "id": "sch-sep-06",
+    "date": "2026-09-05",
+    "displayDate": "Sabtu, 05 Sep 2026",
+    "massTime": "18:00 WIB",
+    "location": "Kapel John Paul II",
+    "targetTotal": 9,
+    "serverIds": [
+      "020",
+      "064",
+      "071",
+      "102",
+      "145",
+      "146",
+      "158",
+      "159",
+      "168"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": [],
+    "serverNames": [
+      "Edwin A. T.",
+      "Andy u. w.",
+      "Hence A. S.",
+      "Denny S. J.",
+      "Damianus S. S.",
+      "Eddy Soedjatmiko",
+      "Rheza R. A.",
+      "Rudy Effendy",
+      "AY. H. G."
+    ]
+  },
+  {
+    "id": "sch-sep-07",
+    "date": "2026-09-06",
+    "displayDate": "Minggu, 06 Sep 2026",
+    "massTime": "06:00 WIB",
+    "location": "Gereja Paroki Santo Yakobus",
+    "targetTotal": 8,
+    "serverIds": [
+      "002",
+      "006",
+      "007",
+      "040",
+      "043",
+      "060",
+      "081",
+      "087"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": [],
+    "serverNames": [
+      "Raymundus R. A.",
+      "Paulus B. P.",
+      "Paulus L. U.",
+      "Vincent W. T.",
+      "Bambang Suprijanto",
+      "Andi w. t.",
+      "Eric Saputro",
+      "Budi Santosa"
+    ]
+  },
+  {
+    "id": "sch-sep-08",
     "date": "2026-09-06",
     "displayDate": "Minggu, 06 Sep 2026",
     "massTime": "08:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 10,
     "serverIds": [
-      "021",
-      "044",
-      "008",
-      "009",
-      "010",
-      "011",
-      "012",
-      "013",
-      "014",
-      "015"
+      "022",
+      "023",
+      "041",
+      "047",
+      "048",
+      "052",
+      "072",
+      "162",
+      "163",
+      "170"
     ],
     "status": "Scheduled",
     "attendedServerIds": [],
     "serverNames": [
-      "Adinanda C.",
-      "Dionisius K.",
-      "Sunardi",
-      "Aloysius Gholo",
-      "Gervasius Nosi",
-      "Argo Putra",
-      "Ignatius P.",
-      "Pius Paru",
-      "Donny K.",
-      "Yohanes S."
+      "Yohanes V. J.",
+      "FX J. H.",
+      "Lerenzo T. O.",
+      "Yeremia S. h.",
+      "Fredy Susanto",
+      "Jonas Angkawidjaja",
+      "Bambang Hermanto",
+      "Alexander M. P.",
+      "Fransiscus P. K. K.",
+      "Budi Santoso"
     ]
   },
   {
-    "id": "sch-sep-04",
+    "id": "sch-sep-09",
     "date": "2026-09-06",
     "displayDate": "Minggu, 06 Sep 2026",
     "massTime": "10:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 20,
+    "targetTotal": 18,
     "serverIds": [
-      "027",
-      "078",
-      "085",
-      "016",
-      "017",
-      "018",
-      "019",
-      "020",
-      "022",
-      "023",
+      "010",
+      "012",
       "024",
-      "025",
-      "026",
-      "028",
-      "029",
       "030",
       "031",
-      "032",
       "033",
-      "034"
+      "036",
+      "042",
+      "079",
+      "085",
+      "122",
+      "123",
+      "131",
+      "132",
+      "144",
+      "154",
+      "156",
+      "161"
     ],
     "status": "Scheduled",
     "attendedServerIds": [],
     "serverNames": [
-      "Fransiskus W.",
-      "Michael W.",
-      "Sugiharto Tanto",
-      "Cliff S.",
-      "Yohanes Y.",
-      "Antonis M.",
-      "Januar S.",
-      "Edwin T.",
-      "Yohanes J.",
-      "FX H.",
+      "Gervasius Nosi",
+      "Ignatius D. P.",
       "Hendra Utama",
-      "Leonardus P.",
-      "Eddy Suwanto",
-      "Tjoa T.",
-      "Hadi Santoso",
       "Andi Singgih",
-      "Victor H.",
-      "Edward S.",
-      "Henrikus H.",
-      "Stevanus B."
+      "Victor K. H.",
+      "Satrio Soetikno",
+      "Johanes I. T. S. D.",
+      "Rudy D. S.",
+      "Michael R. H. W.",
+      "Paulus Tedjadharma",
+      "FX D. I.",
+      "Fidelis Sutatyo",
+      "Stevanus T. P.",
+      "Robertus A. C.",
+      "Andreas S. H.",
+      "Ton W. T.",
+      "Adhika Wardhana",
+      "Edward S. S."
     ]
   },
   {
-    "id": "sch-sep-05",
+    "id": "sch-sep-10",
     "date": "2026-09-06",
     "displayDate": "Minggu, 06 Sep 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 18,
+    "targetTotal": 16,
     "serverIds": [
-      "049",
-      "036",
-      "037",
+      "008",
+      "009",
+      "013",
       "039",
-      "040",
-      "041",
-      "042",
-      "043",
-      "045",
-      "046",
-      "047",
-      "048",
-      "050",
-      "051",
-      "053",
-      "055",
-      "056",
-      "057"
+      "049",
+      "073",
+      "074",
+      "082",
+      "083",
+      "088",
+      "089",
+      "095",
+      "100",
+      "101",
+      "128",
+      "133"
     ],
     "status": "Scheduled",
     "attendedServerIds": [],
     "serverNames": [
-      "Tjio Johansyah",
-      "Alfred M.",
-      "Yudi Wijaya",
-      "Vincent T.",
-      "Lorenzo O.",
-      "Rudy S.",
-      "Bambang S.",
-      "Sebastianus H.",
-      "Mario C.",
-      "Yeremia H.",
-      "Fredy W.",
-      "Tjandra S.",
-      "Paulus J.",
-      "Jonas A.",
-      "Ivan C.",
-      "Agustinus S.",
-      "Antonius T.",
-      "Andrew L."
+      "Sunardi",
+      "Aloysius Gholo",
+      "Pius Paru",
+      "Agustinus R. W.",
+      "Widjanarko Tjandra",
+      "Sonny S. S.",
+      "Albert Sidharta",
+      "Bambang Purnomo",
+      "Rudianto Hartanta",
+      "Michael Kristanto",
+      "Raymond Michael",
+      "Yohanes A. K.",
+      "Gunarjo Tanurijanto",
+      "Wongso Budi",
+      "Leo W. L.",
+      "Febrianto D. I."
     ]
   },
   {
-    "id": "sch-sep-06",
+    "id": "sch-sep-11",
+    "date": "2026-09-08",
+    "displayDate": "Selasa, 08 Sep 2026",
+    "massTime": "18:00 WIB",
+    "location": "Kapel John Paul II",
+    "targetTotal": 1,
+    "serverIds": [
+      "023"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": [],
+    "serverNames": [
+      "FX J. H."
+    ]
+  },
+  {
+    "id": "sch-sep-12",
+    "date": "2026-09-11",
+    "displayDate": "Jumat, 11 Sep 2026",
+    "massTime": "18:00 WIB",
+    "location": "Kapel John Paul II",
+    "targetTotal": 1,
+    "serverIds": [
+      "020"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": [],
+    "serverNames": [
+      "Edwin A. T."
+    ]
+  },
+  {
+    "id": "sch-sep-13",
     "date": "2026-09-12",
     "displayDate": "Sabtu, 12 Sep 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 16,
+    "targetTotal": 14,
     "serverIds": [
-      "052",
-      "111",
-      "058",
-      "059",
-      "060",
-      "061",
-      "062",
+      "025",
+      "026",
+      "034",
+      "048",
+      "054",
       "064",
-      "065",
-      "066",
-      "067",
-      "068",
-      "069",
-      "070",
-      "071",
-      "072"
+      "094",
+      "106",
+      "136",
+      "137",
+      "138",
+      "144",
+      "147",
+      "165"
     ],
     "status": "Scheduled",
     "attendedServerIds": [],
     "serverNames": [
-      "Edward L.",
-      "Handi Wirajaya",
-      "Bambang Susilo",
-      "Tri Wibisono",
-      "Andi T.",
-      "Stevanus H.",
-      "Rizal Kristanto",
-      "Andy W.",
-      "Bambang Budiono",
-      "Berce A.",
-      "Raymond Hanjaya",
-      "Untung Sutikno",
-      "Kornelis Sai",
-      "Nio Eko Susilo",
-      "Hence S.",
-      "Bambang H."
+      "Leonardus c. a. p.",
+      "Eddy Suwanto",
+      "Henrikus H. A. H.",
+      "Fredy Susanto",
+      "Ivan C. C.",
+      "Andy u. w.",
+      "Fx T. S.",
+      "Jap Y. B.",
+      "Mikael Nono",
+      "Berti A. H.",
+      "William A. D. J.",
+      "Andreas S. H.",
+      "Bayu",
+      "Winardi Hartambang"
     ]
   },
   {
-    "id": "sch-sep-07",
+    "id": "sch-sep-14",
     "date": "2026-09-13",
     "displayDate": "Minggu, 13 Sep 2026",
     "massTime": "06:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 8,
     "serverIds": [
-      "054",
-      "073",
-      "074",
-      "075",
-      "076",
-      "077",
-      "079",
-      "080"
+      "007",
+      "038",
+      "044",
+      "047",
+      "070",
+      "090",
+      "163",
+      "167"
     ],
     "status": "Scheduled",
     "attendedServerIds": [],
     "serverNames": [
-      "Hartanto C.",
-      "Sonny S.",
-      "Albert Sidharta",
-      "Stevanus S.",
-      "Ferdyanto Salim",
-      "Yohanes Gunawan",
-      "Tandra Gunawan",
-      "Eric Saputro"
+      "Paulus L. U.",
+      "Yudi Wijaya",
+      "Sebastianus N. H.",
+      "Yeremia S. h.",
+      "Nio E. S.",
+      "Hanjaya Kurniawan",
+      "Fransiscus P. K. K.",
+      "Chen L. A."
     ]
   },
   {
-    "id": "sch-sep-08",
+    "id": "sch-sep-15",
     "date": "2026-09-13",
     "displayDate": "Minggu, 13 Sep 2026",
     "massTime": "08:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 10,
+    "targetTotal": 9,
     "serverIds": [
-      "054",
-      "081",
-      "082",
-      "083",
-      "084",
-      "086",
-      "087",
-      "088",
-      "090",
-      "091"
+      "001",
+      "004",
+      "011",
+      "012",
+      "039",
+      "056",
+      "058",
+      "097",
+      "168"
     ],
     "status": "Scheduled",
     "attendedServerIds": [],
     "serverNames": [
-      "Hartanto C.",
-      "Bambang Purnomo",
-      "Rudianto H.",
-      "Soehadi",
-      "Paulus T.",
-      "Budi Santosa",
-      "Michael K.",
-      "Raymond Michael",
-      "Joseph R.",
-      "Tjetjep O."
+      "Gatot Christhariyono",
+      "Agustinus Cahyono",
+      "Argo Putra",
+      "Ignatius D. P.",
+      "Agustinus R. W.",
+      "Antonius D. T.",
+      "Bambang susilo",
+      "Irwan Afandi",
+      "AY. H. G."
     ]
   },
   {
-    "id": "sch-sep-09",
+    "id": "sch-sep-16",
     "date": "2026-09-13",
     "displayDate": "Minggu, 13 Sep 2026",
     "massTime": "10:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 20,
+    "targetTotal": 18,
     "serverIds": [
-      "097",
-      "098",
-      "112",
-      "092",
-      "093",
-      "094",
-      "095",
+      "005",
+      "015",
+      "028",
+      "033",
+      "051",
+      "052",
+      "068",
+      "078",
+      "086",
       "096",
-      "099",
-      "100",
-      "101",
-      "102",
-      "103",
-      "104",
-      "105",
-      "107",
-      "108",
-      "109",
-      "110",
-      "113"
+      "122",
+      "126",
+      "128",
+      "134",
+      "142",
+      "151",
+      "153",
+      "161"
     ],
     "status": "Scheduled",
     "attendedServerIds": [],
     "serverNames": [
-      "Budi Purnomo",
-      "Alex Santoso",
-      "Aloysius L.",
-      "Widyanto W.",
-      "FX S.",
-      "Yohanes K.",
-      "Laurensius S.",
-      "Irwan Afandi",
-      "Gunarjo T.",
-      "Wongso Budi",
-      "Denny J.",
-      "Wey Tjoendianto",
-      "Tanuddin Rustan",
-      "Mikael P.",
-      "Jap B.",
-      "Hanip K.",
-      "Robert R.",
-      "Yonathan H.",
-      "Sonny Widjaja",
-      "Willy Setiawan"
+      "Andreas Y. A.",
+      "Yohanes H. S.",
+      "Tjoa Tjandrapradja",
+      "Satrio Soetikno",
+      "Paulus A. J.",
+      "Jonas Angkawidjaja",
+      "Untung Sutikno",
+      "Yohanes Gunawan",
+      "Sugiharto Tanto",
+      "Laurensius R. S.",
+      "FX D. I.",
+      "Silvester A. R. P.",
+      "Leo W. L.",
+      "Petrus Y. s.",
+      "Eka Sisario",
+      "Iwan Sutanto",
+      "Agustinus D. S.",
+      "Edward S. S."
     ]
   },
   {
-    "id": "sch-sep-10",
+    "id": "sch-sep-17",
+    "date": "2026-09-13",
+    "displayDate": "Minggu, 13 Sep 2026",
+    "massTime": "17:00 WIB",
+    "location": "Kapel John Paul II",
+    "targetTotal": 12,
+    "serverIds": [
+      "077",
+      "085",
+      "098",
+      "099",
+      "105",
+      "140",
+      "145",
+      "156",
+      "157",
+      "162",
+      "169",
+      "170"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": [],
+    "serverNames": [
+      "Ferdyanto Salim",
+      "Paulus Tedjadharma",
+      "Budi Purnomo",
+      "Alex Santoso",
+      "Mikael H. P.",
+      "Alexander Sukarliono",
+      "Damianus S. S.",
+      "Adhika Wardhana",
+      "Vincentius F. L.",
+      "Alexander M. P.",
+      "Donni Anwar",
+      "Budi Santoso"
+    ]
+  },
+  {
+    "id": "sch-sep-18",
     "date": "2026-09-13",
     "displayDate": "Minggu, 13 Sep 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 18,
+    "targetTotal": 16,
     "serverIds": [
-      "089",
-      "124",
-      "125",
-      "114",
-      "115",
-      "116",
-      "117",
-      "118",
-      "119",
-      "120",
-      "121",
-      "122",
+      "008",
+      "018",
+      "019",
+      "023",
+      "029",
+      "076",
+      "080",
+      "082",
+      "092",
+      "093",
+      "104",
       "123",
-      "126",
       "127",
-      "128",
-      "129",
-      "130"
+      "132",
+      "141",
+      "143"
     ],
     "status": "Scheduled",
     "attendedServerIds": [],
     "serverNames": [
-      "Hanjaya K.",
-      "Julius P.",
-      "Donatus P.",
-      "Nicolas N.",
-      "Effendy L.",
-      "Franciscus W.",
-      "Nikolas Andrew",
-      "Edwin Pribadi",
-      "Monas Tjahjono",
-      "Juliadi Widjaja",
-      "Roy Andinata",
-      "FX K.",
-      "Fidelis S.",
-      "Silvester P.",
-      "Hadrianus S.",
-      "Leo L.",
-      "Johanes N.",
-      "Alexander C."
+      "Sunardi",
+      "Antonis B. M.",
+      "Januar D. S.",
+      "FX J. H.",
+      "Hadi Santoso",
+      "Hary Suwanda",
+      "Tandra Gunawan",
+      "Bambang Purnomo",
+      "Tjetjep T. O.",
+      "Widyanto S. W.",
+      "Tanuddin Rustan",
+      "Fidelis Sutatyo",
+      "Nadianus Sukaryadi",
+      "Robertus A. C.",
+      "Bona v. Y. S.",
+      "Stefanus C. T."
     ]
   },
   {
-    "id": "sch-sep-11",
+    "id": "sch-sep-19",
+    "date": "2026-09-15",
+    "displayDate": "Selasa, 15 Sep 2026",
+    "massTime": "18:00 WIB",
+    "location": "Kapel John Paul II",
+    "targetTotal": 1,
+    "serverIds": [
+      "021"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": [],
+    "serverNames": [
+      "Adinanda Condrowibowo"
+    ]
+  },
+  {
+    "id": "sch-sep-20",
+    "date": "2026-09-18",
+    "displayDate": "Jumat, 18 Sep 2026",
+    "massTime": "18:00 WIB",
+    "location": "Kapel John Paul II",
+    "targetTotal": 1,
+    "serverIds": [
+      "026"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": [],
+    "serverNames": [
+      "Eddy Suwanto"
+    ]
+  },
+  {
+    "id": "sch-sep-21",
     "date": "2026-09-19",
     "displayDate": "Sabtu, 19 Sep 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 16,
     "serverIds": [
-      "145",
-      "131",
+      "009",
+      "017",
+      "037",
+      "053",
+      "055",
+      "060",
+      "084",
+      "102",
+      "122",
+      "125",
+      "126",
       "132",
-      "133",
-      "134",
-      "135",
       "136",
-      "137",
-      "138",
-      "139",
-      "140",
-      "141",
-      "142",
-      "143",
-      "144",
-      "146"
+      "150",
+      "152",
+      "166"
     ],
     "status": "Scheduled",
     "attendedServerIds": [],
     "serverNames": [
-      "Damianus S.",
-      "Stevanus P.",
-      "Robertus C.",
-      "Febrianto I.",
-      "Petrus S.",
-      "Dominikus Asas",
-      "Mikael Mana",
-      "Berti N.",
-      "William J.",
-      "Severus Senjaya",
-      "Alexander S.",
-      "Bona S.",
-      "Reo Sinarta",
-      "Stefanus T.",
-      "Andreas H.",
-      "Eddy S."
+      "Aloysius Gholo",
+      "Yohanes A. Y.",
+      "Alfred S. M.",
+      "Edward Luntungan",
+      "Hartanto Chandra",
+      "Andi w. t.",
+      "Soehadi",
+      "Denny S. J.",
+      "FX D. I.",
+      "Donatus S. T. P.",
+      "Silvester A. R. P.",
+      "Robertus A. C.",
+      "Mikael Nono",
+      "Yohanes K. H.",
+      "Jeffrey Tanuhardjo",
+      "Sutedjo B. W."
     ]
   },
   {
-    "id": "sch-sep-12",
+    "id": "sch-sep-22",
+    "date": "2026-09-19",
+    "displayDate": "Sabtu, 19 Sep 2026",
+    "massTime": "18:00 WIB",
+    "location": "Kapel John Paul II",
+    "targetTotal": 14,
+    "serverIds": [
+      "046",
+      "057",
+      "061",
+      "067",
+      "089",
+      "090",
+      "091",
+      "097",
+      "103",
+      "138",
+      "139",
+      "147",
+      "148",
+      "158"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": [],
+    "serverNames": [
+      "Mario C. C.",
+      "Andrew F. L.",
+      "Stevanus L. H.",
+      "Raymond Hanjaya",
+      "Raymond Michael",
+      "Hanjaya Kurniawan",
+      "Joseph T. R.",
+      "Irwan Afandi",
+      "Wey Tjoendianto",
+      "William A. D. J.",
+      "Severus senjoyo",
+      "Bayu",
+      "Fredy T. P.",
+      "Rheza R. A."
+    ]
+  },
+  {
+    "id": "sch-sep-23",
     "date": "2026-09-20",
     "displayDate": "Minggu, 20 Sep 2026",
     "massTime": "06:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 8,
+    "targetTotal": 7,
     "serverIds": [
-      "054",
-      "145",
-      "147",
-      "148",
-      "149",
-      "150",
-      "151",
-      "152"
+      "002",
+      "003",
+      "032",
+      "045",
+      "082",
+      "137",
+      "165"
     ],
     "status": "Scheduled",
     "attendedServerIds": [],
     "serverNames": [
-      "Hartanto C.",
-      "Damianus S.",
-      "Bayu",
-      "Fredy P.",
-      "Richard D.",
-      "Yohanes H.",
-      "Irwan Sutanto",
-      "Jeffrey T."
+      "Raymundus R. A.",
+      "Venantius Sumarmo",
+      "Edward Kusuma",
+      "Dionisius D. K.",
+      "Bambang Purnomo",
+      "Berti A. H.",
+      "Winardi Hartambang"
     ]
   },
   {
-    "id": "sch-sep-13",
+    "id": "sch-sep-24",
     "date": "2026-09-20",
     "displayDate": "Minggu, 20 Sep 2026",
     "massTime": "08:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 10,
     "serverIds": [
-      "153",
+      "006",
+      "015",
+      "016",
+      "033",
+      "058",
+      "068",
+      "130",
+      "131",
       "154",
-      "155",
-      "156",
-      "157",
-      "158",
-      "159",
-      "160",
-      "161",
-      "162"
+      "164"
     ],
     "status": "Scheduled",
     "attendedServerIds": [],
     "serverNames": [
-      "Agustinus S.",
-      "Tan T.",
-      "Eko K.",
-      "Adhika Wardhana",
-      "Vincentius L.",
-      "Rheza A.",
-      "Rudy Effendy",
-      "Emanuel R.",
-      "Edward S.",
-      "Alexander P."
+      "Paulus B. P.",
+      "Yohanes H. S.",
+      "Cliff P. S.",
+      "Satrio Soetikno",
+      "Bambang susilo",
+      "Untung Sutikno",
+      "Alexander B. C.",
+      "Stevanus T. P.",
+      "Ton W. T.",
+      "Heru Wijaya"
     ]
   },
   {
-    "id": "sch-sep-14",
+    "id": "sch-sep-25",
     "date": "2026-09-20",
     "displayDate": "Minggu, 20 Sep 2026",
     "massTime": "10:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 20,
+    "targetTotal": 18,
     "serverIds": [
-      "163",
-      "164",
-      "165",
-      "166",
-      "167",
-      "168",
-      "169",
-      "170",
-      "001",
-      "002",
-      "003",
-      "004",
-      "005",
-      "006",
-      "007",
-      "008",
-      "009",
-      "010",
       "011",
-      "012"
+      "022",
+      "070",
+      "075",
+      "076",
+      "077",
+      "087",
+      "094",
+      "095",
+      "100",
+      "129",
+      "133",
+      "141",
+      "143",
+      "146",
+      "155",
+      "159",
+      "167"
     ],
     "status": "Scheduled",
     "attendedServerIds": [],
     "serverNames": [
-      "Fransiscus K.",
-      "Heru Wijaya",
-      "Winardi H.",
-      "Sukotjo Budiono",
-      "Wonodihardjo",
-      "Chen Lin Andrew",
-      "AY. G.",
-      "Donni Anwar",
-      "Gatot C.",
-      "Raymundus A.",
-      "Venantius S.",
-      "Agustinus C.",
-      "Andreas A.",
-      "Paulus P.",
-      "Paulus U.",
-      "Sunardi",
-      "Aloysius Gholo",
-      "Gervasius Nosi",
       "Argo Putra",
-      "Ignatius P."
+      "Yohanes V. J.",
+      "Nio E. S.",
+      "Stevanus",
+      "Hary Suwanda",
+      "Ferdyanto Salim",
+      "Budi Santosa",
+      "Fx T. S.",
+      "Yohanes A. K.",
+      "Gunarjo Tanurijanto",
+      "Johanes E. S. N.",
+      "Febrianto D. I.",
+      "Bona v. Y. S.",
+      "Stefanus C. T.",
+      "Eddy Soedjatmiko",
+      "Eko G. K.",
+      "Rudy Effendy",
+      "Chen L. A."
     ]
   },
   {
-    "id": "sch-sep-15",
+    "id": "sch-sep-26",
     "date": "2026-09-20",
     "displayDate": "Minggu, 20 Sep 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 18,
+    "targetTotal": 16,
     "serverIds": [
-      "089",
-      "137",
-      "138",
-      "143",
+      "004",
+      "005",
       "013",
-      "014",
-      "015",
-      "016",
-      "017",
-      "018",
-      "019",
-      "020",
-      "022",
-      "023",
-      "024",
-      "025",
-      "026",
-      "028"
+      "030",
+      "066",
+      "072",
+      "080",
+      "081",
+      "088",
+      "092",
+      "099",
+      "127",
+      "135",
+      "140",
+      "145",
+      "153"
     ],
     "status": "Scheduled",
     "attendedServerIds": [],
     "serverNames": [
-      "Hanjaya K.",
-      "Berti N.",
-      "William J.",
-      "Stefanus T.",
+      "Agustinus Cahyono",
+      "Andreas Y. A.",
       "Pius Paru",
-      "Donny K.",
-      "Yohanes S.",
-      "Cliff S.",
-      "Yohanes Y.",
-      "Antonis M.",
-      "Januar S.",
-      "Edwin T.",
-      "Yohanes J.",
-      "FX H.",
-      "Hendra Utama",
-      "Leonardus P.",
-      "Eddy Suwanto",
-      "Tjoa T."
+      "Andi Singgih",
+      "Berce s. a.",
+      "Bambang Hermanto",
+      "Tandra Gunawan",
+      "Eric Saputro",
+      "Michael Kristanto",
+      "Tjetjep T. O.",
+      "Alex Santoso",
+      "Nadianus Sukaryadi",
+      "Dominikus Anas",
+      "Alexander Sukarliono",
+      "Damianus S. S.",
+      "Agustinus D. S."
     ]
   },
   {
-    "id": "sch-sep-16",
+    "id": "sch-sep-27",
+    "date": "2026-09-22",
+    "displayDate": "Selasa, 22 Sep 2026",
+    "massTime": "18:00 WIB",
+    "location": "Kapel John Paul II",
+    "targetTotal": 1,
+    "serverIds": [
+      "024"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": [],
+    "serverNames": [
+      "Hendra Utama"
+    ]
+  },
+  {
+    "id": "sch-sep-28",
+    "date": "2026-09-25",
+    "displayDate": "Jumat, 25 Sep 2026",
+    "massTime": "18:00 WIB",
+    "location": "Kapel John Paul II",
+    "targetTotal": 1,
+    "serverIds": [
+      "025"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": [],
+    "serverNames": [
+      "Leonardus c. a. p."
+    ]
+  },
+  {
+    "id": "sch-sep-29",
     "date": "2026-09-26",
     "displayDate": "Sabtu, 26 Sep 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 16,
     "serverIds": [
-      "149",
-      "150",
-      "029",
-      "030",
-      "031",
-      "032",
-      "033",
-      "034",
-      "036",
-      "037",
-      "039",
-      "040",
-      "041",
       "042",
       "043",
-      "045"
+      "049",
+      "053",
+      "078",
+      "079",
+      "101",
+      "103",
+      "104",
+      "134",
+      "139",
+      "143",
+      "148",
+      "149",
+      "150",
+      "151"
     ],
     "status": "Scheduled",
     "attendedServerIds": [],
     "serverNames": [
-      "Richard D.",
-      "Yohanes H.",
-      "Hadi Santoso",
-      "Andi Singgih",
-      "Victor H.",
-      "Edward S.",
-      "Henrikus H.",
-      "Stevanus B.",
-      "Alfred M.",
-      "Yudi Wijaya",
-      "Vincent T.",
-      "Lorenzo O.",
-      "Rudy S.",
-      "Bambang S.",
-      "Sebastianus H.",
-      "Mario C."
+      "Rudy D. S.",
+      "Bambang Suprijanto",
+      "Widjanarko Tjandra",
+      "Edward Luntungan",
+      "Yohanes Gunawan",
+      "Michael R. H. W.",
+      "Wongso Budi",
+      "Wey Tjoendianto",
+      "Tanuddin Rustan",
+      "Petrus Y. s.",
+      "Severus senjoyo",
+      "Stefanus C. T.",
+      "Fredy T. P.",
+      "Richard Gharyanto",
+      "Yohanes K. H.",
+      "Iwan Sutanto"
     ]
   },
   {
-    "id": "sch-sep-17",
+    "id": "sch-sep-30",
     "date": "2026-09-27",
     "displayDate": "Minggu, 27 Sep 2026",
     "massTime": "06:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 8,
     "serverIds": [
-      "046",
-      "047",
-      "048",
-      "050",
-      "051",
-      "053",
-      "055",
-      "056"
+      "016",
+      "031",
+      "035",
+      "057",
+      "071",
+      "091",
+      "155",
+      "160"
     ],
     "status": "Scheduled",
     "attendedServerIds": [],
     "serverNames": [
-      "Yeremia H.",
-      "Fredy W.",
-      "Tjandra S.",
-      "Paulus J.",
-      "Jonas A.",
-      "Ivan C.",
-      "Agustinus S.",
-      "Antonius T."
+      "Cliff P. S.",
+      "Victor K. H.",
+      "Stevanus Budianto",
+      "Andrew F. L.",
+      "Hence A. S.",
+      "Joseph T. R.",
+      "Eko G. K.",
+      "Imanuel H. K."
     ]
   },
   {
-    "id": "sch-sep-18",
+    "id": "sch-sep-31",
     "date": "2026-09-27",
     "displayDate": "Minggu, 27 Sep 2026",
     "massTime": "08:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 10,
     "serverIds": [
-      "057",
-      "058",
-      "059",
-      "060",
-      "061",
-      "062",
+      "010",
+      "012",
+      "017",
+      "018",
+      "041",
+      "050",
       "064",
-      "065",
-      "066",
-      "067"
+      "085",
+      "156",
+      "168"
     ],
     "status": "Scheduled",
     "attendedServerIds": [],
     "serverNames": [
-      "Andrew L.",
-      "Bambang Susilo",
-      "Tri Wibisono",
-      "Andi T.",
-      "Stevanus H.",
-      "Rizal Kristanto",
-      "Andy W.",
-      "Bambang Budiono",
-      "Berce A.",
-      "Raymond Hanjaya"
+      "Gervasius Nosi",
+      "Ignatius D. P.",
+      "Yohanes A. Y.",
+      "Antonis B. M.",
+      "Lerenzo T. O.",
+      "Tjo Johansyah",
+      "Andy u. w.",
+      "Paulus Tedjadharma",
+      "Adhika Wardhana",
+      "AY. H. G."
     ]
   },
   {
-    "id": "sch-sep-19",
+    "id": "sch-sep-32",
     "date": "2026-09-27",
     "displayDate": "Minggu, 27 Sep 2026",
     "massTime": "10:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 20,
+    "targetTotal": 19,
     "serverIds": [
-      "163",
-      "068",
-      "069",
-      "070",
-      "071",
-      "072",
-      "073",
-      "074",
+      "003",
+      "028",
+      "058",
+      "063",
+      "065",
       "075",
-      "076",
-      "077",
-      "079",
-      "080",
-      "081",
-      "082",
-      "083",
-      "084",
-      "086",
-      "087",
-      "088"
+      "093",
+      "105",
+      "106",
+      "125",
+      "129",
+      "130",
+      "135",
+      "138",
+      "144",
+      "153",
+      "157",
+      "164",
+      "169"
     ],
     "status": "Scheduled",
     "attendedServerIds": [],
     "serverNames": [
-      "Fransiscus K.",
-      "Untung Sutikno",
-      "Kornelis Sai",
-      "Nio Eko Susilo",
-      "Hence S.",
-      "Bambang H.",
-      "Sonny S.",
-      "Albert Sidharta",
-      "Stevanus S.",
-      "Ferdyanto Salim",
-      "Yohanes Gunawan",
-      "Tandra Gunawan",
-      "Eric Saputro",
-      "Bambang Purnomo",
-      "Rudianto H.",
-      "Soehadi",
-      "Paulus T.",
-      "Budi Santosa",
-      "Michael K.",
-      "Raymond Michael"
+      "Venantius Sumarmo",
+      "Tjoa Tjandrapradja",
+      "Bambang susilo",
+      "Antonius B. S.",
+      "Bambang Budiono",
+      "Stevanus",
+      "Widyanto S. W.",
+      "Mikael H. P.",
+      "Jap Y. B.",
+      "Donatus S. T. P.",
+      "Johanes E. S. N.",
+      "Alexander B. C.",
+      "Dominikus Anas",
+      "William A. D. J.",
+      "Andreas S. H.",
+      "Agustinus D. S.",
+      "Vincentius F. L.",
+      "Heru Wijaya",
+      "Donni Anwar"
     ]
   },
   {
-    "id": "sch-sep-20",
+    "id": "sch-sep-33",
+    "date": "2026-09-27",
+    "displayDate": "Minggu, 27 Sep 2026",
+    "massTime": "17:00 WIB",
+    "location": "Kapel John Paul II",
+    "targetTotal": 13,
+    "serverIds": [
+      "021",
+      "034",
+      "036",
+      "037",
+      "040",
+      "044",
+      "059",
+      "066",
+      "070",
+      "074",
+      "146",
+      "163",
+      "170"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": [],
+    "serverNames": [
+      "Adinanda Condrowibowo",
+      "Henrikus H. A. H.",
+      "Johanes I. T. S. D.",
+      "Alfred S. M.",
+      "Vincent W. T.",
+      "Sebastianus N. H.",
+      "Tri Wibisono",
+      "Berce s. a.",
+      "Nio E. S.",
+      "Albert Sidharta",
+      "Eddy Soedjatmiko",
+      "Fransiscus P. K. K.",
+      "Budi Santoso"
+    ]
+  },
+  {
+    "id": "sch-sep-34",
     "date": "2026-09-27",
     "displayDate": "Minggu, 27 Sep 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 18,
+    "targetTotal": 17,
     "serverIds": [
-      "166",
-      "090",
-      "091",
-      "092",
-      "093",
-      "094",
-      "095",
-      "096",
-      "099",
-      "100",
-      "101",
-      "102",
-      "103",
-      "104",
-      "105",
-      "107",
-      "108",
-      "109"
+      "001",
+      "009",
+      "020",
+      "022",
+      "025",
+      "027",
+      "032",
+      "047",
+      "055",
+      "061",
+      "062",
+      "073",
+      "083",
+      "084",
+      "098",
+      "142",
+      "167"
     ],
     "status": "Scheduled",
     "attendedServerIds": [],
     "serverNames": [
-      "Sukotjo Budiono",
-      "Joseph R.",
-      "Tjetjep O.",
-      "Widyanto W.",
-      "FX S.",
-      "Yohanes K.",
-      "Laurensius S.",
-      "Irwan Afandi",
-      "Gunarjo T.",
-      "Wongso Budi",
-      "Denny J.",
-      "Wey Tjoendianto",
-      "Tanuddin Rustan",
-      "Mikael P.",
-      "Jap B.",
-      "Hanip K.",
-      "Robert R.",
-      "Yonathan H."
+      "Gatot Christhariyono",
+      "Aloysius Gholo",
+      "Edwin A. T.",
+      "Yohanes V. J.",
+      "Leonardus c. a. p.",
+      "Fransiskus S. W. W.",
+      "Edward Kusuma",
+      "Yeremia S. h.",
+      "Hartanto Chandra",
+      "Stevanus L. H.",
+      "Rizal Kristanto",
+      "Sonny S. S.",
+      "Rudianto Hartanta",
+      "Soehadi",
+      "Budi Purnomo",
+      "Eka Sisario",
+      "Chen L. A."
     ]
   }
 ];

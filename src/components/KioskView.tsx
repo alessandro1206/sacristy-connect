@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Officer, ScheduleSlot, PositionAssignment } from '../types';
 import { playAudioFeedback } from '../utils/sound';
 import { CHURCH_LOGO } from '../data/initialData';
@@ -413,6 +413,52 @@ export const KioskView: React.FC<KioskViewProps> = ({
   allSlots,
   onBackToLanding
 }) => {
+  // Dynamically map all live schedule slots to mass session choices
+  const dynamicMassSessions: MassSessionChoice[] = useMemo(() => {
+    if (!allSlots || allSlots.length === 0) return MASS_SESSIONS;
+
+    return allSlots.map(slot => {
+      const isHarian = slot.massTime.includes('18:30') || 
+                       slot.date.endsWith('-01') || 
+                       slot.date.endsWith('-03') || 
+                       slot.date.endsWith('-04') || 
+                       slot.date.endsWith('-08') || 
+                       slot.date.endsWith('-11') || 
+                       slot.date.endsWith('-15') || 
+                       slot.date.endsWith('-18') || 
+                       slot.date.endsWith('-22') || 
+                       slot.date.endsWith('-25');
+      const category: 'harian' | 'mingguan' | 'hari_raya' = isHarian ? 'harian' : 'mingguan';
+      const categoryLabel = isHarian ? 'Misa Harian / Wilayah' : 'Misa Sabtu & Minggu';
+      
+      const assignedOfficers = (slot.serverIds || [])
+        .map(id => officers.find(o => o.id === id || o.id.padStart(3, '0') === id?.padStart(3, '0')))
+        .filter((o): o is Officer => Boolean(o));
+      
+      const koorlapsList = assignedOfficers.filter(o => o.isKoorlap);
+      const koorlaps = koorlapsList.length > 0
+        ? koorlapsList.map(o => ({ id: o.id.padStart(3, '0'), name: o.name }))
+        : assignedOfficers.slice(0, 1).map(o => ({ id: o.id.padStart(3, '0'), name: o.name }));
+
+      const dayPart = slot.displayDate.split(',')[0] || 'MISA';
+      const koorlapDisplay = koorlaps.map(k => k.name).join(' & ') || 'Koorlap Bertugas';
+
+      return {
+        id: slot.id,
+        category,
+        categoryLabel,
+        dayLabel: dayPart.toUpperCase(),
+        dateDisplay: slot.displayDate,
+        timeDisplay: slot.massTime,
+        koorlaps,
+        koorlapCount: koorlaps.length,
+        koorlapDisplay,
+        location: slot.location.toUpperCase(),
+        description: `Misa ${dayPart} (${slot.serverIds.length} Petugas Terjadwal)`
+      };
+    });
+  }, [allSlots, officers]);
+
   // 4 Steps / Simulation Screens matching Google Stitch
   // 1: Pilih Jadwal & Verifikasi Koorlap
   // 2: Input No Absen Petugas (3 Digit Numpad)
@@ -425,7 +471,7 @@ export const KioskView: React.FC<KioskViewProps> = ({
 
   // Step 1 States (Verifikasi Koorlap)
   const [selectedCategoryTab, setSelectedCategoryTab] = useState<'all' | 'harian' | 'mingguan' | 'hari_raya'>('all');
-  const [selectedSession, setSelectedSession] = useState<MassSessionChoice>(MASS_SESSIONS[0]);
+  const [selectedSession, setSelectedSession] = useState<MassSessionChoice>(() => dynamicMassSessions[0] || MASS_SESSIONS[0]);
   const [koorlapId, setKoorlapId] = useState<string>(''); // No auto-fill, user selects or enters ID
   const [koorlapPassword, setKoorlapPassword] = useState<string>(''); // Requires user to fill out password/PIN!
   const [sessionAuthError, setSessionAuthError] = useState<string | null>(null);
@@ -898,7 +944,7 @@ export const KioskView: React.FC<KioskViewProps> = ({
 
               {/* Grid of Mass Schedules */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {MASS_SESSIONS.filter(s => selectedCategoryTab === 'all' || s.category === selectedCategoryTab).map(session => {
+                {dynamicMassSessions.filter(s => selectedCategoryTab === 'all' || s.category === selectedCategoryTab).map(session => {
                   const isSelected = selectedSession.id === session.id;
 
                   return (

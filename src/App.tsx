@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Officer, ScheduleSlot, SystemLog, LeaveRecord, SchedulePatternConfig, AssignmentRulesConfig, UserSession, UserRole } from './types';
 import { 
   INITIAL_OFFICERS, 
@@ -14,6 +14,7 @@ import { LandingPageView } from './components/LandingPageView';
 import { KioskView } from './components/KioskView';
 import { DashboardOverview } from './components/DashboardOverview';
 import { AdminBackoffice } from './components/AdminBackoffice';
+import { AdminScheduleManager } from './components/AdminScheduleManager';
 import { ScheduleCalendarView } from './components/ScheduleCalendarView';
 import { ServerManagementView } from './components/ServerManagementView';
 import { SystemLogsView } from './components/SystemLogsView';
@@ -23,15 +24,134 @@ import { OfficerPersonalScheduleModal } from './components/OfficerPersonalSchedu
 import { CodeExportModal } from './components/CodeExportModal';
 import { HelpModal } from './components/HelpModal';
 
+// Local storage keys for universal persistence
+const STORAGE_KEYS = {
+  OFFICERS: 'sacristy_officers_v2',
+  SCHEDULE: 'sacristy_schedule_v2',
+  LOGS: 'sacristy_logs_v2',
+  LEAVE: 'sacristy_leave_records_v2'
+};
+
 export default function App() {
-  const [officers, setOfficers] = useState<Officer[]>(INITIAL_OFFICERS);
-  const [schedule, setSchedule] = useState<ScheduleSlot[]>(INITIAL_SCHEDULE);
+  // 1. Unified state initialized from localStorage if available, falling back to initialData
+  const [officers, setOfficers] = useState<Officer[]>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.OFFICERS);
+      return saved ? JSON.parse(saved) : INITIAL_OFFICERS;
+    } catch {
+      return INITIAL_OFFICERS;
+    }
+  });
+
+  const [schedule, setSchedule] = useState<ScheduleSlot[]>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.SCHEDULE);
+      return saved ? JSON.parse(saved) : INITIAL_SCHEDULE;
+    } catch {
+      return INITIAL_SCHEDULE;
+    }
+  });
+
   const [currentSlotId, setCurrentSlotId] = useState<string>('sch-sep-01');
-  const [logs, setLogs] = useState<SystemLog[]>(INITIAL_LOGS);
-  const [leaveRecords, setLeaveRecords] = useState<LeaveRecord[]>(INITIAL_LEAVE_RECORDS);
+
+  const [logs, setLogs] = useState<SystemLog[]>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.LOGS);
+      return saved ? JSON.parse(saved) : INITIAL_LOGS;
+    } catch {
+      return INITIAL_LOGS;
+    }
+  });
+
+  const [leaveRecords, setLeaveRecords] = useState<LeaveRecord[]>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.LEAVE);
+      return saved ? JSON.parse(saved) : INITIAL_LEAVE_RECORDS;
+    } catch {
+      return INITIAL_LEAVE_RECORDS;
+    }
+  });
+
   const [patternConfig, setPatternConfig] = useState<SchedulePatternConfig>(INITIAL_PATTERN_CONFIG);
   const [rulesConfig, setRulesConfig] = useState<AssignmentRulesConfig>(INITIAL_RULES_CONFIG);
   
+  // Save to localStorage automatically on state changes
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEYS.OFFICERS, JSON.stringify(officers));
+    } catch (e) {
+      console.warn('Failed to save officers to localStorage', e);
+    }
+  }, [officers]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEYS.SCHEDULE, JSON.stringify(schedule));
+    } catch (e) {
+      console.warn('Failed to save schedule to localStorage', e);
+    }
+  }, [schedule]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEYS.LOGS, JSON.stringify(logs));
+    } catch (e) {
+      console.warn('Failed to save logs to localStorage', e);
+    }
+  }, [logs]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEYS.LEAVE, JSON.stringify(leaveRecords));
+    } catch (e) {
+      console.warn('Failed to save leave records to localStorage', e);
+    }
+  }, [leaveRecords]);
+
+  // Dynamic duty count calculation helper: Keeps officer duty count 100% in sync with active schedule slots
+  const syncOfficerDutyCounts = (newSchedule: ScheduleSlot[], prevOfficers: Officer[]): Officer[] => {
+    const counts: Record<string, number> = {};
+    newSchedule.forEach(slot => {
+      (slot.serverIds || []).forEach(sid => {
+        if (sid) {
+          const norm = sid.padStart(3, '0');
+          counts[norm] = (counts[norm] || 0) + 1;
+        }
+      });
+    });
+
+    return prevOfficers.map(o => {
+      const norm = o.id.padStart(3, '0');
+      const calculated = counts[norm] || 0;
+      return o.dutyCount !== calculated ? { ...o, dutyCount: calculated } : o;
+    });
+  };
+
+  // Schedule CRUD Handlers with automatic live officer duty count recalculation
+  const handleCreateScheduleSlot = (newSlot: ScheduleSlot) => {
+    setSchedule(prevSchedule => {
+      const updatedSchedule = [...prevSchedule, newSlot];
+      setOfficers(prevOfficers => syncOfficerDutyCounts(updatedSchedule, prevOfficers));
+      return updatedSchedule;
+    });
+  };
+
+  const handleUpdateScheduleSlot = (updatedSlot: ScheduleSlot) => {
+    setSchedule(prevSchedule => {
+      const updatedSchedule = prevSchedule.map(s => s.id === updatedSlot.id ? updatedSlot : s);
+      setOfficers(prevOfficers => syncOfficerDutyCounts(updatedSchedule, prevOfficers));
+      return updatedSchedule;
+    });
+  };
+
+  const handleDeleteScheduleSlot = (slotId: string) => {
+    setSchedule(prevSchedule => {
+      const updatedSchedule = prevSchedule.filter(s => s.id !== slotId);
+      setOfficers(prevOfficers => syncOfficerDutyCounts(updatedSchedule, prevOfficers));
+      return updatedSchedule;
+    });
+  };
+
   // Multi-level User Authentication Session State
   const [userSession, setUserSession] = useState<UserSession>({
     isAuthenticated: false,
@@ -44,11 +164,10 @@ export default function App() {
   const [pendingAdminView, setPendingAdminView] = useState<string>('admin-dashboard');
 
   // Navigation states:
-  // 'landing' | 'kiosk' | 'admin-dashboard' | 'admin-chat' | 'admin-servers' | 'admin-logs' | 'admin-reports' | 'admin-schedule' | 'schedules' | 'servers'
+  // 'landing' | 'kiosk' | 'admin-dashboard' | 'admin-chat' | 'admin-servers' | 'admin-logs' | 'admin-reports' | 'admin-schedule' | 'admin-schedule-editor' | 'schedules' | 'servers'
   const [currentView, setCurrentView] = useState<string>('landing');
   const [isCodeExportOpen, setIsCodeExportOpen] = useState<boolean>(false);
   const [isHelpOpen, setIsHelpOpen] = useState<boolean>(false);
-
 
   // Active slot for Kiosk mode
   const currentSlot = schedule.find(s => s.id === currentSlotId) || schedule[0];
@@ -65,7 +184,7 @@ export default function App() {
 
   // Helper to check if a view requires Koorlap or Admin level
   const isKoorlapOrAdminView = (view: string) => {
-    return view === 'admin-schedule' || view === 'schedules';
+    return view === 'admin-schedule' || view === 'admin-schedule-editor' || view === 'schedules';
   };
 
   // Central navigation handler with strict role-level security gate
@@ -267,6 +386,7 @@ export default function App() {
       case 'admin-chat': return 'WA Tukar Jadwal';
       case 'admin-schedule':
       case 'schedules': return 'Schedule Generator';
+      case 'admin-schedule-editor': return 'Kelola & Edit Jadwal';
       case 'admin-reports': return 'Laporan Tugas & Presensi';
       case 'admin-logs': return 'Log Sistem & Audit';
       case 'admin-servers':
@@ -375,6 +495,20 @@ export default function App() {
               onSavePatternConfig={setPatternConfig}
               onSaveRulesConfig={setRulesConfig}
               onAddLeaveRecord={handleAddLeaveRecord}
+              onAddLog={handleCalendarLog}
+              schedule={schedule}
+              onNavigate={handleNavigate}
+            />
+          )}
+
+          {/* 4b. ADMIN SCHEDULE MANAGER: Pusat Pembuatan & Pengeditan Jadwal Tugas Misa */}
+          {currentView === 'admin-schedule-editor' && (
+            <AdminScheduleManager
+              schedule={schedule}
+              officers={officers}
+              onCreateSlot={handleCreateScheduleSlot}
+              onUpdateSlot={handleUpdateScheduleSlot}
+              onDeleteSlot={handleDeleteScheduleSlot}
               onAddLog={handleCalendarLog}
             />
           )}

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Officer, LeaveRecord, SchedulePatternConfig, AssignmentRulesConfig } from '../types';
+import React, { useState, useMemo } from 'react';
+import { Officer, ScheduleSlot, LeaveRecord, SchedulePatternConfig, AssignmentRulesConfig } from '../types';
 import { 
   ChevronLeft, 
   ChevronRight, 
@@ -15,7 +15,8 @@ import {
   Check,
   Clock,
   MapPin,
-  Table as TableIcon
+  Table as TableIcon,
+  Award
 } from 'lucide-react';
 import { playAudioFeedback } from '../utils/sound';
 
@@ -24,6 +25,8 @@ interface ScheduleCalendarViewProps {
   leaveRecords: LeaveRecord[];
   patternConfig: SchedulePatternConfig;
   rulesConfig: AssignmentRulesConfig;
+  schedule?: ScheduleSlot[];
+  onNavigate?: (view: string) => void;
   onSavePatternConfig?: (config: SchedulePatternConfig) => void;
   onSaveRulesConfig?: (rules: AssignmentRulesConfig) => void;
   onAddLeaveRecord?: (leave: LeaveRecord) => void;
@@ -63,6 +66,8 @@ interface CalendarDayItem {
 export const ScheduleCalendarView: React.FC<ScheduleCalendarViewProps> = ({
   officers,
   leaveRecords,
+  schedule = [],
+  onNavigate,
   onAddLog
 }) => {
   const [selectedMonth, setSelectedMonth] = useState<string>('September 2026');
@@ -70,218 +75,73 @@ export const ScheduleCalendarView: React.FC<ScheduleCalendarViewProps> = ({
   const [isRegenerating, setIsRegenerating] = useState<boolean>(false);
   const [bannerNotice, setBannerNotice] = useState<string | null>(null);
 
-  // Month Calendar Data for September 2026 (matching official 170-officer parish schedule)
-  const [calendarDays, setCalendarDays] = useState<CalendarDayItem[]>([
-    {
-      dayNumber: 31,
-      dayName: 'Senin',
-      isCurrentMonth: false,
-      sessions: []
-    },
-    {
-      dayNumber: 1,
-      dayName: 'Selasa',
-      isCurrentMonth: true,
-      sessions: [
-        {
-          waktu: 'Sore',
-          jam: '18:00',
-          lokasi: 'Kapel 1',
-          koorlap: 'Agustinus Cahyono',
-          asisten: ['Gatot Chrishariyono']
+  // Month Calendar Data dynamically generated from live schedule database
+  const calendarDays = useMemo<CalendarDayItem[]>(() => {
+    const daysMap: Record<number, string> = {
+      0: 'Senin',
+      1: 'Selasa',
+      2: 'Rabu',
+      3: 'Kamis',
+      4: 'Jumat',
+      5: 'Sabtu',
+      6: 'Minggu'
+    };
+
+    const slotsByDay: Record<number, any[]> = {};
+    
+    if (schedule && schedule.length > 0) {
+      schedule.forEach(slot => {
+        const parts = slot.date.split('-');
+        if (parts.length === 3) {
+          const dayNum = parseInt(parts[2], 10);
+          if (!slotsByDay[dayNum]) slotsByDay[dayNum] = [];
+
+          const assignedOfficers = (slot.serverIds || [])
+            .map(id => officers.find(o => o.id === id || o.id.padStart(3, '0') === id?.padStart(3, '0')))
+            .filter((o): o is Officer => Boolean(o));
+
+          const koorlaps = assignedOfficers.filter(o => o.isKoorlap).map(o => o.shortName || o.name);
+          const asisten = assignedOfficers.filter(o => !o.isKoorlap).map(o => o.shortName || o.name);
+
+          const timeClean = slot.massTime.replace(' WIB', '').trim();
+          const hour = parseInt(timeClean.split(':')[0], 10) || 18;
+          const waktu: 'Pagi' | 'Sore' = hour < 12 ? 'Pagi' : 'Sore';
+          const lokasi: 'Gereja Utama' | 'Kapel 1' = slot.location.toLowerCase().includes('kapel') ? 'Kapel 1' : 'Gereja Utama';
+
+          slotsByDay[dayNum].push({
+            waktu,
+            jam: timeClean,
+            lokasi,
+            koorlap: koorlaps.length > 0 ? koorlaps.join(' & ') : undefined,
+            asisten: asisten.length > 0 ? asisten : assignedOfficers.map(o => o.shortName || o.name)
+          });
         }
-      ]
-    },
-    {
-      dayNumber: 2,
-      dayName: 'Rabu',
-      isCurrentMonth: true,
-      sessions: []
-    },
-    {
-      dayNumber: 3,
-      dayName: 'Kamis',
-      isCurrentMonth: true,
-      sessions: [
-        {
-          waktu: 'Malam',
-          jam: '18:30',
-          lokasi: 'Kapel 1',
-          koorlap: 'Venantius Sumarmo',
-          asisten: ['Raymundus Raimun Aso', 'Antonius Benny S.']
-        }
-      ]
-    },
-    {
-      dayNumber: 4,
-      dayName: 'Jumat',
-      isCurrentMonth: true,
-      sessions: [
-        {
-          waktu: 'Sore',
-          jam: '18:00',
-          lokasi: 'Gereja Utama',
-          koorlap: 'Bambang Budiono',
-          asisten: ['Venantius Sumarmo', 'Agustinus Cahyono', 'Aloysius Gholo'],
-          cutiList: ['Bambang Suprijanto (Cuti)']
-        }
-      ]
-    },
-    {
-      dayNumber: 5,
-      dayName: 'Sabtu',
-      isCurrentMonth: true,
-      sessions: [
-        {
-          waktu: 'Sore',
-          jam: '18:00',
-          lokasi: 'Gereja Utama',
-          koorlap: 'Johanes Ignasius Totok & Yudi Wijaya',
-          asisten: ['Venantius Sumarmo', 'Agustinus Cahyono', 'Hartanto Chandra', 'Antonius Benny S.', 'Hanjaya Kurniawan', 'Damianus Slamet Subagio', 'Antonius Wibowo']
-        }
-      ]
-    },
-    {
-      dayNumber: 6,
-      dayName: 'Minggu',
-      isCurrentMonth: true,
-      sessions: [
-        {
-          waktu: 'Pagi',
-          jam: '06:00',
-          lokasi: 'Gereja Utama',
-          koorlap: 'Agustinus Cahyono & Adinanda Condrowibowo',
-          asisten: ['Gatot Chrishariyono', 'Raymundus Raimun Aso', 'Venantius Sumarmo', 'Andreas Yoga Adhitama']
-        },
-        {
-          waktu: 'Pagi',
-          jam: '08:00',
-          lokasi: 'Gereja Utama',
-          koorlap: 'Adinanda Condrowibowo & Dionisius Donny K.',
-          asisten: ['Paulus Biodita', 'Sunardi', 'Aloysius Gholo', 'Gervasius Nosi']
-        },
-        {
-          waktu: 'Sore',
-          jam: '18:00',
-          lokasi: 'Gereja Utama',
-          koorlap: 'Tjio Johansyah',
-          asisten: ['Argo Putra', 'Ignatius Dwi P.', 'Pius Paru', 'Donny Kridayanto']
-        }
-      ]
-    },
-    {
-      dayNumber: 12,
-      dayName: 'Sabtu',
-      isCurrentMonth: true,
-      sessions: [
-        {
-          waktu: 'Sore',
-          jam: '18:00',
-          lokasi: 'Gereja Utama',
-          koorlap: 'Edward Luntungan & Handi Wirajaya',
-          asisten: ['Antonius David Tjung', 'Andrew Firmansyah L.', 'Bambang Susilo', 'Tri Wibisono']
-        }
-      ]
-    },
-    {
-      dayNumber: 13,
-      dayName: 'Minggu',
-      isCurrentMonth: true,
-      sessions: [
-        {
-          waktu: 'Pagi',
-          jam: '06:00',
-          lokasi: 'Gereja Utama',
-          koorlap: 'Hartanto Chandra',
-          asisten: ['Hence Antony S.', 'Bambang Hermanto', 'Sonny Sugiarto So']
-        },
-        {
-          waktu: 'Pagi',
-          jam: '08:00',
-          lokasi: 'Gereja Utama',
-          koorlap: 'Hartanto Chandra',
-          asisten: ['Albert Sidharta', 'Stevanus Hary S.', 'Ferdyanto Salim']
-        },
-        {
-          waktu: 'Sore',
-          jam: '18:00',
-          lokasi: 'Gereja Utama',
-          koorlap: 'Hanjaya Kurniawan & Julius Agus Prajitno',
-          asisten: ['Budi Purnomo', 'Alex Santoso', 'Aloysius Ari Senoaji L.', 'Donatus Sri Tur P.']
-        }
-      ]
-    },
-    {
-      dayNumber: 19,
-      dayName: 'Sabtu',
-      isCurrentMonth: true,
-      sessions: [
-        {
-          waktu: 'Sore',
-          jam: '18:00',
-          lokasi: 'Gereja Utama',
-          koorlap: 'Damianus Slamet Subagio',
-          asisten: ['Hanip Kartadihardja', 'Robert Roesbiyanto', 'Yonathan Himawan H.', 'Sonny Widjaja']
-        }
-      ]
-    },
-    {
-      dayNumber: 20,
-      dayName: 'Minggu',
-      isCurrentMonth: true,
-      sessions: [
-        {
-          waktu: 'Pagi',
-          jam: '06:00',
-          lokasi: 'Gereja Utama',
-          koorlap: 'Hartanto Chandra & Damianus Slamet Subagio',
-          asisten: ['Handi Wirajaya', 'Aloysius Ari Senoaji L.', 'Willy Setiawan']
-        },
-        {
-          waktu: 'Sore',
-          jam: '18:00',
-          lokasi: 'Gereja Utama',
-          koorlap: 'Hanjaya Kurniawan & Berti Albertus Nara & William Antonius D. & Stefanus Charlie T.',
-          asisten: ['Alexander Budi Cahyono', 'Stevanus Titus P.', 'Robertus Antonius C.']
-        }
-      ]
-    },
-    {
-      dayNumber: 26,
-      dayName: 'Sabtu',
-      isCurrentMonth: true,
-      sessions: [
-        {
-          waktu: 'Sore',
-          jam: '18:00',
-          lokasi: 'Gereja Utama',
-          koorlap: 'Richard Dharyanto & Yohanes Kurniawan Halim',
-          asisten: ['Severus Senjaya', 'Alexander Sukarliono', 'Bona Ventura Yohan S.']
-        }
-      ]
-    },
-    {
-      dayNumber: 27,
-      dayName: 'Minggu',
-      isCurrentMonth: true,
-      sessions: [
-        {
-          waktu: 'Pagi',
-          jam: '10:00',
-          lokasi: 'Gereja Utama',
-          koorlap: 'Fransiscus Paulus Kuncoro Kohar',
-          asisten: ['Heru Wijaya', 'Winardi Herlambang', 'Sukotjo Budiono']
-        },
-        {
-          waktu: 'Sore',
-          jam: '18:00',
-          lokasi: 'Gereja Utama',
-          koorlap: 'Sukotjo Budiono',
-          asisten: ['Wonodihardjo', 'Chen Lin Andrew', 'AY. Happy Gunawarman', 'Donni Anwar']
-        }
-      ]
+      });
     }
-  ]);
+
+    const days: CalendarDayItem[] = [];
+    days.push({ dayNumber: 30, dayName: 'Minggu', isCurrentMonth: false, sessions: [] });
+    days.push({ dayNumber: 31, dayName: 'Senin', isCurrentMonth: false, sessions: [] });
+
+    for (let d = 1; d <= 30; d++) {
+      const dt = new Date(2026, 8, d); // 8 is September
+      const dayIdx = dt.getDay(); // 0 is Sunday
+      const mappedIdx = dayIdx === 0 ? 6 : dayIdx - 1;
+      const dayName = daysMap[mappedIdx] || 'Minggu';
+      days.push({
+        dayNumber: d,
+        dayName,
+        isCurrentMonth: true,
+        sessions: slotsByDay[d] || []
+      });
+    }
+
+    days.push({ dayNumber: 1, dayName: 'Kamis', isCurrentMonth: false, sessions: [] });
+    days.push({ dayNumber: 2, dayName: 'Jumat', isCurrentMonth: false, sessions: [] });
+    days.push({ dayNumber: 3, dayName: 'Sabtu', isCurrentMonth: false, sessions: [] });
+
+    return days;
+  }, [schedule, officers]);
 
   // Matrix View Data for September 2026 (all 170 officers)
   const [matrixData, setMatrixData] = useState<MatrixRow[]>([
@@ -375,13 +235,28 @@ export const ScheduleCalendarView: React.FC<ScheduleCalendarViewProps> = ({
             </p>
           </div>
 
-          <button
-            onClick={handleExportReport}
-            className="px-5 py-2.5 bg-[#5B1414] hover:bg-[#450e0e] text-white text-xs font-bold rounded-xl shadow-xs transition-all uppercase tracking-wider self-start md:self-auto flex items-center gap-2"
-          >
-            <Download className="w-4 h-4" />
-            <span>EXPORT REPORT</span>
-          </button>
+          <div className="flex flex-wrap items-center gap-2 self-start md:self-auto">
+            {onNavigate && (
+              <button
+                onClick={() => {
+                  playAudioFeedback('tap');
+                  onNavigate('admin-schedule-editor');
+                }}
+                className="px-4 py-2.5 bg-amber-100 hover:bg-amber-200 border border-amber-300 text-amber-900 text-xs font-bold rounded-xl shadow-xs transition-all uppercase tracking-wider flex items-center gap-1.5 cursor-pointer"
+              >
+                <Award className="w-4 h-4 text-amber-700" />
+                <span>Kelola &amp; Edit Jadwal</span>
+              </button>
+            )}
+
+            <button
+              onClick={handleExportReport}
+              className="px-5 py-2.5 bg-[#5B1414] hover:bg-[#450e0e] text-white text-xs font-bold rounded-xl shadow-xs transition-all uppercase tracking-wider flex items-center gap-2 cursor-pointer"
+            >
+              <Download className="w-4 h-4" />
+              <span>EXPORT REPORT</span>
+            </button>
+          </div>
         </div>
 
         {/* ========================================================================= */}
