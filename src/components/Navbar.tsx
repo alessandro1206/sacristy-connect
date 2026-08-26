@@ -134,15 +134,15 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Role Badge */}
         {getRoleBadge()}
 
-        {/* Login / Switch Role Button */}
-        {onOpenLoginModal && (
+        {/* Login Button when not authenticated */}
+        {!isAuthed && onOpenLoginModal && (
           <button
             onClick={onOpenLoginModal}
             className="flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-xl text-xs font-extrabold border border-white/20 transition-colors shadow-xs cursor-pointer"
-            title="Masuk / Ganti Tingkat Akses Akun"
+            title="Masuk Akun"
           >
             <LogIn className="w-4 h-4 text-amber-300" />
-            <span className="hidden md:inline">{isAuthed ? 'Ganti Level' : 'Masuk Akun'}</span>
+            <span className="hidden md:inline">Masuk Akun</span>
           </button>
         )}
 
