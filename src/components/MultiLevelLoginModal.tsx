@@ -26,7 +26,6 @@ interface MultiLevelLoginModalProps {
   officers: Officer[];
   initialRole?: UserRole;
   targetViewLabel?: string;
-  onRegisterOfficer?: (officer: Omit<Officer, 'id' | 'shortName' | 'initials'>) => void;
 }
 
 export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({

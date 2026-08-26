@@ -560,7 +560,7 @@ export default function App() {
         </main>
       </div>
 
-      {/* Multi-Level Login Modal (Petugas, Koorlap, Admin, Register) */}
+      {/* Multi-Level Login Modal (Petugas, Koorlap, Admin) */}
       <MultiLevelLoginModal
         isOpen={isLoginModalOpen}
         onClose={() => setIsLoginModalOpen(false)}
@@ -568,7 +568,6 @@ export default function App() {
         officers={officers}
         initialRole={initialModalRole}
         targetViewLabel={getAdminViewTitle(pendingAdminView)}
-        onRegisterOfficer={handleAddOfficer}
       />
 
       {/* Officer Personal Schedule Modal (Jadwal Saya) */}
