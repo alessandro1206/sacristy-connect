@@ -2923,9 +2923,11 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Eddy Suwanto",
       "Johanes Efendi Sapto Nugroho"
     ],
-    "koorlapIds": [],
+    "koorlapIds": [
+      "002"
+    ],
     "serverRoles": [
-      "AI",
+      "KORLAP",
       "AI",
       "AI"
     ],
@@ -2962,9 +2964,11 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Januar Dwiputra Sutandi",
       "Alex Santoso"
     ],
-    "koorlapIds": [],
+    "koorlapIds": [
+      "019"
+    ],
     "serverRoles": [
-      "AI",
+      "KORLAP",
       "AI"
     ],
     "serverNotes": [
@@ -3095,9 +3099,11 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "FX Johni Hidayat",
       "Damianus Slamet Subagio"
     ],
-    "koorlapIds": [],
+    "koorlapIds": [
+      "023"
+    ],
     "serverRoles": [
-      "AI",
+      "KORLAP",
       "AI"
     ],
     "serverNotes": [
@@ -3160,23 +3166,29 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "koorlapIds": [
       "035",
-      "046"
+      "046",
+      "027",
+      "045",
+      "054",
+      "096",
+      "149",
+      "152"
     ],
     "serverRoles": [
       "AI",
+      "KORLAP",
       "AI",
-      "AI",
+      "KORLAP",
+      "KORLAP",
       "KORLAP",
       "AI",
       "KORLAP",
       "AI",
       "AI",
+      "KORLAP",
       "AI",
-      "AI",
-      "AI",
-      "AI",
-      "AI",
-      "AI",
+      "KORLAP",
+      "KORLAP",
       "AI",
       "AI"
     ],
@@ -3277,13 +3289,15 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AY. Happy Gunawanman"
     ],
     "koorlapIds": [
-      "038"
+      "038",
+      "064",
+      "071"
     ],
     "serverRoles": [
       "AI",
       "KORLAP",
-      "AI",
-      "AI",
+      "KORLAP",
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -3432,9 +3446,11 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "serverNames": [
       "Yohanes Arishka Yudarana"
     ],
-    "koorlapIds": [],
+    "koorlapIds": [
+      "017"
+    ],
     "serverRoles": [
-      "AI"
+      "KORLAP"
     ],
     "serverNotes": [
       "[Korsa RS EH]"
@@ -3480,7 +3496,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Budi Santoso"
     ],
     "koorlapIds": [
-      "022"
+      "022",
+      "072"
     ],
     "serverRoles": [
       "KORLAP",
@@ -3489,7 +3506,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "AI",
+      "KORLAP",
       "AI",
       "AI",
       "AI"
@@ -3586,7 +3603,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "koorlapIds": [
       "079",
-      "085"
+      "085",
+      "123"
     ],
     "serverRoles": [
       "AI",
@@ -3602,7 +3620,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "AI",
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -3997,9 +4015,11 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Agustinus Redy Wibisono",
       "Efendy Liobudhi"
     ],
-    "koorlapIds": [],
+    "koorlapIds": [
+      "039"
+    ],
     "serverRoles": [
-      "AI",
+      "KORLAP",
       "AI"
     ],
     "serverNotes": [
@@ -4034,9 +4054,11 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Jonas Angkawidjaja",
       "Tri Wibisono"
     ],
-    "koorlapIds": [],
+    "koorlapIds": [
+      "046"
+    ],
     "serverRoles": [
-      "AI",
+      "KORLAP",
       "AI",
       "AI"
     ],
@@ -4071,9 +4093,11 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "serverNames": [
       "Edwin Ardianto Tedjosaputro"
     ],
-    "koorlapIds": [],
+    "koorlapIds": [
+      "020"
+    ],
     "serverRoles": [
-      "AI"
+      "KORLAP"
     ],
     "serverNotes": [
       null
@@ -4102,9 +4126,11 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Stevanus Budianto",
       "Willy Setiawan"
     ],
-    "koorlapIds": [],
+    "koorlapIds": [
+      "035"
+    ],
     "serverRoles": [
-      "AI",
+      "KORLAP",
       "AI"
     ],
     "serverNotes": [
@@ -4167,7 +4193,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "koorlapIds": [
       "054",
-      "064"
+      "064",
+      "106"
     ],
     "serverRoles": [
       "AI",
@@ -4177,7 +4204,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "KORLAP",
       "KORLAP",
       "AI",
-      "AI",
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -4272,7 +4299,9 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Chen Lin Andrew"
     ],
     "koorlapIds": [
-      "090"
+      "090",
+      "139",
+      "167"
     ],
     "serverRoles": [
       "AI",
@@ -4281,8 +4310,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "KORLAP",
-      "AI",
-      "AI"
+      "KORLAP",
+      "KORLAP"
     ],
     "serverNotes": [
       null,
@@ -4330,9 +4359,11 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "serverNames": [
       "Antonis Brian Mursidi"
     ],
-    "koorlapIds": [],
+    "koorlapIds": [
+      "018"
+    ],
     "serverRoles": [
-      "AI"
+      "KORLAP"
     ],
     "serverNotes": [
       "[Korsa RS EH]"
@@ -4378,10 +4409,11 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AY. Happy Gunawanman"
     ],
     "koorlapIds": [
-      "097"
+      "097",
+      "001"
     ],
     "serverRoles": [
-      "AI",
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -4617,11 +4649,13 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Budi Santoso"
     ],
     "koorlapIds": [
-      "113"
+      "113",
+      "085",
+      "164"
     ],
     "serverRoles": [
       "AI",
-      "AI",
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -4631,7 +4665,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "AI",
+      "KORLAP",
       "AI",
       "AI"
     ],
@@ -5012,9 +5046,11 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Iwan Sutanto",
       "AY. Happy Gunawanman"
     ],
-    "koorlapIds": [],
+    "koorlapIds": [
+      "033"
+    ],
     "serverRoles": [
-      "AI",
+      "KORLAP",
       "AI",
       "AI"
     ],
@@ -5051,9 +5087,11 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Vincent Winardi Tan",
       "Stevanus Titus Purdijojo"
     ],
-    "koorlapIds": [],
+    "koorlapIds": [
+      "040"
+    ],
     "serverRoles": [
-      "AI",
+      "KORLAP",
       "AI"
     ],
     "serverNotes": [
@@ -5084,9 +5122,11 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "serverNames": [
       "Hary Suwanda"
     ],
-    "koorlapIds": [],
+    "koorlapIds": [
+      "076"
+    ],
     "serverRoles": [
-      "AI"
+      "KORLAP"
     ],
     "serverNotes": [
       "Tukar Jadwal (26) Eddy Suwanto"
@@ -5115,9 +5155,11 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Fredy Susanto",
       "Winardi Hartambang"
     ],
-    "koorlapIds": [],
+    "koorlapIds": [
+      "048"
+    ],
     "serverRoles": [
-      "AI",
+      "KORLAP",
       "AI"
     ],
     "serverNotes": [
@@ -5297,17 +5339,21 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Rheza Ricardo Alex"
     ],
     "koorlapIds": [
-      "139"
+      "139",
+      "046",
+      "089",
+      "090",
+      "097"
     ],
     "serverRoles": [
+      "KORLAP",
       "AI",
       "AI",
       "AI",
+      "KORLAP",
+      "KORLAP",
       "AI",
-      "AI",
-      "AI",
-      "AI",
-      "AI",
+      "KORLAP",
       "AI",
       "AI",
       "KORLAP",
@@ -5471,10 +5517,11 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Heru Wijaya"
     ],
     "koorlapIds": [
-      "164"
+      "164",
+      "006"
     ],
     "serverRoles": [
-      "AI",
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -5577,7 +5624,9 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "koorlapIds": [
       "022",
-      "167"
+      "167",
+      "100",
+      "143"
     ],
     "serverRoles": [
       "AI",
@@ -5589,13 +5638,13 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
+      "KORLAP",
       "AI",
       "AI",
       "AI",
       "AI",
       "AI",
-      "AI",
-      "AI",
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -5719,14 +5768,15 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "koorlapIds": [
       "072",
-      "114"
+      "114",
+      "066"
     ],
     "serverRoles": [
       "AI",
       "AI",
       "AI",
       "AI",
-      "AI",
+      "KORLAP",
       "KORLAP",
       "AI",
       "AI",
@@ -5990,11 +6040,13 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Lorenzo Tjaeyahdy Oeitomo",
       "Raymond Michael"
     ],
-    "koorlapIds": [],
+    "koorlapIds": [
+      "089"
+    ],
     "serverRoles": [
       "AI",
       "AI",
-      "AI"
+      "KORLAP"
     ],
     "serverNotes": [
       "[AI Misa Pagi]",
@@ -6029,9 +6081,11 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Paulus Agus Juwono",
       "Bona ventura Yohan Soenyoto"
     ],
-    "koorlapIds": [],
+    "koorlapIds": [
+      "051"
+    ],
     "serverRoles": [
-      "AI",
+      "KORLAP",
       "AI"
     ],
     "serverNotes": [
@@ -6062,9 +6116,11 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "serverNames": [
       "Leonardus christian adi putra"
     ],
-    "koorlapIds": [],
+    "koorlapIds": [
+      "025"
+    ],
     "serverRoles": [
-      "AI"
+      "KORLAP"
     ],
     "serverNotes": [
       null
@@ -6093,9 +6149,11 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Sonny Widjojo",
       "Eko Gunawan Kusjanto"
     ],
-    "koorlapIds": [],
+    "koorlapIds": [
+      "110"
+    ],
     "serverRoles": [
-      "AI",
+      "KORLAP",
       "AI"
     ],
     "serverNotes": [
@@ -6158,10 +6216,12 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "koorlapIds": [
       "079",
-      "149"
+      "149",
+      "038",
+      "143"
     ],
     "serverRoles": [
-      "AI",
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -6172,7 +6232,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "AI",
+      "KORLAP",
       "AI",
       "KORLAP",
       "AI",
@@ -6263,12 +6323,13 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Imanuel Herry Kosok"
     ],
     "koorlapIds": [
-      "071"
+      "071",
+      "035"
     ],
     "serverRoles": [
       "AI",
       "AI",
-      "AI",
+      "KORLAP",
       "KORLAP",
       "AI",
       "AI",
@@ -6340,7 +6401,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AY. Happy Gunawanman"
     ],
     "koorlapIds": [
-      "085"
+      "085",
+      "064"
     ],
     "serverRoles": [
       "AI",
@@ -6349,7 +6411,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "AI",
+      "KORLAP",
       "KORLAP",
       "AI",
       "AI"
@@ -6446,20 +6508,22 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "koorlapIds": [
       "106",
-      "164"
+      "164",
+      "063",
+      "125"
     ],
     "serverRoles": [
-      "AI",
-      "AI",
-      "AI",
-      "AI",
-      "AI",
       "AI",
       "AI",
       "AI",
       "KORLAP",
       "AI",
       "AI",
+      "AI",
+      "AI",
+      "KORLAP",
+      "AI",
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -6697,13 +6761,16 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "koorlapIds": [
       "027",
-      "167"
+      "167",
+      "001",
+      "022",
+      "062"
     ],
     "serverRoles": [
+      "KORLAP",
       "AI",
       "AI",
-      "AI",
-      "AI",
+      "KORLAP",
       "AI",
       "KORLAP",
       "AI",
@@ -6711,7 +6778,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "AI",
+      "KORLAP",
       "AI",
       "AI",
       "AI",
