@@ -63,28 +63,40 @@ export const AdminBackoffice: React.FC<AdminBackofficeProps> = ({
     }
   ]);
 
-  // Generic template formats for WhatsApp Tukar Jadwal (No specific names)
+  // Generic and pre-filled template formats for WhatsApp Tukar Jadwal
+  const PRESET_REAL_TUKAR = `Lapor Tukar Tugas
+
+Mikael Hengky Pratama #105 tugas tgl 13 Sept di KJP2 jam 17:00
+Tukar dgn pak Widyanto Setiawan Wijaya #092 tgl 13 Sept di Gereja jam 18:00`;
+
+  const PRESET_REAL_REPLACE = `Lapor tukar jadwal tugas :
+
+Petugas : Hadi Santoso #029
+Tugas tgl : 01 September 2026
+Misa jam : 18:00 WIB
+Lokasi : Kapel John Paul II
+
+Digantikan oleh : Soehadi #084
+Alasan : Keperluan dinas keluarga`;
+
   const PRESET_TUKAR = `Lapor Tukar Tugas
 
-[Nama Petugas 1] #[No ID 1] tugas tgl [Tanggal] di [Lokasi 1] jam [Jam 1]..
-
+Saya [Nama Petugas 1] #[No ID 1] tugas tgl [Tanggal] di [Lokasi 1] jam [Jam 1]
 Tukar dgn pak [Nama Petugas 2] #[No ID 2] tgl [Tanggal] di [Lokasi 2] jam [Jam 2]`;
 
   const PRESET_DIGANTIKAN = `Lapor tukar jadwal tugas :
 
-[Nama Petugas 1] #[No ID 1] Tugas [Lokasi] [Hari] [Tanggal] jam [Jam].
+Petugas : [Nama Petugas 1] #[No ID 1]
+Tugas tgl : [Tanggal]
+Misa jam : [Jam Misa]
+Lokasi : [Lokasi]
 
-Digantikan oleh:
-[Nama Petugas 2] #[No ID 2]
+Digantikan oleh : [Nama Petugas 2] #[No ID 2]
+Alasan : Keperluan keluarga`;
 
-Terima kasih . 🙏`;
-
-  const [inputMessage, setInputMessage] = useState<string>(
-    `Lapor Tukar Tugas\n\nPetugas A #001 tugas tgl 13 Sept di KJP2 jam 17.00..\n\nTukar dgn pak Petugas B #002 tgl 13 Sept di Gereja jam 18.00`
-  );
+  const [inputMessage, setInputMessage] = useState<string>(PRESET_REAL_TUKAR);
 
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-
 
   // Detected change state for Live Preview
   const [detectedChange, setDetectedChange] = useState<{
@@ -101,17 +113,17 @@ Terima kasih . 🙏`;
     pengganti: 'Widyanto Setiawan Wijaya (#092)',
     tanggal: '13 Sep 2026',
     jamMisa: '17:00 ⇄ 18:00 WIB',
-    lokasi: 'KJP 2 ⇄ Gereja Utama',
+    lokasi: 'Kapel (KJP 2) ⇄ Gereja Utama',
     action: 'Tukar Jadwal (Mutual Switch)',
     swapType: 'TUKAR',
-    detailNotes: 'Bpk. Hengky (#105) bertukar jadwal dari KJP 2 (17:00) dengan Bpk. Cecep Condro (#092) di Gereja Utama (18:00).'
+    detailNotes: 'Bpk. Hengky (#105) bertukar jadwal dari KJP 2 (17:00) dengan Bpk. Widyanto (#092) di Gereja Utama (18:00).'
   });
 
   // Table rows for "Jadwal Hari Ini / Rekap Tukar"
   const [todayRows, setTodayRows] = useState<TodayScheduleRow[]>([
     {
       id: 't-1',
-      jamMisa: '17:00 WIB',
+      jamMisa: '13 Sep 17:00 WIB',
       lokasi: 'Kapel (KJP 2)',
       petugasOriginal: 'Mikael Hengky Pratama (#105)',
       petugasPengganti: 'Widyanto Setiawan Wijaya (#092)',
@@ -119,16 +131,16 @@ Terima kasih . 🙏`;
     },
     {
       id: 't-2',
-      jamMisa: '18:00 WIB',
-      lokasi: 'Gereja Utama',
-      petugasOriginal: 'Wey Tjoendianto (#103)',
-      petugasPengganti: 'Gunarjo Tanurijanto (#099)',
+      jamMisa: '01 Sep 18:00 WIB',
+      lokasi: 'Kapel John Paul II',
+      petugasOriginal: 'Hadi Santoso (#029)',
+      petugasPengganti: 'Soehadi (#084)',
       status: 'Updated'
     }
   ]);
 
   const [importLogText, setImportLogText] = useState<string>(
-    'Batch #105: Berhasil memproses pertukaran jadwal (Tgl 13 Sept, Lokasi KJP2 & Gereja).'
+    'Siap memproses pesan tukar tugas grup WhatsApp.'
   );
 
   const handleProcessMessage = async () => {
@@ -139,109 +151,226 @@ Terima kasih . 🙏`;
       const text = inputMessage;
 
       // 1. Detect Swap Type: 'TUKAR' (Mutual Switch) vs 'DIGANTIKAN' (One-Way Replacement)
-      const isMutualSwap = /tukar\s+dgn|tukar\s+dengan|bertukar/i.test(text);
+      const isMutualSwap = /tukar\s+dgn|tukar\s+dengan|bertukar|saling\s+tukar/i.test(text);
       const swapType: 'TUKAR' | 'DIGANTIKAN' = isMutualSwap ? 'TUKAR' : 'DIGANTIKAN';
 
-      // 2. Extract Officer IDs (#105, #092, #103, #099, etc.)
-      const idMatches = text.match(/#(\d{1,3})/g) || [];
-      const extractedIds = idMatches.map(m => m.replace('#', '').padStart(3, '0'));
+      // 2. Extract Officer IDs (#105, #092, #103, no 105, nomor 105, etc.)
+      const idMatches = text.match(/(?:#|no\.?\s*|nomor\s*)(\d{1,3})/gi) || [];
+      const extractedIds: string[] = [];
+      idMatches.forEach(m => {
+        const num = m.replace(/[^0-9]/g, '');
+        if (num) extractedIds.push(num.padStart(3, '0'));
+      });
 
-      let officerA = officers.find(o => o.id === extractedIds[0]);
-      let officerB = officers.find(o => o.id === extractedIds[1]);
+      let officerA: Officer | undefined;
+      let officerB: Officer | undefined;
 
-      // Fallback name extraction if no #ID found
-      if (!officerA || !officerB) {
-        const nameMatches = text.match(/([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)/g) || [];
-        if (!officerA && nameMatches[0]) {
-          officerA = officers.find(o => o.name.toLowerCase().includes(nameMatches[0].toLowerCase())) || officers[0];
-        }
-        if (!officerB && nameMatches[1]) {
-          officerB = officers.find(o => o.name.toLowerCase().includes(nameMatches[1].toLowerCase())) || officers[1];
-        }
+      if (extractedIds.length >= 2) {
+        officerA = officers.find(o => parseInt(o.id, 10) === parseInt(extractedIds[0], 10));
+        officerB = officers.find(o => parseInt(o.id, 10) === parseInt(extractedIds[1], 10));
+      } else if (extractedIds.length === 1) {
+        officerA = officers.find(o => parseInt(o.id, 10) === parseInt(extractedIds[0], 10));
       }
 
-      const nameA = officerA ? `${officerA.name} (#${officerA.id.padStart(3, '0')})` : 'Petugas A';
-      const nameB = officerB ? `${officerB.name} (#${officerB.id.padStart(3, '0')})` : 'Petugas B';
+      // Name search fallback if one or both officers not identified via ID
+      const sortedOfficers = [...officers].sort((a, b) => b.name.length - a.name.length);
+      if (!officerA) {
+        officerA = sortedOfficers.find(o => 
+          text.toLowerCase().includes(o.name.toLowerCase()) || 
+          (o.shortName && o.shortName.length > 3 && text.toLowerCase().includes(o.shortName.toLowerCase()))
+        );
+      }
+      if (!officerB) {
+        officerB = sortedOfficers.find(o => 
+          o.id !== officerA?.id && (
+            text.toLowerCase().includes(o.name.toLowerCase()) || 
+            (o.shortName && o.shortName.length > 3 && text.toLowerCase().includes(o.shortName.toLowerCase()))
+          )
+        );
+      }
 
-      // 3. Extract Date (tgl 13 Sept, minggu 30 agust, etc.)
-      const dateMatch = text.match(/(?:tgl|tanggal|minggu)\s+(\d{1,2}\s+[A-Za-z]+)/i) || text.match(/(\d{1,2}\s+(?:Sept|September|Agust|Agustus|Okt|Oktober))/i);
-      const parsedDate = dateMatch ? dateMatch[1] : '13 Sept 2026';
+      if (!officerA || !officerB) {
+        alert('Mohon sebutkan dua nomor ID petugas (misal #105 dan #092) atau nama petugas yang jelas dalam pesan.');
+        setIsProcessing(false);
+        return;
+      }
+
+      const idA3 = officerA.id.padStart(3, '0');
+      const idB3 = officerB.id.padStart(3, '0');
+      const nameA = `${officerA.name} (#${idA3})`;
+      const nameB = `${officerB.name} (#${idB3})`;
+
+      // 3. Extract Date (tgl 13 Sept, 01 September, etc.)
+      const dateNumMatch = text.match(/(?:tgl|tanggal|hari)?\s*0?(\d{1,2})\s*(?:sept|sep|september|agust|okt)?/i);
+      const parsedDayNum = dateNumMatch ? parseInt(dateNumMatch[1], 10) : null;
+      const parsedDate = parsedDayNum ? `${parsedDayNum} Sep 2026` : '13 Sep 2026';
 
       // 4. Extract Location (KJP, KJP2, Gereja, Kapel)
       let lokasiA = 'Gereja Utama';
       if (/kjp2|kjp 2/i.test(text)) lokasiA = 'Kapel (KJP 2)';
       else if (/kjp1|kjp 1|kjp/i.test(text)) lokasiA = 'Kapel (KJP)';
-      else if (/kapel/i.test(text)) lokasiA = 'Kapel Paroki';
+      else if (/kapel/i.test(text)) lokasiA = 'Kapel John Paul II';
 
       let lokasiB = lokasiA;
       if (/di Gereja|Gereja Utama/i.test(text)) lokasiB = 'Gereja Utama';
-      else if (/di KJP|di Kapel/i.test(text)) lokasiB = 'Kapel (KJP)';
+      else if (/di KJP|di Kapel/i.test(text)) lokasiB = 'Kapel John Paul II';
 
       // 5. Extract Times (17.00, 18.00, 06:00, etc.)
       const timeMatches = text.match(/(\d{1,2}[:.]\d{2})/g) || [];
-      const timeA = timeMatches[0] ? timeMatches[0].replace('.', ':') + ' WIB' : '18:00 WIB';
-      const timeB = timeMatches[1] ? timeMatches[1].replace('.', ':') + ' WIB' : timeA;
+      const timeA = timeMatches[0] ? timeMatches[0].replace('.', ':') : '';
+      const timeB = timeMatches[1] ? timeMatches[1].replace('.', ':') : timeA;
 
       const actionLabel = swapType === 'TUKAR' ? 'Tukar Jadwal (Mutual Switch)' : 'Digantikan (One-Way Replacement)';
-      const detailNotes = swapType === 'TUKAR'
-        ? `${nameA} (${lokasiA}, ${timeA}) bertukar jadwal Misa tgl ${parsedDate} dengan ${nameB} (${lokasiB}, ${timeB}).`
-        : `${nameA} (${lokasiA}, ${timeA}) tidak bisa bertugas, digantikan oleh ${nameB}.`;
 
-      // 6. Update Live Preview Box
+      // Helper functions for matching slots
+      const hasOfficerInSlot = (slot: ScheduleSlot, targetId: string) => {
+        return (slot.serverIds || []).some(sid => sid && parseInt(sid, 10) === parseInt(targetId, 10));
+      };
+
+      const slotMatchesDate = (slot: ScheduleSlot, dayNum: number | null) => {
+        if (!dayNum) return true;
+        const parts = slot.date.split('-');
+        if (parts.length === 3) {
+          return parseInt(parts[2], 10) === dayNum;
+        }
+        return slot.displayDate.includes(String(dayNum));
+      };
+
+      const slotMatchesTime = (slot: ScheduleSlot, timeStr: string) => {
+        if (!timeStr) return true;
+        return slot.massTime.replace(' WIB', '').trim().includes(timeStr);
+      };
+
+      // 6. Find target schedule slots to modify
+      let slotA = schedule.find(s => hasOfficerInSlot(s, idA3) && slotMatchesDate(s, parsedDayNum) && (timeA ? slotMatchesTime(s, timeA) : true));
+      if (!slotA) {
+        slotA = schedule.find(s => hasOfficerInSlot(s, idA3) && slotMatchesDate(s, parsedDayNum));
+      }
+      if (!slotA) {
+        slotA = schedule.find(s => hasOfficerInSlot(s, idA3));
+      }
+
+      let slotB: ScheduleSlot | undefined;
+      if (swapType === 'TUKAR') {
+        slotB = schedule.find(s => hasOfficerInSlot(s, idB3) && slotMatchesDate(s, parsedDayNum) && (timeB ? slotMatchesTime(s, timeB) : true) && s.id !== slotA?.id);
+        if (!slotB) {
+          slotB = schedule.find(s => hasOfficerInSlot(s, idB3) && s.id !== slotA?.id);
+        }
+      }
+
+      const effectiveTimeA = slotA ? slotA.massTime : (timeA ? `${timeA} WIB` : '17:00 WIB');
+      const effectiveTimeB = slotB ? slotB.massTime : (timeB ? `${timeB} WIB` : effectiveTimeA);
+      const effectiveLocA = slotA ? slotA.location : lokasiA;
+      const effectiveLocB = slotB ? slotB.location : lokasiB;
+
+      const detailNotes = swapType === 'TUKAR'
+        ? `${nameA} (${effectiveLocA}, ${effectiveTimeA}) bertukar jadwal dengan ${nameB} (${effectiveLocB}, ${effectiveTimeB}).`
+        : `${nameA} (${effectiveLocA}, ${effectiveTimeA}) berhalangan, digantikan oleh ${nameB}.`;
+
+      // 7. Update Live Preview Box
       setDetectedChange({
         original: nameA,
         pengganti: nameB,
-        tanggal: parsedDate,
-        jamMisa: swapType === 'TUKAR' ? `${timeA} ⇄ ${timeB}` : timeA,
-        lokasi: swapType === 'TUKAR' ? `${lokasiA} ⇄ ${lokasiB}` : lokasiA,
+        tanggal: slotA ? slotA.displayDate : parsedDate,
+        jamMisa: swapType === 'TUKAR' ? `${effectiveTimeA} ⇄ ${effectiveTimeB}` : effectiveTimeA,
+        lokasi: swapType === 'TUKAR' ? `${effectiveLocA} ⇄ ${effectiveLocB}` : effectiveLocA,
         action: actionLabel,
         swapType,
         detailNotes
       });
 
-      // 7. Apply Changes to Real Schedule State (onUpdateSchedule)
+      // 8. Apply Changes to Real Schedule State
+      let modifiedSlotsCount = 0;
       if (schedule && schedule.length > 0) {
         const updatedSchedule = schedule.map(slot => {
-          if (swapType === 'DIGANTIKAN') {
-            if (officerA && officerB && slot.serverIds.includes(officerA.id)) {
-              const newServerIds = slot.serverIds.map(id => id === officerA!.id ? officerB!.id : id);
-              const newServerNames = slot.serverNames.map(n => n === officerA!.shortName || n === officerA!.name ? officerB!.shortName : n);
+          // Mutate Slot A: Replace Officer A with Officer B
+          if (slotA && slot.id === slotA.id) {
+            const idx = (slot.serverIds || []).findIndex(sid => sid && parseInt(sid, 10) === parseInt(idA3, 10));
+            if (idx !== -1) {
+              modifiedSlotsCount++;
+              const newServerIds = [...slot.serverIds];
+              const newServerNames = [...slot.serverNames];
+              const newIsSubstituted = [...(slot.isSubstituted || new Array(newServerIds.length).fill(false))];
+              const newOriginalNames = [...(slot.originalServerNames || [...slot.serverNames])];
+              const newServerNotes = [...(slot.serverNotes || new Array(newServerIds.length).fill(null))];
+              const newKoorlapIds = [...(slot.koorlapIds || [])];
+
+              newServerIds[idx] = idB3;
+              newServerNames[idx] = officerB!.name;
+              newIsSubstituted[idx] = true;
+              newOriginalNames[idx] = officerA!.name;
+              newServerNotes[idx] = swapType === 'TUKAR' 
+                ? `(Tukar: #${idA3})` 
+                : `(Sub: #${idB3})`;
+
+              // Transfer Koorlap status if officer A was Koorlap in this slot
+              const kIdx = newKoorlapIds.findIndex(kid => parseInt(kid, 10) === parseInt(idA3, 10));
+              if (kIdx !== -1) {
+                newKoorlapIds[kIdx] = idB3;
+              }
+
               return {
                 ...slot,
                 serverIds: newServerIds,
                 serverNames: newServerNames,
-                status: 'Berlangsung' as const
+                koorlapIds: newKoorlapIds,
+                isSubstituted: newIsSubstituted,
+                originalServerNames: newOriginalNames,
+                serverNotes: newServerNotes,
+                status: 'Tukar Jadwal' as const
               };
             }
-          } else if (swapType === 'TUKAR') {
-            if (officerA && officerB) {
-              const hasA = slot.serverIds.includes(officerA.id);
-              const hasB = slot.serverIds.includes(officerB.id);
+          }
 
-              if (hasA && !hasB) {
-                const newServerIds = slot.serverIds.map(id => id === officerA!.id ? officerB!.id : id);
-                const newServerNames = slot.serverNames.map(n => n === officerA!.shortName ? officerB!.shortName : n);
-                return { ...slot, serverIds: newServerIds, serverNames: newServerNames };
-              } else if (hasB && !hasA) {
-                const newServerIds = slot.serverIds.map(id => id === officerB!.id ? officerA!.id : id);
-                const newServerNames = slot.serverNames.map(n => n === officerB!.shortName ? officerA!.shortName : n);
-                return { ...slot, serverIds: newServerIds, serverNames: newServerNames };
+          // Mutate Slot B: Replace Officer B with Officer A (if mutual swap)
+          if (swapType === 'TUKAR' && slotB && slot.id === slotB.id) {
+            const idx = (slot.serverIds || []).findIndex(sid => sid && parseInt(sid, 10) === parseInt(idB3, 10));
+            if (idx !== -1) {
+              modifiedSlotsCount++;
+              const newServerIds = [...slot.serverIds];
+              const newServerNames = [...slot.serverNames];
+              const newIsSubstituted = [...(slot.isSubstituted || new Array(newServerIds.length).fill(false))];
+              const newOriginalNames = [...(slot.originalServerNames || [...slot.serverNames])];
+              const newServerNotes = [...(slot.serverNotes || new Array(newServerIds.length).fill(null))];
+              const newKoorlapIds = [...(slot.koorlapIds || [])];
+
+              newServerIds[idx] = idA3;
+              newServerNames[idx] = officerA!.name;
+              newIsSubstituted[idx] = true;
+              newOriginalNames[idx] = officerB!.name;
+              newServerNotes[idx] = `(Tukar: #${idB3})`;
+
+              // Transfer Koorlap status if officer B was Koorlap in this slot
+              const kIdx = newKoorlapIds.findIndex(kid => parseInt(kid, 10) === parseInt(idB3, 10));
+              if (kIdx !== -1) {
+                newKoorlapIds[kIdx] = idA3;
               }
+
+              return {
+                ...slot,
+                serverIds: newServerIds,
+                serverNames: newServerNames,
+                koorlapIds: newKoorlapIds,
+                isSubstituted: newIsSubstituted,
+                originalServerNames: newOriginalNames,
+                serverNotes: newServerNotes,
+                status: 'Tukar Jadwal' as const
+              };
             }
           }
+
           return slot;
         });
 
         onUpdateSchedule(updatedSchedule);
       }
 
-      // 8. Update Today's Schedule Table
+      // 9. Update Today's Schedule Table
       setTodayRows(prev => [
         {
           id: 't-' + Date.now(),
-          jamMisa: `${parsedDate} ${timeA}`,
-
-          lokasi: lokasiA,
+          jamMisa: `${slotA ? slotA.displayDate.split(',')[1] || parsedDate : parsedDate} ${effectiveTimeA}`,
+          lokasi: effectiveLocA,
           petugasOriginal: nameA,
           petugasPengganti: nameB,
           status: swapType === 'TUKAR' ? 'Swapped' : 'Updated'
@@ -249,8 +378,7 @@ Terima kasih . 🙏`;
         ...prev
       ]);
 
-
-      // 7. Add to Feed & System Log
+      // 10. Add to Live Feed & System Log
       const now = new Date();
       const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
       setMessages(prev => [
@@ -264,15 +392,18 @@ Terima kasih . 🙏`;
       ]);
 
       onAddLog({
-        type: 'ai_import',
-        description: `WA Converter [${actionLabel}]: ${nameA} -> ${nameB} (${timeA})`,
-        actor: 'WhatsApp AI Parser'
+        type: 'swap',
+        description: `WA Tukar Jadwal [${actionLabel}]: ${nameA} ⇄ ${nameB} (${effectiveTimeA}) - ${modifiedSlotsCount} slot diperbarui`,
+        actor: 'WA Swap Converter'
       });
 
-      setImportLogText(`Berhasil memproses permohonan [${actionLabel}]. Data disinkronkan ke Rekap Tugas.`);
+      setImportLogText(
+        `Berhasil memperbarui ${modifiedSlotsCount} sesi jadwal misa: [${actionLabel}] ${nameA} dan ${nameB}. Seluruh kalender sakristi telah disinkronkan.`
+      );
       playAudioFeedback('success');
     } catch (err) {
       console.error(err);
+      alert('Terjadi kesalahan saat memproses tukar jadwal.');
     } finally {
       setIsProcessing(false);
     }
@@ -346,24 +477,40 @@ Terima kasih . 🙏`;
               {/* Quick Preset Format Buttons */}
               <div className="space-y-1.5 pt-1">
                 <span className="text-[11px] font-bold text-[#5B1414] uppercase tracking-wider block">
-                  Contoh Format WA Resmi Paroki (Klik untuk Isi):
+                  Contoh Format WA Resmi Paroki (Klik untuk Isi Langsung):
                 </span>
-                <div className="flex flex-wrap gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setInputMessage(PRESET_REAL_TUKAR)}
+                    className="px-2.5 py-2 bg-[#FAF7F2] hover:bg-[#F3EDE2] text-[#5B1414] border border-[#D9CEBA] rounded-xl text-[11px] font-bold transition-all flex items-center gap-1.5 text-left cursor-pointer shadow-2xs"
+                  >
+                    <ArrowRightLeft className="w-3.5 h-3.5 text-[#7c191e] shrink-0" />
+                    <span>Contoh 1: Tukar #105 ⇄ #092 (13 Sep)</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setInputMessage(PRESET_REAL_REPLACE)}
+                    className="px-2.5 py-2 bg-[#FAF7F2] hover:bg-[#F3EDE2] text-[#5B1414] border border-[#D9CEBA] rounded-xl text-[11px] font-bold transition-all flex items-center gap-1.5 text-left cursor-pointer shadow-2xs"
+                  >
+                    <RotateCw className="w-3.5 h-3.5 text-amber-700 shrink-0" />
+                    <span>Contoh 2: Digantikan #029 ➔ #084 (1 Sep)</span>
+                  </button>
                   <button
                     type="button"
                     onClick={() => setInputMessage(PRESET_TUKAR)}
-                    className="px-2.5 py-1.5 bg-[#FAF7F2] hover:bg-[#F3EDE2] text-[#5B1414] border border-[#D9CEBA] rounded-lg text-[11px] font-bold transition-all flex items-center gap-1 cursor-pointer"
+                    className="px-2.5 py-1.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 rounded-lg text-[10px] font-semibold transition-all flex items-center gap-1 cursor-pointer"
                   >
-                    <ArrowRightLeft className="w-3 h-3 text-[#5B1414]" />
-                    <span>Format 1: Tukar Tugas (Mutual Swap)</span>
+                    <ArrowRightLeft className="w-3 h-3 text-slate-500" />
+                    <span>Template Format Tukar Tugas</span>
                   </button>
                   <button
                     type="button"
                     onClick={() => setInputMessage(PRESET_DIGANTIKAN)}
-                    className="px-2.5 py-1.5 bg-[#FAF7F2] hover:bg-[#F3EDE2] text-[#5B1414] border border-[#D9CEBA] rounded-lg text-[11px] font-bold transition-all flex items-center gap-1 cursor-pointer"
+                    className="px-2.5 py-1.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 rounded-lg text-[10px] font-semibold transition-all flex items-center gap-1 cursor-pointer"
                   >
-                    <RotateCw className="w-3 h-3 text-[#5B1414]" />
-                    <span>Format 2: Digantikan (Replacement)</span>
+                    <RotateCw className="w-3 h-3 text-slate-500" />
+                    <span>Template Format Penggantian</span>
                   </button>
                 </div>
               </div>

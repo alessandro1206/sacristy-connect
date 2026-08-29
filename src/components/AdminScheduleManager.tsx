@@ -29,6 +29,7 @@ import { playAudioFeedback } from '../utils/sound';
 interface AdminScheduleManagerProps {
   schedule: ScheduleSlot[];
   officers: Officer[];
+  initialSlotId?: string | null;
   onCreateSlot: (newSlot: ScheduleSlot) => void;
   onUpdateSlot: (updatedSlot: ScheduleSlot) => void;
   onDeleteSlot: (slotId: string) => void;
@@ -38,6 +39,7 @@ interface AdminScheduleManagerProps {
 export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
   schedule,
   officers,
+  initialSlotId,
   onCreateSlot,
   onUpdateSlot,
   onDeleteSlot,
@@ -162,15 +164,21 @@ export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
     setEditingSlot(slot);
 
     // Extract time without "WIB"
-    const rawTime = slot.massTime.replace(' WIB', '').trim();
+    const rawTime = slot.massTime.replace(/WIB/gi, '').trim();
     const timeFormatted = rawTime.length === 4 ? `0${rawTime}` : rawTime;
 
     // Detect koorlaps specifically for this slot
-    const assignedIds = slot.serverIds.filter((id): id is string => Boolean(id));
+    const assignedIds = (slot.serverIds || []).filter((id): id is string => Boolean(id));
     const slotKoorlapSet = new Set((slot.koorlapIds || []).map(id => id.padStart(3, '0')));
-    const koorlaps = slot.koorlapIds && slot.koorlapIds.length > 0 
-      ? slot.koorlapIds 
-      : assignedIds.filter(id => slotKoorlapSet.has(id.padStart(3, '0')));
+    
+    // Also include anyone with role 'KORLAP' in serverRoles
+    (slot.serverRoles || []).forEach((role, idx) => {
+      if (role === 'KORLAP' && slot.serverIds[idx]) {
+        slotKoorlapSet.add(slot.serverIds[idx]!.padStart(3, '0'));
+      }
+    });
+
+    const koorlaps = assignedIds.filter(id => slotKoorlapSet.has(id.padStart(3, '0')));
 
     setFormData({
       id: slot.id,
@@ -185,16 +193,27 @@ export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
     setOfficerModalSearch('');
   };
 
+  // Open edit modal if initialSlotId is passed from parent/calendar
+  React.useEffect(() => {
+    if (initialSlotId && schedule.length > 0) {
+      const target = schedule.find(s => s.id === initialSlotId);
+      if (target) {
+        handleOpenEditModal(target);
+      }
+    }
+  }, [initialSlotId, schedule]);
+
   // Toggle Officer selection in Modal
-  const handleToggleOfficerSelection = (officerId: string) => {
+  const toggleOfficerSelection = (officerId: string) => {
     playAudioFeedback('tap');
+    const norm = officerId.padStart(3, '0');
     setFormData(prev => {
-      const exists = prev.selectedOfficerIds.includes(officerId);
+      const exists = prev.selectedOfficerIds.some(id => id === officerId || id.padStart(3, '0') === norm);
       if (exists) {
         return {
           ...prev,
-          selectedOfficerIds: prev.selectedOfficerIds.filter(id => id !== officerId),
-          koorlapOfficerIds: prev.koorlapOfficerIds.filter(id => id !== officerId)
+          selectedOfficerIds: prev.selectedOfficerIds.filter(id => id !== officerId && id.padStart(3, '0') !== norm),
+          koorlapOfficerIds: prev.koorlapOfficerIds.filter(id => id !== officerId && id.padStart(3, '0') !== norm)
         };
       } else {
         return {
@@ -205,16 +224,19 @@ export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
     });
   };
 
+  const handleToggleOfficerSelection = toggleOfficerSelection;
+
   // Toggle Koorlap role within selected officers
   const toggleOfficerKoorlap = (officerId: string, e: React.MouseEvent) => {
     e.stopPropagation();
     playAudioFeedback('tap');
+    const norm = officerId.padStart(3, '0');
     setFormData(prev => {
-      const isKoorlap = prev.koorlapOfficerIds.includes(officerId);
+      const isKoorlap = prev.koorlapOfficerIds.some(id => id === officerId || id.padStart(3, '0') === norm);
       return {
         ...prev,
         koorlapOfficerIds: isKoorlap 
-          ? prev.koorlapOfficerIds.filter(id => id !== officerId)
+          ? prev.koorlapOfficerIds.filter(id => id !== officerId && id.padStart(3, '0') !== norm)
           : [...prev.koorlapOfficerIds, officerId]
       };
     });
@@ -234,26 +256,33 @@ export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
       return off ? off.name : `Petugas #${id}`;
     });
 
+    const cleanTime = formData.time.replace(/WIB/gi, '').trim();
+    const formattedMassTime = cleanTime ? `${cleanTime} WIB` : '18:00 WIB';
+
     const newSlot: ScheduleSlot = {
       id: newId,
       date: formData.date,
       displayDate: displayDate,
-      massTime: `${formData.time} WIB`,
+      massTime: formattedMassTime,
       location: formData.location,
       targetTotal: Math.max(formData.targetTotal, formData.selectedOfficerIds.length),
       serverIds: formData.selectedOfficerIds,
       serverNames: serverNames,
       koorlapIds: formData.koorlapOfficerIds,
-      serverRoles: formData.selectedOfficerIds.map(id => formData.koorlapOfficerIds.includes(id) ? 'KORLAP' : 'AI'),
+      serverRoles: formData.selectedOfficerIds.map(id => {
+        const norm = id.padStart(3, '0');
+        const isKoor = formData.koorlapOfficerIds.some(kid => kid === id || kid.padStart(3, '0') === norm);
+        return isKoor ? 'KORLAP' : 'AI';
+      }),
       status: formData.status,
       attendedServerIds: []
     };
 
     onCreateSlot(newSlot);
     setIsCreateModalOpen(false);
-    showToast(`Jadwal misa baru (${displayDate} - ${formData.time} WIB) berhasil dibuat!`);
+    showToast(`Jadwal misa baru (${displayDate} - ${formattedMassTime}) berhasil dibuat!`);
     if (onAddLog) {
-      onAddLog(`Buat Jadwal Misa Baru: ${displayDate} @ ${formData.time} WIB di ${formData.location} (${formData.selectedOfficerIds.length} Petugas)`, 'Admin Jadwal');
+      onAddLog(`Buat Jadwal Misa Baru: ${displayDate} @ ${formattedMassTime} di ${formData.location} (${formData.selectedOfficerIds.length} Petugas)`, 'Admin Jadwal');
     }
   };
 
@@ -261,31 +290,46 @@ export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
   const handleSaveEdit = () => {
     if (!editingSlot) return;
 
+    if (!formData.date || !formData.time || !formData.location) {
+      alert('Mohon lengkapi Tanggal, Jam Misa, dan Lokasi.');
+      return;
+    }
+
     const displayDate = getIndonesianDisplayDate(formData.date);
     const serverNames = formData.selectedOfficerIds.map(id => {
       const off = officers.find(o => o.id === id || o.id.padStart(3, '0') === id.padStart(3, '0'));
       return off ? off.name : `Petugas #${id}`;
     });
 
+    const cleanTime = formData.time.replace(/WIB/gi, '').trim();
+    const formattedMassTime = cleanTime ? `${cleanTime} WIB` : editingSlot.massTime;
+
     const updated: ScheduleSlot = {
       ...editingSlot,
       date: formData.date,
       displayDate: displayDate,
-      massTime: `${formData.time} WIB`,
+      massTime: formattedMassTime,
       location: formData.location,
       targetTotal: Math.max(formData.targetTotal, formData.selectedOfficerIds.length),
       serverIds: formData.selectedOfficerIds,
       serverNames: serverNames,
       koorlapIds: formData.koorlapOfficerIds,
-      serverRoles: formData.selectedOfficerIds.map(id => formData.koorlapOfficerIds.includes(id) ? 'KORLAP' : 'AI'),
-      status: formData.status
+      serverRoles: formData.selectedOfficerIds.map(id => {
+        const norm = id.padStart(3, '0');
+        const isKoor = formData.koorlapOfficerIds.some(kid => kid === id || kid.padStart(3, '0') === norm);
+        return isKoor ? 'KORLAP' : 'AI';
+      }),
+      status: formData.status,
+      attendedServerIds: (editingSlot.attendedServerIds || []).filter(id => 
+        formData.selectedOfficerIds.some(sid => sid === id || sid.padStart(3, '0') === id.padStart(3, '0'))
+      )
     };
 
     onUpdateSlot(updated);
     setEditingSlot(null);
-    showToast(`Jadwal misa (${displayDate} - ${formData.time} WIB) berhasil diperbarui!`);
+    showToast(`Jadwal misa (${displayDate} - ${formattedMassTime}) berhasil diperbarui!`);
     if (onAddLog) {
-      onAddLog(`Update Jadwal Misa ${editingSlot.id}: ${displayDate} @ ${formData.time} WIB (${formData.selectedOfficerIds.length} Petugas)`, 'Admin Jadwal');
+      onAddLog(`Update Jadwal Misa ${editingSlot.id}: ${displayDate} @ ${formattedMassTime} (${formData.selectedOfficerIds.length} Petugas)`, 'Admin Jadwal');
     }
   };
 
@@ -317,12 +361,14 @@ export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
 
   // Check double-duty conflicts for an officer on the selected date/time
   const getConflictWarning = (officerId: string, currentDate: string, currentTime: string, excludeSlotId?: string) => {
+    const cleanCurrentTime = currentTime.replace(/WIB/gi, '').trim();
+    const norm = officerId.padStart(3, '0');
     const conflicts = schedule.filter(s => {
       if (excludeSlotId && s.id === excludeSlotId) return false;
       if (s.date !== currentDate) return false;
-      const cleanTime = s.massTime.replace(' WIB', '').trim();
-      const isSameTime = cleanTime === currentTime;
-      const isAssigned = (s.serverIds || []).includes(officerId) || (s.serverIds || []).includes(officerId.padStart(3, '0'));
+      const cleanTime = s.massTime.replace(/WIB/gi, '').trim();
+      const isSameTime = cleanTime === cleanCurrentTime;
+      const isAssigned = (s.serverIds || []).some(sid => sid && (sid === officerId || sid.padStart(3, '0') === norm));
       return isSameTime && isAssigned;
     });
 

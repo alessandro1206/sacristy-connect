@@ -1,0 +1,514 @@
+====================================================================================================
+         HASIL VERIFIKASI JADWAL PETUGAS DARI SITUS RESMI GOOGLE APPS SCRIPT (NO 1 S/D 170)        
+      URL: https://script.google.com/macros/s/AKfycby2XkZikWtVpLaUYn2tgq6qOGLnGpSSDWU0x5C0O8sOoWqTFtVq82C5bn5KXw6H81Mf/exec
+                                 BULAN SEPTEMBER 2026                                       
+====================================================================================================
+
+001  | Gatot Chrishariyono              | KOORLAP: 4-Sep-26 (19:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 13-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+002  | Raymundus Raimun                 | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (06:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (06:00 @ GEREJA) [Asisten Imam]; 4-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+003  | Venantius Sumarmo                | KOORLAP: -
+     |                                  | AI     : 5-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (06:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (10:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+004  | Agustinus Cahyono                | KOORLAP: -
+     |                                  | AI     : 4-Sep-26 (19:00 @ GEREJA) [Asisten Imam]; 13-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+005  | Andreas Yoga                     | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (18:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (95) Agus Kartakusuma*; 13-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+006  | Paulus Biodita                   | KOORLAP: 6-Sep-26 (06:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 20-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 30-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+007  | Paulus Letu Udjan                | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (06:00 @ GEREJA) [Asisten Imam]; 13-Sep-26 (06:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+008  | Sunardi                          | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 13-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+009  | Aloysius Gholo                   | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 19-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+010  | Gervasius Nosi                   | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 28-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+011  | Argo Putra                       | KOORLAP: -
+     |                                  | AI     : 4-Sep-26 (19:00 @ GEREJA) [Asisten Imam]; 13-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (10:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+012  | Dwi Prasetyo                     | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 13-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (08:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+013  | Pius Paru                        | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+014  | Donny Kridayanto                 | (Tidak Ada Jadwal Tugas Bulan Ini)
+015  | Yohanes Herman Saputra           | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (08:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+016  | Cliff Patriangga                 | KOORLAP: -
+     |                                  | AI     : 4-Sep-26 (19:00 @ GEREJA) [Asisten Imam]; 6-Sep-26 (10:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (31) Victor Kardiana*; 27-Sep-26 (06:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+017  | Arishka Yudarana                 | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (06:00 @ Rumah Sakit) [Korsa RS EH]; 19-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (08:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+018  | Brian Mursidi                    | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (06:00 @ Rumah Sakit) [Korsa RS EH]; 13-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 30-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+019  | Januar Dwiputro                  | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 29-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 9-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]; 4-Sep-26 (05:30 @ Rumah Sakit) [Backup Korsa]
+----------------------------------------------------------------------------------------------------
+020  | Edwin Ardianto                   | KOORLAP: -
+     |                                  | AI     : 5-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 11-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 27-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+021  | Adinanda Condrowibowo            | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (08:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (58) Bambang Susilo*; 27-Sep-26 (17:00 @ KJP2) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+022  | Valentinus Jimmy                 | KOORLAP: 6-Sep-26 (08:00 @ GEREJA) [Korlap]; 20-Sep-26 (10:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 27-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+023  | Johni Hidayat                    | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 8-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 13-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 5-Sep-26 (05:30 @ Gereja) [AI Misa Pagi] *Catatan: Tukar Jadwal (113) Willy Setiawan*
+----------------------------------------------------------------------------------------------------
+024  | Hendra Utama                     | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 12-Sep-26 (18:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (26) Eddy Suwanto*; 7-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+025  | Christian Adi Putra              | KOORLAP: -
+     |                                  | AI     : 12-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 25-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 27-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+026  | Eddy Suwanto                     | KOORLAP: -
+     |                                  | AI     : 22-Sep-26 (18:00 @ KJP2) [Asisten Imam] *Catatan: Tukar Jadwal (24) Hendra Utama*; 4-Sep-26 (05:30 @ Gereja) [AI Misa Pagi] *Catatan: Tukar Jadwal (76) Hary Suwanda*; 16-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+027  | Silvester Windy Wibisono         | KOORLAP: 27-Sep-26 (18:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 5-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 23-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+028  | Tjoa Tjandrapradja               | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (10:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+029  | Hadi Santoso                     | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 19-Sep-26 (18:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (84) Soehadi*
+----------------------------------------------------------------------------------------------------
+030  | Andi Singgih                     | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+031  | Victor Kardiana                  | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (18:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (83) Rudianto Hartanta*; 20-Sep-26 (08:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (16) Cliff Patriangga*; 27-Sep-26 (06:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+032  | Edward Kusuma                    | KOORLAP: -
+     |                                  | AI     : 20-Sep-26 (06:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 25-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+033  | Satrio Soetikno                  | KOORLAP: -
+     |                                  | AI     : 5-Sep-26 (18:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (50) Tjio Johansyah*; 13-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 18-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+034  | Henry Arvian                     | KOORLAP: -
+     |                                  | AI     : 12-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (17:00 @ KJP2) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+035  | Stevanus Budianto                | KOORLAP: 5-Sep-26 (18:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 27-Sep-26 (06:00 @ GEREJA) [Asisten Imam]; 12-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+036  | Johanes Ignasius Totok           | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (17:00 @ KJP2) [Asisten Imam]; 21-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+037  | Alfred Stephanus                 | KOORLAP: -
+     |                                  | AI     : 19-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (17:00 @ KJP2) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+038  | Yudi Wijaya                      | KOORLAP: 5-Sep-26 (18:00 @ KJP2) [Korlap]
+     |                                  | AI     : 26-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+039  | Redy Wibisono                    | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 19-Sep-26 (18:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (126) Agus Riyanto Pamuji*; 11-Sep-26 (05:30 @ Rumah Sakit) [Backup Korsa]
+----------------------------------------------------------------------------------------------------
+040  | Vincent Winardi Tan              | KOORLAP: -
+     |                                  | AI     : 20-Sep-26 (10:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (95) Agus Kartakusuma*; 27-Sep-26 (17:00 @ KJP2) [Asisten Imam]; 18-Sep-26 (05:30 @ Rumah Sakit) [Backup Korsa]
+----------------------------------------------------------------------------------------------------
+041  | Lorenzo Tjaeyahdy                | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 25-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+042  | Rudy Djaja Siaputra              | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 26-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+043  | Bambang Suprijanto               | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (06:00 @ GEREJA) [Asisten Imam]; 26-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+044  | Nicholas Handoso                 | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (06:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (17:00 @ KJP2) [Asisten Imam]; 8-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+045  | Dionisius Donny Kamadjaja        | KOORLAP: 20-Sep-26 (06:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 5-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+046  | Mario Christiano Chandra         | KOORLAP: 5-Sep-26 (18:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 19-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 11-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+047  | Yeremia Santoso halim            | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 13-Sep-26 (06:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+048  | Fredy Susanto                    | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 12-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 19-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+049  | Widjanarko Tjandra               | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 26-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+050  | Tjio Johansyah                   | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (10:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (33) Satrio Soetikno*; 27-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 3-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+051  | Paulus Agus Juwono               | KOORLAP: -
+     |                                  | AI     : 5-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 13-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 14-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]; 25-Sep-26 (05:30 @ Rumah Sakit) [Backup Korsa]
+----------------------------------------------------------------------------------------------------
+052  | Jonas Angkawidjaja               | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 13-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 11-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+053  | Edward Luntungan                 | KOORLAP: -
+     |                                  | AI     : 19-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 26-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+054  | Ivan Christian Cahyadi           | KOORLAP: 12-Sep-26 (18:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 5-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+055  | Hartanto Chandra                 | KOORLAP: -
+     |                                  | AI     : 19-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+056  | Antonius David Tjung             | KOORLAP: -
+     |                                  | AI     : 4-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 13-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 29-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+057  | Andrew Firmansyah                | KOORLAP: -
+     |                                  | AI     : 19-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 27-Sep-26 (18:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (83) Rudianto Hartanta*
+----------------------------------------------------------------------------------------------------
+058  | Bambang Susilo                   | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (17:00 @ KJP2) [Asisten Imam] *Catatan: Tukar Jadwal (77) Ferdyanto Salim*; 15-Sep-26 (18:00 @ KJP2) [Asisten Imam] *Catatan: Tukar Jadwal (21) Adinanda Condrowibowo*; 20-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 1-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+059  | Tri Wibisono                     | KOORLAP: -
+     |                                  | AI     : 4-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 27-Sep-26 (17:00 @ KJP2) [Asisten Imam]; 11-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+060  | Andi Widjaja                     | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (06:00 @ GEREJA) [Asisten Imam]; 19-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+061  | Leohanes Halim                   | KOORLAP: -
+     |                                  | AI     : 19-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 27-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+062  | Rizal Kristanto                  | KOORLAP: 3-Sep-26 (18:30 @ KJP2) [Korlap]
+     |                                  | AI     : 27-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+063  | Benny Sukamto                    | KOORLAP: 4-Sep-26 (18:00 @ KJP2) [Korlap]
+     |                                  | AI     : 27-Sep-26 (10:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+064  | Andy Untoyo                      | KOORLAP: 12-Sep-26 (18:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 5-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 27-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 21-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+065  | Bambang Budiono                  | KOORLAP: -
+     |                                  | AI     : 3-Sep-26 (18:30 @ KJP2) [Asisten Imam]; 27-Sep-26 (10:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+066  | Berce suisa abraham              | KOORLAP: 27-Sep-26 (17:00 @ KJP2) [Korlap]
+     |                                  | AI     : 20-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+067  | Raymond Hanjaya                  | KOORLAP: -
+     |                                  | AI     : 19-Sep-26 (18:00 @ KJP2) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+068  | Untung Sutikno                   | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (08:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+069  | Kornelis                         | (Tidak Ada Jadwal Tugas Bulan Ini)
+070  | Nio Eko Susilo                   | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (06:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (17:00 @ KJP2) [Asisten Imam]; 7-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+071  | Hence Antony                     | KOORLAP: 27-Sep-26 (06:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 5-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 2-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+072  | Bambang Hermanto                 | KOORLAP: 20-Sep-26 (18:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 6-Sep-26 (08:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+073  | Sonny Sugiarto So                | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+074  | Albert Sidharta                  | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (17:00 @ KJP2) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+075  | Stevanus Lijadi                  | KOORLAP: -
+     |                                  | AI     : 20-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 17-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+076  | Hary Suwanda                     | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 18-Sep-26 (18:00 @ KJP2) [Asisten Imam] *Catatan: Tukar Jadwal (26) Eddy Suwanto*; 20-Sep-26 (10:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+077  | Ferdyanto Salim                  | KOORLAP: -
+     |                                  | AI     : 20-Sep-26 (10:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+078  | Yohanes Gunawan                  | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 26-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+079  | Michael Raphael Hari             | KOORLAP: 6-Sep-26 (10:00 @ GEREJA) [Korlap]; 26-Sep-26 (18:00 @ GEREJA) [Korlap]
+     |                                  | AI     : -
+----------------------------------------------------------------------------------------------------
+080  | Tandra Gunawan                   | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+081  | Eric Saputro                     | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (06:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+082  | Bambang Purnomo                  | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 13-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (06:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+083  | Rudianto Hartanta                | KOORLAP: -
+     |                                  | AI     : 27-Sep-26 (06:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (57) Andrew Firmansyah*
+----------------------------------------------------------------------------------------------------
+084  | Soehadi                          | KOORLAP: -
+     |                                  | AI     : 1-Sep-26 (18:00 @ KJP2) [Asisten Imam] *Catatan: Tukar Jadwal (29) Hadi Santoso*; 27-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+085  | Paulus Tedjadharma               | KOORLAP: 6-Sep-26 (10:00 @ GEREJA) [Korlap]; 27-Sep-26 (08:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 13-Sep-26 (17:00 @ KJP2) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+086  | Sugiharto Tanto                  | KOORLAP: -
+     |                                  | AI     : 5-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 13-Sep-26 (06:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (163) Kuncoro Kohar*
+----------------------------------------------------------------------------------------------------
+087  | Budi Santosa                     | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (06:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (10:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+088  | Michael Kristanto                | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 1-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+089  | Raymond Michael                  | KOORLAP: 6-Sep-26 (18:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 19-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 25-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+090  | Hanjaya Kurniawan                | KOORLAP: 13-Sep-26 (06:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 19-Sep-26 (18:00 @ KJP2) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+091  | Thomas Raynanto                  | KOORLAP: -
+     |                                  | AI     : 19-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 27-Sep-26 (06:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+092  | Tjetjep Tjondro                  | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (17:00 @ KJP2) [Asisten Imam] *Catatan: Tukar Jadwal (105) Mikael Hengky Pratama*; 20-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 15-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+093  | Widyanto Setiawan                | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (10:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+094  | Tanno Sugiharto                  | KOORLAP: -
+     |                                  | AI     : 12-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (10:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+095  | Agus Kartakusuma                 | KOORLAP: -
+     |                                  | AI     : 5-Sep-26 (18:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (5) Andreas Yoga*; 6-Sep-26 (06:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (40) Vincent Winardi Tan*
+----------------------------------------------------------------------------------------------------
+096  | Laurensius Rony Setyawan         | KOORLAP: 13-Sep-26 (10:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 5-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 3-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+097  | Irwan Afandi                     | KOORLAP: 13-Sep-26 (08:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 19-Sep-26 (18:00 @ KJP2) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+098  | Budi Purnomo                     | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (17:00 @ KJP2) [Asisten Imam]; 27-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+099  | Alex Santoso                     | KOORLAP: -
+     |                                  | AI     : 4-Sep-26 (05:30 @ Rumah Sakit) [Korsa]; 13-Sep-26 (17:00 @ KJP2) [Asisten Imam]; 20-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+100  | Gunarjo Tanurijanto              | KOORLAP: 6-Sep-26 (18:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 20-Sep-26 (10:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+101  | Wongso Budi                      | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 26-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+102  | Denny Sentosa Johann             | KOORLAP: -
+     |                                  | AI     : 5-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 19-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+103  | Wey Tjoendianto                  | KOORLAP: -
+     |                                  | AI     : 20-Sep-26 (10:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (115) Effendy Listijabudhi*; 26-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+104  | Tanuddin Rustan                  | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 26-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+105  | Mikael Hengky Pratama            | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (18:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (92) Tjetjep Tjondro*; 27-Sep-26 (10:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+106  | Jap Yohanes Baptista             | KOORLAP: 27-Sep-26 (10:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 12-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+107  | Honip Kertodihardjo              | (Tidak Ada Jadwal Tugas Bulan Ini)
+108  | Robert Roesbiyanto               | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 13-Sep-26 (10:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+109  | Yonathan Himawan                 | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 13-Sep-26 (17:00 @ KJP2) [Asisten Imam]; 28-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+110  | Sonny Widjaja                    | KOORLAP: -
+     |                                  | AI     : 20-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 26-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+111  | Handi Wirajaya                   | KOORLAP: -
+     |                                  | AI     : 5-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 13-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+112  | Ari Senoaji Loekito              | KOORLAP: 13-Sep-26 (10:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 27-Sep-26 (17:00 @ KJP2) [Asisten Imam]; 8-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+113  | Willy Setiawan                   | KOORLAP: 13-Sep-26 (17:00 @ KJP2) [Korlap]
+     |                                  | AI     : 27-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 12-Sep-26 (05:30 @ Gereja) [AI Misa Pagi] *Catatan: Tukar Jadwal (23) Johni Hidayat*
+----------------------------------------------------------------------------------------------------
+114  | Deny Nurcahya                    | KOORLAP: 20-Sep-26 (18:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 12-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 14-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+115  | Effendy Listijabudhi             | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 11-Sep-26 (05:30 @ Rumah Sakit) [Korsa]; 19-Sep-26 (18:00 @ KJP2) [Asisten Imam] *Catatan: Tukar Jadwal (103) Wey Tjoendianto*; 10-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+116  | Hendra Wijaya                    | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+117  | Nikolas Andrew                   | KOORLAP: -
+     |                                  | AI     : 5-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 12-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (06:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+118  | Edwin Pribadi                    | KOORLAP: -
+     |                                  | AI     : 5-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 13-Sep-26 (10:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+119  | Judadi Widjaja                   | (Tidak Ada Jadwal Tugas Bulan Ini)
+120  | Juliadi Widjaja                  | KOORLAP: -
+     |                                  | AI     : 5-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 13-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+121  | Roy Andiarto                     | (Tidak Ada Jadwal Tugas Bulan Ini)
+122  | Doddy krisdyanto                 | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 13-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 19-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+123  | Fidelis Sulistiyo                | KOORLAP: 13-Sep-26 (18:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 6-Sep-26 (10:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+124  | Julius Agus Prajitno             | (Tidak Ada Jadwal Tugas Bulan Ini)
+125  | Sri Tur Prawinoto                | KOORLAP: 19-Sep-26 (18:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 27-Sep-26 (10:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+126  | Agus Riyanto Pamuji              | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (08:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (39) Redy Wibisono*; 13-Sep-26 (10:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+127  | Hadrianus Sukaryadi              | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+128  | Leo Warner Lollo                 | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 13-Sep-26 (10:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+129  | Johanes Rihadi                   | KOORLAP: -
+     |                                  | AI     : 20-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 4-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+130  | Alexander Budi Cahyono           | KOORLAP: -
+     |                                  | AI     : 20-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (10:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+131  | Titus Purdijojo                  | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 18-Sep-26 (05:30 @ Rumah Sakit) [Korsa]; 20-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 16-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+132  | Robertus Antonius                | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 13-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 19-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+133  | Febrianto Dwi                    | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (10:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+134  | Petrus Yuni                      | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 26-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+135  | Dominikus Asas                   | KOORLAP: -
+     |                                  | AI     : 20-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (10:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+136  | Mikael Mana                      | KOORLAP: -
+     |                                  | AI     : 12-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 19-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+137  | Berti Albertus Nara              | KOORLAP: -
+     |                                  | AI     : 12-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (06:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+138  | Davidson Janto                   | KOORLAP: -
+     |                                  | AI     : 12-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 19-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 27-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 29-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+139  | Severus senjaya                  | KOORLAP: 19-Sep-26 (18:00 @ KJP2) [Korlap] *Catatan: Tukar Jadwal (139) Severus senjaya*
+     |                                  | AI     : 13-Sep-26 (06:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (38) Yudi Wijaya*
+----------------------------------------------------------------------------------------------------
+140  | Alexander Sukarliono             | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (17:00 @ KJP2) [Asisten Imam]; 20-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+141  | Yohan Soenyoto                   | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 25-Sep-26 (05:30 @ Rumah Sakit) [Korsa]; 22-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+142  | Reo Sinarta                      | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+143  | Stefanus Charlie                 | KOORLAP: 13-Sep-26 (18:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 20-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 26-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 2-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+144  | Andreas Surja                    | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 12-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 9-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+145  | Damianus Slamet                  | KOORLAP: -
+     |                                  | AI     : 5-Sep-26 (18:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (164) Heru Wijaya*; 6-Sep-26 (10:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (156) Adhika Wardhana*; 20-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 5-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+146  | Eddy Soedjatmiko                 | KOORLAP: -
+     |                                  | AI     : 5-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 20-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (17:00 @ KJP2) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+147  | Bayu                             | KOORLAP: -
+     |                                  | AI     : 12-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 19-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 22-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+148  | Fredy Teguh                      | KOORLAP: -
+     |                                  | AI     : 19-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 26-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+149  | Richard Dharyanto                | KOORLAP: 26-Sep-26 (18:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 5-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 14-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+150  | Yohanes Kurniawan                | KOORLAP: -
+     |                                  | AI     : 19-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 26-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+151  | Irwan Sutanto                    | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 26-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 18-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+152  | Jeffrey Tanuhardja               | KOORLAP: 19-Sep-26 (18:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 5-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+153  | Agustinus Djoko                  | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 24-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+154  | Tan Wemulia Tanto                | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (08:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+155  | Eko Gunawan Kusjanto             | KOORLAP: -
+     |                                  | AI     : 20-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (10:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (157) Vincentius Fidelis Lucky*; 26-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+156  | Adhika Wardhana                  | KOORLAP: -
+     |                                  | AI     : 5-Sep-26 (18:00 @ KJP2) [Asisten Imam] *Catatan: Tukar Jadwal (145) Damianus Slamet*; 13-Sep-26 (17:00 @ KJP2) [Asisten Imam]; 27-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 24-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+157  | Vincentius Fidelis Lucky         | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (17:00 @ KJP2) [Asisten Imam]; 27-Sep-26 (06:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (155) Eko Gunawan Kusjanto*
+----------------------------------------------------------------------------------------------------
+158  | Rheza Ricardo Alex               | KOORLAP: -
+     |                                  | AI     : 5-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 19-Sep-26 (18:00 @ KJP2) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+159  | Rudy Effendy                     | KOORLAP: -
+     |                                  | AI     : 5-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 20-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 15-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+160  | Emanuel Henra                    | KOORLAP: -
+     |                                  | AI     : 5-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (06:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+161  | Edward Siswanto                  | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (10:00 @ GEREJA) [Asisten Imam]; 13-Sep-26 (10:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+162  | Alexander Maria                  | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 13-Sep-26 (17:00 @ KJP2) [Asisten Imam]; 17-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+163  | Kuncoro Kohar                    | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 13-Sep-26 (10:00 @ GEREJA) [Asisten Imam] *Catatan: Tukar Jadwal (86) Sugiharto Tanto*; 27-Sep-26 (17:00 @ KJP2) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+164  | Heru Wijaya                      | KOORLAP: 20-Sep-26 (08:00 @ GEREJA) [Korlap]; 27-Sep-26 (10:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 13-Sep-26 (17:00 @ KJP2) [Asisten Imam] *Catatan: Tukar Jadwal (145) Damianus Slamet*; 10-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+165  | Winardi Herlambang               | KOORLAP: -
+     |                                  | AI     : 12-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 20-Sep-26 (06:00 @ GEREJA) [Asisten Imam]; 19-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+166  | Sukotjo Budiono                  | KOORLAP: -
+     |                                  | AI     : 5-Sep-26 (18:00 @ GEREJA) [Asisten Imam]; 19-Sep-26 (18:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+167  | Chen Lin Andrew                  | KOORLAP: 20-Sep-26 (10:00 @ GEREJA) [Korlap]; 27-Sep-26 (18:00 @ GEREJA) [Korlap]
+     |                                  | AI     : 13-Sep-26 (06:00 @ GEREJA) [Asisten Imam]; 23-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+168  | Happy Gunawarman                 | KOORLAP: -
+     |                                  | AI     : 4-Sep-26 (18:00 @ KJP2) [Asisten Imam] *Catatan: Menggantikan (67) Raymond Hanjaya*; 5-Sep-26 (18:00 @ KJP2) [Asisten Imam]; 13-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 27-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 18-Sep-26 (05:30 @ Gereja) [AI Misa Pagi]
+----------------------------------------------------------------------------------------------------
+169  | Donni Anwar                      | KOORLAP: -
+     |                                  | AI     : 13-Sep-26 (17:00 @ KJP2) [Asisten Imam]; 27-Sep-26 (10:00 @ GEREJA) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+170  | Budi Santoso                     | KOORLAP: -
+     |                                  | AI     : 6-Sep-26 (08:00 @ GEREJA) [Asisten Imam]; 13-Sep-26 (17:00 @ KJP2) [Asisten Imam]; 27-Sep-26 (17:00 @ KJP2) [Asisten Imam]
+----------------------------------------------------------------------------------------------------
+
+====================================================================================================
+RINGKASAN HASIL DARI LIVE WEBSITE:
+- Total Petugas (1 s/d 170)        : 170 Petugas
+- Petugas dengan Jadwal Tugas      : 164 Petugas
+- Petugas Tanpa Tugas Bulan Ini    : 6 Petugas
+- Total Sesi Korlap                : 39 Sesi
+- Total Sesi Asisten Imam (Misa)   : 329 Sesi
+- Total Sesi AI Misa Pagi          : 57 Sesi
+====================================================================================================

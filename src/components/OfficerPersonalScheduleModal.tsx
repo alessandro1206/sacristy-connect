@@ -16,7 +16,7 @@ import {
   User
 } from 'lucide-react';
 
-import { Officer, ScheduleSlot, UserSession } from '../types';
+import { Officer, ScheduleSlot, UserSession, UserRole } from '../types';
 import { playAudioFeedback } from '../utils/sound';
 
 interface OfficerPersonalScheduleModalProps {
@@ -286,10 +286,27 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
                               </span>
                             )}
                           </div>
-                          <h4 className="text-sm font-bold text-slate-900 flex items-center gap-1.5 mt-1">
-                            <MapPin className="w-3.5 h-3.5 text-rose-600" />
-                            <span>{slot.location}</span>
-                          </h4>
+                          <div className="flex items-center justify-between flex-wrap gap-2 pt-1">
+                            <h4 className="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                              <MapPin className="w-3.5 h-3.5 text-rose-600" />
+                              <span>{slot.location}</span>
+                            </h4>
+
+                            {onOpenSwapChat && (
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  playAudioFeedback('tap');
+                                  onClose();
+                                  onOpenSwapChat();
+                                }}
+                                className="text-[11px] font-bold text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-300 px-2.5 py-1 rounded-xl flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs"
+                              >
+                                <MessageSquare className="w-3 h-3 text-amber-800" />
+                                <span>Tukar Jadwal WA</span>
+                              </button>
+                            )}
+                          </div>
                         </div>
                       </div>
                     );

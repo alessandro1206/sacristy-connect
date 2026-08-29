@@ -16,8 +16,8 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
   onSuccess,
   targetViewLabel = 'Portal Administrasi'
 }) => {
-  const [username, setUsername] = useState<string>('admin');
-  const [password, setPassword] = useState<string>('sakristi123');
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);

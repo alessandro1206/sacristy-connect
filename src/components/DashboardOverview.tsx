@@ -53,7 +53,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({
 
           <div className="flex items-center gap-3">
             <button
-              onClick={() => onNavigate('admin-schedule')}
+              onClick={() => onNavigate('admin-schedule-editor')}
               className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold shadow-xs transition-all cursor-pointer"
             >
               <CalendarDays className="w-4 h-4 text-amber-400" />

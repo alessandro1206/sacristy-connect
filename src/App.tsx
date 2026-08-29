@@ -184,6 +184,7 @@ export default function App() {
   const [isOfficerScheduleModalOpen, setIsOfficerScheduleModalOpen] = useState<boolean>(false);
   const [initialModalRole, setInitialModalRole] = useState<UserRole>('officer');
   const [pendingAdminView, setPendingAdminView] = useState<string>('admin-dashboard');
+  const [selectedSlotToEdit, setSelectedSlotToEdit] = useState<string | null>(null);
 
   // Navigation states:
   // 'landing' | 'kiosk' | 'admin-dashboard' | 'admin-chat' | 'admin-servers' | 'admin-logs' | 'admin-reports' | 'admin-schedule' | 'admin-schedule-editor' | 'schedules' | 'servers'
@@ -210,7 +211,10 @@ export default function App() {
   };
 
   // Central navigation handler with strict role-level security gate
-  const handleNavigate = (view: string) => {
+  const handleNavigate = (view: string, slotId?: string) => {
+    if (slotId) {
+      setSelectedSlotToEdit(slotId);
+    }
     if (isStrictAdminView(view)) {
       // ONLY Admin (highest level) can access
       if (userSession.role === 'admin') {
@@ -500,7 +504,10 @@ export default function App() {
             <AdminBackoffice
               schedule={schedule}
               officers={officers}
-              onUpdateSchedule={setSchedule}
+              onUpdateSchedule={(newSched) => {
+                setSchedule(newSched);
+                setOfficers(prev => syncOfficerDutyCounts(newSched, prev));
+              }}
               onAddLog={handleAddLog}
               onOpenCodeExport={() => setIsCodeExportOpen(true)}
               onOpenServerMgmt={() => setCurrentView('admin-servers')}
@@ -528,6 +535,7 @@ export default function App() {
             <AdminScheduleManager
               schedule={schedule}
               officers={officers}
+              initialSlotId={selectedSlotToEdit}
               onCreateSlot={handleCreateScheduleSlot}
               onUpdateSlot={handleUpdateScheduleSlot}
               onDeleteSlot={handleDeleteScheduleSlot}

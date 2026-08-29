@@ -16,7 +16,8 @@ import {
   Clock,
   MapPin,
   Table as TableIcon,
-  Award
+  Award,
+  Edit3
 } from 'lucide-react';
 import { playAudioFeedback } from '../utils/sound';
 
@@ -26,7 +27,7 @@ interface ScheduleCalendarViewProps {
   patternConfig: SchedulePatternConfig;
   rulesConfig: AssignmentRulesConfig;
   schedule?: ScheduleSlot[];
-  onNavigate?: (view: string) => void;
+  onNavigate?: (view: string, slotId?: string) => void;
   onSavePatternConfig?: (config: SchedulePatternConfig) => void;
   onSaveRulesConfig?: (rules: AssignmentRulesConfig) => void;
   onAddLeaveRecord?: (leave: LeaveRecord) => void;
@@ -54,6 +55,7 @@ interface CalendarDayItem {
   dayName: string; // 'Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'
   isCurrentMonth: boolean;
   sessions: {
+    slotId?: string;
     waktu: 'Pagi' | 'Sore' | 'Malam';
     jam: string;
     lokasi: 'Gereja Utama' | 'Kapel 1' | 'Kapel 2';
@@ -110,9 +112,11 @@ export const ScheduleCalendarView: React.FC<ScheduleCalendarViewProps> = ({
           const lokasi: 'Gereja Utama' | 'Kapel 1' = slot.location.toLowerCase().includes('kapel') ? 'Kapel 1' : 'Gereja Utama';
 
           slotsByDay[dayNum].push({
+            slotId: slot.id,
             waktu,
             jam: timeClean,
             lokasi,
+            status: slot.status,
             koorlap: koorlaps.length > 0 ? koorlaps.join(' & ') : undefined,
             asisten: asisten.length > 0 ? asisten : assignedOfficers.map(o => o.shortName || o.name)
           });
@@ -398,13 +402,33 @@ export const ScheduleCalendarView: React.FC<ScheduleCalendarViewProps> = ({
                               <span className="px-2 py-0.5 rounded-md font-black text-[11px] bg-slate-900 text-white font-mono">
                                 ⏰ {sess.jam} WIB
                               </span>
-                              <span className={`px-2 py-0.5 rounded-md font-bold text-[10px] border ${
-                                isKapel 
-                                  ? 'bg-blue-50 text-blue-800 border-blue-200' 
-                                  : 'bg-rose-50 text-rose-800 border-rose-200'
-                              }`}>
-                                {sess.lokasi}
-                              </span>
+                              <div className="flex items-center gap-1.5">
+                                <span className={`px-2 py-0.5 rounded-md font-bold text-[10px] border ${
+                                  isKapel 
+                                    ? 'bg-blue-50 text-blue-800 border-blue-200' 
+                                    : 'bg-rose-50 text-rose-800 border-rose-200'
+                                }`}>
+                                  {sess.lokasi}
+                                </span>
+                                {sess.status === 'Tukar Jadwal' && (
+                                  <span className="text-[9px] px-1.5 py-0.5 rounded font-black bg-purple-100 text-purple-900 border border-purple-300">
+                                    🔄 Tukar
+                                  </span>
+                                )}
+                                {onNavigate && sess.slotId && (
+                                  <button
+                                    onClick={() => {
+                                      playAudioFeedback('tap');
+                                      onNavigate('admin-schedule-editor', sess.slotId);
+                                    }}
+                                    className="px-1.5 py-0.5 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 rounded-lg text-[10px] font-bold flex items-center gap-1 transition-colors cursor-pointer"
+                                    title="Edit Jadwal Misa Ini"
+                                  >
+                                    <Edit3 className="w-2.5 h-2.5 text-amber-700" />
+                                    <span>Edit</span>
+                                  </button>
+                                )}
+                              </div>
                             </div>
 
                             {sess.koorlap && (
@@ -475,11 +499,30 @@ export const ScheduleCalendarView: React.FC<ScheduleCalendarViewProps> = ({
                               <span className="font-bold text-slate-900">
                                 ● {sess.waktu} ({sess.jam})
                               </span>
-                              <span className={`text-[9px] px-1 py-0.2 rounded font-bold ${
-                                isKapel ? 'bg-blue-100 text-blue-800' : 'bg-rose-100 text-rose-800'
-                              }`}>
-                                {isKapel ? 'Kapel' : 'Gereja'}
-                              </span>
+                              <div className="flex items-center gap-1">
+                                <span className={`text-[10px] px-2 py-0.5 rounded font-bold ${
+                                  isKapel ? 'bg-blue-100 text-blue-800' : 'bg-rose-100 text-rose-800'
+                                }`}>
+                                  {isKapel ? 'Kapel JPII' : 'Gereja'}
+                                </span>
+                                {sess.status === 'Tukar Jadwal' && (
+                                  <span className="text-[8px] px-1 py-0.2 rounded font-black bg-purple-100 text-purple-900 border border-purple-300">
+                                    🔄 Tukar
+                                  </span>
+                                )}
+                                {onNavigate && sess.slotId && (
+                                  <button
+                                    onClick={() => {
+                                      playAudioFeedback('tap');
+                                      onNavigate('admin-schedule-editor', sess.slotId);
+                                    }}
+                                    className="p-0.5 hover:bg-amber-100 text-slate-400 hover:text-amber-900 rounded transition-colors cursor-pointer"
+                                    title="Edit Sesi Misa Ini"
+                                  >
+                                    <Edit3 className="w-3 h-3" />
+                                  </button>
+                                )}
+                              </div>
                             </div>
 
                             {sess.koorlap && (
