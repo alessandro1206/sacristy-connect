@@ -109,7 +109,12 @@ export const ScheduleCalendarView: React.FC<ScheduleCalendarViewProps> = ({
           const timeClean = slot.massTime.replace(' WIB', '').trim();
           const hour = parseInt(timeClean.split(':')[0], 10) || 18;
           const waktu: 'Pagi' | 'Sore' = hour < 12 ? 'Pagi' : 'Sore';
-          const lokasi: 'Gereja Utama' | 'Kapel 1' = slot.location.toLowerCase().includes('kapel') ? 'Kapel 1' : 'Gereja Utama';
+          const locLower = slot.location.toLowerCase();
+          const lokasi: 'Gereja Utama' | 'Kapel 1' | 'RS EH (Korsa)' = (locLower.includes('rs') || locLower.includes('korsa') || locLower.includes('rumah sakit'))
+            ? 'RS EH (Korsa)'
+            : locLower.includes('kapel')
+            ? 'Kapel 1'
+            : 'Gereja Utama';
 
           slotsByDay[dayNum].push({
             slotId: slot.id,
@@ -489,21 +494,33 @@ export const ScheduleCalendarView: React.FC<ScheduleCalendarViewProps> = ({
                     {/* Sessions Inside Day */}
                     <div className="space-y-1.5 flex-1">
                       {day.sessions.map((sess, sIdx) => {
-                        const isKapel = sess.lokasi.toLowerCase().includes('kapel');
+                        const isKapel = sess.lokasi === 'Kapel 1';
+                        const isRs = sess.lokasi === 'RS EH (Korsa)';
+
                         return (
                           <div 
                             key={sIdx}
-                            className="bg-slate-50 border border-slate-200/80 rounded-xl p-1.5 text-[11px] space-y-1 shadow-2xs"
+                            className={`p-2 rounded-xl border text-xs space-y-1 ${
+                              isRs
+                                ? 'bg-emerald-50/70 border-emerald-200 text-emerald-950'
+                                : isKapel
+                                ? 'bg-blue-50/60 border-blue-200 text-blue-950'
+                                : 'bg-rose-50/50 border-rose-200 text-[#5B1414]'
+                            }`}
                           >
-                            <div className="flex items-center justify-between">
-                              <span className="font-bold text-slate-900">
+                            <div className="flex items-center justify-between font-bold">
+                              <span className="text-[11px] flex items-center gap-1 font-mono text-[#6E5A4B]">
                                 ● {sess.waktu} ({sess.jam})
                               </span>
                               <div className="flex items-center gap-1">
                                 <span className={`text-[10px] px-2 py-0.5 rounded font-bold ${
-                                  isKapel ? 'bg-blue-100 text-blue-800' : 'bg-rose-100 text-rose-800'
+                                  isRs
+                                    ? 'bg-emerald-100 text-emerald-900 border border-emerald-300'
+                                    : isKapel
+                                    ? 'bg-blue-100 text-blue-800'
+                                    : 'bg-rose-100 text-rose-800'
                                 }`}>
-                                  {isKapel ? 'Kapel JPII' : 'Gereja'}
+                                  {isRs ? 'RS EH (Korsa)' : isKapel ? 'Kapel JPII' : 'Gereja'}
                                 </span>
                                 {sess.status === 'Tukar Jadwal' && (
                                   <span className="text-[8px] px-1 py-0.2 rounded font-black bg-purple-100 text-purple-900 border border-purple-300">

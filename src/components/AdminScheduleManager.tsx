@@ -47,7 +47,7 @@ export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
 }) => {
   // Filters and search states
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [locationFilter, setLocationFilter] = useState<'all' | 'gereja' | 'kapel'>('all');
+  const [locationFilter, setLocationFilter] = useState<'all' | 'gereja' | 'kapel' | 'rs'>('all');
   const [dateFilter, setDateFilter] = useState<string>('all');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
@@ -113,6 +113,7 @@ export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
       // Location filter
       if (locationFilter === 'gereja' && !slot.location.toLowerCase().includes('gereja')) return false;
       if (locationFilter === 'kapel' && !slot.location.toLowerCase().includes('kapel')) return false;
+      if (locationFilter === 'rs' && !(slot.location.toLowerCase().includes('rs') || slot.location.toLowerCase().includes('rumah sakit') || slot.location.toLowerCase().includes('korsa'))) return false;
 
       // Date filter
       if (dateFilter !== 'all' && slot.date !== dateFilter) return false;
@@ -424,45 +425,56 @@ export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
       </div>
 
       {/* Summary KPI Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-white border border-[#D9CEBA] p-4 rounded-2xl shadow-xs">
-          <div className="flex items-center justify-between text-[#6E5A4B] mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider">Total Sesi Misa</span>
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+        <div className="bg-white border border-[#D9CEBA] p-3.5 rounded-2xl shadow-xs">
+          <div className="flex items-center justify-between text-[#6E5A4B] mb-1.5">
+            <span className="text-[11px] font-bold uppercase tracking-wider">Total Sesi Misa</span>
             <Calendar className="w-4 h-4 text-[#5B1414]" />
           </div>
-          <p className="text-2xl font-black text-[#5B1414]">{schedule.length}</p>
-          <span className="text-[11px] text-emerald-700 font-semibold mt-1 block">September 2026</span>
+          <p className="text-xl font-black text-[#5B1414]">{schedule.length}</p>
+          <span className="text-[10px] text-emerald-700 font-semibold mt-0.5 block">September 2026</span>
         </div>
 
-        <div className="bg-white border border-[#D9CEBA] p-4 rounded-2xl shadow-xs">
-          <div className="flex items-center justify-between text-[#6E5A4B] mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider">Total Slot Petugas</span>
+        <div className="bg-white border border-[#D9CEBA] p-3.5 rounded-2xl shadow-xs">
+          <div className="flex items-center justify-between text-[#6E5A4B] mb-1.5">
+            <span className="text-[11px] font-bold uppercase tracking-wider">Total Slot Petugas</span>
             <Users className="w-4 h-4 text-amber-600" />
           </div>
-          <p className="text-2xl font-black text-amber-700">{totalOfficersAssigned}</p>
-          <span className="text-[11px] text-[#6E5A4B] font-medium mt-1 block">Penugasan Terjadwal</span>
+          <p className="text-xl font-black text-amber-700">{totalOfficersAssigned}</p>
+          <span className="text-[10px] text-[#6E5A4B] font-medium mt-0.5 block">Penugasan Terjadwal</span>
         </div>
 
-        <div className="bg-white border border-[#D9CEBA] p-4 rounded-2xl shadow-xs">
-          <div className="flex items-center justify-between text-[#6E5A4B] mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider">Gereja Utama</span>
+        <div className="bg-white border border-[#D9CEBA] p-3.5 rounded-2xl shadow-xs">
+          <div className="flex items-center justify-between text-[#6E5A4B] mb-1.5">
+            <span className="text-[11px] font-bold uppercase tracking-wider">Gereja Utama</span>
             <MapPin className="w-4 h-4 text-[#5B1414]" />
           </div>
-          <p className="text-2xl font-black text-[#5B1414]">
+          <p className="text-xl font-black text-[#5B1414]">
             {schedule.filter(s => s.location.toLowerCase().includes('gereja')).length} Sesi
           </p>
-          <span className="text-[11px] text-[#6E5A4B] font-medium mt-1 block">Paroki Santo Yakobus</span>
+          <span className="text-[10px] text-[#6E5A4B] font-medium mt-0.5 block">Paroki Santo Yakobus</span>
         </div>
 
-        <div className="bg-white border border-[#D9CEBA] p-4 rounded-2xl shadow-xs">
-          <div className="flex items-center justify-between text-[#6E5A4B] mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider">Kapel John Paul II</span>
+        <div className="bg-white border border-[#D9CEBA] p-3.5 rounded-2xl shadow-xs">
+          <div className="flex items-center justify-between text-[#6E5A4B] mb-1.5">
+            <span className="text-[11px] font-bold uppercase tracking-wider">Kapel JPII</span>
             <MapPin className="w-4 h-4 text-blue-600" />
           </div>
-          <p className="text-2xl font-black text-blue-800">
+          <p className="text-xl font-black text-blue-800">
             {schedule.filter(s => s.location.toLowerCase().includes('kapel')).length} Sesi
           </p>
-          <span className="text-[11px] text-[#6E5A4B] font-medium mt-1 block">Misa Wilayah &amp; Khusus</span>
+          <span className="text-[10px] text-[#6E5A4B] font-medium mt-0.5 block">Misa Wilayah &amp; Khusus</span>
+        </div>
+
+        <div className="bg-white border border-[#D9CEBA] p-3.5 rounded-2xl shadow-xs">
+          <div className="flex items-center justify-between text-[#6E5A4B] mb-1.5">
+            <span className="text-[11px] font-bold uppercase tracking-wider">Korsa &amp; RS EH</span>
+            <MapPin className="w-4 h-4 text-emerald-600" />
+          </div>
+          <p className="text-xl font-black text-emerald-800">
+            {schedule.filter(s => s.location.toLowerCase().includes('rs') || s.location.toLowerCase().includes('rumah sakit') || s.location.toLowerCase().includes('korsa')).length} Sesi
+          </p>
+          <span className="text-[10px] text-emerald-700 font-medium mt-0.5 block">Pelayanan Korsa &amp; RS</span>
         </div>
       </div>
 
@@ -517,6 +529,14 @@ export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
               }`}
             >
               Kapel JPII
+            </button>
+            <button
+              onClick={() => { playAudioFeedback('tap'); setLocationFilter('rs'); }}
+              className={`px-3 py-1.5 rounded-lg font-bold transition-all ${
+                locationFilter === 'rs' ? 'bg-emerald-800 text-white shadow-xs' : 'text-[#6E5A4B] hover:text-[#2B241E]'
+              }`}
+            >
+              Korsa &amp; RS EH
             </button>
           </div>
 
@@ -759,6 +779,7 @@ export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
                   >
                     <option value="Gereja Paroki Santo Yakobus">Gereja Paroki Santo Yakobus</option>
                     <option value="Kapel John Paul II">Kapel John Paul II</option>
+                    <option value="Rumah Sakit EH">Rumah Sakit EH (Korsa &amp; RS)</option>
                   </select>
                   <div className="mt-2 flex items-center justify-between text-[11px]">
                     <span className="text-[#6E5A4B] font-bold">Target Petugas:</span>
@@ -1016,6 +1037,7 @@ export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
                   >
                     <option value="Gereja Paroki Santo Yakobus">Gereja Paroki Santo Yakobus</option>
                     <option value="Kapel John Paul II">Kapel John Paul II</option>
+                    <option value="Rumah Sakit EH">Rumah Sakit EH (Korsa &amp; RS)</option>
                   </select>
                   <div className="mt-2 flex items-center justify-between text-[11px]">
                     <span className="text-[#6E5A4B] font-bold">Target Petugas:</span>
