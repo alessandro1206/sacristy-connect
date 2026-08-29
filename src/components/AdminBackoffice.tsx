@@ -119,14 +119,21 @@ Alasan : Keperluan keluarga`;
     detailNotes: 'Bpk. Hengky (#105) bertukar jadwal dari KJP 2 (17:00) dengan Bpk. Widyanto (#092) di Gereja Utama (18:00).'
   });
 
-  // Table rows for "Jadwal Hari Ini / Rekap Tukar"
   const [todayRows, setTodayRows] = useState<TodayScheduleRow[]>([
     {
-      id: 't-1',
+      id: 't-1a',
       jamMisa: '13 Sep 17:00 WIB',
       lokasi: 'Kapel (KJP 2)',
       petugasOriginal: 'Mikael Hengky Pratama (#105)',
       petugasPengganti: 'Widyanto Setiawan Wijaya (#092)',
+      status: 'Swapped'
+    },
+    {
+      id: 't-1b',
+      jamMisa: '13 Sep 18:00 WIB',
+      lokasi: 'Gereja Utama',
+      petugasOriginal: 'Widyanto Setiawan Wijaya (#092)',
+      petugasPengganti: 'Mikael Hengky Pratama (#105)',
       status: 'Swapped'
     },
     {
@@ -251,11 +258,9 @@ Alasan : Keperluan keluarga`;
       }
 
       let slotB: ScheduleSlot | undefined;
-      if (swapType === 'TUKAR') {
-        slotB = schedule.find(s => hasOfficerInSlot(s, idB3) && slotMatchesDate(s, parsedDayNum) && (timeB ? slotMatchesTime(s, timeB) : true) && s.id !== slotA?.id);
-        if (!slotB) {
-          slotB = schedule.find(s => hasOfficerInSlot(s, idB3) && s.id !== slotA?.id);
-        }
+      slotB = schedule.find(s => hasOfficerInSlot(s, idB3) && slotMatchesDate(s, parsedDayNum) && (timeB ? slotMatchesTime(s, timeB) : true) && s.id !== slotA?.id);
+      if (!slotB) {
+        slotB = schedule.find(s => hasOfficerInSlot(s, idB3) && s.id !== slotA?.id);
       }
 
       const effectiveTimeA = slotA ? slotA.massTime : (timeA ? `${timeA} WIB` : '17:00 WIB');
@@ -272,8 +277,8 @@ Alasan : Keperluan keluarga`;
         original: nameA,
         pengganti: nameB,
         tanggal: slotA ? slotA.displayDate : parsedDate,
-        jamMisa: swapType === 'TUKAR' ? `${effectiveTimeA} ⇄ ${effectiveTimeB}` : effectiveTimeA,
-        lokasi: swapType === 'TUKAR' ? `${effectiveLocA} ⇄ ${effectiveLocB}` : effectiveLocA,
+        jamMisa: (swapType === 'TUKAR' || slotB) ? `${effectiveTimeA} ⇄ ${effectiveTimeB}` : effectiveTimeA,
+        lokasi: (swapType === 'TUKAR' || slotB) ? `${effectiveLocA} ⇄ ${effectiveLocB}` : effectiveLocA,
         action: actionLabel,
         swapType,
         detailNotes
@@ -322,8 +327,8 @@ Alasan : Keperluan keluarga`;
             }
           }
 
-          // Mutate Slot B: Replace Officer B with Officer A (if mutual swap)
-          if (swapType === 'TUKAR' && slotB && slot.id === slotB.id) {
+          // Mutate Slot B: Replace Officer B with Officer A (for both Tukar & Ganti Jadwal if slotB exists)
+          if (slotB && slot.id === slotB.id) {
             const idx = (slot.serverIds || []).findIndex(sid => sid && parseInt(sid, 10) === parseInt(idB3, 10));
             if (idx !== -1) {
               modifiedSlotsCount++;
@@ -338,7 +343,7 @@ Alasan : Keperluan keluarga`;
               newServerNames[idx] = officerA!.name;
               newIsSubstituted[idx] = true;
               newOriginalNames[idx] = officerB!.name;
-              newServerNotes[idx] = `(Tukar: #${idB3})`;
+              newServerNotes[idx] = swapType === 'TUKAR' ? `(Tukar: #${idB3})` : `(Sub: #${idA3})`;
 
               // Transfer Koorlap status if officer B was Koorlap in this slot
               const kIdx = newKoorlapIds.findIndex(kid => parseInt(kid, 10) === parseInt(idB3, 10));
@@ -365,8 +370,8 @@ Alasan : Keperluan keluarga`;
         onUpdateSchedule(updatedSchedule);
       }
 
-      // 9. Update Today's Schedule Table
-      setTodayRows(prev => [
+      // 9. Update Today's Schedule Table (Add both changes if 2 slots were updated)
+      const newRows: TodayScheduleRow[] = [
         {
           id: 't-' + Date.now(),
           jamMisa: `${slotA ? slotA.displayDate.split(',')[1] || parsedDate : parsedDate} ${effectiveTimeA}`,
@@ -374,9 +379,21 @@ Alasan : Keperluan keluarga`;
           petugasOriginal: nameA,
           petugasPengganti: nameB,
           status: swapType === 'TUKAR' ? 'Swapped' : 'Updated'
-        },
-        ...prev
-      ]);
+        }
+      ];
+
+      if (slotB) {
+        newRows.push({
+          id: 't-b-' + Date.now(),
+          jamMisa: `${slotB ? slotB.displayDate.split(',')[1] || parsedDate : parsedDate} ${effectiveTimeB}`,
+          lokasi: effectiveLocB,
+          petugasOriginal: nameB,
+          petugasPengganti: nameA,
+          status: swapType === 'TUKAR' ? 'Swapped' : 'Updated'
+        });
+      }
+
+      setTodayRows(prev => [...newRows, ...prev]);
 
       // 10. Add to Live Feed & System Log
       const now = new Date();

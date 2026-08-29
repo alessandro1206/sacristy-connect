@@ -819,12 +819,14 @@ export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
                             <button
                               type="button"
                               onClick={e => toggleOfficerKoorlap(sid, e)}
-                              className={`p-0.5 rounded text-[10px] font-black uppercase ${
-                                isKoorlap ? 'bg-amber-600 text-white' : 'bg-[#EAE2D5] text-[#6E5A4B] hover:bg-amber-300'
+                              className={`px-1.5 py-0.5 rounded text-[10px] font-black uppercase transition-colors ${
+                                isKoorlap 
+                                  ? 'bg-amber-600 text-white hover:bg-amber-700' 
+                                  : 'bg-[#EAE2D5] text-[#6E5A4B] hover:bg-amber-300 hover:text-amber-950'
                               }`}
-                              title={isKoorlap ? 'Lepas status Koorlap' : 'Jadikan Koorlap Misa ini'}
+                              title={isKoorlap ? 'Status: Koorlap (Klik untuk ubah jadi AI)' : 'Status: AI (Klik untuk jadikan Koorlap)'}
                             >
-                              Koorlap
+                              {isKoorlap ? 'KOORLAP' : 'AI'}
                             </button>
                             <button
                               type="button"
@@ -1090,12 +1092,14 @@ export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
                             <button
                               type="button"
                               onClick={e => toggleOfficerKoorlap(sid, e)}
-                              className={`p-0.5 rounded text-[10px] font-black uppercase ${
-                                isKoorlap ? 'bg-amber-600 text-white' : 'bg-[#EAE2D5] text-[#6E5A4B] hover:bg-amber-300'
+                              className={`px-1.5 py-0.5 rounded text-[10px] font-black uppercase transition-colors ${
+                                isKoorlap 
+                                  ? 'bg-amber-600 text-white hover:bg-amber-700' 
+                                  : 'bg-[#EAE2D5] text-[#6E5A4B] hover:bg-amber-300 hover:text-amber-950'
                               }`}
-                              title={isKoorlap ? 'Lepas status Koorlap' : 'Jadikan Koorlap Misa ini'}
+                              title={isKoorlap ? 'Status: Koorlap (Klik untuk ubah jadi AI)' : 'Status: AI (Klik untuk jadikan Koorlap)'}
                             >
-                              Koorlap
+                              {isKoorlap ? 'KOORLAP' : 'AI'}
                             </button>
                             <button
                               type="button"
