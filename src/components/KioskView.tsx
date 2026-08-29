@@ -138,18 +138,14 @@ const MASS_SESSIONS: MassSessionChoice[] = [
         "name": "Stevanus Budianto"
       },
       {
-        "id": "038",
-        "name": "Yudi Wijaya"
-      },
-      {
         "id": "046",
         "name": "Mario Christiano Chandra"
       }
     ],
-    "koorlapCount": 3,
-    "koorlapDisplay": "Stevanus Budianto & Yudi Wijaya & Mario Christiano Chandra",
+    "koorlapCount": 2,
+    "koorlapDisplay": "Stevanus Budianto & Mario Christiano Chandra",
     "location": "GEREJA PAROKI SANTO YAKOBUS",
-    "description": "Misa SABTU (17 Petugas Terjadwal)"
+    "description": "Misa SABTU (16 Petugas Terjadwal)"
   },
   {
     "id": "sch-sep-06",
@@ -158,11 +154,16 @@ const MASS_SESSIONS: MassSessionChoice[] = [
     "dayLabel": "SABTU",
     "dateDisplay": "Sabtu, 05 September 2026",
     "timeDisplay": "18:00 WIB",
-    "koorlaps": [],
-    "koorlapCount": 0,
-    "koorlapDisplay": "Tidak Ada Koorlap Khusus",
+    "koorlaps": [
+      {
+        "id": "038",
+        "name": "Yudi Wijaya"
+      }
+    ],
+    "koorlapCount": 1,
+    "koorlapDisplay": "Yudi Wijaya",
     "location": "KAPEL JOHN PAUL II",
-    "description": "Misa SABTU (9 Petugas Terjadwal)"
+    "description": "Misa SABTU (14 Petugas Terjadwal)"
   },
   {
     "id": "sch-sep-07",
