@@ -3160,7 +3160,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "koorlapIds": [
       "035",
-      "046"
+      "046",
+      "149"
     ],
     "serverRoles": [
       "AI",
@@ -3175,7 +3176,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "AI",
+      "KORLAP",
       "AI",
       "AI",
       "AI"
@@ -4167,7 +4168,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "koorlapIds": [
       "054",
-      "064"
+      "064",
+      "114"
     ],
     "serverRoles": [
       "AI",
@@ -4178,7 +4180,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "KORLAP",
       "AI",
       "AI",
-      "AI",
+      "KORLAP",
       "AI",
       "AI",
       "AI",
