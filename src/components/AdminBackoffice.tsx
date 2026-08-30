@@ -349,7 +349,7 @@ Lokasi : [Lokasi]`;
       if (mode === 'TUKAR_JADWAL') {
         const allHashMatches = Array.from(text.matchAll(/#\d{1,3}/gi));
         if (allHashMatches.length >= 2) {
-          const idx2 = allHashMatches[1].index ?? text.length;
+          const idx2 = (allHashMatches[1] as RegExpExecArray).index ?? text.length;
           let seg1 = text.slice(0, idx2);
           seg1 = seg1.replace(/^\s*(?:tukar\s+jadwal|tukar|menggantikan|digantikan)\s*/i, '');
           const seg2 = text.slice(idx2);

@@ -46,7 +46,8 @@ export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
   onCreateSlot,
   onUpdateSlot,
   onDeleteSlot,
-  onAddLog
+  onAddLog,
+  onBulkUpdateSchedule
 }) => {
   // Filters and search states
   const [searchQuery, setSearchQuery] = useState<string>('');

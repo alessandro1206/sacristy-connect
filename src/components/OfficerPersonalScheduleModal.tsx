@@ -13,7 +13,8 @@ import {
   Sparkles,
   ArrowRight,
   LogOut,
-  User
+  User,
+  RefreshCw
 } from 'lucide-react';
 
 import { Officer, ScheduleSlot, UserSession, UserRole } from '../types';
