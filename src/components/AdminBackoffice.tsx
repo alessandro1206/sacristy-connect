@@ -96,6 +96,7 @@ Misa jam : [Jam Misa]
 Lokasi : [Lokasi]`;
 
   const [inputMessage, setInputMessage] = useState<string>(PRESET_REAL_TUKAR);
+  const [parseError, setParseError] = useState<{ title: string; reason: string; fixHint: string } | null>(null);
 
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
 
@@ -316,7 +317,7 @@ Lokasi : [Lokasi]`;
       if (!dtOriginal.locStr) dtOriginal.locStr = globalDt.locStr;
       if (!dtReplacement.dayNum) dtReplacement.dayNum = dtOriginal.dayNum;
       if (!dtReplacement.timeStr) dtReplacement.timeStr = dtOriginal.timeStr;
-      if (!dtReplacement.locStr) dtReplacement.locStr = dtOriginal.locStr;
+      setParseError(null);
 
       // Global fallback if one or both officers were not parsed
       if (!officerOriginal || !officerReplacement) {
@@ -336,7 +337,13 @@ Lokasi : [Lokasi]`;
       }
 
       if (!officerOriginal || !officerReplacement) {
-        alert('Mohon sebutkan nama atau nomor ID petugas yang digantikan dan petugas pengganti secara jelas dalam pesan WhatsApp.');
+        const missingCount = !officerOriginal && !officerReplacement ? 'kedua nomor ID petugas' : (!officerOriginal ? 'nomor ID Petugas 1' : 'nomor ID Petugas 2');
+        setParseError({
+          title: 'Nomor ID Petugas Tidak Terdeteksi',
+          reason: `AI tidak menemukan ${missingCount} (angka 1 s/d 170) di dalam pesan WhatsApp.`,
+          fixHint: 'Gunakan format nomor ID seperti: #24, #56 atau no. 24, no. 56 agar AI dapat mengenali petugas secara presisi.'
+        });
+        playAudioFeedback('warning');
         setIsProcessing(false);
         return;
       }
@@ -408,6 +415,29 @@ Lokasi : [Lokasi]`;
       const slotB = swapType === 'TUKAR' 
         ? findOfficerSlot(officerReplacement, dtReplacement.dayNum, dtReplacement.timeStr, dtReplacement.locStr, slotA?.id)
         : undefined;
+
+      // Validate slot findings
+      if (!slotA) {
+        setParseError({
+          title: `Jadwal Misa Petugas #${idA3} Tidak Ditemukan`,
+          reason: `Tidak ditemukan sesi misa yang cocok untuk ${nameA} pada tanggal ${dtOriginal.dayNum || '?'} September 2026 jam ${dtOriginal.timeStr || '?'}.`,
+          fixHint: `Pastikan tanggal (1-30 Sep 2026), jam misa (misal 18:00 WIB), dan lokasi (Kapel John Paul II / Gereja Paroki Santo Yakobus) sudah sesuai dengan jadwal.`
+        });
+        playAudioFeedback('warning');
+        setIsProcessing(false);
+        return;
+      }
+
+      if (swapType === 'TUKAR' && !slotB) {
+        setParseError({
+          title: `Jadwal Misa Petugas #${idB3} Tidak Ditemukan`,
+          reason: `Tidak ditemukan sesi misa kedua untuk ${nameB} pada tanggal ${dtReplacement.dayNum || '?'} September 2026 jam ${dtReplacement.timeStr || '?'}.`,
+          fixHint: `Untuk penukaran 2 arah (Tukar Jadwal), pastikan kedua tanggal dan jam misa disebutkan (contoh: #24 tgl 1 Sep 18:00 tukar dgn #56 tgl 4 Sep 18:00).`
+        });
+        playAudioFeedback('warning');
+        setIsProcessing(false);
+        return;
+      }
 
       const effectiveTimeA = slotA ? slotA.massTime : (dtOriginal.timeStr ? `${dtOriginal.timeStr} WIB` : '18:00 WIB');
       const effectiveTimeB = slotB ? slotB.massTime : (dtReplacement.timeStr ? `${dtReplacement.timeStr} WIB` : effectiveTimeA);
@@ -653,7 +683,7 @@ Lokasi : [Lokasi]`;
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <button
                     type="button"
-                    onClick={() => setInputMessage(PRESET_REAL_TUKAR)}
+                    onClick={() => { setInputMessage(PRESET_REAL_TUKAR); setParseError(null); }}
                     className="px-2.5 py-2 bg-[#FAF7F2] hover:bg-[#F3EDE2] text-[#5B1414] border border-[#D9CEBA] rounded-xl text-[11px] font-bold transition-all flex items-center gap-1.5 text-left cursor-pointer shadow-2xs"
                   >
                     <ArrowRightLeft className="w-3.5 h-3.5 text-[#7c191e] shrink-0" />
@@ -661,7 +691,7 @@ Lokasi : [Lokasi]`;
                   </button>
                   <button
                     type="button"
-                    onClick={() => setInputMessage(PRESET_MENGGANTIKAN)}
+                    onClick={() => { setInputMessage(PRESET_MENGGANTIKAN); setParseError(null); }}
                     className="px-2.5 py-2 bg-[#FAF7F2] hover:bg-[#F3EDE2] text-[#5B1414] border border-[#D9CEBA] rounded-xl text-[11px] font-bold transition-all flex items-center gap-1.5 text-left cursor-pointer shadow-2xs"
                   >
                     <RotateCw className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
@@ -669,7 +699,7 @@ Lokasi : [Lokasi]`;
                   </button>
                   <button
                     type="button"
-                    onClick={() => setInputMessage(PRESET_REAL_REPLACE)}
+                    onClick={() => { setInputMessage(PRESET_REAL_REPLACE); setParseError(null); }}
                     className="px-2.5 py-1.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 rounded-lg text-[10px] font-semibold transition-all flex items-center gap-1 cursor-pointer"
                   >
                     <RotateCw className="w-3 h-3 text-slate-500" />
@@ -677,7 +707,7 @@ Lokasi : [Lokasi]`;
                   </button>
                   <button
                     type="button"
-                    onClick={() => setInputMessage(PRESET_TUKAR)}
+                    onClick={() => { setInputMessage(PRESET_TUKAR); setParseError(null); }}
                     className="px-2.5 py-1.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 rounded-lg text-[10px] font-semibold transition-all flex items-center gap-1 cursor-pointer"
                   >
                     <ArrowRightLeft className="w-3 h-3 text-slate-500" />
@@ -690,7 +720,7 @@ Lokasi : [Lokasi]`;
               <div className="space-y-2 pt-1">
                 <textarea
                   value={inputMessage}
-                  onChange={(e) => setInputMessage(e.target.value)}
+                  onChange={(e) => { setInputMessage(e.target.value); if (parseError) setParseError(null); }}
                   placeholder="Tempelkan pesan WA grup tukar tugas di sini..."
                   rows={6}
                   className="w-full p-3.5 bg-white border border-[#d6cbbe] rounded-xl text-xs text-[#2b241e] placeholder:text-[#9e9488] focus:outline-none focus:ring-2 focus:ring-[#7c191e]/40 focus:border-[#7c191e] transition-all resize-none leading-relaxed font-mono"
@@ -704,6 +734,21 @@ Lokasi : [Lokasi]`;
                   <RotateCw className={`w-4 h-4 ${isProcessing ? 'animate-spin' : ''}`} />
                   <span>{isProcessing ? 'Memproses Pesan...' : 'PROSES & UPDATE JADWAL SAKRISTI'}</span>
                 </button>
+
+                {parseError && (
+                  <div className="p-3.5 bg-rose-50 border border-rose-300 rounded-xl space-y-1.5 animate-fadeIn">
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-rose-800 uppercase tracking-wide">
+                      <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+                      <span>{parseError.title}</span>
+                    </div>
+                    <p className="text-xs text-rose-950 leading-relaxed font-medium">
+                      ❌ {parseError.reason}
+                    </p>
+                    <p className="text-[11px] text-rose-800 bg-rose-100/70 p-2 rounded-lg leading-relaxed font-medium">
+                      💡 <strong>Solusi:</strong> {parseError.fixHint}
+                    </p>
+                  </div>
+                )}
               </div>
 
 
