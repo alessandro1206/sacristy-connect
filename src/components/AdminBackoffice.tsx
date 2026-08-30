@@ -363,7 +363,7 @@ Lokasi : [Lokasi]`;
         dtSecond = dtAll;
       }
 
-      // Slot Finder with priority matching
+      // Slot Finder with strict ID number matching
       const findSlotForOfficerOrDate = (
         targetOfficer: Officer,
         dNum: number | null,
@@ -373,11 +373,10 @@ Lokasi : [Lokasi]`;
       ): ScheduleSlot | undefined => {
         const oid = targetOfficer.id.padStart(3, '0');
         
-        // 1. Direct match: check where this officer is currently assigned in schedule
+        // 1. Direct match strictly by officer number ID (in serverIds or serverNotes)
         let candidates = schedule.filter(s => 
           ((s.serverIds || []).some(sid => sid && sid.padStart(3, '0') === oid) ||
-           (s.originalServerNames || []).some(name => name && name.toLowerCase().includes(targetOfficer.name.toLowerCase())) ||
-           (s.serverNotes || []).some(note => note && (note.includes(oid) || note.toLowerCase().includes(targetOfficer.name.toLowerCase())))) &&
+           (s.serverNotes || []).some(note => note && note.includes(oid))) &&
           (!excludeSlotId || s.id !== excludeSlotId)
         );
 
@@ -422,7 +421,7 @@ Lokasi : [Lokasi]`;
       };
 
       // =========================================================================
-      // STEP 4: CONDITIONAL EXECUTION
+      // STEP 4: CONDITIONAL EXECUTION (STRICTLY BY NUMBER ID)
       // =========================================================================
       let modifiedSlotsCount = 0;
 
@@ -434,10 +433,10 @@ Lokasi : [Lokasi]`;
         const slot2 = findSlotForOfficerOrDate(officerSecond, dtSecond.dayNum, dtSecond.timeStr, dtSecond.locStr, slot1?.id);
 
         if (!slot1 || !slot2) {
-          const missingName = !slot1 ? name1 : name2;
+          const missingId = !slot1 ? `#${id1_3}` : `#${id2_3}`;
           setParseError({
             title: 'Sesi Misa Tukar Jadwal Tidak Ditemukan',
-            reason: `Tidak dapat menemukan sesi misa untuk ${missingName} pada tanggal yang dicantumkan.`,
+            reason: `Tidak dapat menemukan sesi misa untuk petugas ${missingId} pada tanggal yang dicantumkan.`,
             fixHint: 'Pastikan kedua sesi misa (tanggal, jam, dan lokasi) sesuai dengan kalender sakristi.'
           });
           playAudioFeedback('warning');
@@ -457,10 +456,7 @@ Lokasi : [Lokasi]`;
           if (slot.id === slot1.id) {
             let targetIdx = (slot.serverIds || []).findIndex(sid => sid && sid.padStart(3, '0') === id1_3);
             if (targetIdx === -1) {
-              targetIdx = (slot.originalServerNames || []).findIndex(name => name && name.toLowerCase().includes(officerFirst.name.toLowerCase()));
-            }
-            if (targetIdx === -1) {
-              targetIdx = (slot.serverNotes || []).findIndex(note => note && (note.includes(id1_3) || note.toLowerCase().includes(officerFirst.name.toLowerCase())));
+              targetIdx = (slot.serverNotes || []).findIndex(note => note && note.includes(id1_3));
             }
             if (targetIdx === -1) targetIdx = 0;
             modifiedSlotsCount++;
@@ -476,7 +472,7 @@ Lokasi : [Lokasi]`;
             newServerNames[targetIdx] = officerSecond.name;
             newIsSubstituted[targetIdx] = true;
             newOriginalNames[targetIdx] = officerFirst.name;
-            newServerNotes[targetIdx] = `Tukar Jadwal: ${id1_3} ${officerFirst.name}`;
+            newServerNotes[targetIdx] = `Tukar Jadwal: #${id1_3} ${officerFirst.name}`;
 
             const kIdx = newKoorlapIds.findIndex(kid => kid.padStart(3, '0') === id1_3);
             if (kIdx !== -1) newKoorlapIds[kIdx] = id2_3;
@@ -497,10 +493,7 @@ Lokasi : [Lokasi]`;
           if (slot.id === slot2.id) {
             let targetIdx = (slot.serverIds || []).findIndex(sid => sid && sid.padStart(3, '0') === id2_3);
             if (targetIdx === -1) {
-              targetIdx = (slot.originalServerNames || []).findIndex(name => name && name.toLowerCase().includes(officerSecond.name.toLowerCase()));
-            }
-            if (targetIdx === -1) {
-              targetIdx = (slot.serverNotes || []).findIndex(note => note && (note.includes(id2_3) || note.toLowerCase().includes(officerSecond.name.toLowerCase())));
+              targetIdx = (slot.serverNotes || []).findIndex(note => note && note.includes(id2_3));
             }
             if (targetIdx === -1) targetIdx = 0;
             modifiedSlotsCount++;
@@ -516,7 +509,7 @@ Lokasi : [Lokasi]`;
             newServerNames[targetIdx] = officerFirst.name;
             newIsSubstituted[targetIdx] = true;
             newOriginalNames[targetIdx] = officerSecond.name;
-            newServerNotes[targetIdx] = `Tukar Jadwal: ${id2_3} ${officerSecond.name}`;
+            newServerNotes[targetIdx] = `Tukar Jadwal: #${id2_3} ${officerSecond.name}`;
 
             const kIdx = newKoorlapIds.findIndex(kid => kid.padStart(3, '0') === id2_3);
             if (kIdx !== -1) newKoorlapIds[kIdx] = id1_3;
@@ -558,7 +551,7 @@ Lokasi : [Lokasi]`;
         if (!targetSlot) {
           setParseError({
             title: `Sesi Misa Petugas #${id2_3} Tidak Ditemukan`,
-            reason: `Tidak ditemukan jadwal misa untuk ${name2} pada tanggal yang dicantumkan.`,
+            reason: `Tidak ditemukan jadwal misa untuk petugas #${id2_3} pada tanggal yang dicantumkan.`,
             fixHint: 'Periksa kembali tanggal dan jam misa tugas yang ingin digantikan.'
           });
           playAudioFeedback('warning');
@@ -572,13 +565,10 @@ Lokasi : [Lokasi]`;
 
         const updatedSchedule = schedule.map(slot => {
           if (slot.id === targetSlot.id) {
-            // Erase second #number and add first #number
+            // Erase second #number and add first #number strictly by ID
             let targetIdx = (slot.serverIds || []).findIndex(sid => sid && sid.padStart(3, '0') === id2_3);
             if (targetIdx === -1) {
-              targetIdx = (slot.originalServerNames || []).findIndex(name => name && name.toLowerCase().includes(officerSecond.name.toLowerCase()));
-            }
-            if (targetIdx === -1) {
-              targetIdx = (slot.serverNotes || []).findIndex(note => note && (note.includes(id2_3) || note.toLowerCase().includes(officerSecond.name.toLowerCase())));
+              targetIdx = (slot.serverNotes || []).findIndex(note => note && note.includes(id2_3));
             }
             if (targetIdx === -1) targetIdx = 0;
             modifiedSlotsCount++;
@@ -623,7 +613,7 @@ Lokasi : [Lokasi]`;
           lokasi: effLoc,
           action: 'Menggantikan (One-Way Replacement)',
           swapType: 'DIGANTIKAN',
-          detailNotes: `MENGGANTIKAN TUGAS:\n• ${name1} menggantikan tugas ${name2} pada sesi (${effDate}, ${effTime} @ ${effLoc}).\n• ${name2} dihapus dari sesi tersebut dan digantikan oleh ${name1}.`
+          detailNotes: `MENGGANTIKAN TUGAS:\n• ${name1} menggantikan tugas ${name2} pada sesi (${effDate}, ${effTime} @ ${effLoc}).\n• Petugas #${id2_3} dihapus dari sesi tersebut dan digantikan oleh #${id1_3}.`
         });
 
       } else if (mode === 'DIGANTIKAN') {
@@ -635,7 +625,7 @@ Lokasi : [Lokasi]`;
         if (!targetSlot) {
           setParseError({
             title: `Sesi Misa Petugas #${id1_3} Tidak Ditemukan`,
-            reason: `Tidak ditemukan jadwal misa untuk ${name1} pada tanggal yang dicantumkan.`,
+            reason: `Tidak ditemukan jadwal misa untuk petugas #${id1_3} pada tanggal yang dicantumkan.`,
             fixHint: 'Periksa kembali tanggal dan jam misa tugas yang ingin digantikan.'
           });
           playAudioFeedback('warning');
@@ -649,13 +639,10 @@ Lokasi : [Lokasi]`;
 
         const updatedSchedule = schedule.map(slot => {
           if (slot.id === targetSlot.id) {
-            // Erase first #number and add second #number
+            // Erase first #number and add second #number strictly by ID
             let targetIdx = (slot.serverIds || []).findIndex(sid => sid && sid.padStart(3, '0') === id1_3);
             if (targetIdx === -1) {
-              targetIdx = (slot.originalServerNames || []).findIndex(name => name && name.toLowerCase().includes(officerFirst.name.toLowerCase()));
-            }
-            if (targetIdx === -1) {
-              targetIdx = (slot.serverNotes || []).findIndex(note => note && (note.includes(id1_3) || note.toLowerCase().includes(officerFirst.name.toLowerCase())));
+              targetIdx = (slot.serverNotes || []).findIndex(note => note && note.includes(id1_3));
             }
             if (targetIdx === -1) targetIdx = 0;
             modifiedSlotsCount++;
@@ -700,7 +687,7 @@ Lokasi : [Lokasi]`;
           lokasi: effLoc,
           action: 'Digantikan (One-Way Replacement)',
           swapType: 'DIGANTIKAN',
-          detailNotes: `DIGANTIKAN:\n• ${name1} pada sesi (${effDate}, ${effTime} @ ${effLoc}) digantikan oleh ${name2}.\n• ${name1} dihapus dari sesi tersebut dan digantikan oleh ${name2}.`
+          detailNotes: `DIGANTIKAN:\n• ${name1} pada sesi (${effDate}, ${effTime} @ ${effLoc}) digantikan oleh ${name2}.\n• Petugas #${id1_3} dihapus dari sesi tersebut dan digantikan oleh #${id2_3}.`
         });
       }
 
