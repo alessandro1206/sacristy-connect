@@ -66,15 +66,25 @@ export const MonthlyScheduleExcelImporterModal: React.FC<MonthlyScheduleExcelImp
   // Initialize rows from currentSchedule or empty template
   const [rows, setRows] = useState<EditableScheduleRow[]>(() => {
     if (currentSchedule && currentSchedule.length > 0) {
-      return currentSchedule.map(s => ({
-        id: s.id || `row-${Math.random()}`,
-        dateStr: s.date,
-        timeStr: s.massTime,
-        locationStr: s.location,
-        koorlapInput: (s.koorlapIds || []).map(k => String(parseInt(k, 10))).join(', '),
-        serversInput: (s.serverIds || []).map(sid => String(parseInt(sid, 10))).join(', '),
-        notesInput: s.serverNotes?.filter(Boolean).join(' | ') || ''
-      }));
+      return currentSchedule.map(s => {
+        // Only keep actual swap / replacement / substitution notes (ignore default role tags)
+        const validNotes = (s.serverNotes || [])
+          .filter(n => n && (
+            n.toLowerCase().includes('tukar') || 
+            n.toLowerCase().includes('menggantikan') || 
+            n.toLowerCase().includes('digantikan')
+          ));
+
+        return {
+          id: s.id || `row-${Math.random()}`,
+          dateStr: s.date,
+          timeStr: s.massTime,
+          locationStr: s.location,
+          koorlapInput: (s.koorlapIds || []).map(k => String(parseInt(k, 10))).join(', '),
+          serversInput: (s.serverIds || []).map(sid => String(parseInt(sid, 10))).join(', '),
+          notesInput: validNotes.join(' | ') || ''
+        };
+      });
     }
     return [];
   });
@@ -113,6 +123,49 @@ export const MonthlyScheduleExcelImporterModal: React.FC<MonthlyScheduleExcelImp
     const dayName = daysIndo[d.getDay()] || 'Hari';
     const monthName = monthsIndo[month] || 'Bulan';
     return `${dayName}, ${String(day).padStart(2, '0')} ${monthName} ${year}`;
+  };
+
+  // Robust universal date parser to ISO (YYYY-MM-DD)
+  const parseAnyDateToISO = (dateVal: string, defaultMonthYear: string): string => {
+    if (!dateVal) return `${defaultMonthYear}-01`;
+    const clean = dateVal.trim();
+
+    // 1. Format YYYY-MM-DD
+    const isoMatch = clean.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+    if (isoMatch) {
+      return `${isoMatch[1]}-${isoMatch[2].padStart(2, '0')}-${isoMatch[3].padStart(2, '0')}`;
+    }
+
+    // 2. Format DD/MM/YYYY or DD-MM-YYYY
+    const slashMatch = clean.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
+    if (slashMatch) {
+      return `${slashMatch[3]}-${slashMatch[2].padStart(2, '0')}-${slashMatch[1].padStart(2, '0')}`;
+    }
+
+    // 3. Format Indonesian text like "Selasa, 01 September 2026" or "1 September"
+    const textMatch = clean.match(/(\d{1,2})\s*(?:jan|feb|mar|apr|mei|jun|jul|agus|agt|sep|sept|september|okt|nov|des)[a-z]*\s*(\d{4})?/i);
+    if (textMatch) {
+      const day = parseInt(textMatch[1], 10);
+      const year = textMatch[2] ? parseInt(textMatch[2], 10) : parseInt(defaultMonthYear.split('-')[0], 10);
+      const months = ['jan', 'feb', 'mar', 'apr', 'mei', 'jun', 'jul', 'agu', 'sep', 'okt', 'nov', 'des'];
+      const lower = clean.toLowerCase();
+      let mIdx = parseInt(defaultMonthYear.split('-')[1], 10);
+      for (let i = 0; i < months.length; i++) {
+        if (lower.includes(months[i])) {
+          mIdx = i + 1;
+          break;
+        }
+      }
+      return `${year}-${String(mIdx).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    }
+
+    // 4. Single number like "1" or "01"
+    const singleNum = parseInt(clean, 10);
+    if (!isNaN(singleNum) && singleNum >= 1 && singleNum <= 31) {
+      return `${defaultMonthYear}-${String(singleNum).padStart(2, '0')}`;
+    }
+
+    return `${defaultMonthYear}-01`;
   };
 
   // 1. Generate Standard Monthly Blank Template (Semua sesi misa harian & mingguan sebulan penuh)
@@ -264,13 +317,12 @@ export const MonthlyScheduleExcelImporterModal: React.FC<MonthlyScheduleExcelImp
     playAudioFeedback('tap');
     const dataForExcel = rows.map((r, idx) => ({
       'No': idx + 1,
-      'Tanggal (YYYY-MM-DD)': r.dateStr,
       'Hari & Tanggal': getIndonesianDisplayDate(r.dateStr),
       'Jam Misa': r.timeStr,
       'Lokasi': r.locationStr,
       'No. Koorlap (ID)': r.koorlapInput,
       'No. Petugas Terjadwal (ID)': r.serversInput,
-      'Keterangan / Catatan': r.notesInput || ''
+      'Keterangan Tukar/Ganti (Opsional)': r.notesInput || ''
     }));
 
     try {
@@ -281,13 +333,12 @@ export const MonthlyScheduleExcelImporterModal: React.FC<MonthlyScheduleExcelImp
         // Auto-fit column widths
         worksheet['!cols'] = [
           { wch: 6 },  // No
-          { wch: 22 }, // Tanggal (YYYY-MM-DD)
-          { wch: 28 }, // Hari & Tanggal
+          { wch: 30 }, // Hari & Tanggal
           { wch: 14 }, // Jam Misa
           { wch: 32 }, // Lokasi
           { wch: 20 }, // No. Koorlap (ID)
           { wch: 35 }, // No. Petugas Terjadwal (ID)
-          { wch: 25 }, // Keterangan / Catatan
+          { wch: 35 }, // Keterangan Tukar/Ganti (Opsional)
         ];
 
         const workbook = XLSX.utils.book_new();
@@ -317,7 +368,7 @@ export const MonthlyScheduleExcelImporterModal: React.FC<MonthlyScheduleExcelImp
     }
 
     // Native CSV Export fallback
-    const headers = ['No', 'Tanggal (YYYY-MM-DD)', 'Hari & Tanggal', 'Jam Misa', 'Lokasi', 'No. Koorlap (ID)', 'No. Petugas Terjadwal (ID)', 'Keterangan / Catatan'];
+    const headers = ['No', 'Hari & Tanggal', 'Jam Misa', 'Lokasi', 'No. Koorlap (ID)', 'No. Petugas Terjadwal (ID)', 'Keterangan Tukar/Ganti (Opsional)'];
     const csvContent = [
       headers.join(','),
       ...dataForExcel.map(row => 
@@ -357,15 +408,17 @@ export const MonthlyScheduleExcelImporterModal: React.FC<MonthlyScheduleExcelImp
         const imported: EditableScheduleRow[] = [];
         for (let i = 1; i < lines.length; i++) {
           const cols = lines[i].split(',').map(c => c.replace(/^"|"$/g, '').trim());
-          if (cols.length >= 5) {
+          if (cols.length >= 4) {
+            const dateVal = cols[1] || `${selectedMonthYear}-01`;
+            const normalizedDate = parseAnyDateToISO(dateVal, selectedMonthYear);
             imported.push({
               id: `row-csv-${i}-${Date.now()}`,
-              dateStr: cols[1] || `${selectedMonthYear}-01`,
-              timeStr: cols[3] || '05:30 WIB',
-              locationStr: cols[4] || 'Gereja Paroki Santo Yakobus',
-              koorlapInput: cols[5] || '',
-              serversInput: cols[6] || '',
-              notesInput: cols[7] || ''
+              dateStr: normalizedDate,
+              timeStr: cols[2] || '05:30 WIB',
+              locationStr: cols[3] || 'Gereja Paroki Santo Yakobus',
+              koorlapInput: cols[4] || '',
+              serversInput: cols[5] || '',
+              notesInput: cols[6] || ''
             });
           }
         }
@@ -389,12 +442,27 @@ export const MonthlyScheduleExcelImporterModal: React.FC<MonthlyScheduleExcelImp
         const rawData: any[] = XLSX.utils.sheet_to_json(ws, { defval: '' });
 
         const importedRows: EditableScheduleRow[] = rawData.map((item, idx) => {
-          const dateVal = String(item['Tanggal (YYYY-MM-DD)'] || item['Tanggal'] || item['tanggal'] || item['Date'] || '').trim();
+          const dateVal = String(
+            item['Hari & Tanggal'] || 
+            item['Tanggal'] || 
+            item['tanggal'] || 
+            item['Tanggal (YYYY-MM-DD)'] || 
+            item['Date'] || 
+            ''
+          ).trim();
+          const normalizedDate = parseAnyDateToISO(dateVal, selectedMonthYear);
+
           const timeVal = String(item['Jam Misa'] || item['Jam'] || item['jam'] || item['Waktu'] || item['Time'] || '05:30 WIB').trim();
           const locVal = String(item['Lokasi'] || item['lokasi'] || item['Location'] || 'Gereja Paroki Santo Yakobus').trim();
           const koorlapVal = String(item['No. Koorlap (ID)'] || item['Koorlap'] || item['koorlap'] || '').trim();
           const serversVal = String(item['No. Petugas Terjadwal (ID)'] || item['No. Petugas'] || item['Petugas'] || item['petugas'] || '').trim();
-          const notesVal = String(item['Keterangan / Catatan'] || item['Keterangan'] || item['Catatan'] || '').trim();
+          const notesVal = String(
+            item['Keterangan Tukar/Ganti (Opsional)'] || 
+            item['Keterangan / Catatan'] || 
+            item['Keterangan'] || 
+            item['Catatan'] || 
+            ''
+          ).trim();
 
           let normLoc = 'Gereja Paroki Santo Yakobus';
           if (/kapel|kjp|john paul/i.test(locVal)) {
@@ -412,7 +480,7 @@ export const MonthlyScheduleExcelImporterModal: React.FC<MonthlyScheduleExcelImp
 
           return {
             id: `row-${idx}-${Date.now()}`,
-            dateStr: dateVal || `${selectedMonthYear}-01`,
+            dateStr: normalizedDate,
             timeStr: normTime,
             locationStr: normLoc,
             koorlapInput: koorlapVal,
@@ -702,18 +770,19 @@ export const MonthlyScheduleExcelImporterModal: React.FC<MonthlyScheduleExcelImp
                   <thead className="bg-[#f2ece1] text-[#5B1414] sticky top-0 z-10 font-bold uppercase tracking-wider border-b border-[#d8cfc4]">
                     <tr>
                       <th className="p-3 w-12 text-center">No</th>
-                      <th className="p-3 w-36">Tanggal (YYYY-MM-DD)</th>
+                      <th className="p-3 w-44">Hari &amp; Tanggal</th>
                       <th className="p-3 w-32">Jam Misa</th>
-                      <th className="p-3 w-48">Lokasi Misa</th>
-                      <th className="p-3 w-40">No. Koorlap (ID)</th>
+                      <th className="p-3 w-44">Lokasi Misa</th>
+                      <th className="p-3 w-36">No. Koorlap (ID)</th>
                       <th className="p-3">No. Petugas Terjadwal (ID) &amp; Live Badges</th>
-                      <th className="p-3 w-16 text-center">Aksi</th>
+                      <th className="p-3 w-48">Keterangan (Tukar / Ganti)</th>
+                      <th className="p-3 w-14 text-center">Aksi</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[#eee6da]">
                     {rows.length === 0 ? (
                       <tr>
-                        <td colSpan={7} className="p-12 text-center text-[#8c827a]">
+                        <td colSpan={8} className="p-12 text-center text-[#8c827a]">
                           <FileSpreadsheet className="w-12 h-12 text-[#c8bfb4] mx-auto mb-3" />
                           <p className="font-bold text-sm text-[#5B1414]">Belum Ada Baris Jadwal</p>
                           <p className="text-xs text-[#8c827a] mt-1 max-w-md mx-auto">
@@ -733,14 +802,19 @@ export const MonthlyScheduleExcelImporterModal: React.FC<MonthlyScheduleExcelImp
                               {idx + 1}
                             </td>
 
-                            {/* Tanggal */}
+                            {/* Hari & Tanggal */}
                             <td className="p-2.5">
-                              <input
-                                type="date"
-                                value={row.dateStr}
-                                onChange={(e) => handleUpdateRowField(row.id, 'dateStr', e.target.value)}
-                                className="w-full bg-white border border-[#d8cfc4] rounded-lg px-2 py-1.5 text-xs font-semibold focus:outline-hidden focus:border-[#5B1414]"
-                              />
+                              <div className="space-y-1">
+                                <input
+                                  type="date"
+                                  value={row.dateStr}
+                                  onChange={(e) => handleUpdateRowField(row.id, 'dateStr', e.target.value)}
+                                  className="w-full bg-white border border-[#d8cfc4] rounded-lg px-2 py-1 text-xs font-semibold focus:outline-hidden focus:border-[#5B1414]"
+                                />
+                                <span className="text-[10px] text-[#665e55] font-semibold block truncate">
+                                  {getIndonesianDisplayDate(row.dateStr)}
+                                </span>
+                              </div>
                             </td>
 
                             {/* Jam Misa */}
@@ -829,6 +903,17 @@ export const MonthlyScheduleExcelImporterModal: React.FC<MonthlyScheduleExcelImp
                                   </div>
                                 )}
                               </div>
+                            </td>
+
+                            {/* Keterangan Tukar/Ganti */}
+                            <td className="p-2.5">
+                              <input
+                                type="text"
+                                placeholder="Kosongkan jika jadwal normal"
+                                value={row.notesInput || ''}
+                                onChange={(e) => handleUpdateRowField(row.id, 'notesInput', e.target.value)}
+                                className="w-full bg-white border border-[#d8cfc4] rounded-lg px-2 py-1.5 text-xs text-[#5B1414] focus:outline-hidden focus:border-[#5B1414] placeholder:text-[#c4bbb0]"
+                              />
                             </td>
 
                             {/* Delete Row */}
