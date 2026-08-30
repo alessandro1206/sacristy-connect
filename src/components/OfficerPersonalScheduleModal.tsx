@@ -252,11 +252,21 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
                     const slotKoorlapSet = new Set((slot.koorlapIds || []).map(id => id.padStart(3, '0')));
                     const isKoorlapForThisSlot = officer && slotKoorlapSet.has(officer.id.padStart(3, '0'));
 
+                    const officerIdx = (slot.serverIds || []).findIndex(sid => sid && (sid === officer?.id || sid.padStart(3, '0') === officerId3));
+                    const dutyNote = officerIdx !== -1 && slot.serverNotes && slot.serverNotes[officerIdx] ? slot.serverNotes[officerIdx] : null;
+                    const isSwapped = dutyNote && (
+                      dutyNote.toLowerCase().includes('tukar') || 
+                      dutyNote.toLowerCase().includes('menggantikan') || 
+                      dutyNote.toLowerCase().includes('digantikan')
+                    );
+
                     return (
                       <div 
                         key={slot.id || idx}
                         className={`bg-white border rounded-2xl p-4 shadow-2xs hover:border-slate-400 transition-all ${
-                          isKoorlapForThisSlot ? 'border-amber-300 bg-amber-50/20' : 'border-slate-200'
+                          isKoorlapForThisSlot 
+                            ? 'border-amber-300 bg-amber-50/20' 
+                            : (isSwapped ? 'border-amber-200 bg-amber-50/10' : 'border-slate-200')
                         }`}
                       >
                         <div className="space-y-1.5">
@@ -286,6 +296,7 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
                               </span>
                             )}
                           </div>
+
                           <div className="flex items-center justify-between flex-wrap gap-2 pt-1">
                             <h4 className="text-sm font-bold text-slate-900 flex items-center gap-1.5">
                               <MapPin className="w-3.5 h-3.5 text-rose-600" />
@@ -307,6 +318,16 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
                               </button>
                             )}
                           </div>
+
+                          {/* Swap / Substitution Note (Only shown when substituted/swapped) */}
+                          {isSwapped && dutyNote && (
+                            <div className="mt-2 pt-2 border-t border-slate-100 flex items-center gap-1.5">
+                              <span className="inline-flex items-center gap-1.5 bg-amber-100/90 border border-amber-300/80 text-amber-950 text-[11px] font-black px-2.5 py-1 rounded-xl shadow-2xs">
+                                <RefreshCw className="w-3.5 h-3.5 text-amber-700 shrink-0" />
+                                <span>{dutyNote}</span>
+                              </span>
+                            </div>
+                          )}
                         </div>
                       </div>
                     );
