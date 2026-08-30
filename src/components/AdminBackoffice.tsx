@@ -175,18 +175,11 @@ Lokasi : [Lokasi]`;
         swapType = 'DIGANTIKAN';
       }
 
-      // Helper function to find officer in text snippet
+      // Helper function to find officer in text snippet (Number/ID takes top priority)
       const findOfficerInSnippet = (snippet: string): Officer | undefined => {
         if (!snippet) return undefined;
-        // Priority 1: Match by Name first (e.g. "Hadi Santoso", "Antonius David Tjung")
-        const sorted = [...officers].sort((a, b) => b.name.length - a.name.length);
-        const nameFound = sorted.find(o => 
-          (o.name.length >= 4 && snippet.toLowerCase().includes(o.name.toLowerCase())) ||
-          (o.shortName && o.shortName.length >= 4 && snippet.toLowerCase().includes(o.shortName.toLowerCase()))
-        );
-        if (nameFound) return nameFound;
 
-        // Priority 2: Match by #ID, no. ID, nomor ID
+        // Priority 1: Match by explicit #ID, no. ID, nomor ID (#24, #56, no 24, etc.)
         const idMatches = snippet.match(/(?:#|no\.?\s*|nomor\s*)(\d{1,3})/gi) || [];
         for (const m of idMatches) {
           const num = parseInt(m.replace(/[^0-9]/g, ''), 10);
@@ -196,7 +189,7 @@ Lokasi : [Lokasi]`;
           }
         }
 
-        // Priority 3: Standalone 1-170 number (excluding date/time digits)
+        // Priority 2: Standalone 1-170 number (excluding year, date, and time digits)
         const stripped = snippet
           .replace(/\b202[4-9]\b/g, '')
           .replace(/(?:jam|pukul)?\s*([01]?\d|2[0-3])[:.]([0-5]\d)/gi, '')
@@ -210,6 +203,14 @@ Lokasi : [Lokasi]`;
             if (numFound) return numFound;
           }
         }
+
+        // Priority 3: Fallback by name only if no number is found
+        const sorted = [...officers].sort((a, b) => b.name.length - a.name.length);
+        const nameFound = sorted.find(o => 
+          (o.name.length >= 4 && snippet.toLowerCase().includes(o.name.toLowerCase())) ||
+          (o.shortName && o.shortName.length >= 4 && snippet.toLowerCase().includes(o.shortName.toLowerCase()))
+        );
+        if (nameFound) return nameFound;
 
         return undefined;
       };
