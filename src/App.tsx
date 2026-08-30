@@ -130,6 +130,37 @@ export default function App() {
     }
   }, [leaveRecords]);
 
+  // Cross-tab real-time synchronization listener (Kiosk, Admin, Calendar, Reports)
+  useEffect(() => {
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === STORAGE_KEYS.SCHEDULE && e.newValue) {
+        try {
+          const parsed = JSON.parse(e.newValue);
+          setSchedule(reconcileScheduleWithInitial(parsed));
+        } catch (err) {
+          console.error('Error syncing schedule from storage event:', err);
+        }
+      }
+      if (e.key === STORAGE_KEYS.OFFICERS && e.newValue) {
+        try {
+          setOfficers(JSON.parse(e.newValue));
+        } catch (err) {
+          console.error('Error syncing officers from storage event:', err);
+        }
+      }
+      if (e.key === STORAGE_KEYS.LOGS && e.newValue) {
+        try {
+          setLogs(JSON.parse(e.newValue));
+        } catch (err) {
+          console.error('Error syncing logs from storage event:', err);
+        }
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
+
   // Dynamic duty count calculation helper: Keeps officer duty count 100% in sync with active schedule slots
   const syncOfficerDutyCounts = (newSchedule: ScheduleSlot[], prevOfficers: Officer[]): Officer[] => {
     const counts: Record<string, number> = {};
