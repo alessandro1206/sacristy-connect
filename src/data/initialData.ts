@@ -2747,7 +2747,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "088"
     ],
     "serverNames": [
-      "Bambang susilo",
+      "Bambang Susilo",
       "Michael Kristanto"
     ],
     "koorlapIds": [],
@@ -2788,7 +2788,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "Tukar Jadwal (29) Hadi Santoso"
+      "Tukar Jadwal: 29 Hadi Santoso"
     ],
     "isSubstituted": [
       true
@@ -2811,8 +2811,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "143"
     ],
     "serverNames": [
-      "Hence Antony Suawah",
-      "Stefanus Charlie Tjahyono"
+      "Hence Antony",
+      "Stefanus Charlie"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -2875,28 +2875,23 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Kamis, 03 September 2026",
     "massTime": "18:30 WIB",
     "location": "Kapel John Paul II",
-    "targetTotal": 2,
+    "targetTotal": 1,
     "serverIds": [
-      "062",
       "065"
     ],
     "serverNames": [
-      "Rizal Kristanto",
       "Bambang Budiono"
     ],
     "koorlapIds": [
       "062"
     ],
     "serverRoles": [
-      "KORLAP",
       "AI"
     ],
     "serverNotes": [
-      null,
-      null
+      ""
     ],
     "isSubstituted": [
-      false,
       false
     ],
     "originalServerNames": [
@@ -2919,9 +2914,9 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "129"
     ],
     "serverNames": [
-      "Raymundus Raimun Aso",
+      "Raymundus Raimun",
       "Eddy Suwanto",
-      "Johanes Efendi Sapto Nugroho"
+      "Johanes Rihadi"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -2931,7 +2926,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNotes": [
       "[AI Misa Pagi]",
-      "Tukar Jadwal (76) Hary Suwanda",
+      "Tukar Jadwal: 76 Hary Suwanda",
       "[AI Misa Pagi]"
     ],
     "isSubstituted": [
@@ -2955,21 +2950,21 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "location": "Rumah Sakit EH",
     "targetTotal": 2,
     "serverIds": [
-      "019",
-      "099"
+      "099",
+      "019"
     ],
     "serverNames": [
-      "Januar Dwiputra Sutandi",
-      "Alex Santoso"
+      "Alex Santoso",
+      "Januar Dwiputro"
     ],
     "koorlapIds": [],
     "serverRoles": [
-      "AI",
-      "AI"
+      "Korsa",
+      "Backup Korsa"
     ],
     "serverNotes": [
-      "[Backup Korsa]",
-      "[Korsa]"
+      "",
+      ""
     ],
     "isSubstituted": [
       false,
@@ -2988,18 +2983,16 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Jumat, 04 September 2026",
     "massTime": "18:00 WIB",
     "location": "Kapel John Paul II",
-    "targetTotal": 4,
+    "targetTotal": 3,
     "serverIds": [
       "056",
       "059",
-      "063",
       "168"
     ],
     "serverNames": [
       "Antonius David Tjung",
       "Tri Wibisono",
-      "Antonius Benny Sukamto",
-      "AY. Happy Gunawanman"
+      "Happy Gunawarman"
     ],
     "koorlapIds": [
       "063"
@@ -3007,17 +3000,14 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "serverRoles": [
       "AI",
       "AI",
-      "KORLAP",
       "AI"
     ],
     "serverNotes": [
-      null,
-      null,
-      null,
-      "Menggantikan (67) Raymond Hanjaya"
+      "",
+      "",
+      "Menggantikan: 67 Raymond Hanjaya"
     ],
     "isSubstituted": [
-      false,
       false,
       false,
       true
@@ -3037,36 +3027,31 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Jumat, 04 September 2026",
     "massTime": "19:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 4,
+    "targetTotal": 3,
     "serverIds": [
-      "001",
       "004",
       "011",
       "016"
     ],
     "serverNames": [
-      "Gatot Chrishariyono",
       "Agustinus Cahyono",
       "Argo Putra",
-      "Cliff Patrisangga Sabarbudiman"
+      "Cliff Patriangga"
     ],
     "koorlapIds": [
       "001"
     ],
     "serverRoles": [
-      "KORLAP",
       "AI",
       "AI",
       "AI"
     ],
     "serverNotes": [
-      null,
-      null,
-      null,
-      null
+      "",
+      "",
+      ""
     ],
     "isSubstituted": [
-      false,
       false,
       false,
       false
@@ -3092,8 +3077,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "145"
     ],
     "serverNames": [
-      "FX Johni Hidayat",
-      "Damianus Slamet Subagio"
+      "Johni Hidayat",
+      "Damianus Slamet"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -3101,7 +3086,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "Tukar Jadwal (113) Willy Setiawan",
+      "Tukar Jadwal: 113 Willy Setiawan",
       "[AI Misa Pagi]"
     ],
     "isSubstituted": [
@@ -3121,86 +3106,79 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Sabtu, 05 September 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 16,
+    "targetTotal": 14,
     "serverIds": [
       "003",
+      "095",
       "027",
-      "033",
-      "035",
       "045",
-      "046",
+      "033",
       "051",
       "054",
       "086",
-      "095",
       "096",
-      "145",
       "149",
       "152",
       "160",
+      "145",
       "166"
     ],
     "serverNames": [
       "Venantius Sumarmo",
-      "Fransiskus Silvester Windy Wibisono",
-      "Satrio Soetikno",
-      "Stevanus Budianto",
+      "Agus Kartakusuma",
+      "Silvester Windy Wibisono",
       "Dionisius Donny Kamadjaja",
-      "Mario Christiano Chandra",
+      "Satrio Soetikno",
       "Paulus Agus Juwono",
       "Ivan Christian Cahyadi",
       "Sugiharto Tanto",
-      "Yohanes Agus Kartakusuma",
       "Laurensius Rony Setyawan",
-      "Damianus Slamet Subagio",
-      "Richard Gharyanto",
-      "Jeffrey Tanuhardjo",
-      "Imanuel Herry Kosok",
-      "Sutedjo Budiono Wonodihardjo"
+      "Richard Dharyanto",
+      "Jeffrey Tanuhardja",
+      "Emanuel Henra",
+      "Damianus Slamet",
+      "Sukotjo Budiono"
     ],
     "koorlapIds": [
       "035",
-      "046",
-      "149"
+      "046"
     ],
     "serverRoles": [
       "AI",
       "AI",
       "AI",
-      "KORLAP",
-      "AI",
-      "KORLAP",
       "AI",
       "AI",
       "AI",
       "AI",
       "AI",
       "AI",
-      "KORLAP",
+      "AI",
+      "AI",
       "AI",
       "AI",
       "AI"
     ],
     "serverNotes": [
-      null,
-      null,
-      "Tukar Jadwal (50) Tjio Johansyah",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "Tukar Jadwal (5) Andreas Yoga",
-      null,
-      "Tukar Jadwal (164) Heru Wijaya",
-      null,
-      null,
-      null,
-      null
+      "",
+      "Tukar Jadwal: 5 Andreas Yoga",
+      "",
+      "",
+      "Tukar Jadwal: 50 Tjio Johansyah",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Tukar Jadwal: 164 Heru Wijaya",
+      ""
     ],
     "isSubstituted": [
       false,
+      true,
+      false,
       false,
       true,
       false,
@@ -3209,12 +3187,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false,
       false,
       false,
-      true,
       false,
       true,
-      false,
-      false,
-      false,
       false
     ],
     "originalServerNames": [
@@ -3244,10 +3218,9 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Sabtu, 05 September 2026",
     "massTime": "18:00 WIB",
     "location": "Kapel John Paul II",
-    "targetTotal": 14,
+    "targetTotal": 13,
     "serverIds": [
       "020",
-      "038",
       "064",
       "071",
       "102",
@@ -3262,27 +3235,25 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "168"
     ],
     "serverNames": [
-      "Edwin Ardianto Tedjosaputro",
-      "Yudi Wijaya",
-      "Andy untoyo wibowo",
-      "Hence Antony Suawah",
+      "Edwin Ardianto",
+      "Andy Untoyo",
+      "Hence Antony",
       "Denny Sentosa Johann",
       "Handi Wirajaya",
       "Nikolas Andrew",
       "Edwin Pribadi",
-      "Judadi Widjaja",
+      "Juliadi Widjaja",
       "Eddy Soedjatmiko",
       "Adhika Wardhana",
       "Rheza Ricardo Alex",
       "Rudy Effendy",
-      "AY. Happy Gunawanman"
+      "Happy Gunawarman"
     ],
     "koorlapIds": [
       "038"
     ],
     "serverRoles": [
       "AI",
-      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -3297,23 +3268,21 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "Tukar Jadwal (145) Damianus Slamet",
-      null,
-      null,
-      null
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Tukar Jadwal: 145 Damianus Slamet",
+      "",
+      "",
+      ""
     ],
     "isSubstituted": [
-      false,
       false,
       false,
       false,
@@ -3353,33 +3322,30 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 06 September 2026",
     "massTime": "06:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 8,
+    "targetTotal": 7,
     "serverIds": [
       "002",
-      "006",
       "007",
+      "095",
       "043",
       "060",
       "081",
-      "087",
-      "095"
+      "087"
     ],
     "serverNames": [
-      "Raymundus Raimun Aso",
-      "Paulus Blodito Pujoasyogyo",
-      "Paulus Leto Udjan",
+      "Raymundus Raimun",
+      "Paulus Letu Udjan",
+      "Agus Kartakusuma",
       "Bambang Suprijanto",
-      "Andi widjaja tirtoprodjo",
+      "Andi Widjaja",
       "Eric Saputro",
-      "Budi Santosa",
-      "Yohanes Agus Kartakusuma"
+      "Budi Santosa"
     ],
     "koorlapIds": [
       "006"
     ],
     "serverRoles": [
       "AI",
-      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -3388,24 +3354,22 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "Tukar Jadwal (40) Vincent Winardi Tan"
+      "",
+      "",
+      "Tukar Jadwal: 40 Vincent Winardi Tan",
+      "",
+      "",
+      "",
+      ""
     ],
     "isSubstituted": [
       false,
       false,
+      true,
       false,
       false,
       false,
-      false,
-      false,
-      true
+      false
     ],
     "originalServerNames": [
       "Raymundus Raimun Aso",
@@ -3431,14 +3395,14 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "017"
     ],
     "serverNames": [
-      "Yohanes Arishka Yudarana"
+      "Arishka Yudarana"
     ],
     "koorlapIds": [],
     "serverRoles": [
-      "AI"
+      "Korsa RS EH"
     ],
     "serverNotes": [
-      "[Korsa RS EH]"
+      ""
     ],
     "isSubstituted": [
       false
@@ -3455,10 +3419,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 06 September 2026",
     "massTime": "08:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 10,
+    "targetTotal": 9,
     "serverIds": [
-      "022",
-      "023",
       "041",
       "047",
       "048",
@@ -3466,25 +3428,24 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "072",
       "162",
       "163",
-      "170"
+      "170",
+      "023"
     ],
     "serverNames": [
-      "Yohanes Valentinus Jimmy",
-      "FX Johni Hidayat",
-      "Lorenzo Tjaeyahdy Oeitomo",
-      "Yeremia Santoso Halim",
+      "Lorenzo Tjaeyahdy",
+      "Yeremia Santoso halim",
       "Fredy Susanto",
       "Jonas Angkawidjaja",
       "Bambang Hermanto",
-      "Alexander Mario Pribadi",
-      "Fransiscus Paulus Kuncoro Kohar",
-      "Budi Santoso"
+      "Alexander Maria",
+      "Kuncoro Kohar",
+      "Budi Santoso",
+      "Johni Hidayat"
     ],
     "koorlapIds": [
       "022"
     ],
     "serverRoles": [
-      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -3496,19 +3457,17 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
     ],
     "isSubstituted": [
-      false,
       false,
       false,
       false,
@@ -3540,18 +3499,16 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 06 September 2026",
     "massTime": "10:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 20,
+    "targetTotal": 18,
     "serverIds": [
       "010",
       "012",
-      "016",
       "024",
       "030",
+      "016",
+      "050",
       "036",
       "042",
-      "050",
-      "079",
-      "085",
       "108",
       "109",
       "122",
@@ -3559,31 +3516,29 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "131",
       "132",
       "144",
-      "145",
       "154",
+      "145",
       "161"
     ],
     "serverNames": [
       "Gervasius Nosi",
-      "Ignatius Dwi Prasetyo",
-      "Cliff Patrisangga Sabarbudiman",
+      "Dwi Prasetyo",
       "Hendra Utama",
       "Andi Singgih",
-      "Johanes Ignasius Totok Sukarno",
-      "Rudy Djaja Siaputra",
+      "Cliff Patriangga",
       "Tjio Johansyah",
-      "Michael Raphael Hari Wiryawan",
-      "Paulus Tedjadharma",
-      "Robert Boesbiyanto",
-      "Yosathan Himawan Handarto",
-      "FX Doddy Isdayanto",
-      "Fidelis Sutatyo",
-      "Stevanus Titus Purdijojo",
-      "Robertus Antonius Christmowanto",
-      "Andreas Suteja Hantono",
-      "Damianus Slamet Subagio",
-      "Ton Wernalia Tante",
-      "Edward Siswanto Santoso"
+      "Johanes Ignasius Totok",
+      "Rudy Djaja Siaputra",
+      "Robert Roesbiyanto",
+      "Yonathan Himawan",
+      "Doddy krisdyanto",
+      "Fidelis Sulistiyo",
+      "Titus Purdijojo",
+      "Robertus Antonius",
+      "Andreas Surja",
+      "Tan Wemulia Tanto",
+      "Damianus Slamet",
+      "Edward Siswanto"
     ],
     "koorlapIds": [
       "079",
@@ -3598,8 +3553,6 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "KORLAP",
-      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -3612,39 +3565,36 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      null,
-      null,
-      "Tukar Jadwal (31) Victor Kardiana",
-      null,
-      null,
-      null,
-      null,
-      "Tukar Jadwal (33) Satrio Soetikno",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "Tukar Jadwal (156) Adhika Wardhana",
-      null,
-      null
+      "",
+      "",
+      "",
+      "",
+      "Tukar Jadwal: 31 Victor Kardiana",
+      "Tukar Jadwal: 33 Satrio Soetikno",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Tukar Jadwal: 156 Adhika Wardhana",
+      ""
     ],
     "isSubstituted": [
       false,
       false,
+      false,
+      false,
+      true,
       true,
       false,
       false,
       false,
       false,
-      true,
-      false,
-      false,
-      false,
       false,
       false,
       false,
@@ -3652,7 +3602,6 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false,
       false,
       true,
-      false,
       false
     ],
     "originalServerNames": [
@@ -3686,21 +3635,19 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 06 September 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 18,
+    "targetTotal": 16,
     "serverIds": [
-      "005",
       "008",
       "009",
       "013",
-      "031",
       "039",
       "049",
       "073",
       "074",
       "082",
+      "031",
       "088",
-      "089",
-      "100",
+      "005",
       "101",
       "115",
       "116",
@@ -3708,24 +3655,22 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "133"
     ],
     "serverNames": [
-      "Andreas Yoga Adhitama",
       "Sunardi",
       "Aloysius Gholo",
       "Pius Paru",
-      "Victor Kardiana Hardjomoeljo",
-      "Agustinus Redy Wibisono",
-      "Widjanarko Tjandra Soejatno",
+      "Redy Wibisono",
+      "Widjanarko Tjandra",
       "Sonny Sugiarto So",
       "Albert Sidharta",
       "Bambang Purnomo",
+      "Victor Kardiana",
       "Michael Kristanto",
-      "Raymond Michael",
-      "Gunarjo Tanurijanto",
+      "Andreas Yoga",
       "Wongso Budi",
-      "Efendy Liobudhi",
-      "Franciscus Xaverius Hendra Wijaya",
-      "Leo Wismer Lolo",
-      "Febrianto Dwi Istiawan"
+      "Effendy Listijabudhi",
+      "Hendra Wijaya",
+      "Leo Warner Lollo",
+      "Febrianto Dwi"
     ],
     "koorlapIds": [
       "089",
@@ -3743,8 +3688,6 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "KORLAP",
-      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -3752,39 +3695,35 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "Tukar Jadwal (95) Agus Kartakusuma",
-      null,
-      null,
-      null,
-      "Tukar Jadwal (83) Rudianto Hartanta",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Tukar Jadwal: 83 Rudianto Hartanta",
+      "",
+      "Tukar Jadwal: 95 Agus Kartakusuma",
+      "",
+      "",
+      "",
+      "",
+      ""
     ],
     "isSubstituted": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
       true,
       false,
-      false,
-      false,
       true,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
       false,
       false,
       false,
@@ -3861,8 +3800,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "112"
     ],
     "serverNames": [
-      "Sebastianus Nicholas Handoso",
-      "Aloysius Ari Senoo Loekito"
+      "Nicholas Handoso",
+      "Ari Senoaji Loekito"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -3895,14 +3834,14 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "023"
     ],
     "serverNames": [
-      "FX Johni Hidayat"
+      "Johni Hidayat"
     ],
     "koorlapIds": [],
     "serverRoles": [
       "AI"
     ],
     "serverNotes": [
-      null
+      ""
     ],
     "isSubstituted": [
       false
@@ -3925,8 +3864,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "144"
     ],
     "serverNames": [
-      "Januar Dwiputra Sutandi",
-      "Andreas Suteja Hantono"
+      "Januar Dwiputro",
+      "Andreas Surja"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -3960,7 +3899,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "164"
     ],
     "serverNames": [
-      "Efendy Liobudhi",
+      "Effendy Listijabudhi",
       "Heru Wijaya"
     ],
     "koorlapIds": [],
@@ -3991,21 +3930,21 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "location": "Rumah Sakit EH",
     "targetTotal": 2,
     "serverIds": [
-      "039",
-      "115"
+      "115",
+      "039"
     ],
     "serverNames": [
-      "Agustinus Redy Wibisono",
-      "Efendy Liobudhi"
+      "Effendy Listijabudhi",
+      "Redy Wibisono"
     ],
     "koorlapIds": [],
     "serverRoles": [
-      "AI",
-      "AI"
+      "Korsa",
+      "Backup Korsa"
     ],
     "serverNotes": [
-      "[Backup Korsa]",
-      "[Korsa]"
+      "",
+      ""
     ],
     "isSubstituted": [
       false,
@@ -4070,14 +4009,14 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "020"
     ],
     "serverNames": [
-      "Edwin Ardianto Tedjosaputro"
+      "Edwin Ardianto"
     ],
     "koorlapIds": [],
     "serverRoles": [
       "AI"
     ],
     "serverNotes": [
-      null
+      ""
     ],
     "isSubstituted": [
       false
@@ -4096,12 +4035,12 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 2,
     "serverIds": [
-      "035",
-      "113"
+      "113",
+      "035"
     ],
     "serverNames": [
-      "Stevanus Budianto",
-      "Willy Setiawan"
+      "Willy Setiawan",
+      "Stevanus Budianto"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -4109,12 +4048,12 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "[AI Misa Pagi]",
-      "Tukar Jadwal (23) Johni Hidayat"
+      "Tukar Jadwal: 23 Johni Hidayat",
+      "[AI Misa Pagi]"
     ],
     "isSubstituted": [
-      false,
-      true
+      true,
+      false
     ],
     "originalServerNames": [
       "Stevanus Budianto",
@@ -4129,14 +4068,12 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Sabtu, 12 September 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 16,
+    "targetTotal": 14,
     "serverIds": [
-      "024",
       "025",
+      "024",
       "034",
       "048",
-      "054",
-      "064",
       "094",
       "106",
       "114",
@@ -4149,38 +4086,33 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "165"
     ],
     "serverNames": [
+      "Christian Adi Putra",
       "Hendra Utama",
-      "Leonardus christian adi putra",
-      "Henrikus Henry Arvian Hady",
+      "Henry Arvian",
       "Fredy Susanto",
-      "Ivan Christian Cahyadi",
-      "Andy untoyo wibowo",
-      "Fx Tanno Sugiharto",
+      "Tanno Sugiharto",
       "Jap Yohanes Baptista",
-      "Nicolas Immanuel Derry Nurcahya",
+      "Deny Nurcahya",
       "Nikolas Andrew",
-      "Mikael Nono",
-      "Berti Albertus Hara",
-      "William Antonius Davidson Jonto",
-      "Andreas Suteja Hantono",
+      "Mikael Mana",
+      "Berti Albertus Nara",
+      "Davidson Janto",
+      "Andreas Surja",
       "Bayu",
-      "Winardi Hartambang"
+      "Winardi Herlambang"
     ],
     "koorlapIds": [
       "054",
-      "064",
-      "114"
+      "064"
     ],
     "serverRoles": [
       "AI",
       "AI",
       "AI",
       "AI",
-      "KORLAP",
-      "KORLAP",
       "AI",
       "AI",
-      "KORLAP",
+      "AI",
       "AI",
       "AI",
       "AI",
@@ -4190,28 +4122,24 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "Tukar Jadwal (26) Eddy Suwanto",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
+      "",
+      "Tukar Jadwal: 26 Eddy Suwanto",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
     ],
     "isSubstituted": [
+      false,
       true,
-      false,
-      false,
-      false,
       false,
       false,
       false,
@@ -4252,25 +4180,23 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 13 September 2026",
     "massTime": "06:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 8,
+    "targetTotal": 7,
     "serverIds": [
       "007",
+      "139",
       "044",
       "047",
       "070",
       "086",
-      "090",
-      "139",
       "167"
     ],
     "serverNames": [
-      "Paulus Leto Udjan",
-      "Sebastianus Nicholas Handoso",
-      "Yeremia Santoso Halim",
+      "Paulus Letu Udjan",
+      "Severus senjaya",
+      "Nicholas Handoso",
+      "Yeremia Santoso halim",
       "Nio Eko Susilo",
       "Sugiharto Tanto",
-      "Hanjaya Kurniawan",
-      "Severus senjoyo",
       "Chen Lin Andrew"
     ],
     "koorlapIds": [
@@ -4282,26 +4208,23 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "KORLAP",
       "AI",
       "AI"
     ],
     "serverNotes": [
-      null,
-      null,
-      null,
-      null,
-      "Tukar Jadwal (163) Kuncoro Kohar",
-      null,
-      "Tukar Jadwal (38) Yudi Wijaya",
-      null
+      "",
+      "Tukar Jadwal: 38 Yudi Wijaya",
+      "",
+      "",
+      "",
+      "Tukar Jadwal: 163 Kuncoro Kohar",
+      ""
     ],
     "isSubstituted": [
       false,
-      false,
-      false,
-      false,
       true,
+      false,
+      false,
       false,
       true,
       false
@@ -4330,14 +4253,14 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "018"
     ],
     "serverNames": [
-      "Antonis Brian Mursidi"
+      "Brian Mursidi"
     ],
     "koorlapIds": [],
     "serverRoles": [
-      "AI"
+      "Korsa RS EH"
     ],
     "serverNotes": [
-      "[Korsa RS EH]"
+      ""
     ],
     "isSubstituted": [
       false
@@ -4354,30 +4277,28 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 13 September 2026",
     "massTime": "08:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 10,
+    "targetTotal": 9,
     "serverIds": [
       "001",
       "004",
       "005",
       "011",
       "012",
-      "021",
-      "056",
-      "097",
       "126",
+      "056",
+      "021",
       "168"
     ],
     "serverNames": [
       "Gatot Chrishariyono",
       "Agustinus Cahyono",
-      "Andreas Yoga Adhitama",
+      "Andreas Yoga",
       "Argo Putra",
-      "Ignatius Dwi Prasetyo",
-      "Adinanda Condrowibowo",
+      "Dwi Prasetyo",
+      "Agus Riyanto Pamuji",
       "Antonius David Tjung",
-      "Irwan Afandi",
-      "Silvester Agus Riyanto Pamuji",
-      "AY. Happy Gunawanman"
+      "Adinanda Condrowibowo",
+      "Happy Gunawarman"
     ],
     "koorlapIds": [
       "097"
@@ -4390,21 +4311,19 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "KORLAP",
       "AI",
       "AI"
     ],
     "serverNotes": [
-      null,
-      null,
-      null,
-      null,
-      null,
-      "Tukar Jadwal (58) Bambang Susilo",
-      null,
-      null,
-      "Tukar Jadwal (39) Redy Wibisono",
-      null
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Tukar Jadwal: 39 Redy Wibisono",
+      "",
+      "Tukar Jadwal: 58 Bambang Susilo",
+      ""
     ],
     "isSubstituted": [
       false,
@@ -4413,7 +4332,6 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false,
       false,
       true,
-      false,
       false,
       true,
       false
@@ -4439,7 +4357,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 13 September 2026",
     "massTime": "10:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 20,
+    "targetTotal": 18,
     "serverIds": [
       "015",
       "028",
@@ -4448,9 +4366,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "052",
       "068",
       "078",
-      "096",
+      "163",
       "108",
-      "112",
       "118",
       "122",
       "126",
@@ -4459,8 +4376,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "142",
       "151",
       "153",
-      "161",
-      "163"
+      "161"
     ],
     "serverNames": [
       "Yohanes Herman Saputra",
@@ -4470,19 +4386,17 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Jonas Angkawidjaja",
       "Untung Sutikno",
       "Yohanes Gunawan",
-      "Laurensius Rony Setyawan",
-      "Robert Boesbiyanto",
-      "Aloysius Ari Senoo Loekito",
+      "Kuncoro Kohar",
+      "Robert Roesbiyanto",
       "Edwin Pribadi",
-      "FX Doddy Isdayanto",
-      "Silvester Agus Riyanto Pamuji",
-      "Leo Wismer Lolo",
-      "Petrus Yuni setyawan",
-      "Eka Sisario",
-      "Iwan Sutanto",
-      "Agustinus Djoko Soetoyo",
-      "Edward Siswanto Santoso",
-      "Fransiscus Paulus Kuncoro Kohar"
+      "Doddy krisdyanto",
+      "Agus Riyanto Pamuji",
+      "Leo Warner Lollo",
+      "Petrus Yuni",
+      "Reo Sinarta",
+      "Irwan Sutanto",
+      "Agustinus Djoko",
+      "Edward Siswanto"
     ],
     "koorlapIds": [
       "096",
@@ -4496,9 +4410,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "KORLAP",
       "AI",
-      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -4511,26 +4423,24 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "Tukar Jadwal (86) Sugiharto Tanto"
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Tukar Jadwal: 86 Sugiharto Tanto",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
     ],
     "isSubstituted": [
       false,
@@ -4540,6 +4450,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false,
       false,
       false,
+      true,
       false,
       false,
       false,
@@ -4549,10 +4460,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false,
       false,
       false,
-      false,
-      false,
-      false,
-      true
+      false
     ],
     "originalServerNames": [
       "Yohanes Herman Saputra",
@@ -4585,36 +4493,34 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 13 September 2026",
     "massTime": "17:00 WIB",
     "location": "Kapel John Paul II",
-    "targetTotal": 14,
+    "targetTotal": 13,
     "serverIds": [
       "058",
       "085",
-      "092",
       "098",
       "099",
+      "092",
       "109",
-      "113",
       "140",
+      "164",
       "156",
       "157",
       "162",
-      "164",
       "169",
       "170"
     ],
     "serverNames": [
-      "Bambang susilo",
+      "Bambang Susilo",
       "Paulus Tedjadharma",
-      "Tjetjep Tjondro Oetomo",
       "Budi Purnomo",
       "Alex Santoso",
-      "Yosathan Himawan Handarto",
-      "Willy Setiawan",
+      "Tjetjep Tjondro",
+      "Yonathan Himawan",
       "Alexander Sukarliono",
+      "Heru Wijaya",
       "Adhika Wardhana",
       "Vincentius Fidelis Lucky",
-      "Alexander Mario Pribadi",
-      "Heru Wijaya",
+      "Alexander Maria",
       "Donni Anwar",
       "Budi Santoso"
     ],
@@ -4628,7 +4534,6 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -4638,34 +4543,32 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "Tukar Jadwal (77) Ferdyanto Salim",
-      null,
-      "Tukar Jadwal (105) Mikael Hengky Pratama",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "Tukar Jadwal (145) Damianus Slamet",
-      null,
-      null
+      "Tukar Jadwal: 77 Ferdyanto Salim",
+      "",
+      "",
+      "",
+      "Tukar Jadwal: 105 Mikael Hengky Pratama",
+      "",
+      "",
+      "Tukar Jadwal: 145 Damianus Slamet",
+      "",
+      "",
+      "",
+      "",
+      ""
     ],
     "isSubstituted": [
       true,
       false,
+      false,
+      false,
+      true,
+      false,
+      false,
       true,
       false,
       false,
       false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      true,
       false,
       false
     ],
@@ -4694,7 +4597,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 13 September 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 18,
+    "targetTotal": 16,
     "serverIds": [
       "008",
       "018",
@@ -4704,36 +4607,32 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "076",
       "080",
       "082",
+      "105",
       "093",
       "104",
-      "105",
       "111",
       "120",
-      "123",
       "127",
       "132",
-      "141",
-      "143"
+      "141"
     ],
     "serverNames": [
       "Sunardi",
-      "Antonis Brian Mursidi",
-      "Januar Dwiputra Sutandi",
-      "FX Johni Hidayat",
+      "Brian Mursidi",
+      "Januar Dwiputro",
+      "Johni Hidayat",
       "Hadi Santoso",
       "Hary Suwanda",
       "Tandra Gunawan",
       "Bambang Purnomo",
-      "Widyanto Setiawan Wijaya",
-      "Tanuddin Rustan",
       "Mikael Hengky Pratama",
+      "Widyanto Setiawan",
+      "Tanuddin Rustan",
       "Handi Wirajaya",
-      "Judadi Widjaja",
-      "Fidelis Sutatyo",
-      "Nadianus Sukaryadi",
-      "Robertus Antonius Christmowanto",
-      "Bona ventura Yohan Soenyoto",
-      "Stefanus Charlie Tjahyono"
+      "Juliadi Widjaja",
+      "Hadrianus Sukaryadi",
+      "Robertus Antonius",
+      "Yohan Soenyoto"
     ],
     "koorlapIds": [
       "123",
@@ -4753,35 +4652,29 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "KORLAP",
       "AI",
       "AI",
-      "AI",
-      "KORLAP"
+      "AI"
     ],
     "serverNotes": [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "Tukar Jadwal (92) Tjetjep Tjondro",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Tukar Jadwal: 92 Tjetjep Tjondro",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
     ],
     "isSubstituted": [
-      false,
-      false,
       false,
       false,
       false,
@@ -4836,8 +4729,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Paulus Agus Juwono",
-      "Nicolas Immanuel Derry Nurcahya",
-      "Richard Gharyanto"
+      "Deny Nurcahya",
+      "Richard Dharyanto"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -4875,7 +4768,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "159"
     ],
     "serverNames": [
-      "Tjetjep Tjondro Oetomo",
+      "Tjetjep Tjondro",
       "Rudy Effendy"
     ],
     "koorlapIds": [],
@@ -4909,14 +4802,14 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "058"
     ],
     "serverNames": [
-      "Bambang susilo"
+      "Bambang Susilo"
     ],
     "koorlapIds": [],
     "serverRoles": [
       "AI"
     ],
     "serverNotes": [
-      "Tukar Jadwal (21) Adinanda Condrowibowo"
+      "Tukar Jadwal: 21 Adinanda Condrowibowo"
     ],
     "isSubstituted": [
       true
@@ -4940,7 +4833,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Eddy Suwanto",
-      "Stevanus Titus Purdijojo"
+      "Titus Purdijojo"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -4974,8 +4867,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "162"
     ],
     "serverNames": [
-      "Stevanus",
-      "Alexander Mario Pribadi"
+      "Stevanus Lijadi",
+      "Alexander Maria"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -5011,8 +4904,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Satrio Soetikno",
-      "Iwan Sutanto",
-      "AY. Happy Gunawanman"
+      "Irwan Sutanto",
+      "Happy Gunawarman"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -5046,21 +4939,21 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "location": "Rumah Sakit EH",
     "targetTotal": 2,
     "serverIds": [
-      "040",
-      "131"
+      "131",
+      "040"
     ],
     "serverNames": [
-      "Vincent Winardi Tan",
-      "Stevanus Titus Purdijojo"
+      "Titus Purdijojo",
+      "Vincent Winardi Tan"
     ],
     "koorlapIds": [],
     "serverRoles": [
-      "AI",
-      "AI"
+      "Korsa",
+      "Backup Korsa"
     ],
     "serverNotes": [
-      "[Backup Korsa]",
-      "[Korsa]"
+      "",
+      ""
     ],
     "isSubstituted": [
       false,
@@ -5091,7 +4984,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "Tukar Jadwal (26) Eddy Suwanto"
+      "Tukar Jadwal: 26 Eddy Suwanto"
     ],
     "isSubstituted": [
       true
@@ -5115,7 +5008,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Fredy Susanto",
-      "Winardi Hartambang"
+      "Winardi Herlambang"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -5143,42 +5036,38 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Sabtu, 19 September 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 16,
+    "targetTotal": 14,
     "serverIds": [
       "009",
       "017",
-      "029",
       "037",
-      "039",
       "053",
       "055",
       "060",
+      "029",
       "102",
       "122",
-      "125",
+      "039",
       "132",
       "136",
       "150",
-      "152",
       "166"
     ],
     "serverNames": [
       "Aloysius Gholo",
-      "Yohanes Arishka Yudarana",
-      "Hadi Santoso",
-      "Alfred Stephanus Metekohy",
-      "Agustinus Redy Wibisono",
+      "Arishka Yudarana",
+      "Alfred Stephanus",
       "Edward Luntungan",
       "Hartanto Chandra",
-      "Andi widjaja tirtoprodjo",
+      "Andi Widjaja",
+      "Hadi Santoso",
       "Denny Sentosa Johann",
-      "FX Doddy Isdayanto",
-      "Donatus Sri Tar Prawinoto",
-      "Robertus Antonius Christmowanto",
-      "Mikael Nono",
-      "Yohanes Kurniawan Halim",
-      "Jeffrey Tanuhardjo",
-      "Sutedjo Budiono Wonodihardjo"
+      "Doddy krisdyanto",
+      "Redy Wibisono",
+      "Robertus Antonius",
+      "Mikael Mana",
+      "Yohanes Kurniawan",
+      "Sukotjo Budiono"
     ],
     "koorlapIds": [
       "125",
@@ -5195,44 +5084,38 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "KORLAP",
       "AI",
       "AI",
       "AI",
-      "KORLAP",
       "AI"
     ],
     "serverNotes": [
-      null,
-      null,
-      "Tukar Jadwal (84) Soehadi",
-      null,
-      "Tukar Jadwal (126) Agus Riyanto Pamuji",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Tukar Jadwal: 84 Soehadi",
+      "",
+      "",
+      "Tukar Jadwal: 126 Agus Riyanto Pamuji",
+      "",
+      "",
+      "",
+      ""
     ],
     "isSubstituted": [
       false,
       false,
+      false,
+      false,
+      false,
+      false,
       true,
       false,
+      false,
       true,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
       false,
       false,
       false,
@@ -5265,7 +5148,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Sabtu, 19 September 2026",
     "massTime": "18:00 WIB",
     "location": "Kapel John Paul II",
-    "targetTotal": 14,
+    "targetTotal": 13,
     "serverIds": [
       "046",
       "057",
@@ -5277,25 +5160,23 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "097",
       "115",
       "138",
-      "139",
       "147",
       "148",
       "158"
     ],
     "serverNames": [
       "Mario Christiano Chandra",
-      "Andrew Firmansyah Limantoro",
-      "Stevanus Leohanes Halim",
+      "Andrew Firmansyah",
+      "Leohanes Halim",
       "Raymond Hanjaya",
       "Raymond Michael",
       "Hanjaya Kurniawan",
-      "Joseph Thomas Raynanto",
+      "Thomas Raynanto",
       "Irwan Afandi",
-      "Efendy Liobudhi",
-      "William Antonius Davidson Jonto",
-      "Severus senjoyo",
+      "Effendy Listijabudhi",
+      "Davidson Janto",
       "Bayu",
-      "Fredy Teguh Prasetyo",
+      "Fredy Teguh",
       "Rheza Ricardo Alex"
     ],
     "koorlapIds": [
@@ -5312,26 +5193,24 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "KORLAP",
       "AI",
       "AI",
       "AI"
     ],
     "serverNotes": [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "Tukar Jadwal (103) Wey Tjoendianto",
-      null,
-      "Tukar Jadwal (139) Severus senjaya",
-      null,
-      null,
-      null
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Tukar Jadwal: 103 Wey Tjoendianto",
+      "",
+      "",
+      "",
+      ""
     ],
     "isSubstituted": [
       false,
@@ -5344,7 +5223,6 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false,
       true,
       false,
-      true,
       false,
       false,
       false
@@ -5374,26 +5252,24 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 20 September 2026",
     "massTime": "06:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 8,
+    "targetTotal": 7,
     "serverIds": [
       "002",
       "003",
       "032",
-      "045",
       "082",
       "117",
       "137",
       "165"
     ],
     "serverNames": [
-      "Raymundus Raimun Aso",
+      "Raymundus Raimun",
       "Venantius Sumarmo",
       "Edward Kusuma",
-      "Dionisius Donny Kamadjaja",
       "Bambang Purnomo",
       "Nikolas Andrew",
-      "Berti Albertus Hara",
-      "Winardi Hartambang"
+      "Berti Albertus Nara",
+      "Winardi Herlambang"
     ],
     "koorlapIds": [
       "045"
@@ -5402,24 +5278,21 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "KORLAP",
       "AI",
       "AI",
       "AI",
       "AI"
     ],
     "serverNotes": [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
     ],
     "isSubstituted": [
-      false,
       false,
       false,
       false,
@@ -5447,7 +5320,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 20 September 2026",
     "massTime": "08:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 10,
+    "targetTotal": 9,
     "serverIds": [
       "006",
       "015",
@@ -5457,20 +5330,18 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "068",
       "130",
       "131",
-      "154",
-      "164"
+      "154"
     ],
     "serverNames": [
-      "Paulus Blodito Pujoasyogyo",
+      "Paulus Biodita",
       "Yohanes Herman Saputra",
-      "Victor Kardiana Hardjomoeljo",
+      "Victor Kardiana",
       "Satrio Soetikno",
-      "Bambang susilo",
+      "Bambang Susilo",
       "Untung Sutikno",
       "Alexander Budi Cahyono",
-      "Stevanus Titus Purdijojo",
-      "Ton Wernalia Tante",
-      "Heru Wijaya"
+      "Titus Purdijojo",
+      "Tan Wemulia Tanto"
     ],
     "koorlapIds": [
       "164"
@@ -5484,26 +5355,23 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "AI",
-      "KORLAP"
+      "AI"
     ],
     "serverNotes": [
-      null,
-      null,
-      "Tukar Jadwal (16) Cliff Patriangga",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
+      "",
+      "",
+      "Tukar Jadwal: 16 Cliff Patriangga",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
     ],
     "isSubstituted": [
       false,
       false,
       true,
-      false,
       false,
       false,
       false,
@@ -5532,50 +5400,46 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 20 September 2026",
     "massTime": "10:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 20,
+    "targetTotal": 18,
     "serverIds": [
       "011",
-      "022",
-      "040",
       "070",
       "075",
       "076",
       "077",
       "087",
       "094",
+      "040",
       "100",
-      "103",
       "110",
+      "103",
       "129",
       "133",
+      "146",
       "141",
       "143",
-      "146",
       "155",
-      "159",
-      "167"
+      "159"
     ],
     "serverNames": [
       "Argo Putra",
-      "Yohanes Valentinus Jimmy",
-      "Vincent Winardi Tan",
       "Nio Eko Susilo",
-      "Stevanus",
+      "Stevanus Lijadi",
       "Hary Suwanda",
       "Ferdyanto Salim",
       "Budi Santosa",
-      "Fx Tanno Sugiharto",
+      "Tanno Sugiharto",
+      "Vincent Winardi Tan",
       "Gunarjo Tanurijanto",
+      "Sonny Widjaja",
       "Wey Tjoendianto",
-      "Sonny Widjojo",
-      "Johanes Efendi Sapto Nugroho",
-      "Febrianto Dwi Istiawan",
-      "Bona ventura Yohan Soenyoto",
-      "Stefanus Charlie Tjahyono",
+      "Johanes Rihadi",
+      "Febrianto Dwi",
       "Eddy Soedjatmiko",
+      "Yohan Soenyoto",
+      "Stefanus Charlie",
       "Eko Gunawan Kusjanto",
-      "Rudy Effendy",
-      "Chen Lin Andrew"
+      "Rudy Effendy"
     ],
     "koorlapIds": [
       "022",
@@ -5583,7 +5447,6 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverRoles": [
       "AI",
-      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -5600,45 +5463,40 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "AI",
-      "KORLAP"
+      "AI"
     ],
     "serverNotes": [
-      null,
-      null,
-      "Tukar Jadwal (95) Agus Kartakusuma",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "Tukar Jadwal (115) Effendy Listijabudhi",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
+      "",
+      "",
+      "",
+      "",
+      "Tukar Jadwal: 58 Bambang Susilo",
+      "",
+      "",
+      "Tukar Jadwal: 95 Agus Kartakusuma",
+      "",
+      "",
+      "Tukar Jadwal: 115 Effendy Listijabudhi",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
     ],
     "isSubstituted": [
       false,
       false,
-      true,
-      false,
-      false,
-      false,
-      false,
-      false,
       false,
       false,
       true,
       false,
       false,
+      true,
+      false,
+      false,
+      true,
       false,
       false,
       false,
@@ -5678,20 +5536,18 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 20 September 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 18,
+    "targetTotal": 16,
     "serverIds": [
       "004",
       "005",
       "013",
       "030",
       "066",
-      "072",
       "080",
       "081",
       "088",
       "092",
       "099",
-      "114",
       "116",
       "127",
       "135",
@@ -5701,23 +5557,21 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Agustinus Cahyono",
-      "Andreas Yoga Adhitama",
+      "Andreas Yoga",
       "Pius Paru",
       "Andi Singgih",
       "Berce suisa abraham",
-      "Bambang Hermanto",
       "Tandra Gunawan",
       "Eric Saputro",
       "Michael Kristanto",
-      "Tjetjep Tjondro Oetomo",
+      "Tjetjep Tjondro",
       "Alex Santoso",
-      "Nicolas Immanuel Derry Nurcahya",
-      "Franciscus Xaverius Hendra Wijaya",
-      "Nadianus Sukaryadi",
-      "Dominikus Anas",
+      "Hendra Wijaya",
+      "Hadrianus Sukaryadi",
+      "Dominikus Asas",
       "Alexander Sukarliono",
-      "Damianus Slamet Subagio",
-      "Agustinus Djoko Soetoyo"
+      "Damianus Slamet",
+      "Agustinus Djoko"
     ],
     "koorlapIds": [
       "072",
@@ -5729,13 +5583,11 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "KORLAP",
       "AI",
       "AI",
       "AI",
       "AI",
       "AI",
-      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -5744,28 +5596,24 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
     ],
     "isSubstituted": [
-      false,
-      false,
       false,
       false,
       false,
@@ -5818,8 +5666,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "064"
     ],
     "serverNames": [
-      "Johanes Ignasius Totok Sukarno",
-      "Andy untoyo wibowo"
+      "Johanes Ignasius Totok",
+      "Andy Untoyo"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -5853,7 +5701,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "147"
     ],
     "serverNames": [
-      "Bona ventura Yohan Soenyoto",
+      "Yohan Soenyoto",
       "Bayu"
     ],
     "koorlapIds": [],
@@ -5894,7 +5742,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "Tukar Jadwal (24) Hendra Utama"
+      "Tukar Jadwal: 24 Hendra Utama"
     ],
     "isSubstituted": [
       true
@@ -5917,7 +5765,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "167"
     ],
     "serverNames": [
-      "Fransiskus Silvester Windy Wibisono",
+      "Silvester Windy Wibisono",
       "Chen Lin Andrew"
     ],
     "koorlapIds": [],
@@ -5952,7 +5800,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "156"
     ],
     "serverNames": [
-      "Agustinus Djoko Soetoyo",
+      "Agustinus Djoko",
       "Adhika Wardhana"
     ],
     "koorlapIds": [],
@@ -5989,7 +5837,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Edward Kusuma",
-      "Lorenzo Tjaeyahdy Oeitomo",
+      "Lorenzo Tjaeyahdy",
       "Raymond Michael"
     ],
     "koorlapIds": [],
@@ -6024,21 +5872,21 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "location": "Rumah Sakit EH",
     "targetTotal": 2,
     "serverIds": [
-      "051",
-      "141"
+      "141",
+      "051"
     ],
     "serverNames": [
-      "Paulus Agus Juwono",
-      "Bona ventura Yohan Soenyoto"
+      "Yohan Soenyoto",
+      "Paulus Agus Juwono"
     ],
     "koorlapIds": [],
     "serverRoles": [
-      "AI",
-      "AI"
+      "Korsa",
+      "Backup Korsa"
     ],
     "serverNotes": [
-      "[Backup Korsa]",
-      "[Korsa]"
+      "",
+      ""
     ],
     "isSubstituted": [
       false,
@@ -6062,14 +5910,14 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "025"
     ],
     "serverNames": [
-      "Leonardus christian adi putra"
+      "Christian Adi Putra"
     ],
     "koorlapIds": [],
     "serverRoles": [
       "AI"
     ],
     "serverNotes": [
-      null
+      ""
     ],
     "isSubstituted": [
       false
@@ -6092,7 +5940,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "155"
     ],
     "serverNames": [
-      "Sonny Widjojo",
+      "Sonny Widjaja",
       "Eko Gunawan Kusjanto"
     ],
     "koorlapIds": [],
@@ -6121,42 +5969,38 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Sabtu, 26 September 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 16,
+    "targetTotal": 14,
     "serverIds": [
-      "038",
       "042",
       "043",
       "049",
       "053",
       "078",
-      "079",
       "101",
       "103",
       "104",
       "134",
+      "038",
       "143",
       "148",
-      "149",
       "150",
       "151"
     ],
     "serverNames": [
-      "Yudi Wijaya",
       "Rudy Djaja Siaputra",
       "Bambang Suprijanto",
-      "Widjanarko Tjandra Soejatno",
+      "Widjanarko Tjandra",
       "Edward Luntungan",
       "Yohanes Gunawan",
-      "Michael Raphael Hari Wiryawan",
       "Wongso Budi",
       "Wey Tjoendianto",
       "Tanuddin Rustan",
-      "Petrus Yuni setyawan",
-      "Stefanus Charlie Tjahyono",
-      "Fredy Teguh Prasetyo",
-      "Richard Gharyanto",
-      "Yohanes Kurniawan Halim",
-      "Iwan Sutanto"
+      "Petrus Yuni",
+      "Yudi Wijaya",
+      "Stefanus Charlie",
+      "Fredy Teguh",
+      "Yohanes Kurniawan",
+      "Irwan Sutanto"
     ],
     "koorlapIds": [
       "079",
@@ -6169,34 +6013,30 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "KORLAP",
       "AI",
       "AI",
       "AI",
       "AI",
       "AI",
       "AI",
-      "KORLAP",
       "AI",
       "AI"
     ],
     "serverNotes": [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Tukar Jadwal: 139 Severus senjaya",
+      "",
+      "",
+      "",
+      ""
     ],
     "isSubstituted": [
       false,
@@ -6208,9 +6048,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false,
       false,
       false,
-      false,
-      false,
-      false,
+      true,
       false,
       false,
       false,
@@ -6243,26 +6081,24 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 27 September 2026",
     "massTime": "06:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 8,
+    "targetTotal": 7,
     "serverIds": [
       "016",
       "031",
       "035",
-      "071",
       "083",
       "091",
       "157",
-      "160"
+      "084"
     ],
     "serverNames": [
-      "Cliff Patrisangga Sabarbudiman",
-      "Victor Kardiana Hardjomoeljo",
+      "Cliff Patriangga",
+      "Victor Kardiana",
       "Stevanus Budianto",
-      "Hence Antony Suawah",
       "Rudianto Hartanta",
-      "Joseph Thomas Raynanto",
+      "Thomas Raynanto",
       "Vincentius Fidelis Lucky",
-      "Imanuel Herry Kosok"
+      "Soehadi"
     ],
     "koorlapIds": [
       "071"
@@ -6271,31 +6107,28 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "KORLAP",
       "AI",
       "AI",
       "AI",
       "AI"
     ],
     "serverNotes": [
-      null,
-      null,
-      null,
-      null,
-      "Tukar Jadwal (57) Andrew Firmansyah",
-      null,
-      "Tukar Jadwal (155) Eko Gunawan Kusjanto",
-      null
+      "",
+      "",
+      "",
+      "Tukar Jadwal: 31 Victor Kardiana",
+      "",
+      "Tukar Jadwal: 155 Eko Gunawan Kusjanto",
+      "Tukar Jadwal: 160 Emanuel Henra"
     ],
     "isSubstituted": [
       false,
       false,
       false,
-      false,
       true,
       false,
       true,
-      false
+      true
     ],
     "originalServerNames": [
       "Cliff Patrisangga Sabarbudiman",
@@ -6316,7 +6149,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 27 September 2026",
     "massTime": "08:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 10,
+    "targetTotal": 9,
     "serverIds": [
       "010",
       "012",
@@ -6325,21 +6158,19 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "041",
       "050",
       "064",
-      "085",
       "156",
       "168"
     ],
     "serverNames": [
       "Gervasius Nosi",
-      "Ignatius Dwi Prasetyo",
-      "Yohanes Arishka Yudarana",
-      "Antonis Brian Mursidi",
-      "Lorenzo Tjaeyahdy Oeitomo",
+      "Dwi Prasetyo",
+      "Arishka Yudarana",
+      "Brian Mursidi",
+      "Lorenzo Tjaeyahdy",
       "Tjio Johansyah",
-      "Andy untoyo wibowo",
-      "Paulus Tedjadharma",
+      "Andy Untoyo",
       "Adhika Wardhana",
-      "AY. Happy Gunawanman"
+      "Happy Gunawarman"
     ],
     "koorlapIds": [
       "085"
@@ -6352,24 +6183,21 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "KORLAP",
       "AI",
       "AI"
     ],
     "serverNotes": [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
     ],
     "isSubstituted": [
-      false,
       false,
       false,
       false,
@@ -6401,7 +6229,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 27 September 2026",
     "massTime": "10:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 20,
+    "targetTotal": 18,
     "serverIds": [
       "003",
       "028",
@@ -6411,7 +6239,6 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "075",
       "093",
       "105",
-      "106",
       "113",
       "125",
       "129",
@@ -6421,29 +6248,26 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "144",
       "153",
       "155",
-      "164",
       "169"
     ],
     "serverNames": [
       "Venantius Sumarmo",
       "Tjoa Tjandrapradja",
-      "Bambang susilo",
-      "Antonius Benny Sukamto",
+      "Bambang Susilo",
+      "Benny Sukamto",
       "Bambang Budiono",
-      "Stevanus",
-      "Widyanto Setiawan Wijaya",
+      "Stevanus Lijadi",
+      "Widyanto Setiawan",
       "Mikael Hengky Pratama",
-      "Jap Yohanes Baptista",
       "Willy Setiawan",
-      "Donatus Sri Tar Prawinoto",
-      "Johanes Efendi Sapto Nugroho",
+      "Sri Tur Prawinoto",
+      "Johanes Rihadi",
       "Alexander Budi Cahyono",
-      "Dominikus Anas",
-      "William Antonius Davidson Jonto",
-      "Andreas Suteja Hantono",
-      "Agustinus Djoko Soetoyo",
+      "Dominikus Asas",
+      "Davidson Janto",
+      "Andreas Surja",
+      "Agustinus Djoko",
       "Eko Gunawan Kusjanto",
-      "Heru Wijaya",
       "Donni Anwar"
     ],
     "koorlapIds": [
@@ -6459,7 +6283,6 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -6469,30 +6292,27 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "KORLAP",
       "AI"
     ],
     "serverNotes": [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "Tukar Jadwal (157) Vincentius Fidelis Lucky",
-      null,
-      null
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Tukar Jadwal: 157 Vincentius Fidelis Lucky",
+      ""
     ],
     "isSubstituted": [
       false,
@@ -6511,9 +6331,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false,
       false,
       false,
-      false,
       true,
-      false,
       false
     ],
     "originalServerNames": [
@@ -6547,7 +6365,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 27 September 2026",
     "massTime": "17:00 WIB",
     "location": "Kapel John Paul II",
-    "targetTotal": 14,
+    "targetTotal": 13,
     "serverIds": [
       "021",
       "034",
@@ -6556,7 +6374,6 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "040",
       "044",
       "059",
-      "066",
       "070",
       "074",
       "112",
@@ -6566,18 +6383,17 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Adinanda Condrowibowo",
-      "Henrikus Henry Arvian Hady",
-      "Johanes Ignasius Totok Sukarno",
-      "Alfred Stephanus Metekohy",
+      "Henry Arvian",
+      "Johanes Ignasius Totok",
+      "Alfred Stephanus",
       "Vincent Winardi Tan",
-      "Sebastianus Nicholas Handoso",
+      "Nicholas Handoso",
       "Tri Wibisono",
-      "Berce suisa abraham",
       "Nio Eko Susilo",
       "Albert Sidharta",
-      "Aloysius Ari Senoo Loekito",
+      "Ari Senoaji Loekito",
       "Eddy Soedjatmiko",
-      "Fransiscus Paulus Kuncoro Kohar",
+      "Kuncoro Kohar",
       "Budi Santoso"
     ],
     "koorlapIds": [
@@ -6591,7 +6407,6 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -6600,23 +6415,21 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
     ],
     "isSubstituted": [
-      false,
       false,
       false,
       false,
@@ -6656,46 +6469,42 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 27 September 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 18,
+    "targetTotal": 16,
     "serverIds": [
       "001",
       "009",
-      "020",
       "022",
+      "020",
       "025",
-      "027",
       "032",
       "047",
       "055",
-      "057",
       "061",
       "062",
       "073",
-      "084",
+      "057",
+      "160",
       "098",
       "110",
-      "142",
-      "167"
+      "142"
     ],
     "serverNames": [
       "Gatot Chrishariyono",
       "Aloysius Gholo",
-      "Edwin Ardianto Tedjosaputro",
-      "Yohanes Valentinus Jimmy",
-      "Leonardus christian adi putra",
-      "Fransiskus Silvester Windy Wibisono",
+      "Valentinus Jimmy",
+      "Edwin Ardianto",
+      "Christian Adi Putra",
       "Edward Kusuma",
-      "Yeremia Santoso Halim",
+      "Yeremia Santoso halim",
       "Hartanto Chandra",
-      "Andrew Firmansyah Limantoro",
-      "Stevanus Leohanes Halim",
+      "Leohanes Halim",
       "Rizal Kristanto",
       "Sonny Sugiarto So",
-      "Soehadi",
+      "Andrew Firmansyah",
+      "Emanuel Henra",
       "Budi Purnomo",
-      "Sonny Widjojo",
-      "Eka Sisario",
-      "Chen Lin Andrew"
+      "Sonny Widjaja",
+      "Reo Sinarta"
     ],
     "koorlapIds": [
       "027",
@@ -6707,7 +6516,6 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -6718,28 +6526,25 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI",
       "AI",
       "AI",
-      "AI",
-      "KORLAP"
+      "AI"
     ],
     "serverNotes": [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      "Tukar Jadwal (83) Rudianto Hartanta",
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Tukar Jadwal: 83 Rudianto Hartanta",
+      "Tukar Jadwal: 84 Soehadi",
+      "",
+      "",
+      ""
     ],
     "isSubstituted": [
       false,
@@ -6751,12 +6556,10 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false,
       false,
       false,
+      false,
+      false,
       true,
-      false,
-      false,
-      false,
-      false,
-      false,
+      true,
       false,
       false,
       false
@@ -6797,7 +6600,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Gervasius Nosi",
-      "Yosathan Himawan Handarto"
+      "Yonathan Himawan"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -6832,7 +6635,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Antonius David Tjung",
-      "William Antonius Davidson Jonto"
+      "Davidson Janto"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -6865,14 +6668,14 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "019"
     ],
     "serverNames": [
-      "Januar Dwiputra Sutandi"
+      "Januar Dwiputro"
     ],
     "koorlapIds": [],
     "serverRoles": [
       "AI"
     ],
     "serverNotes": [
-      null
+      ""
     ],
     "isSubstituted": [
       false
@@ -6895,8 +6698,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "018"
     ],
     "serverNames": [
-      "Paulus Blodito Pujoasyogyo",
-      "Antonis Brian Mursidi"
+      "Paulus Biodita",
+      "Brian Mursidi"
     ],
     "koorlapIds": [],
     "serverRoles": [
