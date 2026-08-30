@@ -178,7 +178,15 @@ Lokasi : [Lokasi]`;
       // Helper function to find officer in text snippet
       const findOfficerInSnippet = (snippet: string): Officer | undefined => {
         if (!snippet) return undefined;
-        // Priority 1: Match by #ID, no. ID, nomor ID
+        // Priority 1: Match by Name first (e.g. "Hadi Santoso", "Antonius David Tjung")
+        const sorted = [...officers].sort((a, b) => b.name.length - a.name.length);
+        const nameFound = sorted.find(o => 
+          (o.name.length >= 4 && snippet.toLowerCase().includes(o.name.toLowerCase())) ||
+          (o.shortName && o.shortName.length >= 4 && snippet.toLowerCase().includes(o.shortName.toLowerCase()))
+        );
+        if (nameFound) return nameFound;
+
+        // Priority 2: Match by #ID, no. ID, nomor ID
         const idMatches = snippet.match(/(?:#|no\.?\s*|nomor\s*)(\d{1,3})/gi) || [];
         for (const m of idMatches) {
           const num = parseInt(m.replace(/[^0-9]/g, ''), 10);
@@ -188,18 +196,12 @@ Lokasi : [Lokasi]`;
           }
         }
 
-        // Priority 2: Match by full name or shortName
-        const sorted = [...officers].sort((a, b) => b.name.length - a.name.length);
-        const nameFound = sorted.find(o => 
-          snippet.toLowerCase().includes(o.name.toLowerCase()) ||
-          (o.shortName && o.shortName.length > 3 && snippet.toLowerCase().includes(o.shortName.toLowerCase()))
-        );
-        if (nameFound) return nameFound;
-
-        // Priority 3: Standalone 1-170 number (excluding date/time)
+        // Priority 3: Standalone 1-170 number (excluding date/time digits)
         const stripped = snippet
-          .replace(/\d{1,2}[:.]\d{2}/g, '')
-          .replace(/(?:tgl|tanggal|hari)\s*0?\d{1,2}/gi, '');
+          .replace(/\b202[4-9]\b/g, '')
+          .replace(/(?:jam|pukul)?\s*([01]?\d|2[0-3])[:.]([0-5]\d)/gi, '')
+          .replace(/(?:jam|pukul)\s*([01]\d|2[0-3])([0-5]\d)/gi, '')
+          .replace(/(?:tgl|tanggal|hari)?\s*0?\d{1,2}\s*(?:jan|feb|mar|apr|mei|jun|jul|agus|agt|sep|sept|september|okt|nov|des)/gi, '');
         const nums = stripped.match(/\b(\d{1,3})\b/g) || [];
         for (const n of nums) {
           const val = parseInt(n, 10);
@@ -214,25 +216,41 @@ Lokasi : [Lokasi]`;
 
       // Helper to extract date, time, and location
       const extractDateTimeLoc = (snippet: string) => {
-        // Date: e.g. tgl 04 Sep, 13 September, 01 September
-        const dateMatch = snippet.match(/(?:tgl|tanggal|hari)\s*0?(\d{1,2})|\b0?(\d{1,2})\s*(?:sept|sep|september|agustus|agust|oktober|okt)/i);
-        let dayNum: number | null = null;
-        if (dateMatch) {
-          const dVal = parseInt(dateMatch[1] || dateMatch[2], 10);
-          if (dVal >= 1 && dVal <= 31) dayNum = dVal;
+        const segClean = snippet.replace(/\b202[4-9]\b/g, '');
+
+        // Time: e.g. 18:00, 18.00, jam 1800, pukul 0530
+        let timeStr: string | null = null;
+        const tMatch1 = segClean.match(/(?:jam|pukul)?\s*([01]?\d|2[0-3])[:.]([0-5]\d)/i);
+        if (tMatch1) {
+          timeStr = `${tMatch1[1].padStart(2, '0')}:${tMatch1[2]}`;
+        } else {
+          const tMatch2 = segClean.match(/(?:jam|pukul)\s*([01]\d|2[0-3])([0-5]\d)/i);
+          if (tMatch2) {
+            timeStr = `${tMatch2[1]}:${tMatch2[2]}`;
+          }
         }
 
-        // Time: e.g. 17:00, 18.00, 05:30
-        const timeMatch = snippet.match(/(\d{1,2}[:.]\d{2})/);
-        const timeStr = timeMatch ? timeMatch[1].replace('.', ':') : null;
+        // Date: e.g. 1 september, 4 september, tgl 04 Sep, 13 September
+        let dayNum: number | null = null;
+        const dMatch1 = segClean.match(/\b0?(\d{1,2})\s*(?:jan|feb|mar|apr|mei|jun|jul|agus|agt|sep|sept|september|okt|nov|des)\b/i);
+        if (dMatch1) {
+          const dVal = parseInt(dMatch1[1], 10);
+          if (dVal >= 1 && dVal <= 31) dayNum = dVal;
+        } else {
+          const dMatch2 = segClean.match(/(?:tgl|tanggal|hari)\s*0?(\d{1,2})\b/i);
+          if (dMatch2) {
+            const dVal = parseInt(dMatch2[1], 10);
+            if (dVal >= 1 && dVal <= 31) dayNum = dVal;
+          }
+        }
 
         // Location: Kapel John Paul II, Gereja Paroki Santo Yakobus, RS EH
         let locStr: string | null = null;
-        if (/kjp|kapel|john paul/i.test(snippet)) {
+        if (/kjp|kapel|john paul/i.test(segClean)) {
           locStr = 'Kapel John Paul II';
-        } else if (/gereja/i.test(snippet)) {
+        } else if (/gereja/i.test(segClean)) {
           locStr = 'Gereja Paroki Santo Yakobus';
-        } else if (/rs|korsa|rumah sakit/i.test(snippet)) {
+        } else if (/rs|korsa|rumah sakit/i.test(segClean)) {
           locStr = 'Rumah Sakit EH';
         }
 
@@ -241,7 +259,8 @@ Lokasi : [Lokasi]`;
 
       let officerOriginal: Officer | undefined;
       let officerReplacement: Officer | undefined;
-      let { dayNum, timeStr, locStr } = extractDateTimeLoc(text);
+      let dtOriginal = { dayNum: null as number | null, timeStr: null as string | null, locStr: null as string | null };
+      let dtReplacement = { dayNum: null as number | null, timeStr: null as string | null, locStr: null as string | null };
 
       if (swapType === 'DIGANTIKAN') {
         // Pattern 1: Structured "Petugas : [A] ... Digantikan oleh : [B]"
@@ -251,6 +270,8 @@ Lokasi : [Lokasi]`;
         if (petugasMatch && penggantiMatch) {
           officerOriginal = findOfficerInSnippet(petugasMatch[1]);
           officerReplacement = findOfficerInSnippet(penggantiMatch[1]);
+          dtOriginal = extractDateTimeLoc(text);
+          dtReplacement = dtOriginal;
         } else {
           // Pattern 2: "[Officer B] menggantikan [Officer A]"
           const menggantikanMatch = text.match(/(.+?)\s+\b(?:menggantikan|mengantikan|gantikan)\s+(.+)/i);
@@ -260,9 +281,13 @@ Lokasi : [Lokasi]`;
           if (menggantikanMatch) {
             officerReplacement = findOfficerInSnippet(menggantikanMatch[1]);
             officerOriginal = findOfficerInSnippet(menggantikanMatch[2]);
+            dtOriginal = extractDateTimeLoc(menggantikanMatch[2]);
+            dtReplacement = extractDateTimeLoc(menggantikanMatch[1]);
           } else if (digantikanMatch) {
             officerOriginal = findOfficerInSnippet(digantikanMatch[1]);
             officerReplacement = findOfficerInSnippet(digantikanMatch[2]);
+            dtOriginal = extractDateTimeLoc(digantikanMatch[1]);
+            dtReplacement = extractDateTimeLoc(digantikanMatch[2]);
           }
         }
       } else {
@@ -278,8 +303,19 @@ Lokasi : [Lokasi]`;
           const segB = cleanedText.slice(splitMatch.index + splitMatch[0].length).trim();
           officerOriginal = findOfficerInSnippet(segA);
           officerReplacement = findOfficerInSnippet(segB);
+          dtOriginal = extractDateTimeLoc(segA);
+          dtReplacement = extractDateTimeLoc(segB);
         }
       }
+
+      // Global datetime fallback if segment datetime was empty
+      const globalDt = extractDateTimeLoc(text);
+      if (!dtOriginal.dayNum) dtOriginal.dayNum = globalDt.dayNum;
+      if (!dtOriginal.timeStr) dtOriginal.timeStr = globalDt.timeStr;
+      if (!dtOriginal.locStr) dtOriginal.locStr = globalDt.locStr;
+      if (!dtReplacement.dayNum) dtReplacement.dayNum = dtOriginal.dayNum;
+      if (!dtReplacement.timeStr) dtReplacement.timeStr = dtOriginal.timeStr;
+      if (!dtReplacement.locStr) dtReplacement.locStr = dtOriginal.locStr;
 
       // Global fallback if one or both officers were not parsed
       if (!officerOriginal || !officerReplacement) {
@@ -318,12 +354,14 @@ Lokasi : [Lokasi]`;
         excludeSlotId?: string
       ): ScheduleSlot | undefined => {
         const oid = off.id.padStart(3, '0');
+        
+        // 1. Direct match by officer in slot (assigned, substituted original, or note)
         let candidates = schedule.filter(s => 
-          (s.serverIds || []).some(sid => sid && sid.padStart(3, '0') === oid) &&
+          ((s.serverIds || []).some(sid => sid && sid.padStart(3, '0') === oid) ||
+           (s.originalServerNames || []).some(name => name && name.toLowerCase().includes(off.name.toLowerCase())) ||
+           (s.serverNotes || []).some(note => note && (note.includes(oid) || note.toLowerCase().includes(off.name.toLowerCase())))) &&
           (!excludeSlotId || s.id !== excludeSlotId)
         );
-
-        if (candidates.length === 0) return undefined;
 
         if (dNum) {
           const dayMatches = candidates.filter(s => {
@@ -343,20 +381,39 @@ Lokasi : [Lokasi]`;
           if (locMatches.length > 0) candidates = locMatches;
         }
 
-        return candidates[0];
+        if (candidates.length > 0) return candidates[0];
+
+        // 2. Fallback by session date/time/location if exact slot exists
+        if (dNum) {
+          let sessionCandidates = schedule.filter(s => {
+            const parts = s.date.split('-');
+            return parts.length === 3 && parseInt(parts[2], 10) === dNum && (!excludeSlotId || s.id !== excludeSlotId);
+          });
+          if (tStr) {
+            const timeMatches = sessionCandidates.filter(s => s.massTime.replace(' WIB', '').includes(tStr));
+            if (timeMatches.length > 0) sessionCandidates = timeMatches;
+          }
+          if (lStr) {
+            const locMatches = sessionCandidates.filter(s => s.location.toLowerCase().includes(lStr.toLowerCase()));
+            if (locMatches.length > 0) sessionCandidates = locMatches;
+          }
+          if (sessionCandidates.length > 0) return sessionCandidates[0];
+        }
+
+        return undefined;
       };
 
-      const slotA = findOfficerSlot(officerOriginal, dayNum, timeStr, locStr);
+      const slotA = findOfficerSlot(officerOriginal, dtOriginal.dayNum, dtOriginal.timeStr, dtOriginal.locStr);
       const slotB = swapType === 'TUKAR' 
-        ? findOfficerSlot(officerReplacement, dayNum, timeStr, locStr, slotA?.id)
+        ? findOfficerSlot(officerReplacement, dtReplacement.dayNum, dtReplacement.timeStr, dtReplacement.locStr, slotA?.id)
         : undefined;
 
-      const effectiveTimeA = slotA ? slotA.massTime : (timeStr ? `${timeStr} WIB` : '18:00 WIB');
-      const effectiveTimeB = slotB ? slotB.massTime : effectiveTimeA;
-      const effectiveLocA = slotA ? slotA.location : (locStr || 'Kapel John Paul II');
-      const effectiveLocB = slotB ? slotB.location : (locStr || 'Gereja Paroki Santo Yakobus');
-      const effectiveDateA = slotA ? slotA.displayDate : `${dayNum || '04'} Sep 2026`;
-      const effectiveDateB = slotB ? slotB.displayDate : effectiveDateA;
+      const effectiveTimeA = slotA ? slotA.massTime : (dtOriginal.timeStr ? `${dtOriginal.timeStr} WIB` : '18:00 WIB');
+      const effectiveTimeB = slotB ? slotB.massTime : (dtReplacement.timeStr ? `${dtReplacement.timeStr} WIB` : effectiveTimeA);
+      const effectiveLocA = slotA ? slotA.location : (dtOriginal.locStr || 'Kapel John Paul II');
+      const effectiveLocB = slotB ? slotB.location : (dtReplacement.locStr || 'Gereja Paroki Santo Yakobus');
+      const effectiveDateA = slotA ? slotA.displayDate : `${dtOriginal.dayNum || '01'} Sep 2026`;
+      const effectiveDateB = slotB ? slotB.displayDate : `${dtReplacement.dayNum || '04'} Sep 2026`;
 
       const actionLabel = swapType === 'TUKAR' 
         ? 'Tukar Jadwal (Mutual Switch)' 
