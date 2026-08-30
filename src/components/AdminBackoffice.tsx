@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Officer, ScheduleSlot, SystemLog } from '../types';
 import { 
   RotateCw, 
@@ -47,21 +47,35 @@ export const AdminBackoffice: React.FC<AdminBackofficeProps> = ({
   onUpdateSchedule,
   onAddLog
 }) => {
-  // Feed of WhatsApp messages matching real parish officers
-  const [messages, setMessages] = useState<MessageItem[]>([
-    {
-      id: 'msg-1',
-      time: '09:45 AM',
-      text: 'Hartanto Chandra tidak bisa tugas misa 08:00, diganti Venantius Sumarmo',
-      status: 'UPDATED'
-    },
-    {
-      id: 'msg-2',
-      time: '10:12 AM',
-      text: 'Gatot Chrishariyono bertukar jadwal dengan Raymundus Raimun Aso untuk Misa 18:00',
-      status: 'UPDATED'
-    }
-  ]);
+  // Keys for persistent WA state
+  const WA_STORAGE = {
+    MESSAGES: 'sacristy_wa_messages_v6',
+    INPUT: 'sacristy_wa_input_v6',
+    DETECTED: 'sacristy_wa_detected_v6',
+    LOG: 'sacristy_wa_log_v6'
+  };
+
+  // Feed of WhatsApp messages matching real parish officers (persisted)
+  const [messages, setMessages] = useState<MessageItem[]>(() => {
+    try {
+      const saved = localStorage.getItem(WA_STORAGE.MESSAGES);
+      if (saved) return JSON.parse(saved);
+    } catch {}
+    return [
+      {
+        id: 'msg-1',
+        time: '09:45 AM',
+        text: 'Hartanto Chandra tidak bisa tugas misa 08:00, diganti Venantius Sumarmo',
+        status: 'UPDATED'
+      },
+      {
+        id: 'msg-2',
+        time: '10:12 AM',
+        text: 'Gatot Chrishariyono bertukar jadwal dengan Raymundus Raimun Aso untuk Misa 18:00',
+        status: 'UPDATED'
+      }
+    ];
+  });
 
   // Generic and pre-filled template formats for WhatsApp Tukar Jadwal & Penggantian
   const PRESET_REAL_TUKAR = `Lapor Tukar Tugas
@@ -95,12 +109,18 @@ Tugas tgl : [Tanggal]
 Misa jam : [Jam Misa]
 Lokasi : [Lokasi]`;
 
-  const [inputMessage, setInputMessage] = useState<string>(PRESET_REAL_TUKAR);
-  const [parseError, setParseError] = useState<{ title: string; reason: string; fixHint: string } | null>(null);
+  const [inputMessage, setInputMessage] = useState<string>(() => {
+    try {
+      const saved = localStorage.getItem(WA_STORAGE.INPUT);
+      if (saved) return saved;
+    } catch {}
+    return PRESET_REAL_TUKAR;
+  });
 
+  const [parseError, setParseError] = useState<{ title: string; reason: string; fixHint: string } | null>(null);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
 
-  // Detected change state for Live Preview
+  // Detected change state for Live Preview (persisted)
   const [detectedChange, setDetectedChange] = useState<{
     original: string;
     pengganti: string;
@@ -110,47 +130,94 @@ Lokasi : [Lokasi]`;
     action: string;
     swapType: 'TUKAR' | 'DIGANTIKAN';
     detailNotes: string;
-  }>({
-    original: 'Mikael Hengky Pratama (#105)',
-    pengganti: 'Widyanto Setiawan Wijaya (#092)',
-    tanggal: '13 Sep 2026',
-    jamMisa: '17:00 ⇄ 18:00 WIB',
-    lokasi: 'Kapel John Paul II ⇄ Gereja Utama',
-    action: 'Tukar Jadwal (Mutual Switch)',
-    swapType: 'TUKAR',
-    detailNotes: 'Bpk. Hengky (#105) bertukar jadwal dari Kapel John Paul II (17:00) dengan Bpk. Widyanto (#092) di Gereja Utama (18:00).'
+  }>(() => {
+    try {
+      const saved = localStorage.getItem(WA_STORAGE.DETECTED);
+      if (saved) return JSON.parse(saved);
+    } catch {}
+    return {
+      original: 'Mikael Hengky Pratama (#105)',
+      pengganti: 'Widyanto Setiawan Wijaya (#092)',
+      tanggal: '13 Sep 2026',
+      jamMisa: '17:00 ⇄ 18:00 WIB',
+      lokasi: 'Kapel John Paul II ⇄ Gereja Utama',
+      action: 'Tukar Jadwal (Mutual Switch)',
+      swapType: 'TUKAR',
+      detailNotes: 'Bpk. Hengky (#105) bertukar jadwal dari Kapel John Paul II (17:00) dengan Bpk. Widyanto (#092) di Gereja Utama (18:00).'
+    };
   });
 
-  const [todayRows, setTodayRows] = useState<TodayScheduleRow[]>([
-    {
-      id: 't-1a',
-      jamMisa: '13 Sep 17:00 WIB',
-      lokasi: 'Kapel John Paul II',
-      petugasOriginal: 'Mikael Hengky Pratama (#105)',
-      petugasPengganti: 'Widyanto Setiawan Wijaya (#092)',
-      status: 'Swapped'
-    },
-    {
-      id: 't-1b',
-      jamMisa: '13 Sep 18:00 WIB',
-      lokasi: 'Gereja Utama',
-      petugasOriginal: 'Widyanto Setiawan Wijaya (#092)',
-      petugasPengganti: 'Mikael Hengky Pratama (#105)',
-      status: 'Swapped'
-    },
-    {
-      id: 't-2',
-      jamMisa: '01 Sep 18:00 WIB',
-      lokasi: 'Kapel John Paul II',
-      petugasOriginal: 'Hadi Santoso (#029)',
-      petugasPengganti: 'Soehadi (#084)',
-      status: 'Updated'
-    }
-  ]);
+  const [importLogText, setImportLogText] = useState<string>(() => {
+    try {
+      const saved = localStorage.getItem(WA_STORAGE.LOG);
+      if (saved) return saved;
+    } catch {}
+    return 'Siap memproses pesan tukar tugas grup WhatsApp.';
+  });
 
-  const [importLogText, setImportLogText] = useState<string>(
-    'Siap memproses pesan tukar tugas grup WhatsApp.'
-  );
+  // Save to localStorage whenever states change
+  useEffect(() => {
+    try {
+      localStorage.setItem(WA_STORAGE.MESSAGES, JSON.stringify(messages));
+    } catch {}
+  }, [messages]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(WA_STORAGE.INPUT, inputMessage);
+    } catch {}
+  }, [inputMessage]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(WA_STORAGE.DETECTED, JSON.stringify(detectedChange));
+    } catch {}
+  }, [detectedChange]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(WA_STORAGE.LOG, importLogText);
+    } catch {}
+  }, [importLogText]);
+
+  // Dynamically compute the swapped/substituted rows from the active real schedule
+  const todayRows: TodayScheduleRow[] = useMemo(() => {
+    const list: TodayScheduleRow[] = [];
+    (schedule || []).forEach(slot => {
+      if (slot.isSubstituted && slot.isSubstituted.some(Boolean)) {
+        slot.isSubstituted.forEach((sub, idx) => {
+          if (sub) {
+            const origName = slot.originalServerNames?.[idx] || 'Petugas Asli';
+            const currName = slot.serverNames[idx] || 'Petugas Pengganti';
+            const currId = slot.serverIds[idx] ? `(#${slot.serverIds[idx].padStart(3, '0')})` : '';
+            list.push({
+              id: `${slot.id}-${idx}`,
+              jamMisa: `${slot.displayDate.split(',')[1]?.trim() || slot.displayDate} (${slot.massTime})`,
+              lokasi: slot.location,
+              petugasOriginal: origName,
+              petugasPengganti: `${currName} ${currId}`,
+              status: 'Swapped'
+            });
+          }
+        });
+      }
+    });
+
+    // If no swapped slots exist yet, show initial upcoming slots
+    if (list.length === 0) {
+      (schedule || []).slice(0, 3).forEach(slot => {
+        list.push({
+          id: slot.id,
+          jamMisa: `${slot.displayDate.split(',')[1]?.trim() || slot.displayDate} (${slot.massTime})`,
+          lokasi: slot.location,
+          petugasOriginal: slot.serverNames[0] ? `${slot.serverNames[0]} (#${(slot.serverIds[0] || '').padStart(3, '0')})` : 'Belum Terisi',
+          petugasPengganti: null,
+          status: 'Terjadwal'
+        });
+      });
+    }
+    return list;
+  }, [schedule]);
 
   const handleProcessMessage = async () => {
     if (!inputMessage.trim()) return;
@@ -388,8 +455,14 @@ Lokasi : [Lokasi]`;
         const updatedSchedule = schedule.map(slot => {
           // In Slot 1: Replace First #number with Second #number
           if (slot.id === slot1.id) {
-            const idx = (slot.serverIds || []).findIndex(sid => sid && sid.padStart(3, '0') === id1_3);
-            const targetIdx = idx !== -1 ? idx : 0;
+            let targetIdx = (slot.serverIds || []).findIndex(sid => sid && sid.padStart(3, '0') === id1_3);
+            if (targetIdx === -1) {
+              targetIdx = (slot.originalServerNames || []).findIndex(name => name && name.toLowerCase().includes(officerFirst.name.toLowerCase()));
+            }
+            if (targetIdx === -1) {
+              targetIdx = (slot.serverNotes || []).findIndex(note => note && (note.includes(id1_3) || note.toLowerCase().includes(officerFirst.name.toLowerCase())));
+            }
+            if (targetIdx === -1) targetIdx = 0;
             modifiedSlotsCount++;
 
             const newServerIds = [...slot.serverIds];
@@ -422,8 +495,14 @@ Lokasi : [Lokasi]`;
 
           // In Slot 2: Replace Second #number with First #number
           if (slot.id === slot2.id) {
-            const idx = (slot.serverIds || []).findIndex(sid => sid && sid.padStart(3, '0') === id2_3);
-            const targetIdx = idx !== -1 ? idx : 0;
+            let targetIdx = (slot.serverIds || []).findIndex(sid => sid && sid.padStart(3, '0') === id2_3);
+            if (targetIdx === -1) {
+              targetIdx = (slot.originalServerNames || []).findIndex(name => name && name.toLowerCase().includes(officerSecond.name.toLowerCase()));
+            }
+            if (targetIdx === -1) {
+              targetIdx = (slot.serverNotes || []).findIndex(note => note && (note.includes(id2_3) || note.toLowerCase().includes(officerSecond.name.toLowerCase())));
+            }
+            if (targetIdx === -1) targetIdx = 0;
             modifiedSlotsCount++;
 
             const newServerIds = [...slot.serverIds];
@@ -470,26 +549,6 @@ Lokasi : [Lokasi]`;
           detailNotes: `TUKAR JADWAL:\n• ${name1} bertukar jadwal dari (${effDate1}, ${effTime1} @ ${effLoc1}) ke (${effDate2}, ${effTime2} @ ${effLoc2}).\n• ${name2} bertukar jadwal dari (${effDate2}, ${effTime2} @ ${effLoc2}) ke (${effDate1}, ${effTime1} @ ${effLoc1}).`
         });
 
-        setTodayRows(prev => [
-          {
-            id: 't-1-' + Date.now(),
-            jamMisa: `${effDate1} (${effTime1})`,
-            lokasi: effLoc1,
-            petugasOriginal: name1,
-            petugasPengganti: name2,
-            status: 'Swapped'
-          },
-          {
-            id: 't-2-' + Date.now(),
-            jamMisa: `${effDate2} (${effTime2})`,
-            lokasi: effLoc2,
-            petugasOriginal: name2,
-            petugasPengganti: name1,
-            status: 'Swapped'
-          },
-          ...prev
-        ]);
-
       } else if (mode === 'MENGGANTIKAN') {
         // -----------------------------------------------------------------------
         // RULE 4B: if "menggantikan" do erase the date from second #number and add to the first #number
@@ -514,8 +573,14 @@ Lokasi : [Lokasi]`;
         const updatedSchedule = schedule.map(slot => {
           if (slot.id === targetSlot.id) {
             // Erase second #number and add first #number
-            const idx = (slot.serverIds || []).findIndex(sid => sid && sid.padStart(3, '0') === id2_3);
-            const targetIdx = idx !== -1 ? idx : 0;
+            let targetIdx = (slot.serverIds || []).findIndex(sid => sid && sid.padStart(3, '0') === id2_3);
+            if (targetIdx === -1) {
+              targetIdx = (slot.originalServerNames || []).findIndex(name => name && name.toLowerCase().includes(officerSecond.name.toLowerCase()));
+            }
+            if (targetIdx === -1) {
+              targetIdx = (slot.serverNotes || []).findIndex(note => note && (note.includes(id2_3) || note.toLowerCase().includes(officerSecond.name.toLowerCase())));
+            }
+            if (targetIdx === -1) targetIdx = 0;
             modifiedSlotsCount++;
 
             const newServerIds = [...slot.serverIds];
@@ -561,18 +626,6 @@ Lokasi : [Lokasi]`;
           detailNotes: `MENGGANTIKAN TUGAS:\n• ${name1} menggantikan tugas ${name2} pada sesi (${effDate}, ${effTime} @ ${effLoc}).\n• ${name2} dihapus dari sesi tersebut dan digantikan oleh ${name1}.`
         });
 
-        setTodayRows(prev => [
-          {
-            id: 't-' + Date.now(),
-            jamMisa: `${effDate} (${effTime})`,
-            lokasi: effLoc,
-            petugasOriginal: name2,
-            petugasPengganti: name1,
-            status: 'Updated'
-          },
-          ...prev
-        ]);
-
       } else if (mode === 'DIGANTIKAN') {
         // -----------------------------------------------------------------------
         // RULE 4C: if "digantikan" do erase the date from first #number and add to the second #number
@@ -597,8 +650,14 @@ Lokasi : [Lokasi]`;
         const updatedSchedule = schedule.map(slot => {
           if (slot.id === targetSlot.id) {
             // Erase first #number and add second #number
-            const idx = (slot.serverIds || []).findIndex(sid => sid && sid.padStart(3, '0') === id1_3);
-            const targetIdx = idx !== -1 ? idx : 0;
+            let targetIdx = (slot.serverIds || []).findIndex(sid => sid && sid.padStart(3, '0') === id1_3);
+            if (targetIdx === -1) {
+              targetIdx = (slot.originalServerNames || []).findIndex(name => name && name.toLowerCase().includes(officerFirst.name.toLowerCase()));
+            }
+            if (targetIdx === -1) {
+              targetIdx = (slot.serverNotes || []).findIndex(note => note && (note.includes(id1_3) || note.toLowerCase().includes(officerFirst.name.toLowerCase())));
+            }
+            if (targetIdx === -1) targetIdx = 0;
             modifiedSlotsCount++;
 
             const newServerIds = [...slot.serverIds];
@@ -643,18 +702,6 @@ Lokasi : [Lokasi]`;
           swapType: 'DIGANTIKAN',
           detailNotes: `DIGANTIKAN:\n• ${name1} pada sesi (${effDate}, ${effTime} @ ${effLoc}) digantikan oleh ${name2}.\n• ${name1} dihapus dari sesi tersebut dan digantikan oleh ${name2}.`
         });
-
-        setTodayRows(prev => [
-          {
-            id: 't-' + Date.now(),
-            jamMisa: `${effDate} (${effTime})`,
-            lokasi: effLoc,
-            petugasOriginal: name1,
-            petugasPengganti: name2,
-            status: 'Updated'
-          },
-          ...prev
-        ]);
       }
 
       // 10. Add to Live Feed & System Log
