@@ -10,7 +10,6 @@ import {
 
 export const CHURCH_LOGO = "/parish-logo.png";
 
-
 export const INITIAL_OFFICERS: Officer[] = [
   {
     "id": "001",
@@ -234,7 +233,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "phone": "0812-1238-1434",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
     "dutyCount": 0,
-    "status": "Aktif"
+    "status": "Cuti"
   },
   {
     "id": "015",
@@ -1114,7 +1113,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "phone": "0812-2173-3139",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
     "dutyCount": 0,
-    "status": "Aktif"
+    "status": "Cuti"
   },
   {
     "id": "070",
@@ -1353,7 +1352,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-2428-3604",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 2,
+    "dutyCount": 1,
     "status": "Aktif"
   },
   {
@@ -1722,7 +1721,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "phone": "0812-2819-4317",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
     "dutyCount": 0,
-    "status": "Aktif"
+    "status": "Cuti"
   },
   {
     "id": "108",
@@ -1793,8 +1792,8 @@ export const INITIAL_OFFICERS: Officer[] = [
     "name": "Aloysius Ari Senoo Loekito",
     "shortName": "Aloysius A. S. L.",
     "initials": "AA",
-    "role": "Asisten Imam",
-    "isKoorlap": false,
+    "role": "Asisten Imam - Koordinator Lapangan (Koorlap)",
+    "isKoorlap": true,
     "wilayah": "Wilayah Petrus",
     "lokasiPelayanan": "Gereja Utama",
     "masaBakti": "2024 - 2027",
@@ -1809,8 +1808,8 @@ export const INITIAL_OFFICERS: Officer[] = [
     "name": "Willy Setiawan",
     "shortName": "Willy Setiawan",
     "initials": "WS",
-    "role": "Asisten Imam",
-    "isKoorlap": false,
+    "role": "Asisten Imam - Koordinator Lapangan (Koorlap)",
+    "isKoorlap": true,
     "wilayah": "Wilayah Petrus",
     "lokasiPelayanan": "Gereja Utama",
     "masaBakti": "2024 - 2027",
@@ -1825,8 +1824,8 @@ export const INITIAL_OFFICERS: Officer[] = [
     "name": "Nicolas Immanuel Derry Nurcahya",
     "shortName": "Nicolas I. D. N.",
     "initials": "NI",
-    "role": "Asisten Imam",
-    "isKoorlap": false,
+    "role": "Asisten Imam - Koordinator Lapangan (Koorlap)",
+    "isKoorlap": true,
     "wilayah": "Wilayah Petrus",
     "lokasiPelayanan": "Gereja Utama",
     "masaBakti": "2024 - 2027",
@@ -1914,7 +1913,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "phone": "0812-3023-4689",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
     "dutyCount": 0,
-    "status": "Aktif"
+    "status": "Cuti"
   },
   {
     "id": "120",
@@ -1946,7 +1945,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "phone": "0812-3057-4751",
     "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
     "dutyCount": 0,
-    "status": "Aktif"
+    "status": "Cuti"
   },
   {
     "id": "122",
@@ -1994,7 +1993,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "phone": "0812-3108-4844",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
     "dutyCount": 0,
-    "status": "Aktif"
+    "status": "Cuti"
   },
   {
     "id": "125",
@@ -2569,7 +2568,7 @@ export const INITIAL_OFFICERS: Officer[] = [
     "preferensiMisaHarian": false,
     "phone": "0812-3720-5960",
     "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face",
-    "dutyCount": 2,
+    "dutyCount": 3,
     "status": "Aktif"
   },
   {
@@ -2875,23 +2874,28 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Kamis, 03 September 2026",
     "massTime": "18:30 WIB",
     "location": "Kapel John Paul II",
-    "targetTotal": 1,
+    "targetTotal": 2,
     "serverIds": [
+      "062",
       "065"
     ],
     "serverNames": [
+      "Rizal Kristanto",
       "Bambang Budiono"
     ],
     "koorlapIds": [
       "062"
     ],
     "serverRoles": [
+      "KORLAP",
       "AI"
     ],
     "serverNotes": [
-      ""
+      "[Koorlap Misa]",
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
       false
     ],
     "originalServerNames": [
@@ -2959,20 +2963,20 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "koorlapIds": [],
     "serverRoles": [
-      "Korsa",
-      "Backup Korsa"
+      "AI",
+      "AI"
     ],
     "serverNotes": [
-      "",
-      ""
+      "[Korsa]",
+      "[Backup Korsa]"
     ],
     "isSubstituted": [
       false,
       false
     ],
     "originalServerNames": [
-      "Januar Dwiputra Sutandi",
-      "Alex Santoso"
+      "Alex Santoso",
+      "Januar Dwiputra Sutandi"
     ],
     "status": "Scheduled",
     "attendedServerIds": []
@@ -2983,13 +2987,15 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Jumat, 04 September 2026",
     "massTime": "18:00 WIB",
     "location": "Kapel John Paul II",
-    "targetTotal": 3,
+    "targetTotal": 4,
     "serverIds": [
+      "063",
       "056",
       "059",
       "168"
     ],
     "serverNames": [
+      "Antonius Benny Sukamto",
       "Antonius David Tjung",
       "Tri Wibisono",
       "AY. Happy Gunawanman"
@@ -2998,24 +3004,27 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "063"
     ],
     "serverRoles": [
+      "KORLAP",
       "AI",
       "AI",
       "AI"
     ],
     "serverNotes": [
-      "",
-      "",
+      "[Koorlap Misa]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
       "Menggantikan: 67 Raymond Hanjaya"
     ],
     "isSubstituted": [
       false,
       false,
+      false,
       true
     ],
     "originalServerNames": [
+      "Antonius Benny Sukamto",
       "Antonius David Tjung",
       "Tri Wibisono",
-      "Antonius Benny Sukamto",
       "AY. Happy Gunawanman"
     ],
     "status": "Scheduled",
@@ -3027,13 +3036,15 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Jumat, 04 September 2026",
     "massTime": "19:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 3,
+    "targetTotal": 4,
     "serverIds": [
+      "001",
       "004",
       "011",
       "016"
     ],
     "serverNames": [
+      "Gatot Chrishariyono",
       "Agustinus Cahyono",
       "Argo Putra",
       "Cliff Patrisangga Sabarbudiman"
@@ -3042,16 +3053,19 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "001"
     ],
     "serverRoles": [
+      "KORLAP",
       "AI",
       "AI",
       "AI"
     ],
     "serverNotes": [
-      "",
-      "",
-      ""
+      "[Koorlap Misa]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
       false,
       false,
       false
@@ -3106,8 +3120,10 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Sabtu, 05 September 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 14,
+    "targetTotal": 16,
     "serverIds": [
+      "035",
+      "046",
       "003",
       "095",
       "027",
@@ -3124,6 +3140,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "166"
     ],
     "serverNames": [
+      "Stevanus Budianto",
+      "Mario Christiano Chandra",
       "Venantius Sumarmo",
       "Yohanes Agus Kartakusuma",
       "Fransiskus Silvester Windy Wibisono",
@@ -3144,6 +3162,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "046"
     ],
     "serverRoles": [
+      "KORLAP",
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -3160,22 +3180,26 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "",
+      "[Koorlap Misa]",
+      "[Koorlap Misa]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 5 Andreas Yoga",
-      "",
-      "",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 50 Tjio Johansyah",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 164 Heru Wijaya",
-      ""
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
+      false,
       false,
       true,
       false,
@@ -3192,21 +3216,21 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false
     ],
     "originalServerNames": [
-      "Venantius Sumarmo",
-      "Fransiskus Silvester Windy Wibisono",
-      "Satrio Soetikno",
       "Stevanus Budianto",
-      "Dionisius Donny Kamadjaja",
       "Mario Christiano Chandra",
+      "Venantius Sumarmo",
+      "Yohanes Agus Kartakusuma",
+      "Fransiskus Silvester Windy Wibisono",
+      "Dionisius Donny Kamadjaja",
+      "Satrio Soetikno",
       "Paulus Agus Juwono",
       "Ivan Christian Cahyadi",
       "Sugiharto Tanto",
-      "Yohanes Agus Kartakusuma",
       "Laurensius Rony Setyawan",
-      "Damianus Slamet Subagio",
       "Richard Gharyanto",
       "Jeffrey Tanuhardjo",
       "Imanuel Herry Kosok",
+      "Damianus Slamet Subagio",
       "Sutedjo Budiono Wonodihardjo"
     ],
     "status": "Scheduled",
@@ -3218,8 +3242,9 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Sabtu, 05 September 2026",
     "massTime": "18:00 WIB",
     "location": "Kapel John Paul II",
-    "targetTotal": 13,
+    "targetTotal": 14,
     "serverIds": [
+      "038",
       "020",
       "064",
       "071",
@@ -3235,6 +3260,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "168"
     ],
     "serverNames": [
+      "Yudi Wijaya",
       "Edwin Ardianto Tedjosaputro",
       "Andy untoyo wibowo",
       "Hence Antony Suawah",
@@ -3253,6 +3279,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "038"
     ],
     "serverRoles": [
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -3268,21 +3295,23 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
+      "[Koorlap Misa]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 145 Damianus Slamet",
-      "",
-      "",
-      ""
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
       false,
       false,
       false,
@@ -3298,8 +3327,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false
     ],
     "originalServerNames": [
-      "Edwin Ardianto Tedjosaputro",
       "Yudi Wijaya",
+      "Edwin Ardianto Tedjosaputro",
       "Andy untoyo wibowo",
       "Hence Antony Suawah",
       "Denny Sentosa Johann",
@@ -3322,8 +3351,9 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 06 September 2026",
     "massTime": "06:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 7,
+    "targetTotal": 8,
     "serverIds": [
+      "006",
       "002",
       "007",
       "095",
@@ -3333,6 +3363,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "087"
     ],
     "serverNames": [
+      "Paulus Blodito Pujoasyogyo",
       "Raymundus Raimun Aso",
       "Paulus Leto Udjan",
       "Yohanes Agus Kartakusuma",
@@ -3345,6 +3376,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "006"
     ],
     "serverRoles": [
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -3354,15 +3386,17 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "",
-      "",
+      "[Koorlap Misa]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 40 Vincent Winardi Tan",
-      "",
-      "",
-      "",
-      ""
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
       false,
       false,
       true,
@@ -3372,14 +3406,14 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false
     ],
     "originalServerNames": [
-      "Raymundus Raimun Aso",
       "Paulus Blodito Pujoasyogyo",
+      "Raymundus Raimun Aso",
       "Paulus Leto Udjan",
+      "Yohanes Agus Kartakusuma",
       "Bambang Suprijanto",
       "Andi widjaja tirtoprodjo",
       "Eric Saputro",
-      "Budi Santosa",
-      "Yohanes Agus Kartakusuma"
+      "Budi Santosa"
     ],
     "status": "Scheduled",
     "attendedServerIds": []
@@ -3399,10 +3433,10 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "koorlapIds": [],
     "serverRoles": [
-      "Korsa RS EH"
+      "AI"
     ],
     "serverNotes": [
-      ""
+      "[Korsa RS EH]"
     ],
     "isSubstituted": [
       false
@@ -3419,8 +3453,9 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 06 September 2026",
     "massTime": "08:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 9,
+    "targetTotal": 10,
     "serverIds": [
+      "022",
       "041",
       "047",
       "048",
@@ -3432,6 +3467,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "023"
     ],
     "serverNames": [
+      "Yohanes Valentinus Jimmy",
       "Lorenzo Tjaeyahdy Oeitomo",
       "Yeremia Santoso Halim",
       "Fredy Susanto",
@@ -3446,6 +3482,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "022"
     ],
     "serverRoles": [
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -3457,17 +3494,19 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
+      "[Koorlap Misa]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
       false,
       false,
       false,
@@ -3480,7 +3519,6 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "originalServerNames": [
       "Yohanes Valentinus Jimmy",
-      "FX Johni Hidayat",
       "Lorenzo Tjaeyahdy Oeitomo",
       "Yeremia Santoso Halim",
       "Fredy Susanto",
@@ -3488,7 +3526,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Bambang Hermanto",
       "Alexander Mario Pribadi",
       "Fransiscus Paulus Kuncoro Kohar",
-      "Budi Santoso"
+      "Budi Santoso",
+      "FX Johni Hidayat"
     ],
     "status": "Scheduled",
     "attendedServerIds": []
@@ -3499,8 +3538,10 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 06 September 2026",
     "massTime": "10:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 18,
+    "targetTotal": 20,
     "serverIds": [
+      "079",
+      "085",
       "010",
       "012",
       "024",
@@ -3521,6 +3562,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "161"
     ],
     "serverNames": [
+      "Michael Raphael Hari Wiryawan",
+      "Paulus Tedjadharma",
       "Gervasius Nosi",
       "Ignatius Dwi Prasetyo",
       "Hendra Utama",
@@ -3545,6 +3588,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "085"
     ],
     "serverRoles": [
+      "KORLAP",
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -3565,26 +3610,30 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "",
-      "",
-      "",
-      "",
+      "[Koorlap Misa]",
+      "[Koorlap Misa]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 31 Victor Kardiana",
       "Tukar Jadwal: 33 Satrio Soetikno",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 156 Adhika Wardhana",
-      ""
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
+      false,
       false,
       false,
       false,
@@ -3605,16 +3654,16 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false
     ],
     "originalServerNames": [
-      "Gervasius Nosi",
-      "Ignatius Dwi Prasetyo",
-      "Cliff Patrisangga Sabarbudiman",
-      "Hendra Utama",
-      "Andi Singgih",
-      "Johanes Ignasius Totok Sukarno",
-      "Rudy Djaja Siaputra",
-      "Tjio Johansyah",
       "Michael Raphael Hari Wiryawan",
       "Paulus Tedjadharma",
+      "Gervasius Nosi",
+      "Ignatius Dwi Prasetyo",
+      "Hendra Utama",
+      "Andi Singgih",
+      "Cliff Patrisangga Sabarbudiman",
+      "Tjio Johansyah",
+      "Johanes Ignasius Totok Sukarno",
+      "Rudy Djaja Siaputra",
       "Robert Boesbiyanto",
       "Yosathan Himawan Handarto",
       "FX Doddy Isdayanto",
@@ -3622,8 +3671,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Stevanus Titus Purdijojo",
       "Robertus Antonius Christmowanto",
       "Andreas Suteja Hantono",
-      "Damianus Slamet Subagio",
       "Ton Wernalia Tante",
+      "Damianus Slamet Subagio",
       "Edward Siswanto Santoso"
     ],
     "status": "Scheduled",
@@ -3635,8 +3684,10 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 06 September 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 16,
+    "targetTotal": 18,
     "serverIds": [
+      "089",
+      "100",
       "008",
       "009",
       "013",
@@ -3655,6 +3706,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "133"
     ],
     "serverNames": [
+      "Raymond Michael",
+      "Gunarjo Tanurijanto",
       "Sunardi",
       "Aloysius Gholo",
       "Pius Paru",
@@ -3677,6 +3730,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "100"
     ],
     "serverRoles": [
+      "KORLAP",
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -3695,24 +3750,28 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
+      "[Koorlap Misa]",
+      "[Koorlap Misa]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 83 Rudianto Hartanta",
-      "",
+      "[Asisten Imam]",
       "Tukar Jadwal: 95 Agus Kartakusuma",
-      "",
-      "",
-      "",
-      "",
-      ""
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
+      false,
       false,
       false,
       false,
@@ -3731,19 +3790,19 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false
     ],
     "originalServerNames": [
-      "Andreas Yoga Adhitama",
+      "Raymond Michael",
+      "Gunarjo Tanurijanto",
       "Sunardi",
       "Aloysius Gholo",
       "Pius Paru",
-      "Victor Kardiana Hardjomoeljo",
       "Agustinus Redy Wibisono",
       "Widjanarko Tjandra Soejatno",
       "Sonny Sugiarto So",
       "Albert Sidharta",
       "Bambang Purnomo",
+      "Victor Kardiana Hardjomoeljo",
       "Michael Kristanto",
-      "Raymond Michael",
-      "Gunarjo Tanurijanto",
+      "Andreas Yoga Adhitama",
       "Wongso Budi",
       "Efendy Liobudhi",
       "Franciscus Xaverius Hendra Wijaya",
@@ -3841,7 +3900,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      ""
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
       false
@@ -3927,41 +3986,6 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "date": "2026-09-11",
     "displayDate": "Jumat, 11 September 2026",
     "massTime": "05:30 WIB",
-    "location": "Rumah Sakit EH",
-    "targetTotal": 2,
-    "serverIds": [
-      "115",
-      "039"
-    ],
-    "serverNames": [
-      "Efendy Liobudhi",
-      "Agustinus Redy Wibisono"
-    ],
-    "koorlapIds": [],
-    "serverRoles": [
-      "Korsa",
-      "Backup Korsa"
-    ],
-    "serverNotes": [
-      "",
-      ""
-    ],
-    "isSubstituted": [
-      false,
-      false
-    ],
-    "originalServerNames": [
-      "Agustinus Redy Wibisono",
-      "Efendy Liobudhi"
-    ],
-    "status": "Scheduled",
-    "attendedServerIds": []
-  },
-  {
-    "id": "sch-sep-24",
-    "date": "2026-09-11",
-    "displayDate": "Jumat, 11 September 2026",
-    "massTime": "05:30 WIB",
     "location": "Gereja Paroki Santo Yakobus",
     "targetTotal": 3,
     "serverIds": [
@@ -3999,6 +4023,41 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "attendedServerIds": []
   },
   {
+    "id": "sch-sep-24",
+    "date": "2026-09-11",
+    "displayDate": "Jumat, 11 September 2026",
+    "massTime": "05:30 WIB",
+    "location": "Rumah Sakit EH",
+    "targetTotal": 2,
+    "serverIds": [
+      "115",
+      "039"
+    ],
+    "serverNames": [
+      "Efendy Liobudhi",
+      "Agustinus Redy Wibisono"
+    ],
+    "koorlapIds": [],
+    "serverRoles": [
+      "AI",
+      "AI"
+    ],
+    "serverNotes": [
+      "[Korsa]",
+      "[Backup Korsa]"
+    ],
+    "isSubstituted": [
+      false,
+      false
+    ],
+    "originalServerNames": [
+      "Efendy Liobudhi",
+      "Agustinus Redy Wibisono"
+    ],
+    "status": "Scheduled",
+    "attendedServerIds": []
+  },
+  {
     "id": "sch-sep-25",
     "date": "2026-09-11",
     "displayDate": "Jumat, 11 September 2026",
@@ -4016,7 +4075,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      ""
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
       false
@@ -4056,8 +4115,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false
     ],
     "originalServerNames": [
-      "Stevanus Budianto",
-      "Willy Setiawan"
+      "Willy Setiawan",
+      "Stevanus Budianto"
     ],
     "status": "Scheduled",
     "attendedServerIds": []
@@ -4068,8 +4127,10 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Sabtu, 12 September 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 14,
+    "targetTotal": 16,
     "serverIds": [
+      "054",
+      "064",
       "025",
       "024",
       "034",
@@ -4086,6 +4147,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "165"
     ],
     "serverNames": [
+      "Ivan Christian Cahyadi",
+      "Andy untoyo wibowo",
       "Leonardus christian adi putra",
       "Hendra Utama",
       "Henrikus Henry Arvian Hady",
@@ -4106,6 +4169,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "064"
     ],
     "serverRoles": [
+      "KORLAP",
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -4122,22 +4187,26 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "",
+      "[Koorlap Misa]",
+      "[Koorlap Misa]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 26 Eddy Suwanto",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
+      false,
       false,
       true,
       false,
@@ -4154,12 +4223,12 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false
     ],
     "originalServerNames": [
-      "Hendra Utama",
-      "Leonardus christian adi putra",
-      "Henrikus Henry Arvian Hady",
-      "Fredy Susanto",
       "Ivan Christian Cahyadi",
       "Andy untoyo wibowo",
+      "Leonardus christian adi putra",
+      "Hendra Utama",
+      "Henrikus Henry Arvian Hady",
+      "Fredy Susanto",
       "Fx Tanno Sugiharto",
       "Jap Yohanes Baptista",
       "Nicolas Immanuel Derry Nurcahya",
@@ -4180,8 +4249,9 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 13 September 2026",
     "massTime": "06:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 7,
+    "targetTotal": 8,
     "serverIds": [
+      "090",
       "007",
       "139",
       "044",
@@ -4191,6 +4261,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "167"
     ],
     "serverNames": [
+      "Hanjaya Kurniawan",
       "Paulus Leto Udjan",
       "Severus senjoyo",
       "Sebastianus Nicholas Handoso",
@@ -4203,6 +4274,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "090"
     ],
     "serverRoles": [
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -4212,15 +4284,17 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "",
+      "[Koorlap Misa]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 38 Yudi Wijaya",
-      "",
-      "",
-      "",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 163 Kuncoro Kohar",
-      ""
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
       false,
       true,
       false,
@@ -4230,13 +4304,13 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false
     ],
     "originalServerNames": [
+      "Hanjaya Kurniawan",
       "Paulus Leto Udjan",
+      "Severus senjoyo",
       "Sebastianus Nicholas Handoso",
       "Yeremia Santoso Halim",
       "Nio Eko Susilo",
       "Sugiharto Tanto",
-      "Hanjaya Kurniawan",
-      "Severus senjoyo",
       "Chen Lin Andrew"
     ],
     "status": "Scheduled",
@@ -4257,10 +4331,10 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "koorlapIds": [],
     "serverRoles": [
-      "Korsa RS EH"
+      "AI"
     ],
     "serverNotes": [
-      ""
+      "[Korsa RS EH]"
     ],
     "isSubstituted": [
       false
@@ -4277,8 +4351,9 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 13 September 2026",
     "massTime": "08:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 9,
+    "targetTotal": 10,
     "serverIds": [
+      "097",
       "001",
       "004",
       "005",
@@ -4290,6 +4365,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "168"
     ],
     "serverNames": [
+      "Irwan Afandi",
       "Gatot Chrishariyono",
       "Agustinus Cahyono",
       "Andreas Yoga Adhitama",
@@ -4304,6 +4380,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "097"
     ],
     "serverRoles": [
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -4315,17 +4392,19 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "",
-      "",
-      "",
-      "",
-      "",
+      "[Koorlap Misa]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 39 Redy Wibisono",
-      "",
+      "[Asisten Imam]",
       "Tukar Jadwal: 58 Bambang Susilo",
-      ""
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
       false,
       false,
       false,
@@ -4337,15 +4416,15 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false
     ],
     "originalServerNames": [
+      "Irwan Afandi",
       "Gatot Chrishariyono",
       "Agustinus Cahyono",
       "Andreas Yoga Adhitama",
       "Argo Putra",
       "Ignatius Dwi Prasetyo",
-      "Adinanda Condrowibowo",
-      "Antonius David Tjung",
-      "Irwan Afandi",
       "Silvester Agus Riyanto Pamuji",
+      "Antonius David Tjung",
+      "Adinanda Condrowibowo",
       "AY. Happy Gunawanman"
     ],
     "status": "Scheduled",
@@ -4357,8 +4436,10 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 13 September 2026",
     "massTime": "10:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 18,
+    "targetTotal": 20,
     "serverIds": [
+      "096",
+      "112",
       "015",
       "028",
       "033",
@@ -4379,6 +4460,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "161"
     ],
     "serverNames": [
+      "Laurensius Rony Setyawan",
+      "Aloysius Ari Senoo Loekito",
       "Yohanes Herman Saputra",
       "Tjoa Tjandrapradja",
       "Satrio Soetikno",
@@ -4403,6 +4486,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "112"
     ],
     "serverRoles": [
+      "KORLAP",
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -4423,26 +4508,30 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
+      "[Koorlap Misa]",
+      "[Koorlap Misa]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 86 Sugiharto Tanto",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
+      false,
       false,
       false,
       false,
@@ -4463,6 +4552,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false
     ],
     "originalServerNames": [
+      "Laurensius Rony Setyawan",
+      "Aloysius Ari Senoo Loekito",
       "Yohanes Herman Saputra",
       "Tjoa Tjandrapradja",
       "Satrio Soetikno",
@@ -4470,9 +4561,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Jonas Angkawidjaja",
       "Untung Sutikno",
       "Yohanes Gunawan",
-      "Laurensius Rony Setyawan",
+      "Fransiscus Paulus Kuncoro Kohar",
       "Robert Boesbiyanto",
-      "Aloysius Ari Senoo Loekito",
       "Edwin Pribadi",
       "FX Doddy Isdayanto",
       "Silvester Agus Riyanto Pamuji",
@@ -4481,8 +4571,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Eka Sisario",
       "Iwan Sutanto",
       "Agustinus Djoko Soetoyo",
-      "Edward Siswanto Santoso",
-      "Fransiscus Paulus Kuncoro Kohar"
+      "Edward Siswanto Santoso"
     ],
     "status": "Scheduled",
     "attendedServerIds": []
@@ -4493,8 +4582,9 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 13 September 2026",
     "massTime": "17:00 WIB",
     "location": "Kapel John Paul II",
-    "targetTotal": 13,
+    "targetTotal": 14,
     "serverIds": [
+      "113",
       "058",
       "085",
       "098",
@@ -4510,6 +4600,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "170"
     ],
     "serverNames": [
+      "Willy Setiawan",
       "Bambang susilo",
       "Paulus Tedjadharma",
       "Budi Purnomo",
@@ -4528,6 +4619,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "113"
     ],
     "serverRoles": [
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -4543,21 +4635,23 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
+      "[Koorlap Misa]",
       "Tukar Jadwal: 77 Ferdyanto Salim",
-      "",
-      "",
-      "",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 105 Mikael Hengky Pratama",
-      "",
-      "",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 145 Damianus Slamet",
-      "",
-      "",
-      "",
-      "",
-      ""
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
       true,
       false,
       false,
@@ -4573,18 +4667,18 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false
     ],
     "originalServerNames": [
+      "Willy Setiawan",
       "Bambang susilo",
       "Paulus Tedjadharma",
-      "Tjetjep Tjondro Oetomo",
       "Budi Purnomo",
       "Alex Santoso",
+      "Tjetjep Tjondro Oetomo",
       "Yosathan Himawan Handarto",
-      "Willy Setiawan",
       "Alexander Sukarliono",
+      "Heru Wijaya",
       "Adhika Wardhana",
       "Vincentius Fidelis Lucky",
       "Alexander Mario Pribadi",
-      "Heru Wijaya",
       "Donni Anwar",
       "Budi Santoso"
     ],
@@ -4597,8 +4691,10 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 13 September 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 16,
+    "targetTotal": 18,
     "serverIds": [
+      "123",
+      "143",
       "008",
       "018",
       "019",
@@ -4617,6 +4713,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "141"
     ],
     "serverNames": [
+      "Fidelis Sutatyo",
+      "Stefanus Charlie Tjahyono",
       "Sunardi",
       "Antonis Brian Mursidi",
       "Januar Dwiputra Sutandi",
@@ -4639,6 +4737,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "143"
     ],
     "serverRoles": [
+      "KORLAP",
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -4657,24 +4757,28 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
+      "[Koorlap Misa]",
+      "[Koorlap Misa]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 92 Tjetjep Tjondro",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
+      false,
       false,
       false,
       false,
@@ -4693,6 +4797,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false
     ],
     "originalServerNames": [
+      "Fidelis Sutatyo",
+      "Stefanus Charlie Tjahyono",
       "Sunardi",
       "Antonis Brian Mursidi",
       "Januar Dwiputra Sutandi",
@@ -4701,16 +4807,14 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Hary Suwanda",
       "Tandra Gunawan",
       "Bambang Purnomo",
+      "Mikael Hengky Pratama",
       "Widyanto Setiawan Wijaya",
       "Tanuddin Rustan",
-      "Mikael Hengky Pratama",
       "Handi Wirajaya",
       "Judadi Widjaja",
-      "Fidelis Sutatyo",
       "Nadianus Sukaryadi",
       "Robertus Antonius Christmowanto",
-      "Bona ventura Yohan Soenyoto",
-      "Stefanus Charlie Tjahyono"
+      "Bona ventura Yohan Soenyoto"
     ],
     "status": "Scheduled",
     "attendedServerIds": []
@@ -4948,20 +5052,20 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "koorlapIds": [],
     "serverRoles": [
-      "Korsa",
-      "Backup Korsa"
+      "AI",
+      "AI"
     ],
     "serverNotes": [
-      "",
-      ""
+      "[Korsa]",
+      "[Backup Korsa]"
     ],
     "isSubstituted": [
       false,
       false
     ],
     "originalServerNames": [
-      "Vincent Winardi Tan",
-      "Stevanus Titus Purdijojo"
+      "Stevanus Titus Purdijojo",
+      "Vincent Winardi Tan"
     ],
     "status": "Scheduled",
     "attendedServerIds": []
@@ -5036,8 +5140,10 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Sabtu, 19 September 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 14,
+    "targetTotal": 16,
     "serverIds": [
+      "125",
+      "152",
       "009",
       "017",
       "037",
@@ -5054,6 +5160,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "166"
     ],
     "serverNames": [
+      "Donatus Sri Tar Prawinoto",
+      "Jeffrey Tanuhardjo",
       "Aloysius Gholo",
       "Yohanes Arishka Yudarana",
       "Alfred Stephanus Metekohy",
@@ -5074,6 +5182,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "152"
     ],
     "serverRoles": [
+      "KORLAP",
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -5090,22 +5200,26 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
+      "[Koorlap Misa]",
+      "[Koorlap Misa]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 84 Soehadi",
-      "",
-      "",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 126 Agus Riyanto Pamuji",
-      "",
-      "",
-      "",
-      ""
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
+      false,
       false,
       false,
       false,
@@ -5122,21 +5236,21 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false
     ],
     "originalServerNames": [
+      "Donatus Sri Tar Prawinoto",
+      "Jeffrey Tanuhardjo",
       "Aloysius Gholo",
       "Yohanes Arishka Yudarana",
-      "Hadi Santoso",
       "Alfred Stephanus Metekohy",
-      "Agustinus Redy Wibisono",
       "Edward Luntungan",
       "Hartanto Chandra",
       "Andi widjaja tirtoprodjo",
+      "Hadi Santoso",
       "Denny Sentosa Johann",
       "FX Doddy Isdayanto",
-      "Donatus Sri Tar Prawinoto",
+      "Agustinus Redy Wibisono",
       "Robertus Antonius Christmowanto",
       "Mikael Nono",
       "Yohanes Kurniawan Halim",
-      "Jeffrey Tanuhardjo",
       "Sutedjo Budiono Wonodihardjo"
     ],
     "status": "Scheduled",
@@ -5148,8 +5262,9 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Sabtu, 19 September 2026",
     "massTime": "18:00 WIB",
     "location": "Kapel John Paul II",
-    "targetTotal": 13,
+    "targetTotal": 14,
     "serverIds": [
+      "139",
       "046",
       "057",
       "061",
@@ -5165,6 +5280,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "158"
     ],
     "serverNames": [
+      "Severus senjoyo",
       "Mario Christiano Chandra",
       "Andrew Firmansyah Limantoro",
       "Stevanus Leohanes Halim",
@@ -5183,6 +5299,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "139"
     ],
     "serverRoles": [
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -5198,21 +5315,23 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
+      "Tukar Jadwal: 139 Severus senjaya",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 103 Wey Tjoendianto",
-      "",
-      "",
-      "",
-      ""
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
       false,
       false,
       false,
@@ -5228,6 +5347,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false
     ],
     "originalServerNames": [
+      "Severus senjoyo",
       "Mario Christiano Chandra",
       "Andrew Firmansyah Limantoro",
       "Stevanus Leohanes Halim",
@@ -5238,7 +5358,6 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Irwan Afandi",
       "Efendy Liobudhi",
       "William Antonius Davidson Jonto",
-      "Severus senjoyo",
       "Bayu",
       "Fredy Teguh Prasetyo",
       "Rheza Ricardo Alex"
@@ -5252,8 +5371,9 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 20 September 2026",
     "massTime": "06:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 7,
+    "targetTotal": 8,
     "serverIds": [
+      "045",
       "002",
       "003",
       "032",
@@ -5263,6 +5383,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "165"
     ],
     "serverNames": [
+      "Dionisius Donny Kamadjaja",
       "Raymundus Raimun Aso",
       "Venantius Sumarmo",
       "Edward Kusuma",
@@ -5275,6 +5396,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "045"
     ],
     "serverRoles": [
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -5284,15 +5406,17 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
+      "[Koorlap Misa]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
       false,
       false,
       false,
@@ -5302,10 +5426,10 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false
     ],
     "originalServerNames": [
+      "Dionisius Donny Kamadjaja",
       "Raymundus Raimun Aso",
       "Venantius Sumarmo",
       "Edward Kusuma",
-      "Dionisius Donny Kamadjaja",
       "Bambang Purnomo",
       "Nikolas Andrew",
       "Berti Albertus Hara",
@@ -5320,8 +5444,9 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 20 September 2026",
     "massTime": "08:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 9,
+    "targetTotal": 10,
     "serverIds": [
+      "164",
       "006",
       "015",
       "031",
@@ -5333,6 +5458,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "154"
     ],
     "serverNames": [
+      "Heru Wijaya",
       "Paulus Blodito Pujoasyogyo",
       "Yohanes Herman Saputra",
       "Victor Kardiana Hardjomoeljo",
@@ -5347,6 +5473,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "164"
     ],
     "serverRoles": [
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -5358,17 +5485,19 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "",
-      "",
+      "[Koorlap Misa]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 16 Cliff Patriangga",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
       false,
       false,
       true,
@@ -5380,6 +5509,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false
     ],
     "originalServerNames": [
+      "Heru Wijaya",
       "Paulus Blodito Pujoasyogyo",
       "Yohanes Herman Saputra",
       "Victor Kardiana Hardjomoeljo",
@@ -5388,8 +5518,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Untung Sutikno",
       "Alexander Budi Cahyono",
       "Stevanus Titus Purdijojo",
-      "Ton Wernalia Tante",
-      "Heru Wijaya"
+      "Ton Wernalia Tante"
     ],
     "status": "Scheduled",
     "attendedServerIds": []
@@ -5400,8 +5529,10 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 20 September 2026",
     "massTime": "10:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 18,
+    "targetTotal": 20,
     "serverIds": [
+      "022",
+      "167",
       "011",
       "070",
       "075",
@@ -5422,6 +5553,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "159"
     ],
     "serverNames": [
+      "Yohanes Valentinus Jimmy",
+      "Chen Lin Andrew",
       "Argo Putra",
       "Nio Eko Susilo",
       "Stevanus",
@@ -5446,6 +5579,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "167"
     ],
     "serverRoles": [
+      "KORLAP",
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -5466,26 +5601,30 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
+      "[Koorlap Misa]",
+      "[Koorlap Misa]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 95 Agus Kartakusuma",
-      "",
-      "",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 115 Effendy Listijabudhi",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
+      false,
       false,
       false,
       false,
@@ -5506,26 +5645,26 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false
     ],
     "originalServerNames": [
-      "Argo Putra",
       "Yohanes Valentinus Jimmy",
-      "Vincent Winardi Tan",
+      "Chen Lin Andrew",
+      "Argo Putra",
       "Nio Eko Susilo",
       "Stevanus",
       "Hary Suwanda",
       "Ferdyanto Salim",
       "Budi Santosa",
       "Fx Tanno Sugiharto",
+      "Vincent Winardi Tan",
       "Gunarjo Tanurijanto",
-      "Wey Tjoendianto",
       "Sonny Widjojo",
+      "Wey Tjoendianto",
       "Johanes Efendi Sapto Nugroho",
       "Febrianto Dwi Istiawan",
+      "Eddy Soedjatmiko",
       "Bona ventura Yohan Soenyoto",
       "Stefanus Charlie Tjahyono",
-      "Eddy Soedjatmiko",
       "Eko Gunawan Kusjanto",
-      "Rudy Effendy",
-      "Chen Lin Andrew"
+      "Rudy Effendy"
     ],
     "status": "Scheduled",
     "attendedServerIds": []
@@ -5536,8 +5675,10 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 20 September 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 16,
+    "targetTotal": 18,
     "serverIds": [
+      "072",
+      "114",
       "004",
       "005",
       "013",
@@ -5556,6 +5697,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "153"
     ],
     "serverNames": [
+      "Bambang Hermanto",
+      "Nicolas Immanuel Derry Nurcahya",
       "Agustinus Cahyono",
       "Andreas Yoga Adhitama",
       "Pius Paru",
@@ -5578,6 +5721,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "114"
     ],
     "serverRoles": [
+      "KORLAP",
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -5596,24 +5741,28 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
+      "[Koorlap Misa]",
+      "[Koorlap Misa]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
+      false,
       false,
       false,
       false,
@@ -5632,18 +5781,18 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false
     ],
     "originalServerNames": [
+      "Bambang Hermanto",
+      "Nicolas Immanuel Derry Nurcahya",
       "Agustinus Cahyono",
       "Andreas Yoga Adhitama",
       "Pius Paru",
       "Andi Singgih",
       "Berce suisa abraham",
-      "Bambang Hermanto",
       "Tandra Gunawan",
       "Eric Saputro",
       "Michael Kristanto",
       "Tjetjep Tjondro Oetomo",
       "Alex Santoso",
-      "Nicolas Immanuel Derry Nurcahya",
       "Franciscus Xaverius Hendra Wijaya",
       "Nadianus Sukaryadi",
       "Dominikus Anas",
@@ -5881,20 +6030,20 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "koorlapIds": [],
     "serverRoles": [
-      "Korsa",
-      "Backup Korsa"
+      "AI",
+      "AI"
     ],
     "serverNotes": [
-      "",
-      ""
+      "[Korsa]",
+      "[Backup Korsa]"
     ],
     "isSubstituted": [
       false,
       false
     ],
     "originalServerNames": [
-      "Paulus Agus Juwono",
-      "Bona ventura Yohan Soenyoto"
+      "Bona ventura Yohan Soenyoto",
+      "Paulus Agus Juwono"
     ],
     "status": "Scheduled",
     "attendedServerIds": []
@@ -5917,7 +6066,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      ""
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
       false
@@ -5969,8 +6118,10 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Sabtu, 26 September 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 14,
+    "targetTotal": 16,
     "serverIds": [
+      "079",
+      "149",
       "042",
       "043",
       "049",
@@ -5987,6 +6138,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "151"
     ],
     "serverNames": [
+      "Michael Raphael Hari Wiryawan",
+      "Richard Gharyanto",
       "Rudy Djaja Siaputra",
       "Bambang Suprijanto",
       "Widjanarko Tjandra Soejatno",
@@ -6007,6 +6160,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "149"
     ],
     "serverRoles": [
+      "KORLAP",
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -6023,22 +6178,26 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
+      "[Koorlap Misa]",
+      "[Koorlap Misa]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
+      false,
       false,
       false,
       false,
@@ -6055,20 +6214,20 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false
     ],
     "originalServerNames": [
-      "Yudi Wijaya",
+      "Michael Raphael Hari Wiryawan",
+      "Richard Gharyanto",
       "Rudy Djaja Siaputra",
       "Bambang Suprijanto",
       "Widjanarko Tjandra Soejatno",
       "Edward Luntungan",
       "Yohanes Gunawan",
-      "Michael Raphael Hari Wiryawan",
       "Wongso Budi",
       "Wey Tjoendianto",
       "Tanuddin Rustan",
       "Petrus Yuni setyawan",
+      "Yudi Wijaya",
       "Stefanus Charlie Tjahyono",
       "Fredy Teguh Prasetyo",
-      "Richard Gharyanto",
       "Yohanes Kurniawan Halim",
       "Iwan Sutanto"
     ],
@@ -6081,8 +6240,9 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 27 September 2026",
     "massTime": "06:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 7,
+    "targetTotal": 8,
     "serverIds": [
+      "071",
       "016",
       "031",
       "035",
@@ -6092,6 +6252,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "160"
     ],
     "serverNames": [
+      "Hence Antony Suawah",
       "Cliff Patrisangga Sabarbudiman",
       "Victor Kardiana Hardjomoeljo",
       "Stevanus Budianto",
@@ -6104,6 +6265,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "071"
     ],
     "serverRoles": [
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -6113,15 +6275,17 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "",
-      "",
-      "",
+      "[Koorlap Misa]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 57 Andrew Firmansyah",
-      "",
+      "[Asisten Imam]",
       "Tukar Jadwal: 155 Eko Gunawan Kusjanto",
-      ""
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
       false,
       false,
       false,
@@ -6131,10 +6295,10 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false
     ],
     "originalServerNames": [
+      "Hence Antony Suawah",
       "Cliff Patrisangga Sabarbudiman",
       "Victor Kardiana Hardjomoeljo",
       "Stevanus Budianto",
-      "Hence Antony Suawah",
       "Rudianto Hartanta",
       "Joseph Thomas Raynanto",
       "Vincentius Fidelis Lucky",
@@ -6149,8 +6313,9 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 27 September 2026",
     "massTime": "08:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 9,
+    "targetTotal": 10,
     "serverIds": [
+      "085",
       "010",
       "012",
       "017",
@@ -6162,6 +6327,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "168"
     ],
     "serverNames": [
+      "Paulus Tedjadharma",
       "Gervasius Nosi",
       "Ignatius Dwi Prasetyo",
       "Yohanes Arishka Yudarana",
@@ -6176,6 +6342,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "085"
     ],
     "serverRoles": [
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -6187,17 +6354,19 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
+      "[Koorlap Misa]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
       false,
       false,
       false,
@@ -6209,6 +6378,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false
     ],
     "originalServerNames": [
+      "Paulus Tedjadharma",
       "Gervasius Nosi",
       "Ignatius Dwi Prasetyo",
       "Yohanes Arishka Yudarana",
@@ -6216,7 +6386,6 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Lorenzo Tjaeyahdy Oeitomo",
       "Tjio Johansyah",
       "Andy untoyo wibowo",
-      "Paulus Tedjadharma",
       "Adhika Wardhana",
       "AY. Happy Gunawanman"
     ],
@@ -6229,8 +6398,10 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 27 September 2026",
     "massTime": "10:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 18,
+    "targetTotal": 20,
     "serverIds": [
+      "106",
+      "164",
       "003",
       "028",
       "058",
@@ -6251,6 +6422,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "169"
     ],
     "serverNames": [
+      "Jap Yohanes Baptista",
+      "Heru Wijaya",
       "Venantius Sumarmo",
       "Tjoa Tjandrapradja",
       "Bambang susilo",
@@ -6275,6 +6448,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "164"
     ],
     "serverRoles": [
+      "KORLAP",
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -6295,26 +6470,30 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
+      "[Koorlap Misa]",
+      "[Koorlap Misa]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 157 Vincentius Fidelis Lucky",
-      ""
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
+      false,
       false,
       false,
       false,
@@ -6335,6 +6514,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false
     ],
     "originalServerNames": [
+      "Jap Yohanes Baptista",
+      "Heru Wijaya",
       "Venantius Sumarmo",
       "Tjoa Tjandrapradja",
       "Bambang susilo",
@@ -6343,7 +6524,6 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Stevanus",
       "Widyanto Setiawan Wijaya",
       "Mikael Hengky Pratama",
-      "Jap Yohanes Baptista",
       "Willy Setiawan",
       "Donatus Sri Tar Prawinoto",
       "Johanes Efendi Sapto Nugroho",
@@ -6353,7 +6533,6 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Andreas Suteja Hantono",
       "Agustinus Djoko Soetoyo",
       "Eko Gunawan Kusjanto",
-      "Heru Wijaya",
       "Donni Anwar"
     ],
     "status": "Scheduled",
@@ -6365,8 +6544,9 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 27 September 2026",
     "massTime": "17:00 WIB",
     "location": "Kapel John Paul II",
-    "targetTotal": 13,
+    "targetTotal": 14,
     "serverIds": [
+      "066",
       "021",
       "034",
       "036",
@@ -6382,6 +6562,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "170"
     ],
     "serverNames": [
+      "Berce suisa abraham",
       "Adinanda Condrowibowo",
       "Henrikus Henry Arvian Hady",
       "Johanes Ignasius Totok Sukarno",
@@ -6400,6 +6581,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "066"
     ],
     "serverRoles": [
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -6415,21 +6597,23 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
+      "[Koorlap Misa]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
       false,
       false,
       false,
@@ -6445,6 +6629,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false
     ],
     "originalServerNames": [
+      "Berce suisa abraham",
       "Adinanda Condrowibowo",
       "Henrikus Henry Arvian Hady",
       "Johanes Ignasius Totok Sukarno",
@@ -6452,7 +6637,6 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Vincent Winardi Tan",
       "Sebastianus Nicholas Handoso",
       "Tri Wibisono",
-      "Berce suisa abraham",
       "Nio Eko Susilo",
       "Albert Sidharta",
       "Aloysius Ari Senoo Loekito",
@@ -6469,8 +6653,10 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "displayDate": "Minggu, 27 September 2026",
     "massTime": "18:00 WIB",
     "location": "Gereja Paroki Santo Yakobus",
-    "targetTotal": 16,
+    "targetTotal": 18,
     "serverIds": [
+      "027",
+      "167",
       "001",
       "009",
       "022",
@@ -6489,6 +6675,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "142"
     ],
     "serverNames": [
+      "Fransiskus Silvester Windy Wibisono",
+      "Chen Lin Andrew",
       "Gatot Chrishariyono",
       "Aloysius Gholo",
       "Yohanes Valentinus Jimmy",
@@ -6511,6 +6699,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "167"
     ],
     "serverRoles": [
+      "KORLAP",
+      "KORLAP",
       "AI",
       "AI",
       "AI",
@@ -6529,24 +6719,28 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
+      "[Koorlap Misa]",
+      "[Koorlap Misa]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]",
       "Tukar Jadwal: 83 Rudianto Hartanta",
       "Tukar Jadwal: 84 Soehadi",
-      "",
-      "",
-      ""
+      "[Asisten Imam]",
+      "[Asisten Imam]",
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
+      false,
+      false,
       false,
       false,
       false,
@@ -6565,24 +6759,24 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false
     ],
     "originalServerNames": [
+      "Fransiskus Silvester Windy Wibisono",
+      "Chen Lin Andrew",
       "Gatot Chrishariyono",
       "Aloysius Gholo",
-      "Edwin Ardianto Tedjosaputro",
       "Yohanes Valentinus Jimmy",
+      "Edwin Ardianto Tedjosaputro",
       "Leonardus christian adi putra",
-      "Fransiskus Silvester Windy Wibisono",
       "Edward Kusuma",
       "Yeremia Santoso Halim",
       "Hartanto Chandra",
-      "Andrew Firmansyah Limantoro",
       "Stevanus Leohanes Halim",
       "Rizal Kristanto",
       "Sonny Sugiarto So",
-      "Soehadi",
+      "Andrew Firmansyah Limantoro",
+      "Imanuel Herry Kosok",
       "Budi Purnomo",
       "Sonny Widjojo",
-      "Eka Sisario",
-      "Chen Lin Andrew"
+      "Eka Sisario"
     ],
     "status": "Scheduled",
     "attendedServerIds": []
@@ -6675,7 +6869,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "AI"
     ],
     "serverNotes": [
-      ""
+      "[Asisten Imam]"
     ],
     "isSubstituted": [
       false
@@ -6807,4 +7001,3 @@ export const INITIAL_LOGS: SystemLog[] = [
     actor: "System Audit",
   }
 ];
-

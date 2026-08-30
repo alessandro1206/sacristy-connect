@@ -58,7 +58,7 @@ interface CalendarDayItem {
     slotId?: string;
     waktu: 'Pagi' | 'Sore' | 'Malam';
     jam: string;
-    lokasi: 'Gereja Utama' | 'Kapel 1' | 'Kapel 2';
+    lokasi: 'Gereja Utama' | 'Kapel John Paul II' | 'RS EH (Korsa)';
     koorlap?: string;
     asisten: string[];
     cutiList?: string[];
@@ -110,10 +110,10 @@ export const ScheduleCalendarView: React.FC<ScheduleCalendarViewProps> = ({
           const hour = parseInt(timeClean.split(':')[0], 10) || 18;
           const waktu: 'Pagi' | 'Sore' = hour < 12 ? 'Pagi' : 'Sore';
           const locLower = slot.location.toLowerCase();
-          const lokasi: 'Gereja Utama' | 'Kapel 1' | 'RS EH (Korsa)' = (locLower.includes('rs') || locLower.includes('korsa') || locLower.includes('rumah sakit'))
+          const lokasi: 'Gereja Utama' | 'Kapel John Paul II' | 'RS EH (Korsa)' = (locLower.includes('rs') || locLower.includes('korsa') || locLower.includes('rumah sakit'))
             ? 'RS EH (Korsa)'
             : locLower.includes('kapel')
-            ? 'Kapel 1'
+            ? 'Kapel John Paul II'
             : 'Gereja Utama';
 
           slotsByDay[dayNum].push({
@@ -319,11 +319,11 @@ export const ScheduleCalendarView: React.FC<ScheduleCalendarViewProps> = ({
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#1976d2]" />
-                <span>Kapel 1</span>
+                <span>Kapel John Paul II</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#00838f]" />
-                <span>Kapel 2</span>
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-600" />
+                <span>RS EH (Korsa)</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#c67d00]" />
@@ -494,7 +494,7 @@ export const ScheduleCalendarView: React.FC<ScheduleCalendarViewProps> = ({
                     {/* Sessions Inside Day */}
                     <div className="space-y-1.5 flex-1">
                       {day.sessions.map((sess, sIdx) => {
-                        const isKapel = sess.lokasi === 'Kapel 1';
+                        const isKapel = sess.lokasi === 'Kapel John Paul II';
                         const isRs = sess.lokasi === 'RS EH (Korsa)';
 
                         return (

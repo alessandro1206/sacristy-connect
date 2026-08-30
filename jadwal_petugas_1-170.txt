@@ -8,7 +8,7 @@ Keterangan Peran:
 - ASISTEN IMAM: Pelayan Altar / Asisten Imam (AI)
 
 ----------------------------------------------------------------------------------------------------
-NO   | NAMA PETUGAS                   | TANGGAL KOORLAP               | TANGGAL ASISTEN IMAM (AI)  
+NO   | NAMA PETUGAS                   | TANGGAL KOORLAP               | TANGGAL ASISTEN IMAM (AI)
 ----------------------------------------------------------------------------------------------------
 001  | Gatot Chrishariyono            | KOORLAP: 04 Sep (19:00 @ Gereja)
      |                                | AI     : 13 Sep (08:00 @ Gereja); 27 Sep (18:00 @ Gereja)
@@ -23,7 +23,7 @@ NO   | NAMA PETUGAS                   | TANGGAL KOORLAP               | TANGGAL 
      |                                | AI     : 04 Sep (19:00 @ Gereja); 13 Sep (08:00 @ Gereja); 20 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 005  | Andreas Yoga Adhitama          | KOORLAP: -
-     |                                | AI     : 06 Sep (18:00 @ Gereja); 13 Sep (08:00 @ Gereja); 20 Sep (18:00 @ Gereja)
+     |                                | AI     : 06 Sep (18:00 @ Gereja) *Catatan: Tukar Jadwal: 95 Agus Kartakusuma*; 13 Sep (08:00 @ Gereja); 20 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 006  | Paulus Blodito Pujoasyogyo     | KOORLAP: 06 Sep (06:00 @ Gereja)
      |                                | AI     : 20 Sep (08:00 @ Gereja); 30 Sep (05:30 @ Gereja)
@@ -55,79 +55,79 @@ NO   | NAMA PETUGAS                   | TANGGAL KOORLAP               | TANGGAL 
      |                                | AI     : 13 Sep (10:00 @ Gereja); 20 Sep (08:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 016  | Cliff Patrisangga Sabarbudiman | KOORLAP: -
-     |                                | AI     : 04 Sep (19:00 @ Gereja); 06 Sep (10:00 @ Gereja); 27 Sep (06:00 @ Gereja)
+     |                                | AI     : 04 Sep (19:00 @ Gereja); 06 Sep (10:00 @ Gereja) *Catatan: Tukar Jadwal: 31 Victor Kardiana*; 27 Sep (06:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 017  | Yohanes Arishka Yudarana       | KOORLAP: -
-     |                                | AI     : 06 Sep (06:00 @ RS); 19 Sep (18:00 @ Gereja); 27 Sep (08:00 @ Gereja)
+     |                                | AI     : 06 Sep (06:00 @ RS EH); 19 Sep (18:00 @ Gereja); 27 Sep (08:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 018  | Antonis Brian Mursidi          | KOORLAP: -
-     |                                | AI     : 13 Sep (06:00 @ RS); 13 Sep (18:00 @ Gereja); 27 Sep (08:00 @ Gereja); 30 Sep (05:30 @ Gereja)
+     |                                | AI     : 13 Sep (06:00 @ RS EH); 13 Sep (18:00 @ Gereja); 27 Sep (08:00 @ Gereja); 30 Sep (05:30 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 019  | Januar Dwiputra Sutandi        | KOORLAP: -
-     |                                | AI     : 04 Sep (05:30 @ RS); 09 Sep (05:30 @ Gereja); 13 Sep (18:00 @ Gereja); 29 Sep (18:00 @ Kapel)
+     |                                | AI     : 04 Sep (05:30 @ RS EH); 09 Sep (05:30 @ Gereja); 13 Sep (18:00 @ Gereja); 29 Sep (18:00 @ Kapel John Paul II)
 ----------------------------------------------------------------------------------------------------
 020  | Edwin Ardianto Tedjosaputro    | KOORLAP: -
-     |                                | AI     : 05 Sep (18:00 @ Kapel); 11 Sep (18:00 @ Kapel); 27 Sep (18:00 @ Gereja)
+     |                                | AI     : 05 Sep (18:00 @ Kapel John Paul II); 11 Sep (18:00 @ Kapel John Paul II); 27 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 021  | Adinanda Condrowibowo          | KOORLAP: -
-     |                                | AI     : 13 Sep (08:00 @ Gereja); 27 Sep (17:00 @ Kapel)
+     |                                | AI     : 13 Sep (08:00 @ Gereja) *Catatan: Tukar Jadwal: 58 Bambang Susilo*; 27 Sep (17:00 @ Kapel John Paul II)
 ----------------------------------------------------------------------------------------------------
 022  | Yohanes Valentinus Jimmy       | KOORLAP: 06 Sep (08:00 @ Gereja); 20 Sep (10:00 @ Gereja)
      |                                | AI     : 27 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 023  | FX Johni Hidayat               | KOORLAP: -
-     |                                | AI     : 05 Sep (05:30 @ Gereja); 06 Sep (08:00 @ Gereja); 08 Sep (18:00 @ Kapel); 13 Sep (18:00 @ Gereja)
+     |                                | AI     : 05 Sep (05:30 @ Gereja) *Catatan: Tukar Jadwal: 113 Willy Setiawan*; 06 Sep (08:00 @ Gereja); 08 Sep (18:00 @ Kapel John Paul II); 13 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 024  | Hendra Utama                   | KOORLAP: -
-     |                                | AI     : 06 Sep (10:00 @ Gereja); 07 Sep (05:30 @ Gereja); 12 Sep (18:00 @ Gereja)
+     |                                | AI     : 06 Sep (10:00 @ Gereja); 07 Sep (05:30 @ Gereja); 12 Sep (18:00 @ Gereja) *Catatan: Tukar Jadwal: 26 Eddy Suwanto*
 ----------------------------------------------------------------------------------------------------
 025  | Leonardus christian adi putra  | KOORLAP: -
-     |                                | AI     : 12 Sep (18:00 @ Gereja); 25 Sep (18:00 @ Kapel); 27 Sep (18:00 @ Gereja)
+     |                                | AI     : 12 Sep (18:00 @ Gereja); 25 Sep (18:00 @ Kapel John Paul II); 27 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 026  | Eddy Suwanto                   | KOORLAP: -
-     |                                | AI     : 04 Sep (05:30 @ Gereja); 16 Sep (05:30 @ Gereja); 22 Sep (18:00 @ Kapel)
+     |                                | AI     : 04 Sep (05:30 @ Gereja) *Catatan: Tukar Jadwal: 76 Hary Suwanda*; 16 Sep (05:30 @ Gereja); 22 Sep (18:00 @ Kapel John Paul II) *Catatan: Tukar Jadwal: 24 Hendra Utama*
 ----------------------------------------------------------------------------------------------------
-027  | Fransiskus Silvester Windy Wib | KOORLAP: 27 Sep (18:00 @ Gereja)
+027  | Fransiskus Silvester Windy Wibisono | KOORLAP: 27 Sep (18:00 @ Gereja)
      |                                | AI     : 05 Sep (18:00 @ Gereja); 23 Sep (05:30 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 028  | Tjoa Tjandrapradja             | KOORLAP: -
      |                                | AI     : 13 Sep (10:00 @ Gereja); 27 Sep (10:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 029  | Hadi Santoso                   | KOORLAP: -
-     |                                | AI     : 13 Sep (18:00 @ Gereja); 19 Sep (18:00 @ Gereja)
+     |                                | AI     : 13 Sep (18:00 @ Gereja); 19 Sep (18:00 @ Gereja) *Catatan: Tukar Jadwal: 84 Soehadi*
 ----------------------------------------------------------------------------------------------------
 030  | Andi Singgih                   | KOORLAP: -
      |                                | AI     : 06 Sep (10:00 @ Gereja); 20 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 031  | Victor Kardiana Hardjomoeljo   | KOORLAP: -
-     |                                | AI     : 06 Sep (18:00 @ Gereja); 20 Sep (08:00 @ Gereja); 27 Sep (06:00 @ Gereja)
+     |                                | AI     : 06 Sep (18:00 @ Gereja) *Catatan: Tukar Jadwal: 83 Rudianto Hartanta*; 20 Sep (08:00 @ Gereja) *Catatan: Tukar Jadwal: 16 Cliff Patriangga*; 27 Sep (06:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 032  | Edward Kusuma                  | KOORLAP: -
      |                                | AI     : 20 Sep (06:00 @ Gereja); 25 Sep (05:30 @ Gereja); 27 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 033  | Satrio Soetikno                | KOORLAP: -
-     |                                | AI     : 05 Sep (18:00 @ Gereja); 13 Sep (10:00 @ Gereja); 18 Sep (05:30 @ Gereja); 20 Sep (08:00 @ Gereja)
+     |                                | AI     : 05 Sep (18:00 @ Gereja) *Catatan: Tukar Jadwal: 50 Tjio Johansyah*; 13 Sep (10:00 @ Gereja); 18 Sep (05:30 @ Gereja); 20 Sep (08:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 034  | Henrikus Henry Arvian Hady     | KOORLAP: -
-     |                                | AI     : 12 Sep (18:00 @ Gereja); 27 Sep (17:00 @ Kapel)
+     |                                | AI     : 12 Sep (18:00 @ Gereja); 27 Sep (17:00 @ Kapel John Paul II)
 ----------------------------------------------------------------------------------------------------
 035  | Stevanus Budianto              | KOORLAP: 05 Sep (18:00 @ Gereja)
      |                                | AI     : 12 Sep (05:30 @ Gereja); 27 Sep (06:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 036  | Johanes Ignasius Totok Sukarno | KOORLAP: -
-     |                                | AI     : 06 Sep (10:00 @ Gereja); 21 Sep (05:30 @ Gereja); 27 Sep (17:00 @ Kapel)
+     |                                | AI     : 06 Sep (10:00 @ Gereja); 21 Sep (05:30 @ Gereja); 27 Sep (17:00 @ Kapel John Paul II)
 ----------------------------------------------------------------------------------------------------
 037  | Alfred Stephanus Metekohy      | KOORLAP: -
-     |                                | AI     : 19 Sep (18:00 @ Gereja); 27 Sep (17:00 @ Kapel)
+     |                                | AI     : 19 Sep (18:00 @ Gereja); 27 Sep (17:00 @ Kapel John Paul II)
 ----------------------------------------------------------------------------------------------------
-038  | Yudi Wijaya                    | KOORLAP: 05 Sep (18:00 @ Kapel)
+038  | Yudi Wijaya                    | KOORLAP: 05 Sep (18:00 @ Kapel John Paul II)
      |                                | AI     : 26 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 039  | Agustinus Redy Wibisono        | KOORLAP: -
-     |                                | AI     : 06 Sep (18:00 @ Gereja); 11 Sep (05:30 @ RS); 19 Sep (18:00 @ Gereja)
+     |                                | AI     : 06 Sep (18:00 @ Gereja); 11 Sep (05:30 @ RS EH); 19 Sep (18:00 @ Gereja) *Catatan: Tukar Jadwal: 126 Agus Riyanto Pamuji*
 ----------------------------------------------------------------------------------------------------
 040  | Vincent Winardi Tan            | KOORLAP: -
-     |                                | AI     : 18 Sep (05:30 @ RS); 20 Sep (10:00 @ Gereja); 27 Sep (17:00 @ Kapel)
+     |                                | AI     : 18 Sep (05:30 @ RS EH); 20 Sep (10:00 @ Gereja) *Catatan: Tukar Jadwal: 95 Agus Kartakusuma*; 27 Sep (17:00 @ Kapel John Paul II)
 ----------------------------------------------------------------------------------------------------
 041  | Lorenzo Tjaeyahdy Oeitomo      | KOORLAP: -
      |                                | AI     : 06 Sep (08:00 @ Gereja); 25 Sep (05:30 @ Gereja); 27 Sep (08:00 @ Gereja)
@@ -139,13 +139,13 @@ NO   | NAMA PETUGAS                   | TANGGAL KOORLAP               | TANGGAL 
      |                                | AI     : 06 Sep (06:00 @ Gereja); 26 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 044  | Sebastianus Nicholas Handoso   | KOORLAP: -
-     |                                | AI     : 08 Sep (05:30 @ Gereja); 13 Sep (06:00 @ Gereja); 27 Sep (17:00 @ Kapel)
+     |                                | AI     : 08 Sep (05:30 @ Gereja); 13 Sep (06:00 @ Gereja); 27 Sep (17:00 @ Kapel John Paul II)
 ----------------------------------------------------------------------------------------------------
 045  | Dionisius Donny Kamadjaja      | KOORLAP: 20 Sep (06:00 @ Gereja)
      |                                | AI     : 05 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 046  | Mario Christiano Chandra       | KOORLAP: 05 Sep (18:00 @ Gereja)
-     |                                | AI     : 11 Sep (05:30 @ Gereja); 19 Sep (18:00 @ Kapel)
+     |                                | AI     : 11 Sep (05:30 @ Gereja); 19 Sep (18:00 @ Kapel John Paul II)
 ----------------------------------------------------------------------------------------------------
 047  | Yeremia Santoso Halim          | KOORLAP: -
      |                                | AI     : 06 Sep (08:00 @ Gereja); 13 Sep (06:00 @ Gereja); 27 Sep (18:00 @ Gereja)
@@ -157,10 +157,10 @@ NO   | NAMA PETUGAS                   | TANGGAL KOORLAP               | TANGGAL 
      |                                | AI     : 06 Sep (18:00 @ Gereja); 26 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 050  | Tjio Johansyah                 | KOORLAP: -
-     |                                | AI     : 03 Sep (05:30 @ Gereja); 06 Sep (10:00 @ Gereja); 27 Sep (08:00 @ Gereja)
+     |                                | AI     : 03 Sep (05:30 @ Gereja); 06 Sep (10:00 @ Gereja) *Catatan: Tukar Jadwal: 33 Satrio Soetikno*; 27 Sep (08:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 051  | Paulus Agus Juwono             | KOORLAP: -
-     |                                | AI     : 05 Sep (18:00 @ Gereja); 13 Sep (10:00 @ Gereja); 14 Sep (05:30 @ Gereja); 25 Sep (05:30 @ RS)
+     |                                | AI     : 05 Sep (18:00 @ Gereja); 13 Sep (10:00 @ Gereja); 14 Sep (05:30 @ Gereja); 25 Sep (05:30 @ RS EH)
 ----------------------------------------------------------------------------------------------------
 052  | Jonas Angkawidjaja             | KOORLAP: -
      |                                | AI     : 06 Sep (08:00 @ Gereja); 11 Sep (05:30 @ Gereja); 13 Sep (10:00 @ Gereja)
@@ -175,40 +175,40 @@ NO   | NAMA PETUGAS                   | TANGGAL KOORLAP               | TANGGAL 
      |                                | AI     : 19 Sep (18:00 @ Gereja); 27 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 056  | Antonius David Tjung           | KOORLAP: -
-     |                                | AI     : 04 Sep (18:00 @ Kapel); 13 Sep (08:00 @ Gereja); 29 Sep (05:30 @ Gereja)
+     |                                | AI     : 04 Sep (18:00 @ Kapel John Paul II); 13 Sep (08:00 @ Gereja); 29 Sep (05:30 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 057  | Andrew Firmansyah Limantoro    | KOORLAP: -
-     |                                | AI     : 19 Sep (18:00 @ Kapel); 27 Sep (18:00 @ Gereja)
+     |                                | AI     : 19 Sep (18:00 @ Kapel John Paul II); 27 Sep (18:00 @ Gereja) *Catatan: Tukar Jadwal: 83 Rudianto Hartanta*
 ----------------------------------------------------------------------------------------------------
 058  | Bambang susilo                 | KOORLAP: -
-     |                                | AI     : 01 Sep (05:30 @ Gereja); 13 Sep (17:00 @ Kapel); 15 Sep (18:00 @ Kapel); 20 Sep (08:00 @ Gereja); 27 Sep (10:00 @ Gereja)
+     |                                | AI     : 01 Sep (05:30 @ Gereja); 13 Sep (17:00 @ Kapel John Paul II) *Catatan: Tukar Jadwal: 77 Ferdyanto Salim*; 15 Sep (18:00 @ Kapel John Paul II) *Catatan: Tukar Jadwal: 21 Adinanda Condrowibowo*; 20 Sep (08:00 @ Gereja); 27 Sep (10:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 059  | Tri Wibisono                   | KOORLAP: -
-     |                                | AI     : 04 Sep (18:00 @ Kapel); 11 Sep (05:30 @ Gereja); 27 Sep (17:00 @ Kapel)
+     |                                | AI     : 04 Sep (18:00 @ Kapel John Paul II); 11 Sep (05:30 @ Gereja); 27 Sep (17:00 @ Kapel John Paul II)
 ----------------------------------------------------------------------------------------------------
 060  | Andi widjaja tirtoprodjo       | KOORLAP: -
      |                                | AI     : 06 Sep (06:00 @ Gereja); 19 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 061  | Stevanus Leohanes Halim        | KOORLAP: -
-     |                                | AI     : 19 Sep (18:00 @ Kapel); 27 Sep (18:00 @ Gereja)
+     |                                | AI     : 19 Sep (18:00 @ Kapel John Paul II); 27 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
-062  | Rizal Kristanto                | KOORLAP: 03 Sep (18:30 @ Kapel)
+062  | Rizal Kristanto                | KOORLAP: 03 Sep (18:30 @ Kapel John Paul II)
      |                                | AI     : 27 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
-063  | Antonius Benny Sukamto         | KOORLAP: 04 Sep (18:00 @ Kapel)
+063  | Antonius Benny Sukamto         | KOORLAP: 04 Sep (18:00 @ Kapel John Paul II)
      |                                | AI     : 27 Sep (10:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 064  | Andy untoyo wibowo             | KOORLAP: 12 Sep (18:00 @ Gereja)
-     |                                | AI     : 05 Sep (18:00 @ Kapel); 21 Sep (05:30 @ Gereja); 27 Sep (08:00 @ Gereja)
+     |                                | AI     : 05 Sep (18:00 @ Kapel John Paul II); 21 Sep (05:30 @ Gereja); 27 Sep (08:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 065  | Bambang Budiono                | KOORLAP: -
-     |                                | AI     : 03 Sep (18:30 @ Kapel); 27 Sep (10:00 @ Gereja)
+     |                                | AI     : 03 Sep (18:30 @ Kapel John Paul II); 27 Sep (10:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
-066  | Berce suisa abraham            | KOORLAP: 27 Sep (17:00 @ Kapel)
+066  | Berce suisa abraham            | KOORLAP: 27 Sep (17:00 @ Kapel John Paul II)
      |                                | AI     : 20 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 067  | Raymond Hanjaya                | KOORLAP: -
-     |                                | AI     : 19 Sep (18:00 @ Kapel)
+     |                                | AI     : 19 Sep (18:00 @ Kapel John Paul II)
 ----------------------------------------------------------------------------------------------------
 068  | Untung Sutikno                 | KOORLAP: -
      |                                | AI     : 13 Sep (10:00 @ Gereja); 20 Sep (08:00 @ Gereja)
@@ -216,10 +216,10 @@ NO   | NAMA PETUGAS                   | TANGGAL KOORLAP               | TANGGAL 
 069  | Kornelis sai                   | (Tidak Ada Jadwal Tugas Bulan Ini)
 ----------------------------------------------------------------------------------------------------
 070  | Nio Eko Susilo                 | KOORLAP: -
-     |                                | AI     : 07 Sep (05:30 @ Gereja); 13 Sep (06:00 @ Gereja); 20 Sep (10:00 @ Gereja); 27 Sep (17:00 @ Kapel)
+     |                                | AI     : 07 Sep (05:30 @ Gereja); 13 Sep (06:00 @ Gereja); 20 Sep (10:00 @ Gereja); 27 Sep (17:00 @ Kapel John Paul II)
 ----------------------------------------------------------------------------------------------------
 071  | Hence Antony Suawah            | KOORLAP: 27 Sep (06:00 @ Gereja)
-     |                                | AI     : 02 Sep (05:30 @ Gereja); 05 Sep (18:00 @ Kapel)
+     |                                | AI     : 02 Sep (05:30 @ Gereja); 05 Sep (18:00 @ Kapel John Paul II)
 ----------------------------------------------------------------------------------------------------
 072  | Bambang Hermanto               | KOORLAP: 20 Sep (18:00 @ Gereja)
      |                                | AI     : 06 Sep (08:00 @ Gereja)
@@ -228,13 +228,13 @@ NO   | NAMA PETUGAS                   | TANGGAL KOORLAP               | TANGGAL 
      |                                | AI     : 06 Sep (18:00 @ Gereja); 27 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 074  | Albert Sidharta                | KOORLAP: -
-     |                                | AI     : 06 Sep (18:00 @ Gereja); 27 Sep (17:00 @ Kapel)
+     |                                | AI     : 06 Sep (18:00 @ Gereja); 27 Sep (17:00 @ Kapel John Paul II)
 ----------------------------------------------------------------------------------------------------
 075  | Stevanus                       | KOORLAP: -
      |                                | AI     : 17 Sep (05:30 @ Gereja); 20 Sep (10:00 @ Gereja); 27 Sep (10:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 076  | Hary Suwanda                   | KOORLAP: -
-     |                                | AI     : 13 Sep (18:00 @ Gereja); 18 Sep (18:00 @ Kapel); 20 Sep (10:00 @ Gereja)
+     |                                | AI     : 13 Sep (18:00 @ Gereja); 18 Sep (18:00 @ Kapel John Paul II) *Catatan: Tukar Jadwal: 26 Eddy Suwanto*; 20 Sep (10:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 077  | Ferdyanto Salim                | KOORLAP: -
      |                                | AI     : 20 Sep (10:00 @ Gereja)
@@ -255,16 +255,16 @@ NO   | NAMA PETUGAS                   | TANGGAL KOORLAP               | TANGGAL 
      |                                | AI     : 06 Sep (18:00 @ Gereja); 13 Sep (18:00 @ Gereja); 20 Sep (06:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 083  | Rudianto Hartanta              | KOORLAP: -
-     |                                | AI     : 27 Sep (06:00 @ Gereja)
+     |                                | AI     : 27 Sep (06:00 @ Gereja) *Catatan: Tukar Jadwal: 57 Andrew Firmansyah*
 ----------------------------------------------------------------------------------------------------
 084  | Soehadi                        | KOORLAP: -
-     |                                | AI     : 01 Sep (18:00 @ Kapel)
+     |                                | AI     : 01 Sep (18:00 @ Kapel John Paul II) *Catatan: Tukar Jadwal: 29 Hadi Santoso*
 ----------------------------------------------------------------------------------------------------
 085  | Paulus Tedjadharma             | KOORLAP: 06 Sep (10:00 @ Gereja); 27 Sep (08:00 @ Gereja)
-     |                                | AI     : 13 Sep (17:00 @ Kapel)
+     |                                | AI     : 13 Sep (17:00 @ Kapel John Paul II)
 ----------------------------------------------------------------------------------------------------
 086  | Sugiharto Tanto                | KOORLAP: -
-     |                                | AI     : 05 Sep (18:00 @ Gereja); 13 Sep (06:00 @ Gereja)
+     |                                | AI     : 05 Sep (18:00 @ Gereja); 13 Sep (06:00 @ Gereja) *Catatan: Tukar Jadwal: 163 Kuncoro Kohar*
 ----------------------------------------------------------------------------------------------------
 087  | Budi Santosa                   | KOORLAP: -
      |                                | AI     : 06 Sep (06:00 @ Gereja); 20 Sep (10:00 @ Gereja)
@@ -273,16 +273,16 @@ NO   | NAMA PETUGAS                   | TANGGAL KOORLAP               | TANGGAL 
      |                                | AI     : 01 Sep (05:30 @ Gereja); 06 Sep (18:00 @ Gereja); 20 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 089  | Raymond Michael                | KOORLAP: 06 Sep (18:00 @ Gereja)
-     |                                | AI     : 19 Sep (18:00 @ Kapel); 25 Sep (05:30 @ Gereja)
+     |                                | AI     : 19 Sep (18:00 @ Kapel John Paul II); 25 Sep (05:30 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 090  | Hanjaya Kurniawan              | KOORLAP: 13 Sep (06:00 @ Gereja)
-     |                                | AI     : 19 Sep (18:00 @ Kapel)
+     |                                | AI     : 19 Sep (18:00 @ Kapel John Paul II)
 ----------------------------------------------------------------------------------------------------
 091  | Joseph Thomas Raynanto         | KOORLAP: -
-     |                                | AI     : 19 Sep (18:00 @ Kapel); 27 Sep (06:00 @ Gereja)
+     |                                | AI     : 19 Sep (18:00 @ Kapel John Paul II); 27 Sep (06:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 092  | Tjetjep Tjondro Oetomo         | KOORLAP: -
-     |                                | AI     : 13 Sep (17:00 @ Kapel); 15 Sep (05:30 @ Gereja); 20 Sep (18:00 @ Gereja)
+     |                                | AI     : 13 Sep (17:00 @ Kapel John Paul II) *Catatan: Tukar Jadwal: 105 Mikael Hengky Pratama*; 15 Sep (05:30 @ Gereja); 20 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 093  | Widyanto Setiawan Wijaya       | KOORLAP: -
      |                                | AI     : 13 Sep (18:00 @ Gereja); 27 Sep (10:00 @ Gereja)
@@ -291,19 +291,19 @@ NO   | NAMA PETUGAS                   | TANGGAL KOORLAP               | TANGGAL 
      |                                | AI     : 12 Sep (18:00 @ Gereja); 20 Sep (10:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 095  | Yohanes Agus Kartakusuma       | KOORLAP: -
-     |                                | AI     : 05 Sep (18:00 @ Gereja); 06 Sep (06:00 @ Gereja)
+     |                                | AI     : 05 Sep (18:00 @ Gereja) *Catatan: Tukar Jadwal: 5 Andreas Yoga*; 06 Sep (06:00 @ Gereja) *Catatan: Tukar Jadwal: 40 Vincent Winardi Tan*
 ----------------------------------------------------------------------------------------------------
 096  | Laurensius Rony Setyawan       | KOORLAP: 13 Sep (10:00 @ Gereja)
      |                                | AI     : 03 Sep (05:30 @ Gereja); 05 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 097  | Irwan Afandi                   | KOORLAP: 13 Sep (08:00 @ Gereja)
-     |                                | AI     : 19 Sep (18:00 @ Kapel)
+     |                                | AI     : 19 Sep (18:00 @ Kapel John Paul II)
 ----------------------------------------------------------------------------------------------------
 098  | Budi Purnomo                   | KOORLAP: -
-     |                                | AI     : 13 Sep (17:00 @ Kapel); 27 Sep (18:00 @ Gereja)
+     |                                | AI     : 13 Sep (17:00 @ Kapel John Paul II); 27 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 099  | Alex Santoso                   | KOORLAP: -
-     |                                | AI     : 04 Sep (05:30 @ RS); 13 Sep (17:00 @ Kapel); 20 Sep (18:00 @ Gereja)
+     |                                | AI     : 04 Sep (05:30 @ RS EH); 13 Sep (17:00 @ Kapel John Paul II); 20 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 100  | Gunarjo Tanurijanto            | KOORLAP: 06 Sep (18:00 @ Gereja)
      |                                | AI     : 20 Sep (10:00 @ Gereja)
@@ -312,16 +312,16 @@ NO   | NAMA PETUGAS                   | TANGGAL KOORLAP               | TANGGAL 
      |                                | AI     : 06 Sep (18:00 @ Gereja); 26 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 102  | Denny Sentosa Johann           | KOORLAP: -
-     |                                | AI     : 05 Sep (18:00 @ Kapel); 19 Sep (18:00 @ Gereja)
+     |                                | AI     : 05 Sep (18:00 @ Kapel John Paul II); 19 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 103  | Wey Tjoendianto                | KOORLAP: -
-     |                                | AI     : 20 Sep (10:00 @ Gereja); 26 Sep (18:00 @ Gereja)
+     |                                | AI     : 20 Sep (10:00 @ Gereja) *Catatan: Tukar Jadwal: 115 Effendy Listijabudhi*; 26 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 104  | Tanuddin Rustan                | KOORLAP: -
      |                                | AI     : 13 Sep (18:00 @ Gereja); 26 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 105  | Mikael Hengky Pratama          | KOORLAP: -
-     |                                | AI     : 13 Sep (18:00 @ Gereja); 27 Sep (10:00 @ Gereja)
+     |                                | AI     : 13 Sep (18:00 @ Gereja) *Catatan: Tukar Jadwal: 92 Tjetjep Tjondro*; 27 Sep (10:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 106  | Jap Yohanes Baptista           | KOORLAP: 27 Sep (10:00 @ Gereja)
      |                                | AI     : 12 Sep (18:00 @ Gereja)
@@ -332,39 +332,39 @@ NO   | NAMA PETUGAS                   | TANGGAL KOORLAP               | TANGGAL 
      |                                | AI     : 06 Sep (10:00 @ Gereja); 13 Sep (10:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 109  | Yosathan Himawan Handarto      | KOORLAP: -
-     |                                | AI     : 06 Sep (10:00 @ Gereja); 13 Sep (17:00 @ Kapel); 28 Sep (05:30 @ Gereja)
+     |                                | AI     : 06 Sep (10:00 @ Gereja); 13 Sep (17:00 @ Kapel John Paul II); 28 Sep (05:30 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 110  | Sonny Widjojo                  | KOORLAP: -
      |                                | AI     : 20 Sep (10:00 @ Gereja); 26 Sep (05:30 @ Gereja); 27 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 111  | Handi Wirajaya                 | KOORLAP: -
-     |                                | AI     : 05 Sep (18:00 @ Kapel); 13 Sep (18:00 @ Gereja)
+     |                                | AI     : 05 Sep (18:00 @ Kapel John Paul II); 13 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 112  | Aloysius Ari Senoo Loekito     | KOORLAP: 13 Sep (10:00 @ Gereja)
-     |                                | AI     : 08 Sep (05:30 @ Gereja); 27 Sep (17:00 @ Kapel)
+     |                                | AI     : 08 Sep (05:30 @ Gereja); 27 Sep (17:00 @ Kapel John Paul II)
 ----------------------------------------------------------------------------------------------------
-113  | Willy Setiawan                 | KOORLAP: 13 Sep (17:00 @ Kapel)
-     |                                | AI     : 12 Sep (05:30 @ Gereja); 27 Sep (10:00 @ Gereja)
+113  | Willy Setiawan                 | KOORLAP: 13 Sep (17:00 @ Kapel John Paul II)
+     |                                | AI     : 12 Sep (05:30 @ Gereja) *Catatan: Tukar Jadwal: 23 Johni Hidayat*; 27 Sep (10:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
-114  | Nicolas Immanuel Derry Nurcahy | KOORLAP: 20 Sep (18:00 @ Gereja)
+114  | Nicolas Immanuel Derry Nurcahya | KOORLAP: 20 Sep (18:00 @ Gereja)
      |                                | AI     : 12 Sep (18:00 @ Gereja); 14 Sep (05:30 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 115  | Efendy Liobudhi                | KOORLAP: -
-     |                                | AI     : 06 Sep (18:00 @ Gereja); 10 Sep (05:30 @ Gereja); 11 Sep (05:30 @ RS); 19 Sep (18:00 @ Kapel)
+     |                                | AI     : 06 Sep (18:00 @ Gereja); 10 Sep (05:30 @ Gereja); 11 Sep (05:30 @ RS EH); 19 Sep (18:00 @ Kapel John Paul II) *Catatan: Tukar Jadwal: 103 Wey Tjoendianto*
 ----------------------------------------------------------------------------------------------------
-116  | Franciscus Xaverius Hendra Wij | KOORLAP: -
+116  | Franciscus Xaverius Hendra Wijaya | KOORLAP: -
      |                                | AI     : 06 Sep (18:00 @ Gereja); 20 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 117  | Nikolas Andrew                 | KOORLAP: -
-     |                                | AI     : 05 Sep (18:00 @ Kapel); 12 Sep (18:00 @ Gereja); 20 Sep (06:00 @ Gereja)
+     |                                | AI     : 05 Sep (18:00 @ Kapel John Paul II); 12 Sep (18:00 @ Gereja); 20 Sep (06:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 118  | Edwin Pribadi                  | KOORLAP: -
-     |                                | AI     : 05 Sep (18:00 @ Kapel); 13 Sep (10:00 @ Gereja)
+     |                                | AI     : 05 Sep (18:00 @ Kapel John Paul II); 13 Sep (10:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 119  | Manas Tjahjono                 | (Tidak Ada Jadwal Tugas Bulan Ini)
 ----------------------------------------------------------------------------------------------------
 120  | Judadi Widjaja                 | KOORLAP: -
-     |                                | AI     : 05 Sep (18:00 @ Kapel); 13 Sep (18:00 @ Gereja)
+     |                                | AI     : 05 Sep (18:00 @ Kapel John Paul II); 13 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 121  | Roy Andiarto                   | (Tidak Ada Jadwal Tugas Bulan Ini)
 ----------------------------------------------------------------------------------------------------
@@ -380,7 +380,7 @@ NO   | NAMA PETUGAS                   | TANGGAL KOORLAP               | TANGGAL 
      |                                | AI     : 27 Sep (10:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 126  | Silvester Agus Riyanto Pamuji  | KOORLAP: -
-     |                                | AI     : 13 Sep (08:00 @ Gereja); 13 Sep (10:00 @ Gereja)
+     |                                | AI     : 13 Sep (08:00 @ Gereja) *Catatan: Tukar Jadwal: 39 Redy Wibisono*; 13 Sep (10:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 127  | Nadianus Sukaryadi             | KOORLAP: -
      |                                | AI     : 13 Sep (18:00 @ Gereja); 20 Sep (18:00 @ Gereja)
@@ -395,9 +395,9 @@ NO   | NAMA PETUGAS                   | TANGGAL KOORLAP               | TANGGAL 
      |                                | AI     : 20 Sep (08:00 @ Gereja); 27 Sep (10:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 131  | Stevanus Titus Purdijojo       | KOORLAP: -
-     |                                | AI     : 06 Sep (10:00 @ Gereja); 16 Sep (05:30 @ Gereja); 18 Sep (05:30 @ RS); 20 Sep (08:00 @ Gereja)
+     |                                | AI     : 06 Sep (10:00 @ Gereja); 16 Sep (05:30 @ Gereja); 18 Sep (05:30 @ RS EH); 20 Sep (08:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
-132  | Robertus Antonius Christmowant | KOORLAP: -
+132  | Robertus Antonius Christmowanto | KOORLAP: -
      |                                | AI     : 06 Sep (10:00 @ Gereja); 13 Sep (18:00 @ Gereja); 19 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 133  | Febrianto Dwi Istiawan         | KOORLAP: -
@@ -415,17 +415,17 @@ NO   | NAMA PETUGAS                   | TANGGAL KOORLAP               | TANGGAL 
 137  | Berti Albertus Hara            | KOORLAP: -
      |                                | AI     : 12 Sep (18:00 @ Gereja); 20 Sep (06:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
-138  | William Antonius Davidson Jont | KOORLAP: -
-     |                                | AI     : 12 Sep (18:00 @ Gereja); 19 Sep (18:00 @ Kapel); 27 Sep (10:00 @ Gereja); 29 Sep (05:30 @ Gereja)
+138  | William Antonius Davidson Jonto | KOORLAP: -
+     |                                | AI     : 12 Sep (18:00 @ Gereja); 19 Sep (18:00 @ Kapel John Paul II); 27 Sep (10:00 @ Gereja); 29 Sep (05:30 @ Gereja)
 ----------------------------------------------------------------------------------------------------
-139  | Severus senjoyo                | KOORLAP: 19 Sep (18:00 @ Kapel)
-     |                                | AI     : 13 Sep (06:00 @ Gereja)
+139  | Severus senjoyo                | KOORLAP: 19 Sep (18:00 @ Kapel John Paul II)
+     |                                | AI     : 13 Sep (06:00 @ Gereja) *Catatan: Tukar Jadwal: 38 Yudi Wijaya*
 ----------------------------------------------------------------------------------------------------
 140  | Alexander Sukarliono           | KOORLAP: -
-     |                                | AI     : 13 Sep (17:00 @ Kapel); 20 Sep (18:00 @ Gereja)
+     |                                | AI     : 13 Sep (17:00 @ Kapel John Paul II); 20 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 141  | Bona ventura Yohan Soenyoto    | KOORLAP: -
-     |                                | AI     : 13 Sep (18:00 @ Gereja); 20 Sep (10:00 @ Gereja); 22 Sep (05:30 @ Gereja); 25 Sep (05:30 @ RS)
+     |                                | AI     : 13 Sep (18:00 @ Gereja); 20 Sep (10:00 @ Gereja); 22 Sep (05:30 @ Gereja); 25 Sep (05:30 @ RS EH)
 ----------------------------------------------------------------------------------------------------
 142  | Eka Sisario                    | KOORLAP: -
      |                                | AI     : 13 Sep (10:00 @ Gereja); 27 Sep (18:00 @ Gereja)
@@ -437,16 +437,16 @@ NO   | NAMA PETUGAS                   | TANGGAL KOORLAP               | TANGGAL 
      |                                | AI     : 06 Sep (10:00 @ Gereja); 09 Sep (05:30 @ Gereja); 12 Sep (18:00 @ Gereja); 27 Sep (10:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 145  | Damianus Slamet Subagio        | KOORLAP: -
-     |                                | AI     : 05 Sep (05:30 @ Gereja); 05 Sep (18:00 @ Gereja); 06 Sep (10:00 @ Gereja); 20 Sep (18:00 @ Gereja)
+     |                                | AI     : 05 Sep (05:30 @ Gereja); 05 Sep (18:00 @ Gereja) *Catatan: Tukar Jadwal: 164 Heru Wijaya*; 06 Sep (10:00 @ Gereja) *Catatan: Tukar Jadwal: 156 Adhika Wardhana*; 20 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 146  | Eddy Soedjatmiko               | KOORLAP: -
-     |                                | AI     : 05 Sep (18:00 @ Kapel); 20 Sep (10:00 @ Gereja); 27 Sep (17:00 @ Kapel)
+     |                                | AI     : 05 Sep (18:00 @ Kapel John Paul II); 20 Sep (10:00 @ Gereja); 27 Sep (17:00 @ Kapel John Paul II)
 ----------------------------------------------------------------------------------------------------
 147  | Bayu                           | KOORLAP: -
-     |                                | AI     : 12 Sep (18:00 @ Gereja); 19 Sep (18:00 @ Kapel); 22 Sep (05:30 @ Gereja)
+     |                                | AI     : 12 Sep (18:00 @ Gereja); 19 Sep (18:00 @ Kapel John Paul II); 22 Sep (05:30 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 148  | Fredy Teguh Prasetyo           | KOORLAP: -
-     |                                | AI     : 19 Sep (18:00 @ Kapel); 26 Sep (18:00 @ Gereja)
+     |                                | AI     : 19 Sep (18:00 @ Kapel John Paul II); 26 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 149  | Richard Gharyanto              | KOORLAP: 26 Sep (18:00 @ Gereja)
      |                                | AI     : 05 Sep (18:00 @ Gereja); 14 Sep (05:30 @ Gereja)
@@ -467,34 +467,34 @@ NO   | NAMA PETUGAS                   | TANGGAL KOORLAP               | TANGGAL 
      |                                | AI     : 06 Sep (10:00 @ Gereja); 20 Sep (08:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 155  | Eko Gunawan Kusjanto           | KOORLAP: -
-     |                                | AI     : 20 Sep (10:00 @ Gereja); 26 Sep (05:30 @ Gereja); 27 Sep (10:00 @ Gereja)
+     |                                | AI     : 20 Sep (10:00 @ Gereja); 26 Sep (05:30 @ Gereja); 27 Sep (10:00 @ Gereja) *Catatan: Tukar Jadwal: 157 Vincentius Fidelis Lucky*
 ----------------------------------------------------------------------------------------------------
 156  | Adhika Wardhana                | KOORLAP: -
-     |                                | AI     : 05 Sep (18:00 @ Kapel); 13 Sep (17:00 @ Kapel); 24 Sep (05:30 @ Gereja); 27 Sep (08:00 @ Gereja)
+     |                                | AI     : 05 Sep (18:00 @ Kapel John Paul II) *Catatan: Tukar Jadwal: 145 Damianus Slamet*; 13 Sep (17:00 @ Kapel John Paul II); 24 Sep (05:30 @ Gereja); 27 Sep (08:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 157  | Vincentius Fidelis Lucky       | KOORLAP: -
-     |                                | AI     : 13 Sep (17:00 @ Kapel); 27 Sep (06:00 @ Gereja)
+     |                                | AI     : 13 Sep (17:00 @ Kapel John Paul II); 27 Sep (06:00 @ Gereja) *Catatan: Tukar Jadwal: 155 Eko Gunawan Kusjanto*
 ----------------------------------------------------------------------------------------------------
 158  | Rheza Ricardo Alex             | KOORLAP: -
-     |                                | AI     : 05 Sep (18:00 @ Kapel); 19 Sep (18:00 @ Kapel)
+     |                                | AI     : 05 Sep (18:00 @ Kapel John Paul II); 19 Sep (18:00 @ Kapel John Paul II)
 ----------------------------------------------------------------------------------------------------
 159  | Rudy Effendy                   | KOORLAP: -
-     |                                | AI     : 05 Sep (18:00 @ Kapel); 15 Sep (05:30 @ Gereja); 20 Sep (10:00 @ Gereja)
+     |                                | AI     : 05 Sep (18:00 @ Kapel John Paul II); 15 Sep (05:30 @ Gereja); 20 Sep (10:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 160  | Imanuel Herry Kosok            | KOORLAP: -
-     |                                | AI     : 05 Sep (18:00 @ Gereja); 27 Sep (06:00 @ Gereja); 27 Sep (18:00 @ Gereja)
+     |                                | AI     : 05 Sep (18:00 @ Gereja); 27 Sep (06:00 @ Gereja); 27 Sep (18:00 @ Gereja) *Catatan: Tukar Jadwal: 84 Soehadi*
 ----------------------------------------------------------------------------------------------------
 161  | Edward Siswanto Santoso        | KOORLAP: -
      |                                | AI     : 06 Sep (10:00 @ Gereja); 13 Sep (10:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 162  | Alexander Mario Pribadi        | KOORLAP: -
-     |                                | AI     : 06 Sep (08:00 @ Gereja); 13 Sep (17:00 @ Kapel); 17 Sep (05:30 @ Gereja)
+     |                                | AI     : 06 Sep (08:00 @ Gereja); 13 Sep (17:00 @ Kapel John Paul II); 17 Sep (05:30 @ Gereja)
 ----------------------------------------------------------------------------------------------------
-163  | Fransiscus Paulus Kuncoro Koha | KOORLAP: -
-     |                                | AI     : 06 Sep (08:00 @ Gereja); 13 Sep (10:00 @ Gereja); 27 Sep (17:00 @ Kapel)
+163  | Fransiscus Paulus Kuncoro Kohar | KOORLAP: -
+     |                                | AI     : 06 Sep (08:00 @ Gereja); 13 Sep (10:00 @ Gereja) *Catatan: Tukar Jadwal: 86 Sugiharto Tanto*; 27 Sep (17:00 @ Kapel John Paul II)
 ----------------------------------------------------------------------------------------------------
 164  | Heru Wijaya                    | KOORLAP: 20 Sep (08:00 @ Gereja); 27 Sep (10:00 @ Gereja)
-     |                                | AI     : 10 Sep (05:30 @ Gereja); 13 Sep (17:00 @ Kapel)
+     |                                | AI     : 10 Sep (05:30 @ Gereja); 13 Sep (17:00 @ Kapel John Paul II) *Catatan: Tukar Jadwal: 145 Damianus Slamet*
 ----------------------------------------------------------------------------------------------------
 165  | Winardi Hartambang             | KOORLAP: -
      |                                | AI     : 12 Sep (18:00 @ Gereja); 19 Sep (05:30 @ Gereja); 20 Sep (06:00 @ Gereja)
@@ -506,11 +506,11 @@ NO   | NAMA PETUGAS                   | TANGGAL KOORLAP               | TANGGAL 
      |                                | AI     : 13 Sep (06:00 @ Gereja); 23 Sep (05:30 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 168  | AY. Happy Gunawanman           | KOORLAP: -
-     |                                | AI     : 04 Sep (18:00 @ Kapel); 05 Sep (18:00 @ Kapel); 13 Sep (08:00 @ Gereja); 18 Sep (05:30 @ Gereja); 27 Sep (08:00 @ Gereja)
+     |                                | AI     : 04 Sep (18:00 @ Kapel John Paul II) *Catatan: Menggantikan: 67 Raymond Hanjaya*; 05 Sep (18:00 @ Kapel John Paul II); 13 Sep (08:00 @ Gereja); 18 Sep (05:30 @ Gereja); 27 Sep (08:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 169  | Donni Anwar                    | KOORLAP: -
-     |                                | AI     : 13 Sep (17:00 @ Kapel); 27 Sep (10:00 @ Gereja)
+     |                                | AI     : 13 Sep (17:00 @ Kapel John Paul II); 27 Sep (10:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 170  | Budi Santoso                   | KOORLAP: -
-     |                                | AI     : 06 Sep (08:00 @ Gereja); 13 Sep (17:00 @ Kapel); 27 Sep (17:00 @ Kapel)
+     |                                | AI     : 06 Sep (08:00 @ Gereja); 13 Sep (17:00 @ Kapel John Paul II); 27 Sep (17:00 @ Kapel John Paul II)
 ----------------------------------------------------------------------------------------------------

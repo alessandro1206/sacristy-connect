@@ -66,7 +66,7 @@ export const AdminBackoffice: React.FC<AdminBackofficeProps> = ({
   // Generic and pre-filled template formats for WhatsApp Tukar Jadwal
   const PRESET_REAL_TUKAR = `Lapor Tukar Tugas
 
-Mikael Hengky Pratama #105 tugas tgl 13 Sept di KJP2 jam 17:00
+Mikael Hengky Pratama #105 tugas tgl 13 Sept di Kapel John Paul II jam 17:00
 Tukar dgn pak Widyanto Setiawan Wijaya #092 tgl 13 Sept di Gereja jam 18:00`;
 
   const PRESET_REAL_REPLACE = `Lapor tukar jadwal tugas :
@@ -113,17 +113,17 @@ Alasan : Keperluan keluarga`;
     pengganti: 'Widyanto Setiawan Wijaya (#092)',
     tanggal: '13 Sep 2026',
     jamMisa: '17:00 ⇄ 18:00 WIB',
-    lokasi: 'Kapel (KJP 2) ⇄ Gereja Utama',
+    lokasi: 'Kapel John Paul II ⇄ Gereja Utama',
     action: 'Tukar Jadwal (Mutual Switch)',
     swapType: 'TUKAR',
-    detailNotes: 'Bpk. Hengky (#105) bertukar jadwal dari KJP 2 (17:00) dengan Bpk. Widyanto (#092) di Gereja Utama (18:00).'
+    detailNotes: 'Bpk. Hengky (#105) bertukar jadwal dari Kapel John Paul II (17:00) dengan Bpk. Widyanto (#092) di Gereja Utama (18:00).'
   });
 
   const [todayRows, setTodayRows] = useState<TodayScheduleRow[]>([
     {
       id: 't-1a',
       jamMisa: '13 Sep 17:00 WIB',
-      lokasi: 'Kapel (KJP 2)',
+      lokasi: 'Kapel John Paul II',
       petugasOriginal: 'Mikael Hengky Pratama (#105)',
       petugasPengganti: 'Widyanto Setiawan Wijaya (#092)',
       status: 'Swapped'
@@ -212,15 +212,16 @@ Alasan : Keperluan keluarga`;
       const parsedDayNum = dateNumMatch ? parseInt(dateNumMatch[1], 10) : null;
       const parsedDate = parsedDayNum ? `${parsedDayNum} Sep 2026` : '13 Sep 2026';
 
-      // 4. Extract Location (KJP, KJP2, Gereja, Kapel)
+      // 4. Extract Location (KJP, Kapel, Gereja, RS)
       let lokasiA = 'Gereja Utama';
-      if (/kjp2|kjp 2/i.test(text)) lokasiA = 'Kapel (KJP 2)';
-      else if (/kjp1|kjp 1|kjp/i.test(text)) lokasiA = 'Kapel (KJP)';
-      else if (/kapel/i.test(text)) lokasiA = 'Kapel John Paul II';
+      if (/kjp|kapel|john paul/i.test(text)) lokasiA = 'Kapel John Paul II';
+      else if (/gereja/i.test(text)) lokasiA = 'Gereja Utama';
+      else if (/rs|korsa|rumah sakit/i.test(text)) lokasiA = 'Rumah Sakit EH';
 
       let lokasiB = lokasiA;
       if (/di Gereja|Gereja Utama/i.test(text)) lokasiB = 'Gereja Utama';
-      else if (/di KJP|di Kapel/i.test(text)) lokasiB = 'Kapel John Paul II';
+      else if (/di KJP|di Kapel|Kapel John Paul II/i.test(text)) lokasiB = 'Kapel John Paul II';
+      else if (/di RS|di Rumah Sakit/i.test(text)) lokasiB = 'Rumah Sakit EH';
 
       // 5. Extract Times (17.00, 18.00, 06:00, etc.)
       const timeMatches = text.match(/(\d{1,2}[:.]\d{2})/g) || [];

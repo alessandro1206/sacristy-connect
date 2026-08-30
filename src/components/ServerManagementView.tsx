@@ -307,8 +307,8 @@ export const ServerManagementView: React.FC<ServerManagementViewProps> = ({
               >
                 <option value="">Pilih lokasi pelayanan terdekat</option>
                 <option value="Gereja Utama">Gereja Utama Santo Yakobus</option>
-                <option value="Kapel 1">Kapel 1 St. Andreas</option>
-                <option value="Kapel 2">Kapel 2 St. Petrus</option>
+                <option value="Kapel John Paul II">Kapel John Paul II</option>
+                <option value="Rumah Sakit EH">Rumah Sakit EH (Korsa)</option>
               </select>
             </div>
 
