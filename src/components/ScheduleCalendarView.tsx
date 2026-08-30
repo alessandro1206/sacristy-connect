@@ -17,9 +17,11 @@ import {
   MapPin,
   Table as TableIcon,
   Award,
-  Edit3
+  Edit3,
+  Upload
 } from 'lucide-react';
 import { playAudioFeedback } from '../utils/sound';
+import { MonthlyScheduleExcelImporterModal } from './MonthlyScheduleExcelImporterModal';
 
 interface ScheduleCalendarViewProps {
   officers: Officer[];
@@ -32,6 +34,7 @@ interface ScheduleCalendarViewProps {
   onSaveRulesConfig?: (rules: AssignmentRulesConfig) => void;
   onAddLeaveRecord?: (leave: LeaveRecord) => void;
   onAddLog?: (description: string, actor: string) => void;
+  onUpdateSchedule?: (newSchedule: ScheduleSlot[]) => void;
 }
 
 interface MatrixRow {
@@ -68,14 +71,23 @@ interface CalendarDayItem {
 export const ScheduleCalendarView: React.FC<ScheduleCalendarViewProps> = ({
   officers,
   leaveRecords,
+  patternConfig,
+  rulesConfig,
   schedule = [],
   onNavigate,
-  onAddLog
+  onSavePatternConfig,
+  onSaveRulesConfig,
+  onAddLeaveRecord,
+  onAddLog,
+  onUpdateSchedule
 }) => {
   const [selectedMonth, setSelectedMonth] = useState<string>('September 2026');
-  const [viewMode, setViewMode] = useState<'calendar' | 'matrix'>('calendar');
+  const [filterLocation, setFilterLocation] = useState<string>('Semua');
+  const [activeTab, setActiveTab] = useState<'calendar' | 'matrix' | 'table'>('calendar');
+  const [selectedSlot, setSelectedSlot] = useState<ScheduleSlot | null>(null);
   const [isRegenerating, setIsRegenerating] = useState<boolean>(false);
   const [bannerNotice, setBannerNotice] = useState<string | null>(null);
+  const [isExcelImporterOpen, setIsExcelImporterOpen] = useState<boolean>(false);
 
   // Month Calendar Data dynamically generated from live schedule database
   const calendarDays = useMemo<CalendarDayItem[]>(() => {
@@ -246,6 +258,17 @@ export const ScheduleCalendarView: React.FC<ScheduleCalendarViewProps> = ({
           </div>
 
           <div className="flex flex-wrap items-center gap-2 self-start md:self-auto">
+            <button
+              onClick={() => {
+                playAudioFeedback('tap');
+                setIsExcelImporterOpen(true);
+              }}
+              className="px-4 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold rounded-xl shadow-xs transition-all uppercase tracking-wider flex items-center gap-1.5 cursor-pointer"
+            >
+              <FileSpreadsheet className="w-4 h-4 text-emerald-200" />
+              <span>📥 Spreadsheet &amp; Import Excel</span>
+            </button>
+
             {onNavigate && (
               <button
                 onClick={() => {
@@ -690,6 +713,25 @@ export const ScheduleCalendarView: React.FC<ScheduleCalendarViewProps> = ({
             </table>
           </div>
         </div>
+
+        {/* MODAL SPREADSHEET & IMPORT EXCEL BULANAN */}
+        {isExcelImporterOpen && (
+          <MonthlyScheduleExcelImporterModal
+            isOpen={isExcelImporterOpen}
+            onClose={() => setIsExcelImporterOpen(false)}
+            officers={officers}
+            currentSchedule={schedule}
+            onSaveSchedule={(newSched) => {
+              if (onUpdateSchedule) {
+                onUpdateSchedule(newSched);
+              }
+              setIsExcelImporterOpen(false);
+              setBannerNotice('Jadwal Bulanan berhasil diimpor dan diperbarui secara real-time ke seluruh sistem!');
+              setTimeout(() => setBannerNotice(null), 4000);
+            }}
+            onAddLog={onAddLog}
+          />
+        )}
 
       </div>
     </div>

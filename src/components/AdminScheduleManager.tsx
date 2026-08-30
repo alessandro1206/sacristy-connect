@@ -22,9 +22,11 @@ import {
   Check,
   ChevronRight,
   Eye,
-  RefreshCw
+  RefreshCw,
+  FileSpreadsheet
 } from 'lucide-react';
 import { playAudioFeedback } from '../utils/sound';
+import { MonthlyScheduleExcelImporterModal } from './MonthlyScheduleExcelImporterModal';
 
 interface AdminScheduleManagerProps {
   schedule: ScheduleSlot[];
@@ -34,6 +36,7 @@ interface AdminScheduleManagerProps {
   onUpdateSlot: (updatedSlot: ScheduleSlot) => void;
   onDeleteSlot: (slotId: string) => void;
   onAddLog?: (description: string, actor: string) => void;
+  onBulkUpdateSchedule?: (newSchedule: ScheduleSlot[]) => void;
 }
 
 export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
@@ -55,6 +58,7 @@ export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
   const [isCreateModalOpen, setIsCreateModalOpen] = useState<boolean>(false);
   const [editingSlot, setEditingSlot] = useState<ScheduleSlot | null>(null);
   const [slotToDelete, setSlotToDelete] = useState<ScheduleSlot | null>(null);
+  const [isExcelImporterOpen, setIsExcelImporterOpen] = useState<boolean>(false);
 
   // Form states for creating / editing slot
   const [formData, setFormData] = useState<{
@@ -413,7 +417,18 @@ export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2.5">
+          <button
+            onClick={() => {
+              playAudioFeedback('tap');
+              setIsExcelImporterOpen(true);
+            }}
+            className="px-4 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold rounded-2xl shadow-md transition-all uppercase tracking-wider flex items-center gap-2 cursor-pointer active:scale-95"
+          >
+            <FileSpreadsheet className="w-4 h-4 text-emerald-200" />
+            <span>📥 Spreadsheet &amp; Import Excel</span>
+          </button>
+
           <button
             onClick={handleOpenCreateModal}
             className="px-5 py-2.5 bg-[#5B1414] hover:bg-[#420D0D] text-white text-xs font-bold rounded-2xl shadow-md transition-all uppercase tracking-wider flex items-center gap-2 cursor-pointer active:scale-95"
@@ -1263,6 +1278,25 @@ export const AdminScheduleManager: React.FC<AdminScheduleManagerProps> = ({
             </div>
           </div>
         </div>
+      )}
+
+      {/* MODAL SPREADSHEET & IMPORT EXCEL BULANAN */}
+      {isExcelImporterOpen && (
+        <MonthlyScheduleExcelImporterModal
+          isOpen={isExcelImporterOpen}
+          onClose={() => setIsExcelImporterOpen(false)}
+          officers={officers}
+          currentSchedule={schedule}
+          onSaveSchedule={(newSched) => {
+            if (onBulkUpdateSchedule) {
+              onBulkUpdateSchedule(newSched);
+            }
+            setIsExcelImporterOpen(false);
+            setToastMessage('✅ Berhasil mengimpor & memperbarui jadwal bulanan dari Excel!');
+            setTimeout(() => setToastMessage(null), 4000);
+          }}
+          onAddLog={onAddLog}
+        />
       )}
 
     </div>

@@ -552,12 +552,16 @@ export default function App() {
               leaveRecords={leaveRecords}
               patternConfig={patternConfig}
               rulesConfig={rulesConfig}
+              schedule={schedule}
               onSavePatternConfig={setPatternConfig}
               onSaveRulesConfig={setRulesConfig}
-              onAddLeaveRecord={handleAddLeaveRecord}
+              onAddLeaveRecord={(record) => setLeaveRecords(prev => [...prev, record])}
               onAddLog={handleCalendarLog}
-              schedule={schedule}
               onNavigate={handleNavigate}
+              onUpdateSchedule={(newSched) => {
+                setSchedule(newSched);
+                setOfficers(prev => syncOfficerDutyCounts(newSched, prev));
+              }}
             />
           )}
 
@@ -571,6 +575,10 @@ export default function App() {
               onUpdateSlot={handleUpdateScheduleSlot}
               onDeleteSlot={handleDeleteScheduleSlot}
               onAddLog={handleCalendarLog}
+              onBulkUpdateSchedule={(newSched) => {
+                setSchedule(newSched);
+                setOfficers(prev => syncOfficerDutyCounts(newSched, prev));
+              }}
             />
           )}
 
