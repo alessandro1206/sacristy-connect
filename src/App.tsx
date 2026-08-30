@@ -27,10 +27,10 @@ import { MobileBottomNav } from './components/MobileBottomNav';
 
 // Local storage keys for universal persistence
 const STORAGE_KEYS = {
-  OFFICERS: 'sacristy_officers_v6',
-  SCHEDULE: 'sacristy_schedule_v6',
-  LOGS: 'sacristy_logs_v6',
-  LEAVE: 'sacristy_leave_records_v6'
+  OFFICERS: 'sacristy_officers_v7',
+  SCHEDULE: 'sacristy_schedule_v7',
+  LOGS: 'sacristy_logs_v7',
+  LEAVE: 'sacristy_leave_records_v7'
 };
 
 export default function App() {

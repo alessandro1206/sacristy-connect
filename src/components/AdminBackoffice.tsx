@@ -49,10 +49,10 @@ export const AdminBackoffice: React.FC<AdminBackofficeProps> = ({
 }) => {
   // Keys for persistent WA state
   const WA_STORAGE = {
-    MESSAGES: 'sacristy_wa_messages_v6',
-    INPUT: 'sacristy_wa_input_v6',
-    DETECTED: 'sacristy_wa_detected_v6',
-    LOG: 'sacristy_wa_log_v6'
+    MESSAGES: 'sacristy_wa_messages_v7',
+    INPUT: 'sacristy_wa_input_v7',
+    DETECTED: 'sacristy_wa_detected_v7',
+    LOG: 'sacristy_wa_log_v7'
   };
 
   // Feed of WhatsApp messages matching real parish officers (persisted)
@@ -372,11 +372,12 @@ Lokasi : [Lokasi]`;
         excludeSlotId?: string
       ): ScheduleSlot | undefined => {
         const oid = targetOfficer.id.padStart(3, '0');
+        const unpadded = String(parseInt(targetOfficer.id, 10));
         
         // 1. Direct match strictly by officer number ID (in serverIds or serverNotes)
         let candidates = schedule.filter(s => 
           ((s.serverIds || []).some(sid => sid && sid.padStart(3, '0') === oid) ||
-           (s.serverNotes || []).some(note => note && note.includes(oid))) &&
+           (s.serverNotes || []).some(note => note && (note.includes(oid) || note.includes(unpadded)))) &&
           (!excludeSlotId || s.id !== excludeSlotId)
         );
 
@@ -456,7 +457,7 @@ Lokasi : [Lokasi]`;
           if (slot.id === slot1.id) {
             let targetIdx = (slot.serverIds || []).findIndex(sid => sid && sid.padStart(3, '0') === id1_3);
             if (targetIdx === -1) {
-              targetIdx = (slot.serverNotes || []).findIndex(note => note && note.includes(id1_3));
+              targetIdx = (slot.serverNotes || []).findIndex(note => note && (note.includes(id1_3) || note.includes(String(firstNum))));
             }
             if (targetIdx === -1) targetIdx = 0;
             modifiedSlotsCount++;
@@ -493,7 +494,7 @@ Lokasi : [Lokasi]`;
           if (slot.id === slot2.id) {
             let targetIdx = (slot.serverIds || []).findIndex(sid => sid && sid.padStart(3, '0') === id2_3);
             if (targetIdx === -1) {
-              targetIdx = (slot.serverNotes || []).findIndex(note => note && note.includes(id2_3));
+              targetIdx = (slot.serverNotes || []).findIndex(note => note && (note.includes(id2_3) || note.includes(String(secondNum))));
             }
             if (targetIdx === -1) targetIdx = 0;
             modifiedSlotsCount++;
@@ -568,7 +569,7 @@ Lokasi : [Lokasi]`;
             // Erase second #number and add first #number strictly by ID
             let targetIdx = (slot.serverIds || []).findIndex(sid => sid && sid.padStart(3, '0') === id2_3);
             if (targetIdx === -1) {
-              targetIdx = (slot.serverNotes || []).findIndex(note => note && note.includes(id2_3));
+              targetIdx = (slot.serverNotes || []).findIndex(note => note && (note.includes(id2_3) || note.includes(String(secondNum))));
             }
             if (targetIdx === -1) targetIdx = 0;
             modifiedSlotsCount++;
@@ -642,7 +643,7 @@ Lokasi : [Lokasi]`;
             // Erase first #number and add second #number strictly by ID
             let targetIdx = (slot.serverIds || []).findIndex(sid => sid && sid.padStart(3, '0') === id1_3);
             if (targetIdx === -1) {
-              targetIdx = (slot.serverNotes || []).findIndex(note => note && note.includes(id1_3));
+              targetIdx = (slot.serverNotes || []).findIndex(note => note && (note.includes(id1_3) || note.includes(String(firstNum))));
             }
             if (targetIdx === -1) targetIdx = 0;
             modifiedSlotsCount++;
