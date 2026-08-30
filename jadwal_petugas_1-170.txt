@@ -258,7 +258,7 @@ NO   | NAMA PETUGAS                   | TANGGAL KOORLAP               | TANGGAL 
      |                                | AI     : 27 Sep (06:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 084  | Soehadi                        | KOORLAP: -
-     |                                | AI     : 01 Sep (18:00 @ Kapel); 27 Sep (06:00 @ Gereja)
+     |                                | AI     : 01 Sep (18:00 @ Kapel)
 ----------------------------------------------------------------------------------------------------
 085  | Paulus Tedjadharma             | KOORLAP: 06 Sep (10:00 @ Gereja); 27 Sep (08:00 @ Gereja)
      |                                | AI     : 13 Sep (17:00 @ Kapel)
@@ -482,7 +482,7 @@ NO   | NAMA PETUGAS                   | TANGGAL KOORLAP               | TANGGAL 
      |                                | AI     : 05 Sep (18:00 @ Kapel); 15 Sep (05:30 @ Gereja); 20 Sep (10:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 160  | Imanuel Herry Kosok            | KOORLAP: -
-     |                                | AI     : 05 Sep (18:00 @ Gereja); 27 Sep (18:00 @ Gereja)
+     |                                | AI     : 05 Sep (18:00 @ Gereja); 27 Sep (06:00 @ Gereja); 27 Sep (18:00 @ Gereja)
 ----------------------------------------------------------------------------------------------------
 161  | Edward Siswanto Santoso        | KOORLAP: -
      |                                | AI     : 06 Sep (10:00 @ Gereja); 13 Sep (10:00 @ Gereja)

@@ -2747,7 +2747,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "088"
     ],
     "serverNames": [
-      "Bambang Susilo",
+      "Bambang susilo",
       "Michael Kristanto"
     ],
     "koorlapIds": [],
@@ -2811,8 +2811,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "143"
     ],
     "serverNames": [
-      "Hence Antony",
-      "Stefanus Charlie"
+      "Hence Antony Suawah",
+      "Stefanus Charlie Tjahyono"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -2914,9 +2914,9 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "129"
     ],
     "serverNames": [
-      "Raymundus Raimun",
+      "Raymundus Raimun Aso",
       "Eddy Suwanto",
-      "Johanes Rihadi"
+      "Johanes Efendi Sapto Nugroho"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -2955,7 +2955,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Alex Santoso",
-      "Januar Dwiputro"
+      "Januar Dwiputra Sutandi"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -2992,7 +2992,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "serverNames": [
       "Antonius David Tjung",
       "Tri Wibisono",
-      "Happy Gunawarman"
+      "AY. Happy Gunawanman"
     ],
     "koorlapIds": [
       "063"
@@ -3036,7 +3036,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "serverNames": [
       "Agustinus Cahyono",
       "Argo Putra",
-      "Cliff Patriangga"
+      "Cliff Patrisangga Sabarbudiman"
     ],
     "koorlapIds": [
       "001"
@@ -3077,8 +3077,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "145"
     ],
     "serverNames": [
-      "Johni Hidayat",
-      "Damianus Slamet"
+      "FX Johni Hidayat",
+      "Damianus Slamet Subagio"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -3125,19 +3125,19 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Venantius Sumarmo",
-      "Agus Kartakusuma",
-      "Silvester Windy Wibisono",
+      "Yohanes Agus Kartakusuma",
+      "Fransiskus Silvester Windy Wibisono",
       "Dionisius Donny Kamadjaja",
       "Satrio Soetikno",
       "Paulus Agus Juwono",
       "Ivan Christian Cahyadi",
       "Sugiharto Tanto",
       "Laurensius Rony Setyawan",
-      "Richard Dharyanto",
-      "Jeffrey Tanuhardja",
-      "Emanuel Henra",
-      "Damianus Slamet",
-      "Sukotjo Budiono"
+      "Richard Gharyanto",
+      "Jeffrey Tanuhardjo",
+      "Imanuel Herry Kosok",
+      "Damianus Slamet Subagio",
+      "Sutedjo Budiono Wonodihardjo"
     ],
     "koorlapIds": [
       "035",
@@ -3235,19 +3235,19 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "168"
     ],
     "serverNames": [
-      "Edwin Ardianto",
-      "Andy Untoyo",
-      "Hence Antony",
+      "Edwin Ardianto Tedjosaputro",
+      "Andy untoyo wibowo",
+      "Hence Antony Suawah",
       "Denny Sentosa Johann",
       "Handi Wirajaya",
       "Nikolas Andrew",
       "Edwin Pribadi",
-      "Juliadi Widjaja",
+      "Judadi Widjaja",
       "Eddy Soedjatmiko",
       "Adhika Wardhana",
       "Rheza Ricardo Alex",
       "Rudy Effendy",
-      "Happy Gunawarman"
+      "AY. Happy Gunawanman"
     ],
     "koorlapIds": [
       "038"
@@ -3333,11 +3333,11 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "087"
     ],
     "serverNames": [
-      "Raymundus Raimun",
-      "Paulus Letu Udjan",
-      "Agus Kartakusuma",
+      "Raymundus Raimun Aso",
+      "Paulus Leto Udjan",
+      "Yohanes Agus Kartakusuma",
       "Bambang Suprijanto",
-      "Andi Widjaja",
+      "Andi widjaja tirtoprodjo",
       "Eric Saputro",
       "Budi Santosa"
     ],
@@ -3395,7 +3395,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "017"
     ],
     "serverNames": [
-      "Arishka Yudarana"
+      "Yohanes Arishka Yudarana"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -3432,15 +3432,15 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "023"
     ],
     "serverNames": [
-      "Lorenzo Tjaeyahdy",
-      "Yeremia Santoso halim",
+      "Lorenzo Tjaeyahdy Oeitomo",
+      "Yeremia Santoso Halim",
       "Fredy Susanto",
       "Jonas Angkawidjaja",
       "Bambang Hermanto",
-      "Alexander Maria",
-      "Kuncoro Kohar",
+      "Alexander Mario Pribadi",
+      "Fransiscus Paulus Kuncoro Kohar",
       "Budi Santoso",
-      "Johni Hidayat"
+      "FX Johni Hidayat"
     ],
     "koorlapIds": [
       "022"
@@ -3522,23 +3522,23 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Gervasius Nosi",
-      "Dwi Prasetyo",
+      "Ignatius Dwi Prasetyo",
       "Hendra Utama",
       "Andi Singgih",
-      "Cliff Patriangga",
+      "Cliff Patrisangga Sabarbudiman",
       "Tjio Johansyah",
-      "Johanes Ignasius Totok",
+      "Johanes Ignasius Totok Sukarno",
       "Rudy Djaja Siaputra",
-      "Robert Roesbiyanto",
-      "Yonathan Himawan",
-      "Doddy krisdyanto",
-      "Fidelis Sulistiyo",
-      "Titus Purdijojo",
-      "Robertus Antonius",
-      "Andreas Surja",
-      "Tan Wemulia Tanto",
-      "Damianus Slamet",
-      "Edward Siswanto"
+      "Robert Boesbiyanto",
+      "Yosathan Himawan Handarto",
+      "FX Doddy Isdayanto",
+      "Fidelis Sutatyo",
+      "Stevanus Titus Purdijojo",
+      "Robertus Antonius Christmowanto",
+      "Andreas Suteja Hantono",
+      "Ton Wernalia Tante",
+      "Damianus Slamet Subagio",
+      "Edward Siswanto Santoso"
     ],
     "koorlapIds": [
       "079",
@@ -3658,19 +3658,19 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Sunardi",
       "Aloysius Gholo",
       "Pius Paru",
-      "Redy Wibisono",
-      "Widjanarko Tjandra",
+      "Agustinus Redy Wibisono",
+      "Widjanarko Tjandra Soejatno",
       "Sonny Sugiarto So",
       "Albert Sidharta",
       "Bambang Purnomo",
-      "Victor Kardiana",
+      "Victor Kardiana Hardjomoeljo",
       "Michael Kristanto",
-      "Andreas Yoga",
+      "Andreas Yoga Adhitama",
       "Wongso Budi",
-      "Effendy Listijabudhi",
-      "Hendra Wijaya",
-      "Leo Warner Lollo",
-      "Febrianto Dwi"
+      "Efendy Liobudhi",
+      "Franciscus Xaverius Hendra Wijaya",
+      "Leo Wismer Lolo",
+      "Febrianto Dwi Istiawan"
     ],
     "koorlapIds": [
       "089",
@@ -3800,8 +3800,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "112"
     ],
     "serverNames": [
-      "Nicholas Handoso",
-      "Ari Senoaji Loekito"
+      "Sebastianus Nicholas Handoso",
+      "Aloysius Ari Senoo Loekito"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -3834,7 +3834,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "023"
     ],
     "serverNames": [
-      "Johni Hidayat"
+      "FX Johni Hidayat"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -3864,8 +3864,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "144"
     ],
     "serverNames": [
-      "Januar Dwiputro",
-      "Andreas Surja"
+      "Januar Dwiputra Sutandi",
+      "Andreas Suteja Hantono"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -3899,7 +3899,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "164"
     ],
     "serverNames": [
-      "Effendy Listijabudhi",
+      "Efendy Liobudhi",
       "Heru Wijaya"
     ],
     "koorlapIds": [],
@@ -3934,8 +3934,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "039"
     ],
     "serverNames": [
-      "Effendy Listijabudhi",
-      "Redy Wibisono"
+      "Efendy Liobudhi",
+      "Agustinus Redy Wibisono"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -4009,7 +4009,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "020"
     ],
     "serverNames": [
-      "Edwin Ardianto"
+      "Edwin Ardianto Tedjosaputro"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -4086,20 +4086,20 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "165"
     ],
     "serverNames": [
-      "Christian Adi Putra",
+      "Leonardus christian adi putra",
       "Hendra Utama",
-      "Henry Arvian",
+      "Henrikus Henry Arvian Hady",
       "Fredy Susanto",
-      "Tanno Sugiharto",
+      "Fx Tanno Sugiharto",
       "Jap Yohanes Baptista",
-      "Deny Nurcahya",
+      "Nicolas Immanuel Derry Nurcahya",
       "Nikolas Andrew",
-      "Mikael Mana",
-      "Berti Albertus Nara",
-      "Davidson Janto",
-      "Andreas Surja",
+      "Mikael Nono",
+      "Berti Albertus Hara",
+      "William Antonius Davidson Jonto",
+      "Andreas Suteja Hantono",
       "Bayu",
-      "Winardi Herlambang"
+      "Winardi Hartambang"
     ],
     "koorlapIds": [
       "054",
@@ -4191,10 +4191,10 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "167"
     ],
     "serverNames": [
-      "Paulus Letu Udjan",
-      "Severus senjaya",
-      "Nicholas Handoso",
-      "Yeremia Santoso halim",
+      "Paulus Leto Udjan",
+      "Severus senjoyo",
+      "Sebastianus Nicholas Handoso",
+      "Yeremia Santoso Halim",
       "Nio Eko Susilo",
       "Sugiharto Tanto",
       "Chen Lin Andrew"
@@ -4253,7 +4253,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "018"
     ],
     "serverNames": [
-      "Brian Mursidi"
+      "Antonis Brian Mursidi"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -4292,13 +4292,13 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "serverNames": [
       "Gatot Chrishariyono",
       "Agustinus Cahyono",
-      "Andreas Yoga",
+      "Andreas Yoga Adhitama",
       "Argo Putra",
-      "Dwi Prasetyo",
-      "Agus Riyanto Pamuji",
+      "Ignatius Dwi Prasetyo",
+      "Silvester Agus Riyanto Pamuji",
       "Antonius David Tjung",
       "Adinanda Condrowibowo",
-      "Happy Gunawarman"
+      "AY. Happy Gunawanman"
     ],
     "koorlapIds": [
       "097"
@@ -4386,17 +4386,17 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "Jonas Angkawidjaja",
       "Untung Sutikno",
       "Yohanes Gunawan",
-      "Kuncoro Kohar",
-      "Robert Roesbiyanto",
+      "Fransiscus Paulus Kuncoro Kohar",
+      "Robert Boesbiyanto",
       "Edwin Pribadi",
-      "Doddy krisdyanto",
-      "Agus Riyanto Pamuji",
-      "Leo Warner Lollo",
-      "Petrus Yuni",
-      "Reo Sinarta",
-      "Irwan Sutanto",
-      "Agustinus Djoko",
-      "Edward Siswanto"
+      "FX Doddy Isdayanto",
+      "Silvester Agus Riyanto Pamuji",
+      "Leo Wismer Lolo",
+      "Petrus Yuni setyawan",
+      "Eka Sisario",
+      "Iwan Sutanto",
+      "Agustinus Djoko Soetoyo",
+      "Edward Siswanto Santoso"
     ],
     "koorlapIds": [
       "096",
@@ -4510,17 +4510,17 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "170"
     ],
     "serverNames": [
-      "Bambang Susilo",
+      "Bambang susilo",
       "Paulus Tedjadharma",
       "Budi Purnomo",
       "Alex Santoso",
-      "Tjetjep Tjondro",
-      "Yonathan Himawan",
+      "Tjetjep Tjondro Oetomo",
+      "Yosathan Himawan Handarto",
       "Alexander Sukarliono",
       "Heru Wijaya",
       "Adhika Wardhana",
       "Vincentius Fidelis Lucky",
-      "Alexander Maria",
+      "Alexander Mario Pribadi",
       "Donni Anwar",
       "Budi Santoso"
     ],
@@ -4618,21 +4618,21 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Sunardi",
-      "Brian Mursidi",
-      "Januar Dwiputro",
-      "Johni Hidayat",
+      "Antonis Brian Mursidi",
+      "Januar Dwiputra Sutandi",
+      "FX Johni Hidayat",
       "Hadi Santoso",
       "Hary Suwanda",
       "Tandra Gunawan",
       "Bambang Purnomo",
       "Mikael Hengky Pratama",
-      "Widyanto Setiawan",
+      "Widyanto Setiawan Wijaya",
       "Tanuddin Rustan",
       "Handi Wirajaya",
-      "Juliadi Widjaja",
-      "Hadrianus Sukaryadi",
-      "Robertus Antonius",
-      "Yohan Soenyoto"
+      "Judadi Widjaja",
+      "Nadianus Sukaryadi",
+      "Robertus Antonius Christmowanto",
+      "Bona ventura Yohan Soenyoto"
     ],
     "koorlapIds": [
       "123",
@@ -4729,8 +4729,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Paulus Agus Juwono",
-      "Deny Nurcahya",
-      "Richard Dharyanto"
+      "Nicolas Immanuel Derry Nurcahya",
+      "Richard Gharyanto"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -4768,7 +4768,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "159"
     ],
     "serverNames": [
-      "Tjetjep Tjondro",
+      "Tjetjep Tjondro Oetomo",
       "Rudy Effendy"
     ],
     "koorlapIds": [],
@@ -4802,7 +4802,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "058"
     ],
     "serverNames": [
-      "Bambang Susilo"
+      "Bambang susilo"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -4833,7 +4833,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Eddy Suwanto",
-      "Titus Purdijojo"
+      "Stevanus Titus Purdijojo"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -4867,8 +4867,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "162"
     ],
     "serverNames": [
-      "Stevanus Lijadi",
-      "Alexander Maria"
+      "Stevanus",
+      "Alexander Mario Pribadi"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -4904,8 +4904,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Satrio Soetikno",
-      "Irwan Sutanto",
-      "Happy Gunawarman"
+      "Iwan Sutanto",
+      "AY. Happy Gunawanman"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -4943,7 +4943,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "040"
     ],
     "serverNames": [
-      "Titus Purdijojo",
+      "Stevanus Titus Purdijojo",
       "Vincent Winardi Tan"
     ],
     "koorlapIds": [],
@@ -5008,7 +5008,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Fredy Susanto",
-      "Winardi Herlambang"
+      "Winardi Hartambang"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -5055,19 +5055,19 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Aloysius Gholo",
-      "Arishka Yudarana",
-      "Alfred Stephanus",
+      "Yohanes Arishka Yudarana",
+      "Alfred Stephanus Metekohy",
       "Edward Luntungan",
       "Hartanto Chandra",
-      "Andi Widjaja",
+      "Andi widjaja tirtoprodjo",
       "Hadi Santoso",
       "Denny Sentosa Johann",
-      "Doddy krisdyanto",
-      "Redy Wibisono",
-      "Robertus Antonius",
-      "Mikael Mana",
-      "Yohanes Kurniawan",
-      "Sukotjo Budiono"
+      "FX Doddy Isdayanto",
+      "Agustinus Redy Wibisono",
+      "Robertus Antonius Christmowanto",
+      "Mikael Nono",
+      "Yohanes Kurniawan Halim",
+      "Sutedjo Budiono Wonodihardjo"
     ],
     "koorlapIds": [
       "125",
@@ -5166,17 +5166,17 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Mario Christiano Chandra",
-      "Andrew Firmansyah",
-      "Leohanes Halim",
+      "Andrew Firmansyah Limantoro",
+      "Stevanus Leohanes Halim",
       "Raymond Hanjaya",
       "Raymond Michael",
       "Hanjaya Kurniawan",
-      "Thomas Raynanto",
+      "Joseph Thomas Raynanto",
       "Irwan Afandi",
-      "Effendy Listijabudhi",
-      "Davidson Janto",
+      "Efendy Liobudhi",
+      "William Antonius Davidson Jonto",
       "Bayu",
-      "Fredy Teguh",
+      "Fredy Teguh Prasetyo",
       "Rheza Ricardo Alex"
     ],
     "koorlapIds": [
@@ -5263,13 +5263,13 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "165"
     ],
     "serverNames": [
-      "Raymundus Raimun",
+      "Raymundus Raimun Aso",
       "Venantius Sumarmo",
       "Edward Kusuma",
       "Bambang Purnomo",
       "Nikolas Andrew",
-      "Berti Albertus Nara",
-      "Winardi Herlambang"
+      "Berti Albertus Hara",
+      "Winardi Hartambang"
     ],
     "koorlapIds": [
       "045"
@@ -5333,15 +5333,15 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "154"
     ],
     "serverNames": [
-      "Paulus Biodita",
+      "Paulus Blodito Pujoasyogyo",
       "Yohanes Herman Saputra",
-      "Victor Kardiana",
+      "Victor Kardiana Hardjomoeljo",
       "Satrio Soetikno",
-      "Bambang Susilo",
+      "Bambang susilo",
       "Untung Sutikno",
       "Alexander Budi Cahyono",
-      "Titus Purdijojo",
-      "Tan Wemulia Tanto"
+      "Stevanus Titus Purdijojo",
+      "Ton Wernalia Tante"
     ],
     "koorlapIds": [
       "164"
@@ -5424,20 +5424,20 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "serverNames": [
       "Argo Putra",
       "Nio Eko Susilo",
-      "Stevanus Lijadi",
+      "Stevanus",
       "Hary Suwanda",
       "Ferdyanto Salim",
       "Budi Santosa",
-      "Tanno Sugiharto",
+      "Fx Tanno Sugiharto",
       "Vincent Winardi Tan",
       "Gunarjo Tanurijanto",
-      "Sonny Widjaja",
+      "Sonny Widjojo",
       "Wey Tjoendianto",
-      "Johanes Rihadi",
-      "Febrianto Dwi",
+      "Johanes Efendi Sapto Nugroho",
+      "Febrianto Dwi Istiawan",
       "Eddy Soedjatmiko",
-      "Yohan Soenyoto",
-      "Stefanus Charlie",
+      "Bona ventura Yohan Soenyoto",
+      "Stefanus Charlie Tjahyono",
       "Eko Gunawan Kusjanto",
       "Rudy Effendy"
     ],
@@ -5470,7 +5470,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "",
       "",
       "",
-      "Tukar Jadwal: 58 Bambang Susilo",
+      "",
       "",
       "",
       "Tukar Jadwal: 95 Agus Kartakusuma",
@@ -5490,7 +5490,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false,
       false,
       false,
-      true,
+      false,
       false,
       false,
       true,
@@ -5557,21 +5557,21 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Agustinus Cahyono",
-      "Andreas Yoga",
+      "Andreas Yoga Adhitama",
       "Pius Paru",
       "Andi Singgih",
       "Berce suisa abraham",
       "Tandra Gunawan",
       "Eric Saputro",
       "Michael Kristanto",
-      "Tjetjep Tjondro",
+      "Tjetjep Tjondro Oetomo",
       "Alex Santoso",
-      "Hendra Wijaya",
-      "Hadrianus Sukaryadi",
-      "Dominikus Asas",
+      "Franciscus Xaverius Hendra Wijaya",
+      "Nadianus Sukaryadi",
+      "Dominikus Anas",
       "Alexander Sukarliono",
-      "Damianus Slamet",
-      "Agustinus Djoko"
+      "Damianus Slamet Subagio",
+      "Agustinus Djoko Soetoyo"
     ],
     "koorlapIds": [
       "072",
@@ -5666,8 +5666,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "064"
     ],
     "serverNames": [
-      "Johanes Ignasius Totok",
-      "Andy Untoyo"
+      "Johanes Ignasius Totok Sukarno",
+      "Andy untoyo wibowo"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -5701,7 +5701,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "147"
     ],
     "serverNames": [
-      "Yohan Soenyoto",
+      "Bona ventura Yohan Soenyoto",
       "Bayu"
     ],
     "koorlapIds": [],
@@ -5765,7 +5765,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "167"
     ],
     "serverNames": [
-      "Silvester Windy Wibisono",
+      "Fransiskus Silvester Windy Wibisono",
       "Chen Lin Andrew"
     ],
     "koorlapIds": [],
@@ -5800,7 +5800,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "156"
     ],
     "serverNames": [
-      "Agustinus Djoko",
+      "Agustinus Djoko Soetoyo",
       "Adhika Wardhana"
     ],
     "koorlapIds": [],
@@ -5837,7 +5837,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Edward Kusuma",
-      "Lorenzo Tjaeyahdy",
+      "Lorenzo Tjaeyahdy Oeitomo",
       "Raymond Michael"
     ],
     "koorlapIds": [],
@@ -5876,7 +5876,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "051"
     ],
     "serverNames": [
-      "Yohan Soenyoto",
+      "Bona ventura Yohan Soenyoto",
       "Paulus Agus Juwono"
     ],
     "koorlapIds": [],
@@ -5910,7 +5910,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "025"
     ],
     "serverNames": [
-      "Christian Adi Putra"
+      "Leonardus christian adi putra"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -5940,7 +5940,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "155"
     ],
     "serverNames": [
-      "Sonny Widjaja",
+      "Sonny Widjojo",
       "Eko Gunawan Kusjanto"
     ],
     "koorlapIds": [],
@@ -5989,18 +5989,18 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "serverNames": [
       "Rudy Djaja Siaputra",
       "Bambang Suprijanto",
-      "Widjanarko Tjandra",
+      "Widjanarko Tjandra Soejatno",
       "Edward Luntungan",
       "Yohanes Gunawan",
       "Wongso Budi",
       "Wey Tjoendianto",
       "Tanuddin Rustan",
-      "Petrus Yuni",
+      "Petrus Yuni setyawan",
       "Yudi Wijaya",
-      "Stefanus Charlie",
-      "Fredy Teguh",
-      "Yohanes Kurniawan",
-      "Irwan Sutanto"
+      "Stefanus Charlie Tjahyono",
+      "Fredy Teguh Prasetyo",
+      "Yohanes Kurniawan Halim",
+      "Iwan Sutanto"
     ],
     "koorlapIds": [
       "079",
@@ -6032,7 +6032,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "",
       "",
       "",
-      "Tukar Jadwal: 139 Severus senjaya",
+      "",
       "",
       "",
       "",
@@ -6048,7 +6048,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       false,
       false,
       false,
-      true,
+      false,
       false,
       false,
       false,
@@ -6089,16 +6089,16 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "083",
       "091",
       "157",
-      "084"
+      "160"
     ],
     "serverNames": [
-      "Cliff Patriangga",
-      "Victor Kardiana",
+      "Cliff Patrisangga Sabarbudiman",
+      "Victor Kardiana Hardjomoeljo",
       "Stevanus Budianto",
       "Rudianto Hartanta",
-      "Thomas Raynanto",
+      "Joseph Thomas Raynanto",
       "Vincentius Fidelis Lucky",
-      "Soehadi"
+      "Imanuel Herry Kosok"
     ],
     "koorlapIds": [
       "071"
@@ -6116,10 +6116,10 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "",
       "",
       "",
-      "Tukar Jadwal: 31 Victor Kardiana",
+      "Tukar Jadwal: 57 Andrew Firmansyah",
       "",
       "Tukar Jadwal: 155 Eko Gunawan Kusjanto",
-      "Tukar Jadwal: 160 Emanuel Henra"
+      ""
     ],
     "isSubstituted": [
       false,
@@ -6128,7 +6128,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       true,
       false,
       true,
-      true
+      false
     ],
     "originalServerNames": [
       "Cliff Patrisangga Sabarbudiman",
@@ -6163,14 +6163,14 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Gervasius Nosi",
-      "Dwi Prasetyo",
-      "Arishka Yudarana",
-      "Brian Mursidi",
-      "Lorenzo Tjaeyahdy",
+      "Ignatius Dwi Prasetyo",
+      "Yohanes Arishka Yudarana",
+      "Antonis Brian Mursidi",
+      "Lorenzo Tjaeyahdy Oeitomo",
       "Tjio Johansyah",
-      "Andy Untoyo",
+      "Andy untoyo wibowo",
       "Adhika Wardhana",
-      "Happy Gunawarman"
+      "AY. Happy Gunawanman"
     ],
     "koorlapIds": [
       "085"
@@ -6253,20 +6253,20 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "serverNames": [
       "Venantius Sumarmo",
       "Tjoa Tjandrapradja",
-      "Bambang Susilo",
-      "Benny Sukamto",
+      "Bambang susilo",
+      "Antonius Benny Sukamto",
       "Bambang Budiono",
-      "Stevanus Lijadi",
-      "Widyanto Setiawan",
+      "Stevanus",
+      "Widyanto Setiawan Wijaya",
       "Mikael Hengky Pratama",
       "Willy Setiawan",
-      "Sri Tur Prawinoto",
-      "Johanes Rihadi",
+      "Donatus Sri Tar Prawinoto",
+      "Johanes Efendi Sapto Nugroho",
       "Alexander Budi Cahyono",
-      "Dominikus Asas",
-      "Davidson Janto",
-      "Andreas Surja",
-      "Agustinus Djoko",
+      "Dominikus Anas",
+      "William Antonius Davidson Jonto",
+      "Andreas Suteja Hantono",
+      "Agustinus Djoko Soetoyo",
       "Eko Gunawan Kusjanto",
       "Donni Anwar"
     ],
@@ -6383,17 +6383,17 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Adinanda Condrowibowo",
-      "Henry Arvian",
-      "Johanes Ignasius Totok",
-      "Alfred Stephanus",
+      "Henrikus Henry Arvian Hady",
+      "Johanes Ignasius Totok Sukarno",
+      "Alfred Stephanus Metekohy",
       "Vincent Winardi Tan",
-      "Nicholas Handoso",
+      "Sebastianus Nicholas Handoso",
       "Tri Wibisono",
       "Nio Eko Susilo",
       "Albert Sidharta",
-      "Ari Senoaji Loekito",
+      "Aloysius Ari Senoo Loekito",
       "Eddy Soedjatmiko",
-      "Kuncoro Kohar",
+      "Fransiscus Paulus Kuncoro Kohar",
       "Budi Santoso"
     ],
     "koorlapIds": [
@@ -6491,20 +6491,20 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     "serverNames": [
       "Gatot Chrishariyono",
       "Aloysius Gholo",
-      "Valentinus Jimmy",
-      "Edwin Ardianto",
-      "Christian Adi Putra",
+      "Yohanes Valentinus Jimmy",
+      "Edwin Ardianto Tedjosaputro",
+      "Leonardus christian adi putra",
       "Edward Kusuma",
-      "Yeremia Santoso halim",
+      "Yeremia Santoso Halim",
       "Hartanto Chandra",
-      "Leohanes Halim",
+      "Stevanus Leohanes Halim",
       "Rizal Kristanto",
       "Sonny Sugiarto So",
-      "Andrew Firmansyah",
-      "Emanuel Henra",
+      "Andrew Firmansyah Limantoro",
+      "Imanuel Herry Kosok",
       "Budi Purnomo",
-      "Sonny Widjaja",
-      "Reo Sinarta"
+      "Sonny Widjojo",
+      "Eka Sisario"
     ],
     "koorlapIds": [
       "027",
@@ -6600,7 +6600,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Gervasius Nosi",
-      "Yonathan Himawan"
+      "Yosathan Himawan Handarto"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -6635,7 +6635,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
     ],
     "serverNames": [
       "Antonius David Tjung",
-      "Davidson Janto"
+      "William Antonius Davidson Jonto"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -6668,7 +6668,7 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "019"
     ],
     "serverNames": [
-      "Januar Dwiputro"
+      "Januar Dwiputra Sutandi"
     ],
     "koorlapIds": [],
     "serverRoles": [
@@ -6698,8 +6698,8 @@ export const INITIAL_SCHEDULE: ScheduleSlot[] = [
       "018"
     ],
     "serverNames": [
-      "Paulus Biodita",
-      "Brian Mursidi"
+      "Paulus Blodito Pujoasyogyo",
+      "Antonis Brian Mursidi"
     ],
     "koorlapIds": [],
     "serverRoles": [
