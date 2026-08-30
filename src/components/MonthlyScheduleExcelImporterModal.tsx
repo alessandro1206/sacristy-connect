@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from 'react';
-import * as XLSX from 'xlsx';
 import { Officer, ScheduleSlot } from '../types';
 import { playAudioFeedback } from '../utils/sound';
 import { 
@@ -19,6 +18,17 @@ import {
   Copy,
   Check
 } from 'lucide-react';
+
+// Dynamic browser-safe SheetJS loader
+const getXLSX = async () => {
+  try {
+    const module = await import('xlsx');
+    return module.default || module;
+  } catch (e) {
+    console.warn('XLSX module dynamic import fallback:', e);
+    return null;
+  }
+};
 
 interface MonthlyScheduleExcelImporterModalProps {
   isOpen: boolean;
@@ -249,8 +259,8 @@ export const MonthlyScheduleExcelImporterModal: React.FC<MonthlyScheduleExcelImp
     setRows(newTemplateRows);
   };
 
-  // 2. Download Template Excel (.xlsx)
-  const handleDownloadExcelTemplate = () => {
+  // 2. Download Template Excel (.xlsx / .csv fallback)
+  const handleDownloadExcelTemplate = async () => {
     playAudioFeedback('tap');
     const dataForExcel = rows.map((r, idx) => ({
       'No': idx + 1,
@@ -263,76 +273,140 @@ export const MonthlyScheduleExcelImporterModal: React.FC<MonthlyScheduleExcelImp
       'Keterangan / Catatan': r.notesInput || ''
     }));
 
-    const worksheet = XLSX.utils.json_to_sheet(dataForExcel);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Jadwal_Misa');
-    XLSX.writeFile(workbook, `Template_Jadwal_Sakristi_${selectedMonthYear}.xlsx`);
+    try {
+      const XLSX = await getXLSX();
+      if (XLSX) {
+        const worksheet = XLSX.utils.json_to_sheet(dataForExcel);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Jadwal_Misa');
+        XLSX.writeFile(workbook, `Template_Jadwal_Sakristi_${selectedMonthYear}.xlsx`);
+        return;
+      }
+    } catch (e) {
+      console.warn('XLSX export fallback to CSV:', e);
+    }
+
+    // Native CSV Export fallback
+    const headers = ['No', 'Tanggal (YYYY-MM-DD)', 'Hari & Tanggal', 'Jam Misa', 'Lokasi', 'No. Koorlap (ID)', 'No. Petugas Terjadwal (ID)', 'Keterangan / Catatan'];
+    const csvContent = [
+      headers.join(','),
+      ...dataForExcel.map(row => 
+        Object.values(row).map(val => `"${String(val).replace(/"/g, '""')}"`).join(',')
+      )
+    ].join('\n');
+    
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `Template_Jadwal_Sakristi_${selectedMonthYear}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   // 3. Upload File Excel (.xlsx / .xls / .csv)
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     playAudioFeedback('tap');
-    const reader = new FileReader();
-    reader.onload = (evt) => {
-      try {
-        const bstr = evt.target?.result;
-        const wb = XLSX.read(bstr, { type: 'binary' });
-        const wsname = wb.SheetNames[0];
-        const ws = wb.Sheets[wsname];
-        const rawData: any[] = XLSX.utils.sheet_to_json(ws, { defval: '' });
+    const isCsv = file.name.endsWith('.csv') || file.type.includes('csv');
 
-        const importedRows: EditableScheduleRow[] = rawData.map((item, idx) => {
-          // Flexible key detection
-          const dateVal = String(item['Tanggal (YYYY-MM-DD)'] || item['Tanggal'] || item['tanggal'] || item['Date'] || '').trim();
-          const timeVal = String(item['Jam Misa'] || item['Jam'] || item['jam'] || item['Waktu'] || item['Time'] || '05:30 WIB').trim();
-          const locVal = String(item['Lokasi'] || item['lokasi'] || item['Location'] || 'Gereja Paroki Santo Yakobus').trim();
-          const koorlapVal = String(item['No. Koorlap (ID)'] || item['Koorlap'] || item['koorlap'] || '').trim();
-          const serversVal = String(item['No. Petugas Terjadwal (ID)'] || item['No. Petugas'] || item['Petugas'] || item['petugas'] || '').trim();
-          const notesVal = String(item['Keterangan / Catatan'] || item['Keterangan'] || item['Catatan'] || '').trim();
-
-          // Normalize location
-          let normLoc = 'Gereja Paroki Santo Yakobus';
-          if (/kapel|kjp|john paul/i.test(locVal)) {
-            normLoc = 'Kapel John Paul II';
-          } else if (/rs|korsa|rumah sakit/i.test(locVal)) {
-            normLoc = 'Rumah Sakit EH';
+    if (isCsv) {
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        const text = evt.target?.result as string;
+        if (!text) return;
+        const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+        if (lines.length <= 1) return;
+        
+        const imported: EditableScheduleRow[] = [];
+        for (let i = 1; i < lines.length; i++) {
+          const cols = lines[i].split(',').map(c => c.replace(/^"|"$/g, '').trim());
+          if (cols.length >= 5) {
+            imported.push({
+              id: `row-csv-${i}-${Date.now()}`,
+              dateStr: cols[1] || `${selectedMonthYear}-01`,
+              timeStr: cols[3] || '05:30 WIB',
+              locationStr: cols[4] || 'Gereja Paroki Santo Yakobus',
+              koorlapInput: cols[5] || '',
+              serversInput: cols[6] || '',
+              notesInput: cols[7] || ''
+            });
           }
-
-          // Normalize time
-          let normTime = timeVal;
-          if (!normTime.includes('WIB')) {
-            const tm = normTime.match(/([01]?\d|2[0-3])[:.]([0-5]\d)/);
-            if (tm) normTime = `${tm[1].padStart(2, '0')}:${tm[2]} WIB`;
-            else normTime = `${normTime} WIB`;
-          }
-
-          return {
-            id: `row-${idx}-${Date.now()}`,
-            dateStr: dateVal || `${selectedMonthYear}-01`,
-            timeStr: normTime,
-            locationStr: normLoc,
-            koorlapInput: koorlapVal,
-            serversInput: serversVal,
-            notesInput: notesVal
-          };
-        });
-
-        if (importedRows.length > 0) {
-          setRows(importedRows);
-          playAudioFeedback('success');
-        } else {
-          alert('File Excel tidak memiliki data baris yang valid.');
         }
-      } catch (err) {
-        console.error('Error parsing Excel file:', err);
-        alert('Gagal membaca file Excel. Pastikan format kolom sesuai template.');
+        if (imported.length > 0) {
+          setRows(imported);
+          playAudioFeedback('success');
+        }
+      };
+      reader.readAsText(file);
+      e.target.value = '';
+      return;
+    }
+
+    try {
+      const XLSX = await getXLSX();
+      if (XLSX) {
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          try {
+            const bstr = evt.target?.result;
+            const wb = XLSX.read(bstr, { type: 'binary' });
+            const wsname = wb.SheetNames[0];
+            const ws = wb.Sheets[wsname];
+            const rawData: any[] = XLSX.utils.sheet_to_json(ws, { defval: '' });
+
+            const importedRows: EditableScheduleRow[] = rawData.map((item, idx) => {
+              const dateVal = String(item['Tanggal (YYYY-MM-DD)'] || item['Tanggal'] || item['tanggal'] || item['Date'] || '').trim();
+              const timeVal = String(item['Jam Misa'] || item['Jam'] || item['jam'] || item['Waktu'] || item['Time'] || '05:30 WIB').trim();
+              const locVal = String(item['Lokasi'] || item['lokasi'] || item['Location'] || 'Gereja Paroki Santo Yakobus').trim();
+              const koorlapVal = String(item['No. Koorlap (ID)'] || item['Koorlap'] || item['koorlap'] || '').trim();
+              const serversVal = String(item['No. Petugas Terjadwal (ID)'] || item['No. Petugas'] || item['Petugas'] || item['petugas'] || '').trim();
+              const notesVal = String(item['Keterangan / Catatan'] || item['Keterangan'] || item['Catatan'] || '').trim();
+
+              let normLoc = 'Gereja Paroki Santo Yakobus';
+              if (/kapel|kjp|john paul/i.test(locVal)) {
+                normLoc = 'Kapel John Paul II';
+              } else if (/rs|korsa|rumah sakit/i.test(locVal)) {
+                normLoc = 'Rumah Sakit EH';
+              }
+
+              let normTime = timeVal;
+              if (!normTime.includes('WIB')) {
+                const tm = normTime.match(/([01]?\d|2[0-3])[:.]([0-5]\d)/);
+                if (tm) normTime = `${tm[1].padStart(2, '0')}:${tm[2]} WIB`;
+                else normTime = `${normTime} WIB`;
+              }
+
+              return {
+                id: `row-${idx}-${Date.now()}`,
+                dateStr: dateVal || `${selectedMonthYear}-01`,
+                timeStr: normTime,
+                locationStr: normLoc,
+                koorlapInput: koorlapVal,
+                serversInput: serversVal,
+                notesInput: notesVal
+              };
+            });
+
+            if (importedRows.length > 0) {
+              setRows(importedRows);
+              playAudioFeedback('success');
+            } else {
+              alert('File Excel tidak memiliki data baris yang valid.');
+            }
+          } catch (err) {
+            console.error('Error parsing Excel:', err);
+            alert('Gagal membaca file Excel.');
+          }
+        };
+        reader.readAsBinaryString(file);
       }
-    };
-    reader.readAsBinaryString(file);
-    // Reset input
+    } catch (err) {
+      console.error('Error loading XLSX loader:', err);
+    }
     e.target.value = '';
   };
 
