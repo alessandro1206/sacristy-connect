@@ -363,30 +363,59 @@ Lokasi : [Lokasi]`;
         dtSecond = dtAll;
       }
 
-      // Slot Finder with strict ID number matching
-      const findSlotForOfficerOrDate = (
+      // Strict Slot Finder: Searches ONLY where targetOfficer is assigned
+      const findOfficerDutySlot = (
         targetOfficer: Officer,
         dNum: number | null,
         tStr: string | null,
         lStr: string | null,
         excludeSlotId?: string
-      ): ScheduleSlot | undefined => {
+      ): { slot: ScheduleSlot | null; error?: { title: string; reason: string; fixHint: string } } => {
         const oid = targetOfficer.id.padStart(3, '0');
         const unpadded = String(parseInt(targetOfficer.id, 10));
         
-        // 1. Direct match strictly by officer number ID (in serverIds or serverNotes)
+        // Find all slots where targetOfficer is assigned
         let candidates = schedule.filter(s => 
-          ((s.serverIds || []).some(sid => sid && sid.padStart(3, '0') === oid) ||
+          ((s.serverIds || []).some(sid => sid && (sid.padStart(3, '0') === oid || sid === unpadded)) ||
            (s.serverNotes || []).some(note => note && (note.includes(oid) || note.includes(unpadded)))) &&
           (!excludeSlotId || s.id !== excludeSlotId)
         );
+
+        if (candidates.length === 0) {
+          return {
+            slot: null,
+            error: {
+              title: `Petugas #${oid} Tidak Memiliki Jadwal Tugas`,
+              reason: `Petugas #${oid} (${targetOfficer.name}) tidak terdaftar dalam jadwal tugas misa mana pun di bulan September 2026.`,
+              fixHint: `Periksa kembali nomor ID petugas (apakah benar #${oid} ${targetOfficer.name} atau nomor petugas lain).`
+            }
+          };
+        }
 
         if (dNum) {
           const dayMatches = candidates.filter(s => {
             const parts = s.date.split('-');
             return parts.length === 3 && parseInt(parts[2], 10) === dNum;
           });
-          if (dayMatches.length > 0) candidates = dayMatches;
+          if (dayMatches.length === 0) {
+            // Find who is actually scheduled on dNum to provide helpful guidance
+            const slotOnDay = schedule.find(s => {
+              const parts = s.date.split('-');
+              return parts.length === 3 && parseInt(parts[2], 10) === dNum && (!tStr || s.massTime.includes(tStr));
+            });
+            const scheduledList = slotOnDay && slotOnDay.serverIds && slotOnDay.serverNames
+              ? slotOnDay.serverIds.map((sid, idx) => `#${sid} ${slotOnDay.serverNames[idx] || ''}`).join(', ')
+              : 'Tidak ada data';
+            return {
+              slot: null,
+              error: {
+                title: `Petugas #${oid} Tidak Terjadwal pada Tanggal ${dNum} Sep`,
+                reason: `Petugas #${oid} (${targetOfficer.name}) TIDAK terdaftar bertugas pada tanggal ${dNum} September 2026. Petugas yang bertugas pada sesi tersebut adalah: ${scheduledList}.`,
+                fixHint: `Periksa kembali nomor ID petugas yang dimasukkan (misal jika ingin mengganti/menukar petugas ${scheduledList}, gunakan nomor ID petugas tersebut).`
+              }
+            };
+          }
+          candidates = dayMatches;
         }
 
         if (tStr) {
@@ -399,26 +428,18 @@ Lokasi : [Lokasi]`;
           if (locMatches.length > 0) candidates = locMatches;
         }
 
-        if (candidates.length > 0) return candidates[0];
-
-        // 2. Fallback: match by session date, time, and location directly
-        if (dNum) {
-          let sessionCandidates = schedule.filter(s => {
-            const parts = s.date.split('-');
-            return parts.length === 3 && parseInt(parts[2], 10) === dNum && (!excludeSlotId || s.id !== excludeSlotId);
-          });
-          if (tStr) {
-            const timeMatches = sessionCandidates.filter(s => s.massTime.replace(' WIB', '').includes(tStr));
-            if (timeMatches.length > 0) sessionCandidates = timeMatches;
-          }
-          if (lStr) {
-            const locMatches = sessionCandidates.filter(s => s.location.toLowerCase().includes(lStr.toLowerCase()));
-            if (locMatches.length > 0) sessionCandidates = locMatches;
-          }
-          if (sessionCandidates.length > 0) return sessionCandidates[0];
+        if (candidates.length > 0) {
+          return { slot: candidates[0] };
         }
 
-        return undefined;
+        return {
+          slot: null,
+          error: {
+            title: `Sesi Misa Petugas #${oid} Tidak Cocok`,
+            reason: `Tidak ditemukan sesi misa yang cocok untuk Petugas #${oid} (${targetOfficer.name}) pada jam/lokasi yang dicantumkan.`,
+            fixHint: `Pastikan tanggal, jam misa, dan lokasi sesuai dengan jadwal tugas Petugas #${oid}.`
+          }
+        };
       };
 
       // =========================================================================
@@ -430,20 +451,31 @@ Lokasi : [Lokasi]`;
         // -----------------------------------------------------------------------
         // RULE 4A: if "tukar jadwal" do swapped the schedule
         // -----------------------------------------------------------------------
-        const slot1 = findSlotForOfficerOrDate(officerFirst, dtFirst.dayNum, dtFirst.timeStr, dtFirst.locStr);
-        const slot2 = findSlotForOfficerOrDate(officerSecond, dtSecond.dayNum, dtSecond.timeStr, dtSecond.locStr, slot1?.id);
-
-        if (!slot1 || !slot2) {
-          const missingId = !slot1 ? `#${id1_3}` : `#${id2_3}`;
-          setParseError({
-            title: 'Sesi Misa Tukar Jadwal Tidak Ditemukan',
-            reason: `Tidak dapat menemukan sesi misa untuk petugas ${missingId} pada tanggal yang dicantumkan.`,
-            fixHint: 'Pastikan kedua sesi misa (tanggal, jam, dan lokasi) sesuai dengan kalender sakristi.'
+        const res1 = findOfficerDutySlot(officerFirst, dtFirst.dayNum, dtFirst.timeStr, dtFirst.locStr);
+        if (!res1.slot) {
+          setParseError(res1.error || {
+            title: `Petugas #${id1_3} Tidak Terjadwal`,
+            reason: `Petugas #${id1_3} (${officerFirst.name}) tidak terdaftar pada sesi misa tersebut.`,
+            fixHint: 'Periksa kembali nomor petugas dan tanggal misa.'
           });
           playAudioFeedback('warning');
           setIsProcessing(false);
           return;
         }
+        const slot1 = res1.slot;
+
+        const res2 = findOfficerDutySlot(officerSecond, dtSecond.dayNum, dtSecond.timeStr, dtSecond.locStr, slot1.id);
+        if (!res2.slot) {
+          setParseError(res2.error || {
+            title: `Petugas #${id2_3} Tidak Terjadwal`,
+            reason: `Petugas #${id2_3} (${officerSecond.name}) tidak terdaftar pada sesi misa tersebut.`,
+            fixHint: 'Periksa kembali nomor petugas dan tanggal misa.'
+          });
+          playAudioFeedback('warning');
+          setIsProcessing(false);
+          return;
+        }
+        const slot2 = res2.slot;
 
         const effTime1 = slot1.massTime;
         const effTime2 = slot2.massTime;
@@ -547,18 +579,18 @@ Lokasi : [Lokasi]`;
         // -----------------------------------------------------------------------
         // RULE 4B: if "menggantikan" do erase the date from second #number and add to the first #number
         // -----------------------------------------------------------------------
-        const targetSlot = findSlotForOfficerOrDate(officerSecond, dtSecond.dayNum, dtSecond.timeStr, dtSecond.locStr);
-
-        if (!targetSlot) {
-          setParseError({
-            title: `Sesi Misa Petugas #${id2_3} Tidak Ditemukan`,
-            reason: `Tidak ditemukan jadwal misa untuk petugas #${id2_3} pada tanggal yang dicantumkan.`,
-            fixHint: 'Periksa kembali tanggal dan jam misa tugas yang ingin digantikan.'
+        const res = findOfficerDutySlot(officerSecond, dtSecond.dayNum, dtSecond.timeStr, dtSecond.locStr);
+        if (!res.slot) {
+          setParseError(res.error || {
+            title: `Petugas #${id2_3} Tidak Terjadwal`,
+            reason: `Petugas #${id2_3} (${officerSecond.name}) yang ingin digantikan tidak memiliki jadwal tugas pada tanggal tersebut.`,
+            fixHint: 'Periksa kembali nomor ID petugas yang digantikan dan tanggal tugasnya.'
           });
           playAudioFeedback('warning');
           setIsProcessing(false);
           return;
         }
+        const targetSlot = res.slot;
 
         const effTime = targetSlot.massTime;
         const effLoc = targetSlot.location;
@@ -621,18 +653,18 @@ Lokasi : [Lokasi]`;
         // -----------------------------------------------------------------------
         // RULE 4C: if "digantikan" do erase the date from first #number and add to the second #number
         // -----------------------------------------------------------------------
-        const targetSlot = findSlotForOfficerOrDate(officerFirst, dtFirst.dayNum, dtFirst.timeStr, dtFirst.locStr);
-
-        if (!targetSlot) {
-          setParseError({
-            title: `Sesi Misa Petugas #${id1_3} Tidak Ditemukan`,
-            reason: `Tidak ditemukan jadwal misa untuk petugas #${id1_3} pada tanggal yang dicantumkan.`,
-            fixHint: 'Periksa kembali tanggal dan jam misa tugas yang ingin digantikan.'
+        const res = findOfficerDutySlot(officerFirst, dtFirst.dayNum, dtFirst.timeStr, dtFirst.locStr);
+        if (!res.slot) {
+          setParseError(res.error || {
+            title: `Petugas #${id1_3} Tidak Terjadwal`,
+            reason: `Petugas #${id1_3} (${officerFirst.name}) yang ingin digantikan tidak memiliki jadwal tugas pada tanggal tersebut.`,
+            fixHint: 'Periksa kembali nomor ID petugas yang digantikan dan tanggal tugasnya.'
           });
           playAudioFeedback('warning');
           setIsProcessing(false);
           return;
         }
+        const targetSlot = res.slot;
 
         const effTime = targetSlot.massTime;
         const effLoc = targetSlot.location;
