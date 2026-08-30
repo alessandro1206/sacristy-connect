@@ -303,13 +303,13 @@ Lokasi : [Lokasi]`;
       const extractDateTimeLoc = (snippet: string) => {
         const segClean = snippet.replace(/\b202[4-9]\b/g, '');
 
-        // Time: e.g. 18:00, 18.00, jam 1800, pukul 0530
+        // Time: e.g. 18:00, 18.00, jam 1800, pukul 0530, or standalone 1800 / 0530
         let timeStr: string | null = null;
         const tMatch1 = segClean.match(/(?:jam|pukul)?\s*([01]?\d|2[0-3])[:.]([0-5]\d)/i);
         if (tMatch1) {
           timeStr = `${tMatch1[1].padStart(2, '0')}:${tMatch1[2]}`;
         } else {
-          const tMatch2 = segClean.match(/(?:jam|pukul)\s*([01]\d|2[0-3])([0-5]\d)/i);
+          const tMatch2 = segClean.match(/(?:jam|pukul|\b)\s*([01]\d|2[0-3])([0-5]\d)\b/i);
           if (tMatch2) {
             timeStr = `${tMatch2[1]}:${tMatch2[2]}`;
           }
@@ -342,25 +342,29 @@ Lokasi : [Lokasi]`;
         return { dayNum, timeStr, locStr };
       };
 
-      // Extract details for segment A and segment B if mutual swap
+      // Extract details for segment A and segment B cleanly based on #ID boundaries
       let dtFirst = { dayNum: null as number | null, timeStr: null as string | null, locStr: null as string | null };
       let dtSecond = { dayNum: null as number | null, timeStr: null as string | null, locStr: null as string | null };
 
       if (mode === 'TUKAR_JADWAL') {
-        const splitMatch = text.match(/(?:\n|\b)(?:tukar\s+dgn|tukar\s+dengan|tukar\s+sama|tukar\s+ke|tukar\s+sama\s+pak|dgn\s+pak|dengan\s+pak|tukar|dgn|dengan)(?:\s*:|\s+)/i);
-        if (splitMatch && splitMatch.index !== undefined) {
-          const seg1 = text.slice(0, splitMatch.index).trim();
-          const seg2 = text.slice(splitMatch.index + splitMatch[0].length).trim();
+        const allHashMatches = Array.from(text.matchAll(/#\d{1,3}/gi));
+        if (allHashMatches.length >= 2) {
+          const idx2 = allHashMatches[1].index ?? text.length;
+          let seg1 = text.slice(0, idx2);
+          seg1 = seg1.replace(/^\s*(?:tukar\s+jadwal|tukar|menggantikan|digantikan)\s*/i, '');
+          const seg2 = text.slice(idx2);
+
           dtFirst = extractDateTimeLoc(seg1);
           dtSecond = extractDateTimeLoc(seg2);
         } else {
-          dtFirst = extractDateTimeLoc(text);
-          dtSecond = dtFirst;
+          const dtCommon = extractDateTimeLoc(text);
+          dtFirst = dtCommon;
+          dtSecond = dtCommon;
         }
       } else {
-        const dtAll = extractDateTimeLoc(text);
-        dtFirst = dtAll;
-        dtSecond = dtAll;
+        const dtCommon = extractDateTimeLoc(text);
+        dtFirst = dtCommon;
+        dtSecond = dtCommon;
       }
 
       // Strict Slot Finder: Searches ONLY where targetOfficer is assigned
