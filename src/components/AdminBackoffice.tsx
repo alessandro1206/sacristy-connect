@@ -670,19 +670,28 @@ Lokasi : [Lokasi]`;
         ...prev
       ]);
 
+      const modeLabel = mode === 'TUKAR_JADWAL' 
+        ? 'Tukar Jadwal (Mutual Switch)' 
+        : (mode === 'MENGGANTIKAN' ? 'Menggantikan (One-Way Replacement)' : 'Digantikan (One-Way Replacement)');
+
       onAddLog({
         type: 'swap',
-        description: `WA Tukar Jadwal [${actionLabel}]: ${nameA} (${effectiveLocA}) ⇄ ${nameB} (${effectiveLocB}) - ${modifiedSlotsCount} slot berhasil disinkronkan`,
+        description: `WA ${modeLabel}: ${name1} ⇄ ${name2} - ${modifiedSlotsCount} slot berhasil disinkronkan`,
         actor: 'WA AI Assistant'
       });
 
       setImportLogText(
-        `✅ Berhasil memproses ${actionLabel}: ${nameA} (${effectiveLocA}, ${effectiveTimeA}) bertukar jadwal dengan ${nameB} (${effectiveLocB}, ${effectiveTimeB}). Database dan kalender telah diperbarui otomatis.`
+        `✅ Berhasil memproses [${modeLabel}]: ${name1} dan ${name2}. Sebanyak ${modifiedSlotsCount} sesi jadwal misa telah disinkronkan secara otomatis.`
       );
       playAudioFeedback('success');
     } catch (err) {
-      console.error(err);
-      alert('Terjadi kesalahan saat memproses tukar jadwal.');
+      console.error('Error processing WA message:', err);
+      setParseError({
+        title: 'Gagal Memproses Permintaan',
+        reason: (err as Error)?.message || 'Terjadi kendala saat memproses permohonan jadwal.',
+        fixHint: 'Pastikan format penulisan memuat nomor petugas dengan tanda # (misal: #29 dan #56) dan tanggal misa yang valid.'
+      });
+      playAudioFeedback('warning');
     } finally {
       setIsProcessing(false);
     }
