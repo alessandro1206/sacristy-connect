@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Officer, ScheduleSlot } from '../types';
 import { 
   FileText, 
@@ -55,11 +55,20 @@ export const ReportsDutyView: React.FC<ReportsDutyViewProps> = ({
   schedule
 }) => {
   const [activeTab, setActiveTab] = useState<'positions' | 'summary'>('positions');
-  const [selectedMassId, setSelectedMassId] = useState<string>('misa-minggu-0830');
+  const [selectedMassId, setSelectedMassId] = useState<string>(() => schedule[0]?.id || 'sch-sep-01');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [filterWilayah, setFilterWilayah] = useState<string>('all');
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [copiedBanner, setCopiedBanner] = useState<string | null>(null);
+
+  // Sync selectedMassId whenever schedule changes if current selection is invalid
+  useEffect(() => {
+    if (schedule && schedule.length > 0) {
+      if (!schedule.some(s => s.id === selectedMassId)) {
+        setSelectedMassId(schedule[0].id);
+      }
+    }
+  }, [schedule, selectedMassId]);
 
   // Dynamically map schedule slots to mass sessions report
   const massSessions: MassReportSession[] = useMemo(() => {

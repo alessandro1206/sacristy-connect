@@ -99,6 +99,10 @@ export const ServerManagementView: React.FC<ServerManagementViewProps> = ({
     }
 
     const formattedId = noAbsen.trim().padStart(3, '0');
+    if (officers.some(o => o.id === formattedId || o.id.padStart(3, '0') === formattedId)) {
+      alert(`Nomor Absen #${formattedId} sudah terdaftar dalam sistem. Silakan gunakan nomor ID yang berbeda.`);
+      return;
+    }
     const isKoorlap = peranPetugas === 'koorlap';
     const chosenLocation = lokasiPelayanan || 'Gereja Utama';
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Calendar, 
   Clock, 
@@ -14,7 +14,8 @@ import {
   ArrowRight,
   LogOut,
   User,
-  RefreshCw
+  RefreshCw,
+  Copy
 } from 'lucide-react';
 
 import { Officer, ScheduleSlot, UserSession, UserRole } from '../types';
@@ -48,6 +49,18 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
     userSession.officerId || (userSession.isAuthenticated ? '001' : '')
   );
   const [searchDateQuery, setSearchDateQuery] = useState<string>('');
+  const [copyBanner, setCopyBanner] = useState<string | null>(null);
+
+  // Synchronize selectedOfficerId when modal opens or when user session changes
+  useEffect(() => {
+    if (isOpen) {
+      if (userSession.officerId) {
+        setSelectedOfficerId(userSession.officerId);
+      } else if (!selectedOfficerId && officers.length > 0) {
+        setSelectedOfficerId(officers[0].id);
+      }
+    }
+  }, [isOpen, userSession.officerId, officers]);
 
   if (!isOpen) {
     return null;
@@ -74,6 +87,30 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
       slot.location.toLowerCase().includes(q)
     );
   });
+
+  const handleCopySwapTemplate = (slot: ScheduleSlot) => {
+    if (userSession.role === 'admin' && onOpenSwapChat) {
+      playAudioFeedback('tap');
+      onClose();
+      onOpenSwapChat();
+      return;
+    }
+
+    const offName = officer ? officer.name : 'Petugas';
+    const offId = officer ? officer.id.padStart(3, '0') : '000';
+    const text = `Lapor Tukar Tugas :\n\nPetugas : ${offName} #${offId}\nTugas tgl : ${slot.displayDate}\nMisa jam : ${slot.massTime}\nLokasi : ${slot.location}\n\nTukar dgn : [Nama Petugas Pengganti #ID]\nAlasan : [Isi Alasan Tukar/Izin]`;
+    
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text);
+      }
+      playAudioFeedback('success');
+      setCopyBanner(`Format WA Tukar Tugas Misa ${slot.massTime} (${slot.displayDate}) berhasil disalin ke clipboard!`);
+      setTimeout(() => setCopyBanner(null), 4000);
+    } catch {
+      alert(text);
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in">
@@ -182,6 +219,22 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
 
         {/* Modal Content Body */}
         <div className="p-5 overflow-y-auto flex-1 space-y-4 bg-slate-50/50">
+
+          {/* Copy Success Feedback Banner */}
+          {copyBanner && (
+            <div className="p-3.5 bg-emerald-50 border border-emerald-300 rounded-2xl flex items-center justify-between gap-2 text-xs font-bold text-emerald-900 shadow-2xs animate-in fade-in">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>{copyBanner}</span>
+              </div>
+              <button
+                onClick={() => setCopyBanner(null)}
+                className="text-emerald-700 hover:text-emerald-950 text-xs px-1.5 py-0.5 rounded cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+          )}
 
           {/* Unauthenticated Login Prompt Banner */}
           {!userSession.isAuthenticated && (
@@ -304,20 +357,15 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
                               <span>{slot.location}</span>
                             </h4>
 
-                            {onOpenSwapChat && (
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  playAudioFeedback('tap');
-                                  onClose();
-                                  onOpenSwapChat();
-                                }}
-                                className="text-[11px] font-bold text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-300 px-2.5 py-1 rounded-xl flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs"
-                              >
-                                <MessageSquare className="w-3 h-3 text-amber-800" />
-                                <span>Tukar Jadwal WA</span>
-                              </button>
-                            )}
+                            <button
+                              type="button"
+                              onClick={() => handleCopySwapTemplate(slot)}
+                              className="text-[11px] font-bold text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-300 px-2.5 py-1 rounded-xl flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs"
+                              title={userSession.role === 'admin' ? 'Buka Admin WA Tukar Jadwal' : 'Salin Format Pengajuan Tukar Tugas ke WhatsApp'}
+                            >
+                              <MessageSquare className="w-3 h-3 text-amber-800" />
+                              <span>{userSession.role === 'admin' ? 'Tukar Jadwal WA' : 'Salin Format WA'}</span>
+                            </button>
                           </div>
 
                           {/* Swap / Substitution Note (Only shown when substituted/swapped) */}

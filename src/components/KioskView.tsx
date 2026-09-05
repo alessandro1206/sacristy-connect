@@ -1290,13 +1290,19 @@ export const KioskView: React.FC<KioskViewProps> = ({
     // Check Admin override (Admin credentials override restriction)
     const isAdminAuth = (cleanId === 'admin' || cleanId === 'sakristi' || cleanId === 'pastor') && (cleanPass === 'sakristi123' || cleanPass === 'admin' || cleanPass.length >= 4);
 
-    // Rule: Only Koorlaps assigned to this specific Mass session can open it
+    // Rule: If special Koorlap is assigned, they (or Admin) must unlock. If no special Koorlap assigned (e.g. Misa Harian), any active officer or koorlap can open with PIN
     const assignedKoorlaps = selectedSession.koorlaps || [];
-    const isAssignedKoorlap = assignedKoorlaps.some(k => {
-      const kId3 = k.id.padStart(3, '0');
-      const userCleanId3 = cleanId.padStart(3, '0');
-      return kId3 === userCleanId3 || k.id === cleanId || k.name.toLowerCase().includes(cleanId);
-    });
+    const isAssignedKoorlap = assignedKoorlaps.length > 0
+      ? assignedKoorlaps.some(k => {
+          const kId3 = k.id.padStart(3, '0');
+          const userCleanId3 = cleanId.padStart(3, '0');
+          return kId3 === userCleanId3 || k.id === cleanId || k.name.toLowerCase().includes(cleanId);
+        })
+      : officers.some(o => {
+          const oId3 = o.id.padStart(3, '0');
+          const userCleanId3 = cleanId.padStart(3, '0');
+          return (oId3 === userCleanId3 || o.id === cleanId || o.name.toLowerCase().includes(cleanId)) && o.status === 'Aktif';
+        });
 
     if (!isAdminAuth && !isAssignedKoorlap) {
       setSessionAuthError(`❌ Akses Ditolak: Hanya Koorlap resmi yang ditugaskan pada Misa ini (${selectedSession.koorlapDisplay}) yang berhak membuka presensi.`);
@@ -1306,7 +1312,7 @@ export const KioskView: React.FC<KioskViewProps> = ({
 
     // Check PIN validity
     if (!isAdminAuth && cleanPass !== '1234' && cleanPass.length < 4) {
-      setSessionAuthError('Otorisasi Gagal: PIN Koorlap salah. (Gunakan PIN Default Koorlap: 1234)');
+      setSessionAuthError('Otorisasi Gagal: PIN salah. (Gunakan PIN Default: 1234)');
       playAudioFeedback('error');
       return;
     }
@@ -1314,6 +1320,9 @@ export const KioskView: React.FC<KioskViewProps> = ({
     setSessionAuthError(null);
     setIsSessionUnlocked(true); // Unlock all kiosk steps!
     playAudioFeedback('success');
+    if (onSwitchSlot && selectedSession) {
+      onSwitchSlot(selectedSession.id);
+    }
     setCurrentStep(2); // Move to Step 2: Numpad Attendance
   };
 
@@ -1583,7 +1592,7 @@ export const KioskView: React.FC<KioskViewProps> = ({
         <div className="flex items-center gap-3 text-slate-300 text-[11px]">
           <span>Misa: <strong className="text-white">{selectedSession.dayLabel}, {selectedSession.timeDisplay}</strong></span>
           <span>&bull;</span>
-          <span>Koorlap: <strong className="text-amber-300">{selectedSession.koorlap}</strong></span>
+          <span>Koorlap: <strong className="text-amber-300">{selectedSession.koorlapDisplay}</strong></span>
           {onBackToLanding && (
             <button
               onClick={onBackToLanding}
