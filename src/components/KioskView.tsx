@@ -1223,12 +1223,61 @@ export const KioskView: React.FC<KioskViewProps> = ({
   // Camera & Face Snapshot States
   const videoRef = React.useRef<HTMLVideoElement | null>(null);
   const streamRef = React.useRef<MediaStream | null>(null);
+  const [cameraStream, setCameraStream] = useState<MediaStream | null>(null);
   const [cameraActive, setCameraActive] = useState<boolean>(false);
   const [cameraError, setCameraError] = useState<string | null>(null);
   const [capturedSnapshot, setCapturedSnapshot] = useState<string | null>(null);
   const [isCapturing, setIsCapturing] = useState<boolean>(false);
   const [cameraFlash, setCameraFlash] = useState<boolean>(false);
   const [viewerModalData, setViewerModalData] = useState<SnapshotViewerData | null>(null);
+
+  // Directly attach and play stream on video element whenever cameraStream updates
+  useEffect(() => {
+    if (videoRef.current && cameraStream) {
+      const video = videoRef.current;
+      video.srcObject = cameraStream;
+      video.play().catch(err => {
+        console.warn('Video autoplay notice:', err);
+      });
+    }
+  }, [cameraStream]);
+
+  // Robust mobile-friendly camera stream requester with tiered constraint fallbacks
+  const requestCameraStream = async (): Promise<MediaStream> => {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      throw new Error('Kamera tidak didukung oleh peramban ini.');
+    }
+
+    // Level 1: Preferred front-facing camera with optimal dimensions
+    try {
+      return await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: 'user',
+          width: { ideal: 640 },
+          height: { ideal: 480 }
+        },
+        audio: false
+      });
+    } catch (e1) {
+      console.warn('FacingMode user with dimensions failed, trying facingMode user only', e1);
+    }
+
+    // Level 2: Front-facing without strict dimensions
+    try {
+      return await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: 'user' },
+        audio: false
+      });
+    } catch (e2) {
+      console.warn('FacingMode user failed, trying any video stream', e2);
+    }
+
+    // Level 3: Generic video stream
+    return await navigator.mediaDevices.getUserMedia({
+      video: true,
+      audio: false
+    });
+  };
 
   // Lifecycle for Camera Video Stream in Step 3
   useEffect(() => {
@@ -1239,31 +1288,24 @@ export const KioskView: React.FC<KioskViewProps> = ({
 
       const startCamera = async () => {
         try {
-          if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-            throw new Error('Kamera tidak didukung oleh peramban ini');
-          }
-          const stream = await navigator.mediaDevices.getUserMedia({
-            video: {
-              facingMode: 'user',
-              width: { ideal: 640 },
-              height: { ideal: 480 }
-            },
-            audio: false
-          });
+          const stream = await requestCameraStream();
           if (!active) {
             stream.getTracks().forEach(t => t.stop());
             return;
           }
           streamRef.current = stream;
+          setCameraStream(stream);
+          setCameraActive(true);
+
           if (videoRef.current) {
             videoRef.current.srcObject = stream;
             videoRef.current.play().catch(() => {});
           }
-          setCameraActive(true);
         } catch (err: any) {
           console.warn('Camera access issue:', err);
           if (active) {
             setCameraActive(false);
+            setCameraStream(null);
             setCameraError(err.message || 'Izin kamera ditolak atau perangkat kamera tidak ditemukan.');
           }
         }
@@ -1275,6 +1317,7 @@ export const KioskView: React.FC<KioskViewProps> = ({
         streamRef.current.getTracks().forEach(track => track.stop());
         streamRef.current = null;
       }
+      setCameraStream(null);
       setCameraActive(false);
     }
 
@@ -1284,6 +1327,8 @@ export const KioskView: React.FC<KioskViewProps> = ({
         streamRef.current.getTracks().forEach(track => track.stop());
         streamRef.current = null;
       }
+      setCameraStream(null);
+      setCameraActive(false);
     };
   }, [currentStep, pendingOfficer]);
 
@@ -1347,32 +1392,34 @@ export const KioskView: React.FC<KioskViewProps> = ({
     if (videoRef.current && cameraActive) {
       try {
         const video = videoRef.current;
+        const w = video.videoWidth > 0 ? video.videoWidth : 640;
+        const h = video.videoHeight > 0 ? video.videoHeight : 480;
         const canvas = document.createElement('canvas');
-        canvas.width = video.videoWidth || 640;
-        canvas.height = video.videoHeight || 480;
+        canvas.width = w;
+        canvas.height = h;
         const ctx = canvas.getContext('2d');
         if (ctx) {
           // Draw video mirrored horizontally for natural front-camera orientation
           ctx.save();
           ctx.scale(-1, 1);
-          ctx.drawImage(video, -canvas.width, 0, canvas.width, canvas.height);
+          ctx.drawImage(video, -w, 0, w, h);
           ctx.restore();
 
           // Timestamp and Identity Watermark Overlay
           ctx.fillStyle = 'rgba(0, 0, 0, 0.65)';
-          ctx.fillRect(0, canvas.height - 48, canvas.width, 48);
+          ctx.fillRect(0, h - 48, w, 48);
 
           ctx.fillStyle = '#FFFFFF';
           ctx.font = 'bold 15px sans-serif';
           ctx.textAlign = 'left';
-          ctx.fillText(`✓ ${pendingOfficer?.name} (#${pendingOfficer?.id.padStart(3, '0')})`, 16, canvas.height - 18);
+          ctx.fillText(`✓ ${pendingOfficer?.name} (#${pendingOfficer?.id.padStart(3, '0')})`, 16, h - 18);
 
           const now = new Date();
           const timeStr = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' WIB';
           ctx.fillStyle = '#34D399';
           ctx.font = 'bold 13px monospace';
           ctx.textAlign = 'right';
-          ctx.fillText(`${selectedSession.dayLabel} • ${timeStr}`, canvas.width - 16, canvas.height - 18);
+          ctx.fillText(`${selectedSession.dayLabel} • ${timeStr}`, w - 16, h - 18);
 
           return canvas.toDataURL('image/jpeg', 0.85);
         }
@@ -1613,21 +1660,18 @@ export const KioskView: React.FC<KioskViewProps> = ({
   const handleRetakePhoto = async () => {
     setCapturedSnapshot(null);
     try {
-      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } },
-          audio: false
-        });
-        streamRef.current = stream;
-        if (videoRef.current) {
-          videoRef.current.srcObject = stream;
-          videoRef.current.play().catch(() => {});
-        }
-        setCameraActive(true);
-        setCameraError(null);
+      const stream = await requestCameraStream();
+      streamRef.current = stream;
+      setCameraStream(stream);
+      setCameraActive(true);
+      setCameraError(null);
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+        videoRef.current.play().catch(() => {});
       }
     } catch (err: any) {
       setCameraActive(false);
+      setCameraStream(null);
       setCameraError(err.message || 'Kamera tidak dapat diakses');
     }
   };
@@ -2398,16 +2442,25 @@ export const KioskView: React.FC<KioskViewProps> = ({
               <div className="md:col-span-7 flex flex-col items-center">
                 <div className="relative w-full max-w-[340px] aspect-4/3 rounded-2xl overflow-hidden border-4 border-[#5B1414]/20 shadow-inner bg-slate-900 flex items-center justify-center">
                   
-                  {/* Active Video Stream */}
-                  {cameraActive && !capturedSnapshot && (
-                    <video
-                      ref={videoRef}
-                      autoPlay
-                      playsInline
-                      muted
-                      className="w-full h-full object-cover scale-x-[-1]"
-                    />
-                  )}
+                  {/* Active Video Stream - Always mounted in DOM to prevent React ref null issues */}
+                  <video
+                    ref={(el) => {
+                      videoRef.current = el;
+                      if (el && cameraStream && el.srcObject !== cameraStream) {
+                        el.srcObject = cameraStream;
+                        el.play().catch(() => {});
+                      }
+                    }}
+                    autoPlay
+                    playsInline
+                    muted
+                    onLoadedMetadata={(e) => {
+                      e.currentTarget.play().catch(() => {});
+                    }}
+                    className={`w-full h-full object-cover scale-x-[-1] ${
+                      cameraActive && !capturedSnapshot ? 'block' : 'hidden'
+                    }`}
+                  />
 
                   {/* Captured Snapshot Display */}
                   {capturedSnapshot && (
