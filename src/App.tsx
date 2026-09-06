@@ -347,9 +347,9 @@ export default function App() {
   };
 
 
-  // Handle officer attendance check-in
-  const handleAttendanceSuccess = (officerId: string, officerName: string) => {
-    // 1. Update current slot attendedServerIds
+  // Handle officer attendance check-in with face snapshot
+  const handleAttendanceSuccess = (officerId: string, officerName: string, snapshotUrl?: string) => {
+    // 1. Update current slot attendedServerIds & attendanceSnapshots
     setSchedule(prevSchedule =>
       prevSchedule.map(slot => {
         if (slot.id === currentSlot.id) {
@@ -357,6 +357,10 @@ export default function App() {
             const newAttended = [...slot.attendedServerIds, officerId];
             const updatedServerIds = [...slot.serverIds];
             const updatedServerNames = [...slot.serverNames];
+            const updatedSnapshots = {
+              ...(slot.attendanceSnapshots || {}),
+              ...(snapshotUrl ? { [officerId]: snapshotUrl } : {})
+            };
 
             if (updatedServerIds[3] === null) {
               updatedServerIds[3] = officerId;
@@ -367,7 +371,8 @@ export default function App() {
               ...slot,
               attendedServerIds: newAttended,
               serverIds: updatedServerIds,
-              serverNames: updatedServerNames
+              serverNames: updatedServerNames,
+              attendanceSnapshots: updatedSnapshots
             };
           }
         }
@@ -393,8 +398,9 @@ export default function App() {
       id: 'log-' + Date.now(),
       timestamp: timeString,
       type: 'attendance',
-      description: `Presensi Mandiri ID: ${officerId} (${officerName}) - Hadir Sesi ${currentSlot.massTime}`,
-      actor: 'Kiosk Numpad'
+      description: `Presensi Mandiri ID: ${officerId} (${officerName}) - Hadir Sesi ${currentSlot.massTime}${snapshotUrl ? ' [Foto Wajah]' : ''}`,
+      actor: 'Kiosk Numpad',
+      snapshotUrl: snapshotUrl
     };
     setLogs(prev => [newLog, ...prev]);
   };

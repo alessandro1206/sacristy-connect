@@ -32,13 +32,18 @@ import {
   MessageSquare,
   Copy,
   FileText,
-  X
+  X,
+  Camera,
+  CameraOff,
+  RotateCw,
+  Eye
 } from 'lucide-react';
+import { SnapshotViewerModal, SnapshotViewerData } from './SnapshotViewerModal';
 
 interface KioskViewProps {
   currentSlot: ScheduleSlot;
   officers: Officer[];
-  onAttendanceSuccess: (officerId: string, officerName: string) => void;
+  onAttendanceSuccess: (officerId: string, officerName: string, snapshotUrl?: string) => void;
   onSwitchSlot?: (slotId: string) => void;
   allSlots: ScheduleSlot[];
   onBackToLanding?: () => void;
@@ -1211,9 +1216,172 @@ export const KioskView: React.FC<KioskViewProps> = ({
   const [unattendedSearch, setUnattendedSearch] = useState<string>('');
   const [attendedSearch, setAttendedSearch] = useState<string>('');
 
-  // Step 3 States (Identity Confirmation)
+  // Step 3 States (Identity Confirmation & Camera Face Snapshot)
   const [pendingOfficer, setPendingOfficer] = useState<Officer | null>(null);
   const [attendanceSuccessMessage, setAttendanceSuccessMessage] = useState<string | null>(null);
+
+  // Camera & Face Snapshot States
+  const videoRef = React.useRef<HTMLVideoElement | null>(null);
+  const streamRef = React.useRef<MediaStream | null>(null);
+  const [cameraActive, setCameraActive] = useState<boolean>(false);
+  const [cameraError, setCameraError] = useState<string | null>(null);
+  const [capturedSnapshot, setCapturedSnapshot] = useState<string | null>(null);
+  const [isCapturing, setIsCapturing] = useState<boolean>(false);
+  const [cameraFlash, setCameraFlash] = useState<boolean>(false);
+  const [viewerModalData, setViewerModalData] = useState<SnapshotViewerData | null>(null);
+
+  // Lifecycle for Camera Video Stream in Step 3
+  useEffect(() => {
+    let active = true;
+    if (currentStep === 3 && pendingOfficer) {
+      setCapturedSnapshot(null);
+      setCameraError(null);
+
+      const startCamera = async () => {
+        try {
+          if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            throw new Error('Kamera tidak didukung oleh peramban ini');
+          }
+          const stream = await navigator.mediaDevices.getUserMedia({
+            video: {
+              facingMode: 'user',
+              width: { ideal: 640 },
+              height: { ideal: 480 }
+            },
+            audio: false
+          });
+          if (!active) {
+            stream.getTracks().forEach(t => t.stop());
+            return;
+          }
+          streamRef.current = stream;
+          if (videoRef.current) {
+            videoRef.current.srcObject = stream;
+            videoRef.current.play().catch(() => {});
+          }
+          setCameraActive(true);
+        } catch (err: any) {
+          console.warn('Camera access issue:', err);
+          if (active) {
+            setCameraActive(false);
+            setCameraError(err.message || 'Izin kamera ditolak atau perangkat kamera tidak ditemukan.');
+          }
+        }
+      };
+
+      startCamera();
+    } else {
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop());
+        streamRef.current = null;
+      }
+      setCameraActive(false);
+    }
+
+    return () => {
+      active = false;
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop());
+        streamRef.current = null;
+      }
+    };
+  }, [currentStep, pendingOfficer]);
+
+  // Helper to generate a fallback snapshot when hardware camera is disabled/unavailable
+  const generateFallbackSnapshot = (officer: Officer): string => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 480;
+    canvas.height = 360;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return officer.avatarUrl;
+
+    // Background gradient
+    const grad = ctx.createLinearGradient(0, 0, 480, 360);
+    grad.addColorStop(0, '#5B1414');
+    grad.addColorStop(1, '#2C2420');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 480, 360);
+
+    // Header badge
+    ctx.fillStyle = '#D9CEBA';
+    ctx.font = 'bold 13px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('PAROKI SANTO YAKOBUS • SAKRISTI CONNECT', 240, 45);
+
+    // Officer Info
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = 'bold 22px sans-serif';
+    ctx.fillText(officer.name, 240, 120);
+
+    ctx.fillStyle = '#F59E0B';
+    ctx.font = 'bold 17px monospace';
+    ctx.fillText(`NO. ABSEN: #${officer.id.padStart(3, '0')}`, 240, 155);
+
+    ctx.fillStyle = '#E5E7EB';
+    ctx.font = '14px sans-serif';
+    ctx.fillText(officer.role, 240, 190);
+    ctx.fillText(officer.wilayah || 'Asisten Imam Sakristi', 240, 215);
+
+    // Live Watermark at bottom
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+    ctx.fillRect(0, 300, 480, 60);
+
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+    const timeStr = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' WIB';
+
+    ctx.fillStyle = '#34D399';
+    ctx.font = 'bold 13px monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText(`✓ PRESENSI: ${dateStr} ${timeStr}`, 16, 335);
+
+    ctx.fillStyle = '#FBBF24';
+    ctx.font = 'bold 11px sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText('SNAPSHOT CADANGAN', 464, 335);
+
+    return canvas.toDataURL('image/jpeg', 0.85);
+  };
+
+  const takeSnapshot = (): string => {
+    if (videoRef.current && cameraActive) {
+      try {
+        const video = videoRef.current;
+        const canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth || 640;
+        canvas.height = video.videoHeight || 480;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          // Draw video mirrored horizontally for natural front-camera orientation
+          ctx.save();
+          ctx.scale(-1, 1);
+          ctx.drawImage(video, -canvas.width, 0, canvas.width, canvas.height);
+          ctx.restore();
+
+          // Timestamp and Identity Watermark Overlay
+          ctx.fillStyle = 'rgba(0, 0, 0, 0.65)';
+          ctx.fillRect(0, canvas.height - 48, canvas.width, 48);
+
+          ctx.fillStyle = '#FFFFFF';
+          ctx.font = 'bold 15px sans-serif';
+          ctx.textAlign = 'left';
+          ctx.fillText(`✓ ${pendingOfficer?.name} (#${pendingOfficer?.id.padStart(3, '0')})`, 16, canvas.height - 18);
+
+          const now = new Date();
+          const timeStr = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' WIB';
+          ctx.fillStyle = '#34D399';
+          ctx.font = 'bold 13px monospace';
+          ctx.textAlign = 'right';
+          ctx.fillText(`${selectedSession.dayLabel} • ${timeStr}`, canvas.width - 16, canvas.height - 18);
+
+          return canvas.toDataURL('image/jpeg', 0.85);
+        }
+      } catch (err) {
+        console.warn('Canvas snapshot capture error:', err);
+      }
+    }
+    return pendingOfficer ? generateFallbackSnapshot(pendingOfficer) : '';
+  };
 
   // Step 4 States (8 Positions + Balai)
   const [filterListTab, setFilterListTab] = useState<'all' | 'attended' | 'unattended'>('all');
@@ -1401,25 +1569,67 @@ export const KioskView: React.FC<KioskViewProps> = ({
   };
 
 
-  // Step 3: Confirm Identity ("YA, SAYA HADIR")
+  // Step 3: Confirm Identity with Camera Face Snapshot ("AMBIL FOTO & KONFIRMASI HADIR")
   const handleConfirmAttendance = () => {
-    if (!pendingOfficer) return;
-    playAudioFeedback('success');
-    onAttendanceSuccess(pendingOfficer.id, pendingOfficer.name);
-    setAttendanceSuccessMessage(`Terima kasih dan selamat bertugas, ${pendingOfficer.name}!`);
+    if (!pendingOfficer || isCapturing) return;
+
+    setIsCapturing(true);
+    setCameraFlash(true);
+    playAudioFeedback('shutter');
 
     setTimeout(() => {
-      setAttendanceSuccessMessage(null);
-      setPendingOfficer(null);
+      setCameraFlash(false);
+      const snapshot = capturedSnapshot || takeSnapshot();
+      setCapturedSnapshot(snapshot);
 
-      // Check if all officers have attended, or transition
-      const updatedAttendedCount = currentSlot.attendedServerIds.length + 1;
-      if (updatedAttendedCount >= currentSlot.targetTotal) {
-        setCurrentStep(4); // All attended -> proceed to Step 4 Assign
-      } else {
-        setCurrentStep(2); // Continue checking in next officer
+      // Stop camera stream tracks cleanly
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(t => t.stop());
+        streamRef.current = null;
       }
-    }, 2000);
+      setCameraActive(false);
+
+      playAudioFeedback('success');
+      onAttendanceSuccess(pendingOfficer.id, pendingOfficer.name, snapshot);
+      setAttendanceSuccessMessage(`Terima kasih & selamat bertugas, ${pendingOfficer.name}! Foto wajah presensi berhasil dicatat.`);
+
+      setTimeout(() => {
+        setIsCapturing(false);
+        setAttendanceSuccessMessage(null);
+        setPendingOfficer(null);
+        setCapturedSnapshot(null);
+
+        // Check if all officers have attended, or transition
+        const updatedAttendedCount = currentSlot.attendedServerIds.length + 1;
+        if (updatedAttendedCount >= currentSlot.targetTotal) {
+          setCurrentStep(4); // All attended -> proceed to Step 4 Assign
+        } else {
+          setCurrentStep(2); // Continue checking in next officer
+        }
+      }, 1800);
+    }, 150);
+  };
+
+  const handleRetakePhoto = async () => {
+    setCapturedSnapshot(null);
+    try {
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } },
+          audio: false
+        });
+        streamRef.current = stream;
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+          videoRef.current.play().catch(() => {});
+        }
+        setCameraActive(true);
+        setCameraError(null);
+      }
+    } catch (err: any) {
+      setCameraActive(false);
+      setCameraError(err.message || 'Kamera tidak dapat diakses');
+    }
   };
 
   // Step 2 Numpad Error State
@@ -2155,73 +2365,177 @@ export const KioskView: React.FC<KioskViewProps> = ({
         </div>
       )}
 
+      {/* Flash animation effect when snapshot is snapped */}
+      <div className={`fixed inset-0 bg-white z-50 pointer-events-none transition-opacity duration-150 ${cameraFlash ? 'opacity-90' : 'opacity-0'}`} />
+
       {/* ========================================================================= */}
-      {/* SIMULASI 3: KONFIRMASI IDENTITAS */}
+      {/* SIMULASI 3: KONFIRMASI IDENTITAS & FOTO WAJAH PRESENSI (FACE SNAPSHOT)    */}
       {/* ========================================================================= */}
       {currentStep === 3 && pendingOfficer && (
-        <div className="flex-1 flex flex-col p-6 md:p-8 max-w-lg mx-auto w-full justify-center items-center">
+        <div className="flex-1 flex flex-col p-4 md:p-8 max-w-3xl mx-auto w-full justify-center items-center">
           
-          <div className="bg-white border-2 border-[#D9CEBA] rounded-3xl p-8 shadow-xl w-full text-center space-y-6 animate-in zoom-in-95">
+          <div className="bg-white border-2 border-[#D9CEBA] rounded-3xl p-6 sm:p-8 shadow-2xl w-full text-center space-y-6 animate-in zoom-in-95 relative overflow-hidden">
             
-            {/* Badge ID Ditemukan */}
-            <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 text-xs font-black uppercase tracking-wider">
-              <CheckCircle2 className="w-4 h-4 text-amber-700" />
-              <span>ID DITEMUKAN</span>
-            </div>
-
-            {/* Officer Photo (Large Square with rounded corners from Stitch replica) */}
-            <div className="flex justify-center">
-              <div className="w-36 h-36 rounded-2xl overflow-hidden border-4 border-[#F3EDE2] shadow-inner bg-[#F3EDE2] p-1">
-                <img
-                  src={pendingOfficer.avatarUrl}
-                  alt={pendingOfficer.name}
-                  className="w-full h-full object-cover rounded-xl"
-                />
+            {/* Top Status Header */}
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E8DFC8] pb-4">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="text-xs font-black text-[#5B1414] uppercase tracking-wider font-headline">
+                  Live Camera Presensi Sakristi
+                </span>
               </div>
-            </div>
 
-            {/* Officer Name & ID */}
-            <div>
-              <h2 className="text-2xl md:text-3xl font-extrabold text-[#5B1414] font-headline tracking-tight">
-                {pendingOfficer.name}
-              </h2>
-              <div className="text-sm font-mono font-bold text-[#8C7662] mt-1">
-                No. Absen: <span className="text-[#5B1414] font-black">{pendingOfficer.id.padStart(3, '0')}</span>
-              </div>
-              <div className="text-xs font-semibold text-[#524135] mt-1">
-                {pendingOfficer.role} &bull; {pendingOfficer.wilayah || 'Wilayah St. Yakobus'}
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-900 border border-amber-300 text-[11px] font-black uppercase tracking-wider">
+                <CheckCircle2 className="w-3.5 h-3.5 text-amber-700" />
+                <span>ID #{pendingOfficer.id.padStart(3, '0')} Terdaftar</span>
               </div>
             </div>
 
-            {/* Success Feedback Alert if Confirmed */}
-            {attendanceSuccessMessage ? (
-              <div className="p-4 bg-emerald-50 border border-emerald-300 rounded-2xl text-emerald-900 text-sm font-bold flex items-center justify-center gap-2 animate-in fade-in">
-                <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-                <span>{attendanceSuccessMessage}</span>
-              </div>
-            ) : (
-              /* Confirmation CTA */
-              <div className="space-y-3 pt-2">
-                <button
-                  onClick={handleConfirmAttendance}
-                  className="w-full py-3.5 bg-[#5B1414] hover:bg-[#4A0E17] active:scale-98 text-white rounded-xl font-extrabold text-sm tracking-wider uppercase shadow-md transition-all flex items-center justify-center gap-2"
-                >
-                  <Check className="w-5 h-5 text-amber-300" />
-                  <span>YA, BENAR (SAYA HADIR)</span>
-                </button>
+            {/* 2-Column Responsive Layout: Camera Feed (Left) & Identity/Action (Right) */}
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+              
+              {/* Left Column: Live Camera Video Stream / Snapshot Preview (7 cols) */}
+              <div className="md:col-span-7 flex flex-col items-center">
+                <div className="relative w-full max-w-[340px] aspect-4/3 rounded-2xl overflow-hidden border-4 border-[#5B1414]/20 shadow-inner bg-slate-900 flex items-center justify-center">
+                  
+                  {/* Active Video Stream */}
+                  {cameraActive && !capturedSnapshot && (
+                    <video
+                      ref={videoRef}
+                      autoPlay
+                      playsInline
+                      muted
+                      className="w-full h-full object-cover scale-x-[-1]"
+                    />
+                  )}
 
-                <button
-                  onClick={() => {
-                    setPendingOfficer(null);
-                    setCurrentStep(2);
-                  }}
-                  className="text-xs font-bold text-[#8C7662] hover:text-[#5B1414] transition-colors inline-flex items-center gap-1"
-                >
-                  <ArrowLeft className="w-3.5 h-3.5" />
-                  <span>Salah Orang? Kembali</span>
-                </button>
+                  {/* Captured Snapshot Display */}
+                  {capturedSnapshot && (
+                    <img
+                      src={capturedSnapshot}
+                      alt="Captured Face Snapshot"
+                      className="w-full h-full object-cover"
+                    />
+                  )}
+
+                  {/* Camera Unavailable / Denied Fallback UI */}
+                  {!cameraActive && !capturedSnapshot && (
+                    <div className="p-6 text-center text-slate-300 space-y-2">
+                      <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mx-auto text-amber-400">
+                        <CameraOff className="w-6 h-6" />
+                      </div>
+                      <p className="text-xs font-bold text-white">
+                        Kamera Tidak Terhubung
+                      </p>
+                      <p className="text-[10px] text-slate-400 max-w-[220px] mx-auto">
+                        {cameraError || 'Mode simulasi snapshot wajah aktif. Foto presensi profil resmi akan digunakan.'}
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Biometric Oval Face Guideline Overlay (when camera is live) */}
+                  {cameraActive && !capturedSnapshot && (
+                    <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center">
+                      <div className="w-36 h-48 border-2 border-dashed border-amber-300/80 rounded-[50%] shadow-2xl relative animate-pulse">
+                        <div className="absolute -top-6 inset-x-0 text-center">
+                          <span className="bg-black/60 text-amber-300 text-[9px] font-bold px-2 py-0.5 rounded-full backdrop-blur-xs">
+                            Posisikan Wajah Di Sini
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Live Status Tag */}
+                  <div className="absolute top-2.5 left-2.5 bg-black/60 backdrop-blur-xs px-2.5 py-1 rounded-full text-white text-[10px] font-bold flex items-center gap-1.5 pointer-events-none">
+                    <span className={`w-2 h-2 rounded-full ${cameraActive ? 'bg-red-500 animate-ping' : 'bg-slate-400'}`} />
+                    <span>{capturedSnapshot ? 'FOTO TERSIMPAN' : cameraActive ? 'LIVE' : 'SIMULASI'}</span>
+                  </div>
+                </div>
+
+                <p className="text-[11px] text-[#8C7662] mt-2 font-medium flex items-center gap-1">
+                  <Camera className="w-3.5 h-3.5 text-[#5B1414]" />
+                  <span>Foto wajah ini akan dicatat dalam laporan audit presensi Misa</span>
+                </p>
               </div>
-            )}
+
+              {/* Right Column: Officer Details & Confirmation CTA (5 cols) */}
+              <div className="md:col-span-5 text-left space-y-4">
+                
+                {/* Officer Profile Card */}
+                <div className="bg-[#FAF7F2] border border-[#D9CEBA] p-4 rounded-2xl space-y-3">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={pendingOfficer.avatarUrl}
+                      alt={pendingOfficer.name}
+                      className="w-12 h-12 rounded-xl object-cover border border-[#D9CEBA] shadow-2xs shrink-0"
+                    />
+                    <div className="min-w-0">
+                      <h2 className="text-base font-extrabold text-[#5B1414] font-headline tracking-tight truncate">
+                        {pendingOfficer.name}
+                      </h2>
+                      <div className="text-xs font-mono font-bold text-[#8C7662]">
+                        No. Absen: <span className="text-[#5B1414] font-black">#{pendingOfficer.id.padStart(3, '0')}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-2 border-t border-[#E8DFC8] space-y-1 text-xs">
+                    <div className="text-[#524135] font-semibold flex items-center justify-between">
+                      <span className="text-[#8C7662]">Peran:</span>
+                      <span className="font-bold text-[#5B1414]">{pendingOfficer.role}</span>
+                    </div>
+                    <div className="text-[#524135] font-semibold flex items-center justify-between">
+                      <span className="text-[#8C7662]">Wilayah:</span>
+                      <span className="font-bold">{pendingOfficer.wilayah || 'St. Yakobus'}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Feedback or Confirmation Button */}
+                {attendanceSuccessMessage ? (
+                  <div className="p-4 bg-emerald-50 border border-emerald-300 rounded-2xl text-emerald-900 text-xs font-bold flex items-center gap-2 animate-in fade-in">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                    <span>{attendanceSuccessMessage}</span>
+                  </div>
+                ) : (
+                  <div className="space-y-2.5">
+                    <button
+                      onClick={handleConfirmAttendance}
+                      disabled={isCapturing}
+                      className="w-full py-3.5 bg-gradient-to-r from-[#5B1414] to-[#7C191E] hover:from-[#4A0E17] hover:to-[#5B1414] active:scale-98 text-white rounded-xl font-extrabold text-xs tracking-wider uppercase shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                    >
+                      <Camera className="w-4 h-4 text-amber-300" />
+                      <span>{isCapturing ? 'Merekam Foto...' : 'Ambil Foto & Konfirmasi Hadir'}</span>
+                    </button>
+
+                    {capturedSnapshot && (
+                      <button
+                        onClick={handleRetakePhoto}
+                        className="w-full py-2 bg-[#F3EDE2] hover:bg-[#E8DFC8] text-[#5B1414] border border-[#D9CEBA] rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                      >
+                        <RotateCw className="w-3.5 h-3.5" />
+                        <span>Foto Ulang (Retake)</span>
+                      </button>
+                    )}
+
+                    <button
+                      onClick={() => {
+                        setPendingOfficer(null);
+                        setCapturedSnapshot(null);
+                        setCurrentStep(2);
+                      }}
+                      className="w-full text-center text-xs font-bold text-[#8C7662] hover:text-[#5B1414] transition-colors inline-flex items-center justify-center gap-1 pt-1 cursor-pointer"
+                    >
+                      <ArrowLeft className="w-3.5 h-3.5" />
+                      <span>Bukan Saya? Kembali ke Numpad</span>
+                    </button>
+                  </div>
+                )}
+
+              </div>
+
+            </div>
 
           </div>
 
@@ -2407,7 +2721,28 @@ export const KioskView: React.FC<KioskViewProps> = ({
                         </div>
                       </div>
 
-                      <div className="shrink-0 ml-2">
+                      <div className="shrink-0 ml-2 flex items-center gap-1.5">
+                        {isAttended && currentSlot.attendanceSnapshots?.[off.id] && (
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              playAudioFeedback('tap');
+                              setViewerModalData({
+                                snapshotUrl: currentSlot.attendanceSnapshots![off.id],
+                                officerName: off.name,
+                                officerId: off.id,
+                                massSession: `${selectedSession.dayLabel} • ${selectedSession.timeDisplay}`,
+                                wilayah: off.wilayah
+                              });
+                            }}
+                            className="p-1 rounded-md bg-amber-100 text-amber-900 hover:bg-amber-200 border border-amber-300 transition-colors cursor-pointer"
+                            title="Lihat Bukti Foto Wajah Presensi"
+                          >
+                            <Camera className="w-3.5 h-3.5 text-amber-800" />
+                          </button>
+                        )}
+
                         {isAssigned ? (
                           <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100 border border-emerald-300 px-2 py-0.5 rounded-md">
                             Assigned
@@ -2534,22 +2869,44 @@ export const KioskView: React.FC<KioskViewProps> = ({
                             Lepaskan di Sini! 🎯
                           </div>
                         ) : isAssigned ? (
-                          <div className="flex items-center gap-2 mt-2 bg-white/70 p-1.5 rounded-xl border border-[#E8DFC8]">
-                            {pos.assignedOfficerAvatar && (
-                              <img
-                                src={pos.assignedOfficerAvatar}
-                                alt={pos.assignedOfficerName || ''}
-                                className="w-8 h-8 rounded-full object-cover border border-[#5B1414] shrink-0"
-                              />
-                            )}
-                            <div className="min-w-0">
-                              <div className="text-xs font-extrabold text-[#2C2420] truncate">
-                                {pos.assignedOfficerName}
-                              </div>
-                              <div className="text-[10px] font-mono font-bold text-[#5B1414]">
-                                No. {pos.assignedOfficerId?.padStart(3, '0')}
+                          <div className="flex items-center justify-between gap-2 mt-2 bg-white/70 p-1.5 rounded-xl border border-[#E8DFC8]">
+                            <div className="flex items-center gap-2 min-w-0">
+                              {pos.assignedOfficerAvatar && (
+                                <img
+                                  src={pos.assignedOfficerAvatar}
+                                  alt={pos.assignedOfficerName || ''}
+                                  className="w-8 h-8 rounded-full object-cover border border-[#5B1414] shrink-0"
+                                />
+                              )}
+                              <div className="min-w-0">
+                                <div className="text-xs font-extrabold text-[#2C2420] truncate">
+                                  {pos.assignedOfficerName}
+                                </div>
+                                <div className="text-[10px] font-mono font-bold text-[#5B1414]">
+                                  No. {pos.assignedOfficerId?.padStart(3, '0')}
+                                </div>
                               </div>
                             </div>
+
+                            {pos.assignedOfficerId && currentSlot.attendanceSnapshots?.[pos.assignedOfficerId] && (
+                              <button
+                                type="button"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  playAudioFeedback('tap');
+                                  setViewerModalData({
+                                    snapshotUrl: currentSlot.attendanceSnapshots![pos.assignedOfficerId!],
+                                    officerName: pos.assignedOfficerName || '',
+                                    officerId: pos.assignedOfficerId!,
+                                    massSession: `${selectedSession.dayLabel} • ${selectedSession.timeDisplay}`
+                                  });
+                                }}
+                                className="p-1 rounded-md bg-amber-100 text-amber-900 hover:bg-amber-200 border border-amber-300 transition-colors shrink-0 cursor-pointer"
+                                title="Lihat Bukti Foto Wajah Presensi"
+                              >
+                                <Camera className="w-3.5 h-3.5 text-amber-800" />
+                              </button>
+                            )}
                           </div>
                         ) : (
                           <div className="text-[11px] text-[#8C7662] italic mt-2 flex items-center gap-1">
@@ -2796,6 +3153,13 @@ export const KioskView: React.FC<KioskViewProps> = ({
 
         </div>
       )}
+
+      {/* Snapshot Viewer Modal for Auditing Photos */}
+      <SnapshotViewerModal
+        isOpen={!!viewerModalData}
+        onClose={() => setViewerModalData(null)}
+        data={viewerModalData}
+      />
 
     </div>
   );

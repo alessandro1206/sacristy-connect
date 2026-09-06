@@ -10,9 +10,11 @@ import {
   Filter, 
   Clock, 
   Download,
-  Trash2
+  Trash2,
+  Camera
 } from 'lucide-react';
 import { playAudioFeedback } from '../utils/sound';
+import { SnapshotViewerModal, SnapshotViewerData } from './SnapshotViewerModal';
 
 interface SystemLogsViewProps {
   logs: SystemLog[];
@@ -22,6 +24,7 @@ interface SystemLogsViewProps {
 export const SystemLogsView: React.FC<SystemLogsViewProps> = ({ logs }) => {
   const [filterType, setFilterType] = useState<'all' | 'attendance' | 'swap' | 'leave' | 'admin' | 'ai_import'>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [viewerModalData, setViewerModalData] = useState<SnapshotViewerData | null>(null);
 
   const filteredLogs = useMemo(() => {
     return logs.filter(log => {
@@ -176,6 +179,27 @@ export const SystemLogsView: React.FC<SystemLogsViewProps> = ({ logs }) => {
                       </span>
                     </div>
                   </div>
+
+                  {log.snapshotUrl && (
+                    <div className="shrink-0 self-center">
+                      <button
+                        onClick={() => {
+                          playAudioFeedback('tap');
+                          setViewerModalData({
+                            snapshotUrl: log.snapshotUrl!,
+                            officerName: log.description,
+                            officerId: log.description.match(/ID:\s*(\w+)/)?.[1] || '---',
+                            timestamp: log.timestamp
+                          });
+                        }}
+                        className="flex items-center gap-1.5 px-2.5 py-1.5 bg-amber-100 hover:bg-amber-200 border border-amber-300 rounded-xl text-amber-900 text-xs font-bold transition-all shadow-2xs cursor-pointer"
+                        title="Lihat Bukti Foto Wajah Presensi"
+                      >
+                        <Camera className="w-3.5 h-3.5 text-amber-800" />
+                        <span className="hidden sm:inline">Foto Wajah</span>
+                      </button>
+                    </div>
+                  )}
                 </div>
               );
             })
@@ -183,6 +207,13 @@ export const SystemLogsView: React.FC<SystemLogsViewProps> = ({ logs }) => {
         </div>
 
       </div>
+
+      {/* Snapshot Viewer Modal */}
+      <SnapshotViewerModal
+        isOpen={!!viewerModalData}
+        onClose={() => setViewerModalData(null)}
+        data={viewerModalData}
+      />
     </div>
   );
 };

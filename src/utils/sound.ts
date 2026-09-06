@@ -1,4 +1,4 @@
-export function playAudioFeedback(type: 'success' | 'tap' | 'error' | 'delete' | 'warning') {
+export function playAudioFeedback(type: 'success' | 'tap' | 'error' | 'delete' | 'warning' | 'shutter') {
   try {
     const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
     if (!AudioContextClass) return;
@@ -79,6 +79,32 @@ export function playAudioFeedback(type: 'success' | 'tap' | 'error' | 'delete' |
       osc1.stop(ctx.currentTime + 0.5);
       osc2.start(ctx.currentTime + 0.2);
       osc2.stop(ctx.currentTime + 0.6);
+    } else if (type === 'shutter') {
+      // Camera mechanical shutter click effect
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(800, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(120, ctx.currentTime + 0.06);
+      gain.gain.setValueAtTime(0.2, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+
+      const osc2 = ctx.createOscillator();
+      const gain2 = ctx.createGain();
+      osc2.type = 'sine';
+      osc2.frequency.setValueAtTime(1200, ctx.currentTime + 0.08);
+      gain2.gain.setValueAtTime(0.15, ctx.currentTime + 0.08);
+      gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.16);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc2.connect(gain2);
+      gain2.connect(ctx.destination);
+
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.08);
+      osc2.start(ctx.currentTime + 0.08);
+      osc2.stop(ctx.currentTime + 0.16);
     }
   } catch (e) {
     // AudioContext blocked by browser policy

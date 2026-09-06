@@ -20,9 +20,11 @@ import {
   UserCheck,
   Award,
   AlertTriangle,
-  ArrowUpDown
+  ArrowUpDown,
+  Camera
 } from 'lucide-react';
 import { playAudioFeedback } from '../utils/sound';
+import { SnapshotViewerModal, SnapshotViewerData } from './SnapshotViewerModal';
 
 interface ReportsDutyViewProps {
   officers: Officer[];
@@ -47,6 +49,7 @@ interface MassReportSession {
     wilayah: string | null;
     status: 'Hadir' | 'Digantikan' | 'Belum Hadir';
     avatarUrl?: string;
+    snapshotUrl?: string;
   }[];
 }
 
@@ -60,6 +63,7 @@ export const ReportsDutyView: React.FC<ReportsDutyViewProps> = ({
   const [filterWilayah, setFilterWilayah] = useState<string>('all');
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [copiedBanner, setCopiedBanner] = useState<string | null>(null);
+  const [viewerModalData, setViewerModalData] = useState<SnapshotViewerData | null>(null);
 
   // Sync selectedMassId whenever schedule changes if current selection is invalid
   useEffect(() => {
@@ -101,7 +105,8 @@ export const ReportsDutyView: React.FC<ReportsDutyViewProps> = ({
           officerName: off.name,
           wilayah: off.wilayah,
           status: isAttended ? ('Hadir' as const) : ('Belum Absen' as const),
-          avatarUrl: off.avatarUrl
+          avatarUrl: off.avatarUrl,
+          snapshotUrl: slot.attendanceSnapshots?.[off.id]
         };
       });
 
@@ -469,24 +474,47 @@ export const ReportsDutyView: React.FC<ReportsDutyViewProps> = ({
                     </div>
 
                     {/* Assigned Officer Details */}
-                    <div className="pt-3 border-t border-[#E8DFC8] flex items-center gap-3">
+                    <div className="pt-3 border-t border-[#E8DFC8] flex items-center justify-between gap-3">
                       {isAssigned ? (
                         <>
-                          <img
-                            src={pos.avatarUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=300&fit=crop&crop=face'}
-                            alt={pos.officerName || ''}
-                            className="w-10 h-10 rounded-full object-cover border border-[#D9CEBA] shrink-0"
-                          />
-                          <div className="min-w-0">
-                            <h4 className="font-bold text-xs text-[#2C2420] truncate">
-                              {pos.officerName}
-                            </h4>
-                            <div className="flex items-center gap-1.5 text-[10px] text-[#6E5A4B]">
-                              <span className="font-mono font-bold text-[#5B1414]">ID: {(pos.officerId || '').padStart(3, '0')}</span>
-                              <span>&bull;</span>
-                              <span className="truncate">{pos.wilayah}</span>
+                          <div className="flex items-center gap-2.5 min-w-0">
+                            <img
+                              src={pos.avatarUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=300&fit=crop&crop=face'}
+                              alt={pos.officerName || ''}
+                              className="w-10 h-10 rounded-full object-cover border border-[#D9CEBA] shrink-0"
+                            />
+                            <div className="min-w-0">
+                              <h4 className="font-bold text-xs text-[#2C2420] truncate">
+                                {pos.officerName}
+                              </h4>
+                              <div className="flex items-center gap-1.5 text-[10px] text-[#6E5A4B]">
+                                <span className="font-mono font-bold text-[#5B1414]">ID: {(pos.officerId || '').padStart(3, '0')}</span>
+                                <span>&bull;</span>
+                                <span className="truncate">{pos.wilayah}</span>
+                              </div>
                             </div>
                           </div>
+
+                          {pos.snapshotUrl && (
+                            <button
+                              type="button"
+                              onClick={() => {
+                                playAudioFeedback('tap');
+                                setViewerModalData({
+                                  snapshotUrl: pos.snapshotUrl!,
+                                  officerName: pos.officerName || '',
+                                  officerId: pos.officerId || '',
+                                  massSession: `${activeMass.dayLabel}, ${activeMass.date} (${activeMass.time})`,
+                                  wilayah: pos.wilayah || undefined
+                                });
+                              }}
+                              className="p-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 border border-amber-300 text-amber-900 transition-colors flex items-center gap-1 shrink-0 cursor-pointer shadow-2xs"
+                              title="Lihat Bukti Foto Wajah Presensi Misa"
+                            >
+                              <Camera className="w-3.5 h-3.5 text-amber-800" />
+                              <span className="text-[10px] font-bold">Foto</span>
+                            </button>
+                          )}
                         </>
                       ) : (
                         <div className="text-xs text-[#8C7662] italic py-2">
@@ -754,6 +782,13 @@ export const ReportsDutyView: React.FC<ReportsDutyViewProps> = ({
         )}
 
       </div>
+
+      {/* Snapshot Viewer Modal */}
+      <SnapshotViewerModal
+        isOpen={!!viewerModalData}
+        onClose={() => setViewerModalData(null)}
+        data={viewerModalData}
+      />
     </div>
   );
 };

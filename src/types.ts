@@ -44,6 +44,7 @@ export interface ScheduleSlot {
   originalServerNames?: (string | null)[]; // ["Damianus S.", null, null, null]
   status: 'Scheduled' | 'Tukar Jadwal' | 'Needs Server' | 'Selesai' | 'Berlangsung';
   attendedServerIds: string[]; // IDs of servers who checked in
+  attendanceSnapshots?: Record<string, string>; // Maps officerId to captured face snapshot base64 data URL
 }
 
 export interface AttendanceRecord {
@@ -55,6 +56,7 @@ export interface AttendanceRecord {
   massSession: string; // "SABTU, 15 AGUSTUS 2026 - 18:00 GEREJA"
   status: 'Hadir Tepat Waktu' | 'Hadir (Sub)' | 'Terlambat';
   verifiedBy: 'Kiosk Numpad' | 'Admin Manual';
+  snapshotUrl?: string; // Captured face snapshot data URL
 }
 
 export interface SystemLog {
@@ -63,6 +65,7 @@ export interface SystemLog {
   type: 'attendance' | 'swap' | 'leave' | 'admin' | 'ai_import';
   description: string;
   actor: string;
+  snapshotUrl?: string; // Optional face snapshot associated with attendance log
 }
 
 export interface LeaveRecord {
