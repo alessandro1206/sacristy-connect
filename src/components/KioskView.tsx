@@ -1287,8 +1287,8 @@ export const KioskView: React.FC<KioskViewProps> = ({
       return;
     }
 
-    // Check Admin override (Admin credentials override restriction)
-    const isAdminAuth = (cleanId === 'admin' || cleanId === 'sakristi' || cleanId === 'pastor') && (cleanPass === 'sakristi123' || cleanPass === 'admin' || cleanPass.length >= 4);
+    // Check Admin override (Strictly 1 username and password)
+    const isAdminAuth = cleanId === 'admin' && cleanPass === 'sakristi123';
 
     // Rule: If special Koorlap is assigned, they (or Admin) must unlock. If no special Koorlap assigned (e.g. Misa Harian), any active officer or koorlap can open with PIN
     const assignedKoorlaps = selectedSession.koorlaps || [];

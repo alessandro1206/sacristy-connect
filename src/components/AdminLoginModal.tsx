@@ -40,20 +40,17 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({
     setIsLoading(true);
 
     setTimeout(() => {
-      // Allow flexible admin credentials for parish team
-      // Valid usernames: admin, sakristi, koorlap, paroki, pengurus
-      // Valid passwords: admin, sakristi123, yakobus, admin123, 123456, or matching standard pass
-      const validUsers = ['admin', 'sakristi', 'koorlap', 'paroki', 'pengurus', 'pastor'];
-      const isValidUser = validUsers.includes(cleanUser) || cleanUser.length >= 3;
-      const isValidPass = cleanPass.length >= 4;
+      // STRICT LOCK: Exactly 1 username ('admin') and 1 password ('sakristi123')
+      const LOCKED_ADMIN_USER = 'admin';
+      const LOCKED_ADMIN_PASS = 'sakristi123';
 
-      if (isValidUser && isValidPass) {
+      if (cleanUser === LOCKED_ADMIN_USER && cleanPass === LOCKED_ADMIN_PASS) {
         playAudioFeedback('success');
         setIsLoading(false);
         onSuccess();
       } else {
         setIsLoading(false);
-        setErrorMsg('Username atau Password Admin salah. (Gunakan: admin / sakristi123)');
+        setErrorMsg('Username atau Password Admin salah.');
         playAudioFeedback('error');
       }
     }, 400);
