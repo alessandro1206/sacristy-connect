@@ -24,6 +24,7 @@ import {
   Camera
 } from 'lucide-react';
 import { playAudioFeedback } from '../utils/sound';
+import { getNearestUpcomingSlot } from '../utils/dateUtils';
 import { SnapshotViewerModal, SnapshotViewerData } from './SnapshotViewerModal';
 
 interface ReportsDutyViewProps {
@@ -58,7 +59,7 @@ export const ReportsDutyView: React.FC<ReportsDutyViewProps> = ({
   schedule
 }) => {
   const [activeTab, setActiveTab] = useState<'positions' | 'summary'>('positions');
-  const [selectedMassId, setSelectedMassId] = useState<string>(() => schedule[0]?.id || 'sch-sep-01');
+  const [selectedMassId, setSelectedMassId] = useState<string>(() => getNearestUpcomingSlot(schedule)?.id || schedule[0]?.id || 'sch-sep-01');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [filterWilayah, setFilterWilayah] = useState<string>('all');
   const [filterStatus, setFilterStatus] = useState<string>('all');

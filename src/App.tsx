@@ -26,6 +26,7 @@ import { HelpModal } from './components/HelpModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { ChangePasswordModal } from './components/ChangePasswordModal';
 import { InstallAppModal } from './components/InstallAppModal';
+import { getNearestUpcomingSlot } from './utils/dateUtils';
 
 // Local storage keys for universal persistence
 const STORAGE_KEYS = {
@@ -76,7 +77,17 @@ export default function App() {
     }
   });
 
-  const [currentSlotId, setCurrentSlotId] = useState<string>('sch-sep-01');
+  const [currentSlotId, setCurrentSlotId] = useState<string>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.SCHEDULE);
+      const sched = saved ? reconcileScheduleWithInitial(JSON.parse(saved)) : INITIAL_SCHEDULE;
+      const nearest = getNearestUpcomingSlot(sched);
+      return nearest ? nearest.id : 'sch-sep-01';
+    } catch {
+      const nearest = getNearestUpcomingSlot(INITIAL_SCHEDULE);
+      return nearest ? nearest.id : 'sch-sep-01';
+    }
+  });
 
   const [logs, setLogs] = useState<SystemLog[]>(() => {
     try {
@@ -254,8 +265,8 @@ export default function App() {
     };
   }, []);
 
-  // Active slot for Kiosk mode
-  const currentSlot = schedule.find(s => s.id === currentSlotId) || schedule[0];
+  // Active slot for Kiosk & Landing mode (nearest upcoming active mass)
+  const currentSlot = schedule.find(s => s.id === currentSlotId) || getNearestUpcomingSlot(schedule) || schedule[0];
 
   // Helper to check if a view requires strict Admin (highest level) authorization
   const isStrictAdminView = (view: string) => {

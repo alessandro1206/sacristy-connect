@@ -39,6 +39,7 @@ import {
   Eye
 } from 'lucide-react';
 import { SnapshotViewerModal, SnapshotViewerData } from './SnapshotViewerModal';
+import { isMassPassed } from '../utils/dateUtils';
 
 interface KioskViewProps {
   currentSlot: ScheduleSlot;
@@ -56,6 +57,8 @@ interface MassSessionChoice {
   dayLabel: string;
   dateDisplay: string;
   timeDisplay: string;
+  rawDate?: string;
+  isPassed?: boolean;
   koorlaps: { id: string; name: string }[];
   koorlapCount: number;
   koorlapDisplay: string;
@@ -1177,6 +1180,8 @@ export const KioskView: React.FC<KioskViewProps> = ({
         ? koorlaps.map(k => k.name).join(' & ')
         : 'Tidak Ada Koorlap Khusus';
 
+      const isPassed = isMassPassed(slot.date, slot.massTime);
+
       return {
         id: slot.id,
         category,
@@ -1184,6 +1189,8 @@ export const KioskView: React.FC<KioskViewProps> = ({
         dayLabel: dayPart.toUpperCase(),
         dateDisplay: slot.displayDate,
         timeDisplay: slot.massTime,
+        rawDate: slot.date,
+        isPassed,
         koorlaps,
         koorlapCount: koorlaps.length,
         koorlapDisplay,
@@ -1203,12 +1210,31 @@ export const KioskView: React.FC<KioskViewProps> = ({
   // Strict session lock guard
   const [isSessionUnlocked, setIsSessionUnlocked] = useState<boolean>(false);
 
-  // Step 1 States (Verifikasi Koorlap)
+  // Step 1 States (Verifikasi Koorlap & Filter Misa Lampau)
+  const [hidePassedMasses, setHidePassedMasses] = useState<boolean>(true);
   const [selectedCategoryTab, setSelectedCategoryTab] = useState<'all' | 'harian' | 'mingguan' | 'hari_raya'>('all');
-  const [selectedSession, setSelectedSession] = useState<MassSessionChoice>(() => dynamicMassSessions[0] || MASS_SESSIONS[0]);
+  const [selectedSession, setSelectedSession] = useState<MassSessionChoice>(() => {
+    const matchCurrent = dynamicMassSessions.find(s => s.id === currentSlot.id);
+    if (matchCurrent && !matchCurrent.isPassed) return matchCurrent;
+    const upcoming = dynamicMassSessions.find(s => !s.isPassed);
+    return upcoming || matchCurrent || dynamicMassSessions[0] || MASS_SESSIONS[0];
+  });
   const [koorlapId, setKoorlapId] = useState<string>(''); // No auto-fill, user selects or enters ID
   const [koorlapPassword, setKoorlapPassword] = useState<string>(''); // Requires user to fill out password/PIN!
   const [sessionAuthError, setSessionAuthError] = useState<string | null>(null);
+
+  // Auto-switch away from passed session if hidePassedMasses is active
+  useEffect(() => {
+    if (hidePassedMasses && selectedSession?.isPassed) {
+      const upcoming = dynamicMassSessions.find(s => !s.isPassed);
+      if (upcoming) {
+        setSelectedSession(upcoming);
+        if (upcoming.koorlaps && upcoming.koorlaps.length > 0) {
+          setKoorlapId(upcoming.koorlaps[0].id);
+        }
+      }
+    }
+  }, [dynamicMassSessions, hidePassedMasses, selectedSession]);
 
   // Step 2 States (3-Digit Numpad & Sidebars)
   const [pinInput, setPinInput] = useState<string>('');
@@ -1931,9 +1957,50 @@ export const KioskView: React.FC<KioskViewProps> = ({
                 ))}
               </div>
 
+              {/* Passed Masses Automatic Filter Banner / Toggle */}
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 p-3 rounded-2xl bg-[#FAF7F2] border border-[#D9CEBA]">
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
+                    <Clock className="w-3.5 h-3.5 text-emerald-700" />
+                  </div>
+                  <div>
+                    <span className="text-xs font-bold text-[#2C2420] block">
+                      {hidePassedMasses ? 'Misa Mendatang & Hari Ini' : 'Semua Misa (Termasuk Lampau)'}
+                    </span>
+                    <span className="text-[10px] text-[#8C7662]">
+                      {hidePassedMasses
+                        ? `${dynamicMassSessions.filter(s => s.isPassed).length} sesi misa yang telah lewat otomatis disembunyikan`
+                        : 'Menampilkan seluruh sesi misa termasuk yang telah lewat'}
+                    </span>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    playAudioFeedback('tap');
+                    setHidePassedMasses(!hidePassedMasses);
+                  }}
+                  className={`px-3 py-1.5 rounded-xl border text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 cursor-pointer shadow-2xs ${
+                    hidePassedMasses
+                      ? 'bg-emerald-600 hover:bg-emerald-700 text-white border-emerald-700'
+                      : 'bg-white hover:bg-[#F3EDE2] text-[#5B1414] border-[#D9CEBA]'
+                  }`}
+                >
+                  <span>{hidePassedMasses ? '✓ Sembunyikan Lampau' : 'Tampilkan Semua'}</span>
+                </button>
+              </div>
+
               {/* Grid of Mass Schedules */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {dynamicMassSessions.filter(s => selectedCategoryTab === 'all' || s.category === selectedCategoryTab).map(session => {
+                {dynamicMassSessions
+                  .filter(s => {
+                    const matchCat = selectedCategoryTab === 'all' || s.category === selectedCategoryTab;
+                    if (!matchCat) return false;
+                    if (hidePassedMasses && s.isPassed) return false;
+                    return true;
+                  })
+                  .map(session => {
                   const isSelected = selectedSession.id === session.id;
 
                   return (
@@ -1966,6 +2033,11 @@ export const KioskView: React.FC<KioskViewProps> = ({
                           }`}>
                             {session.koorlapCount} Koorlap
                           </span>
+                          {session.isPassed && (
+                            <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-slate-200 text-slate-700 border border-slate-300">
+                              Selesai
+                            </span>
+                          )}
                         </div>
 
                         <h4 className="text-base font-extrabold text-[#2C2420] font-headline mt-1">

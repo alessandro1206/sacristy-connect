@@ -20,6 +20,7 @@ import {
 
 import { Officer, ScheduleSlot, UserSession, UserRole } from '../types';
 import { playAudioFeedback } from '../utils/sound';
+import { isMassPassed } from '../utils/dateUtils';
 
 interface OfficerPersonalScheduleModalProps {
   isOpen: boolean;
@@ -45,6 +46,7 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
   onOpenLoginModal
 }) => {
   const [activeTab, setActiveTab] = useState<'duties' | 'profile'>('duties');
+  const [dutyFilter, setDutyFilter] = useState<'upcoming' | 'all'>('upcoming');
   const [selectedOfficerId, setSelectedOfficerId] = useState<string>(
     userSession.officerId || (userSession.isAuthenticated ? '001' : '')
   );
@@ -79,6 +81,9 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
   }) : [];
 
   const filteredDutySlots = myAssignedSlots.filter(slot => {
+    if (dutyFilter === 'upcoming' && isMassPassed(slot.date, slot.massTime)) {
+      return false;
+    }
     if (!searchDateQuery.trim()) return true;
     const q = searchDateQuery.toLowerCase();
     return (
@@ -265,13 +270,47 @@ export const OfficerPersonalScheduleModal: React.FC<OfficerPersonalScheduleModal
             <div className="space-y-3">
               {/* Header & Date Search Filter */}
               <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
-                <h3 className="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
-                  <Calendar className="w-4 h-4 text-amber-600" />
-                  <span>JADWAL TUGAS MISA</span>
-                </h3>
-                <span className="text-[11px] font-bold text-slate-500">
-                  Total: {filteredDutySlots.length} Misa Terdaftar
-                </span>
+                <div className="flex items-center gap-2">
+                  <h3 className="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+                    <Calendar className="w-4 h-4 text-amber-600" />
+                    <span>JADWAL TUGAS MISA</span>
+                  </h3>
+                  <span className="text-[11px] font-bold text-slate-500">
+                    ({filteredDutySlots.length})
+                  </span>
+                </div>
+
+                {/* Filter Pills: Tugas Mendatang vs Semua */}
+                <div className="inline-flex p-0.5 bg-slate-200/80 rounded-xl text-xs">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      playAudioFeedback('tap');
+                      setDutyFilter('upcoming');
+                    }}
+                    className={`px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer ${
+                      dutyFilter === 'upcoming'
+                        ? 'bg-white text-slate-900 shadow-2xs'
+                        : 'text-slate-600 hover:text-slate-900'
+                    }`}
+                  >
+                    Mendatang
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      playAudioFeedback('tap');
+                      setDutyFilter('all');
+                    }}
+                    className={`px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer ${
+                      dutyFilter === 'all'
+                        ? 'bg-white text-slate-900 shadow-2xs'
+                        : 'text-slate-600 hover:text-slate-900'
+                    }`}
+                  >
+                    Semua ({myAssignedSlots.length})
+                  </button>
+                </div>
               </div>
 
               {/* Date Search Input Bar */}
