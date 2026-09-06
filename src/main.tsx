@@ -71,3 +71,12 @@ createRoot(document.getElementById('root')!).render(
     </RootErrorBoundary>
   </StrictMode>,
 );
+
+// Register Service Worker for PWA app shortcut & offline installability
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch((err) => {
+      console.warn('PWA service worker registration failed:', err);
+    });
+  });
+}

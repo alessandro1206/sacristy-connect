@@ -25,6 +25,7 @@ import { CodeExportModal } from './components/CodeExportModal';
 import { HelpModal } from './components/HelpModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { ChangePasswordModal } from './components/ChangePasswordModal';
+import { InstallAppModal } from './components/InstallAppModal';
 
 // Local storage keys for universal persistence
 const STORAGE_KEYS = {
@@ -230,6 +231,28 @@ export default function App() {
     setChangePasswordInitialTab(tab);
     setIsChangePasswordOpen(true);
   };
+
+  // PWA BeforeInstallPrompt & Install App Shortcut Modal State
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [isInstallModalOpen, setIsInstallModalOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handler = (e: any) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+    const installedHandler = () => {
+      setDeferredPrompt(null);
+    };
+    window.addEventListener('beforeinstallprompt', handler);
+    window.addEventListener('appinstalled', installedHandler);
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handler);
+      window.removeEventListener('appinstalled', installedHandler);
+    };
+  }, []);
 
   // Active slot for Kiosk mode
   const currentSlot = schedule.find(s => s.id === currentSlotId) || schedule[0];
@@ -476,6 +499,7 @@ export default function App() {
         onLogout={handleLogout}
         onOpenOfficerSchedule={() => setIsOfficerScheduleModalOpen(true)}
         onOpenChangePassword={handleOpenChangePassword}
+        onOpenInstallModal={() => setIsInstallModalOpen(true)}
       />
 
 
@@ -496,6 +520,7 @@ export default function App() {
             onAdminLogout={handleLogout}
             onOpenOfficerSchedule={() => setIsOfficerScheduleModalOpen(true)}
             onOpenChangePassword={handleOpenChangePassword}
+            onOpenInstallModal={() => setIsInstallModalOpen(true)}
           />
         )}
 
@@ -512,6 +537,7 @@ export default function App() {
               currentSlot={currentSlot}
               officers={officers}
               onOpenProfile={() => setIsOfficerScheduleModalOpen(true)}
+              onOpenInstallModal={() => setIsInstallModalOpen(true)}
             />
           )}
 
@@ -672,6 +698,21 @@ export default function App() {
       <HelpModal
         isOpen={isHelpOpen}
         onClose={() => setIsHelpOpen(false)}
+      />
+
+      {/* PWA / App Shortcut Install Modal */}
+      <InstallAppModal
+        isOpen={isInstallModalOpen}
+        onClose={() => setIsInstallModalOpen(false)}
+        deferredPrompt={deferredPrompt}
+        onInstalled={() => {
+          setDeferredPrompt(null);
+          handleAddLog({
+            type: 'admin',
+            description: 'Aplikasi SacristyConnect berhasil diinstal / ditambahkan sebagai pintasan layar.',
+            actor: 'PWA Manager'
+          });
+        }}
       />
 
       {/* Mobile-Only Bottom Navigation Bar */}

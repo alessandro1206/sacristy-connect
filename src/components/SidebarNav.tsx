@@ -16,7 +16,8 @@ import {
   ShieldCheck,
   Award,
   UserCheck,
-  KeyRound
+  KeyRound,
+  Download
 } from 'lucide-react';
 import { playAudioFeedback } from '../utils/sound';
 
@@ -30,6 +31,7 @@ interface SidebarNavProps {
   onOpenLoginModal?: () => void;
   onOpenOfficerSchedule?: () => void;
   onOpenChangePassword?: (initialTab?: 'koorlap' | 'admin') => void;
+  onOpenInstallModal?: () => void;
 }
 
 export const SidebarNav: React.FC<SidebarNavProps> = ({
@@ -40,7 +42,8 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({
   userSession,
   onOpenLoginModal,
   onOpenOfficerSchedule,
-  onOpenChangePassword
+  onOpenChangePassword,
+  onOpenInstallModal
 }) => {
 
 
@@ -268,6 +271,20 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({
           >
             <KeyRound className="w-4 h-4 text-amber-600" />
             <span className="text-xs">Ubah Password &amp; PIN</span>
+          </button>
+        )}
+
+        {/* 9. Pasang Pintasan Aplikasi */}
+        {onOpenInstallModal && (
+          <button
+            onClick={() => {
+              playAudioFeedback('tap');
+              onOpenInstallModal();
+            }}
+            className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-left text-emerald-700 hover:bg-emerald-50 hover:text-emerald-950 font-bold transition-all cursor-pointer"
+          >
+            <Download className="w-4 h-4 text-emerald-600" />
+            <span className="text-xs">Pasang Pintasan App</span>
           </button>
         )}
 

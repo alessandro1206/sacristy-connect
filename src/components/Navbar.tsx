@@ -1,6 +1,6 @@
 import React from 'react';
 import { CHURCH_LOGO } from '../data/initialData';
-import { Settings, HelpCircle, Sparkles, Home, Shield, Touchpad, LogIn, LogOut, UserCheck, Award, KeyRound, Calendar } from 'lucide-react';
+import { Settings, HelpCircle, Sparkles, Home, Shield, Touchpad, LogIn, LogOut, UserCheck, Award, KeyRound, Calendar, Download } from 'lucide-react';
 import { UserSession } from '../types';
 
 
@@ -14,6 +14,7 @@ interface NavbarProps {
   onLogout?: () => void;
   onOpenOfficerSchedule?: () => void;
   onOpenChangePassword?: (initialTab?: 'koorlap' | 'admin') => void;
+  onOpenInstallModal?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -25,7 +26,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenLoginModal,
   onLogout,
   onOpenOfficerSchedule,
-  onOpenChangePassword
+  onOpenChangePassword,
+  onOpenInstallModal
 }) => {
 
   const isLanding = currentView === 'landing';
@@ -180,6 +182,18 @@ export const Navbar: React.FC<NavbarProps> = ({
             title="Keluar Akun"
           >
             <LogOut className="w-4 h-4" />
+          </button>
+        )}
+
+        {/* App Shortcut / Install button */}
+        {onOpenInstallModal && (
+          <button
+            onClick={onOpenInstallModal}
+            className="flex items-center gap-1.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white px-3 py-1.5 rounded-xl text-xs font-bold border border-emerald-500/40 transition-all shadow-xs cursor-pointer"
+            title="Pasang Pintasan Aplikasi ke Layar Utama / Desktop"
+          >
+            <Download className="w-3.5 h-3.5 text-emerald-200" />
+            <span className="hidden sm:inline">Pintasan App</span>
           </button>
         )}
 

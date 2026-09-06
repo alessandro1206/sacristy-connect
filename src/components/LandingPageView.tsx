@@ -14,7 +14,8 @@ import {
   MapPin,
   Flame,
   LayoutGrid,
-  UserCheck
+  UserCheck,
+  Download
 } from 'lucide-react';
 
 import { playAudioFeedback } from '../utils/sound';
@@ -30,6 +31,7 @@ interface LandingPageViewProps {
   currentSlot?: ScheduleSlot;
   officers?: Officer[];
   onOpenProfile?: () => void;
+  onOpenInstallModal?: () => void;
 }
 
 export const LandingPageView: React.FC<LandingPageViewProps> = ({
@@ -40,7 +42,8 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
   userSession,
   currentSlot,
   officers = [],
-  onOpenProfile
+  onOpenProfile,
+  onOpenInstallModal
 }) => {
   const isAdminRole = userSession?.role === 'admin';
 
@@ -96,9 +99,9 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
             Sistem Informasi Terpadu Presensi Kiosk, Manajemen 170 Asisten Imam, &amp; Penjadwalan Sakristi
           </p>
 
-          {/* Profil Saya & Jadwal Tugas CTA */}
-          {onOpenProfile && (
-            <div className="pt-1">
+          {/* Profil Saya & Pasang Pintasan Aplikasi CTAs */}
+          <div className="pt-1 flex flex-wrap items-center justify-center gap-2.5">
+            {onOpenProfile && (
               <button
                 onClick={() => {
                   playAudioFeedback('tap');
@@ -110,8 +113,22 @@ export const LandingPageView: React.FC<LandingPageViewProps> = ({
                 <span>Lihat Profil &amp; Tanggal Tugas Saya</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
-            </div>
-          )}
+            )}
+
+            {onOpenInstallModal && (
+              <button
+                onClick={() => {
+                  playAudioFeedback('tap');
+                  onOpenInstallModal();
+                }}
+                className="inline-flex items-center gap-2 px-4 py-2.5 bg-white hover:bg-slate-100 text-slate-800 text-xs font-bold rounded-2xl border border-slate-200 shadow-xs transition-all cursor-pointer hover:scale-[1.02]"
+                title="Pasang aplikasi di HP atau Komputer agar tidak perlu mengetik alamat web lagi"
+              >
+                <Download className="w-4 h-4 text-amber-600" />
+                <span>Pasang Pintasan Aplikasi</span>
+              </button>
+            )}
+          </div>
         </div>
 
         {/* ========================================================================= */}
