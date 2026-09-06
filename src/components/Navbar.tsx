@@ -13,6 +13,7 @@ interface NavbarProps {
   onOpenLoginModal?: () => void;
   onLogout?: () => void;
   onOpenOfficerSchedule?: () => void;
+  onOpenChangePassword?: (initialTab?: 'koorlap' | 'admin') => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -23,7 +24,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   userSession = { isAuthenticated: false, role: 'guest', name: 'Tamu / Guest' },
   onOpenLoginModal,
   onLogout,
-  onOpenOfficerSchedule
+  onOpenOfficerSchedule,
+  onOpenChangePassword
 }) => {
 
   const isLanding = currentView === 'landing';
@@ -155,6 +157,18 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <UserCheck className="w-4 h-4" />
             <span>Profil Saya</span>
+          </button>
+        )}
+
+        {/* Change Password / PIN button */}
+        {onOpenChangePassword && (
+          <button
+            onClick={() => onOpenChangePassword(role === 'admin' ? 'admin' : 'koorlap')}
+            className="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-700 transition-all shadow-xs cursor-pointer"
+            title="Ubah Password Admin / PIN Koorlap"
+          >
+            <KeyRound className="w-3.5 h-3.5 text-amber-400" />
+            <span className="hidden lg:inline">Ganti Sandi</span>
           </button>
         )}
 

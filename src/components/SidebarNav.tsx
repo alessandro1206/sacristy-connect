@@ -15,7 +15,8 @@ import {
   LogIn,
   ShieldCheck,
   Award,
-  UserCheck
+  UserCheck,
+  KeyRound
 } from 'lucide-react';
 import { playAudioFeedback } from '../utils/sound';
 
@@ -28,6 +29,7 @@ interface SidebarNavProps {
   userSession?: UserSession;
   onOpenLoginModal?: () => void;
   onOpenOfficerSchedule?: () => void;
+  onOpenChangePassword?: (initialTab?: 'koorlap' | 'admin') => void;
 }
 
 export const SidebarNav: React.FC<SidebarNavProps> = ({
@@ -37,7 +39,8 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({
   onAdminLogout,
   userSession,
   onOpenLoginModal,
-  onOpenOfficerSchedule
+  onOpenOfficerSchedule,
+  onOpenChangePassword
 }) => {
 
 
@@ -251,6 +254,20 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({
           >
             <UserCheck className="w-4 h-4 text-amber-700" />
             <span className="text-xs">Profil &amp; Tugas Saya</span>
+          </button>
+        )}
+
+        {/* 8. Ubah Password & PIN */}
+        {onOpenChangePassword && (
+          <button
+            onClick={() => {
+              playAudioFeedback('tap');
+              onOpenChangePassword(userSession?.role === 'admin' ? 'admin' : 'koorlap');
+            }}
+            className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-left text-slate-600 hover:bg-slate-100 hover:text-slate-950 font-semibold transition-all cursor-pointer"
+          >
+            <KeyRound className="w-4 h-4 text-amber-600" />
+            <span className="text-xs">Ubah Password &amp; PIN</span>
           </button>
         )}
 

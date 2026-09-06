@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Officer, ScheduleSlot, PositionAssignment } from '../types';
 import { playAudioFeedback } from '../utils/sound';
+import { verifyAdminCredentials, verifyOfficerPin } from '../utils/authStore';
 import { CHURCH_LOGO } from '../data/initialData';
 import { 
   CheckCircle2, 
@@ -1287,8 +1288,8 @@ export const KioskView: React.FC<KioskViewProps> = ({
       return;
     }
 
-    // Check Admin override (Strictly 1 username and password)
-    const isAdminAuth = cleanId === 'admin' && cleanPass === 'sakristi123';
+    // Check Admin override (uses credentials from authStore)
+    const isAdminAuth = verifyAdminCredentials(cleanId, cleanPass);
 
     // Rule: If special Koorlap is assigned, they (or Admin) must unlock. If no special Koorlap assigned (e.g. Misa Harian), any active officer or koorlap can open with PIN
     const assignedKoorlaps = selectedSession.koorlaps || [];
@@ -1310,9 +1311,9 @@ export const KioskView: React.FC<KioskViewProps> = ({
       return;
     }
 
-    // Check PIN validity
-    if (!isAdminAuth && cleanPass !== '1234' && cleanPass.length < 4) {
-      setSessionAuthError('Otorisasi Gagal: PIN salah. (Gunakan PIN Default: 1234)');
+    // Check PIN validity against saved officer PIN (default: 1234)
+    if (!isAdminAuth && !verifyOfficerPin(cleanId, cleanPass)) {
+      setSessionAuthError('Otorisasi Gagal: PIN salah.');
       playAudioFeedback('error');
       return;
     }

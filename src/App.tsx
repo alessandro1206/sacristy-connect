@@ -24,6 +24,7 @@ import { OfficerPersonalScheduleModal } from './components/OfficerPersonalSchedu
 import { CodeExportModal } from './components/CodeExportModal';
 import { HelpModal } from './components/HelpModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
+import { ChangePasswordModal } from './components/ChangePasswordModal';
 
 // Local storage keys for universal persistence
 const STORAGE_KEYS = {
@@ -222,6 +223,13 @@ export default function App() {
   const [currentView, setCurrentView] = useState<string>('landing');
   const [isCodeExportOpen, setIsCodeExportOpen] = useState<boolean>(false);
   const [isHelpOpen, setIsHelpOpen] = useState<boolean>(false);
+  const [isChangePasswordOpen, setIsChangePasswordOpen] = useState<boolean>(false);
+  const [changePasswordInitialTab, setChangePasswordInitialTab] = useState<'koorlap' | 'admin'>('koorlap');
+
+  const handleOpenChangePassword = (tab: 'koorlap' | 'admin' = 'koorlap') => {
+    setChangePasswordInitialTab(tab);
+    setIsChangePasswordOpen(true);
+  };
 
   // Active slot for Kiosk mode
   const currentSlot = schedule.find(s => s.id === currentSlotId) || schedule[0];
@@ -467,6 +475,7 @@ export default function App() {
         }}
         onLogout={handleLogout}
         onOpenOfficerSchedule={() => setIsOfficerScheduleModalOpen(true)}
+        onOpenChangePassword={handleOpenChangePassword}
       />
 
 
@@ -486,6 +495,7 @@ export default function App() {
             }}
             onAdminLogout={handleLogout}
             onOpenOfficerSchedule={() => setIsOfficerScheduleModalOpen(true)}
+            onOpenChangePassword={handleOpenChangePassword}
           />
         )}
 
@@ -616,6 +626,23 @@ export default function App() {
         officers={officers}
         initialRole={initialModalRole}
         targetViewLabel={getAdminViewTitle(pendingAdminView)}
+        onOpenChangePassword={handleOpenChangePassword}
+      />
+
+      {/* Change Password / PIN Modal (Koorlap & Admin tabs) */}
+      <ChangePasswordModal
+        isOpen={isChangePasswordOpen}
+        onClose={() => setIsChangePasswordOpen(false)}
+        officers={officers}
+        userSession={userSession}
+        initialTab={changePasswordInitialTab}
+        onPasswordChanged={(role, message) => {
+          handleAddLog({
+            type: 'admin',
+            description: message,
+            actor: role === 'admin' ? 'Admin Security' : 'Koorlap Security'
+          });
+        }}
       />
 
       {/* Officer Personal Schedule Modal (Jadwal Saya) */}

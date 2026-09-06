@@ -18,6 +18,12 @@ import {
 import { Officer, UserRole, UserSession } from '../types';
 import { CHURCH_LOGO } from '../data/initialData';
 import { playAudioFeedback } from '../utils/sound';
+import { 
+  verifyAdminCredentials, 
+  verifyOfficerPin, 
+  getAdminCredentials, 
+  getOfficerPin 
+} from '../utils/authStore';
 
 interface MultiLevelLoginModalProps {
   isOpen: boolean;
@@ -26,6 +32,7 @@ interface MultiLevelLoginModalProps {
   officers: Officer[];
   initialRole?: UserRole;
   targetViewLabel?: string;
+  onOpenChangePassword?: (initialTab?: 'koorlap' | 'admin') => void;
 }
 
 export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
@@ -34,7 +41,8 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
   onLoginSuccess,
   officers,
   initialRole = 'officer',
-  targetViewLabel
+  targetViewLabel,
+  onOpenChangePassword
 }) => {
   const [activeTab, setActiveTab] = useState<UserRole>(initialRole === 'guest' ? 'officer' : initialRole);
   
@@ -97,6 +105,12 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
       return;
     }
 
+    if (!verifyOfficerPin(officer.id, officerPin)) {
+      setErrorMsg('PIN Petugas salah.');
+      playAudioFeedback('error');
+      return;
+    }
+
     const isKoorlapAssigned = officer.isKoorlap || officer.role.toLowerCase().includes('koorlap');
 
     setIsLoading(true);
@@ -128,9 +142,21 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
       return;
     }
 
+    const matchedKoorlap = officers.find(o => (o.id === cleanUser || o.id.padStart(3, '0') === cleanUser.padStart(3, '0') || o.shortName.toLowerCase().includes(cleanUser)) && (o.isKoorlap || o.role.toLowerCase().includes('koorlap')));
+    if (!matchedKoorlap) {
+      setErrorMsg('Akun Koordinator Lapangan tidak ditemukan.');
+      playAudioFeedback('error');
+      return;
+    }
+
+    if (!verifyOfficerPin(matchedKoorlap.id, cleanPin)) {
+      setErrorMsg('PIN Koorlap salah.');
+      playAudioFeedback('error');
+      return;
+    }
+
     setIsLoading(true);
     setTimeout(() => {
-      const matchedKoorlap = officers.find(o => (o.id === cleanUser || o.shortName.toLowerCase().includes(cleanUser)) && (o.isKoorlap || o.role.toLowerCase().includes('koorlap')));
       const koorlapName = matchedKoorlap ? matchedKoorlap.name : 'Koordinator Lapangan';
       const avatarUrl = matchedKoorlap ? matchedKoorlap.avatarUrl : undefined;
 
@@ -139,7 +165,7 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
       onLoginSuccess({
         isAuthenticated: true,
         role: 'koorlap',
-        officerId: matchedKoorlap?.id || 'koorlap-01',
+        officerId: matchedKoorlap.id,
         name: koorlapName,
         avatarUrl,
         loginTime: new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' })
@@ -162,11 +188,8 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
 
     setIsLoading(true);
     setTimeout(() => {
-      // STRICT LOCK: Exactly 1 username ('admin') and 1 password ('sakristi123')
-      const LOCKED_ADMIN_USER = 'admin';
-      const LOCKED_ADMIN_PASS = 'sakristi123';
-
-      if (cleanUser === LOCKED_ADMIN_USER && cleanPass === LOCKED_ADMIN_PASS) {
+      // Validate against authStore credentials (default: admin / sakristi123)
+      if (verifyAdminCredentials(cleanUser, cleanPass)) {
         setIsLoading(false);
         playAudioFeedback('success');
         onLoginSuccess({
@@ -189,14 +212,15 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
     if (activeTab === 'officer') {
       const sample = officers[0] || { id: '001' };
       setSelectedOfficerId(sample.id);
-      setOfficerPin('1234');
+      setOfficerPin(getOfficerPin(sample.id));
     } else if (activeTab === 'koorlap') {
       const koorlap = koorlaps[0] || { id: '145' };
       setKoorlapUser(koorlap.id);
-      setKoorlapPin('1234');
+      setKoorlapPin(getOfficerPin(koorlap.id));
     } else {
-      setAdminUser('admin');
-      setAdminPass('sakristi123');
+      const creds = getAdminCredentials();
+      setAdminUser(creds.username);
+      setAdminPass(creds.password);
     }
   };
 
@@ -505,8 +529,26 @@ export const MultiLevelLoginModal: React.FC<MultiLevelLoginModalProps> = ({
             </form>
           )}
 
+          {/* Change Password / PIN option */}
+          {onOpenChangePassword && (
+            <div className="pt-2 text-center border-t border-slate-200">
+              <button
+                type="button"
+                onClick={() => {
+                  playAudioFeedback('tap');
+                  onClose();
+                  onOpenChangePassword(activeTab === 'admin' ? 'admin' : 'koorlap');
+                }}
+                className="text-xs font-bold text-amber-700 hover:text-amber-900 flex items-center justify-center gap-1.5 mx-auto transition-colors cursor-pointer"
+              >
+                <KeyRound className="w-3.5 h-3.5 text-amber-600" />
+                <span>Ubah Password Admin atau PIN Koorlap</span>
+              </button>
+            </div>
+          )}
+
           {/* Cancel / Guest option */}
-          <div className="pt-2 text-center">
+          <div className="pt-1 text-center">
             <button
               type="button"
               onClick={() => {
