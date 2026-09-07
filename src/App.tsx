@@ -358,8 +358,14 @@ export default function App() {
   };
 
 
-  // Handle officer attendance check-in with face snapshot
-  const handleAttendanceSuccess = (officerId: string, officerName: string, snapshotUrl?: string) => {
+  // Handle officer attendance check-in with face snapshot and biometric/numpad verification
+  const handleAttendanceSuccess = (
+    officerId: string,
+    officerName: string,
+    snapshotUrl?: string,
+    verifiedBy: 'Kiosk Numpad' | 'Face ID Biometric' | 'Admin Manual' = 'Kiosk Numpad',
+    faceMatchConfidence?: number
+  ) => {
     // 1. Update current slot attendedServerIds & attendanceSnapshots
     setSchedule(prevSchedule =>
       prevSchedule.map(slot => {
@@ -405,12 +411,15 @@ export default function App() {
     const now = new Date();
     const timeString = now.toLocaleDateString('id-ID', { year: 'numeric', month: '2-digit', day: '2-digit' }) + ' ' +
                        now.toLocaleTimeString('id-ID') + ' WIB';
+    const confidenceText = faceMatchConfidence ? ` (Kecocokan ${Math.round(faceMatchConfidence * 100)}%)` : '';
+    const modeLabel = verifiedBy === 'Face ID Biometric' ? 'Face ID Biometrik' : 'Mandiri';
+
     const newLog: SystemLog = {
       id: 'log-' + Date.now(),
       timestamp: timeString,
       type: 'attendance',
-      description: `Presensi Mandiri ID: ${officerId} (${officerName}) - Hadir Sesi ${currentSlot.massTime}${snapshotUrl ? ' [Foto Wajah]' : ''}`,
-      actor: 'Kiosk Numpad',
+      description: `Presensi ${modeLabel} ID: ${officerId} (${officerName}) - Hadir Sesi ${currentSlot.massTime}${confidenceText}${snapshotUrl ? ' [Foto Wajah]' : ''}`,
+      actor: verifiedBy || 'Kiosk Numpad',
       snapshotUrl: snapshotUrl
     };
     setLogs(prev => [newLog, ...prev]);
