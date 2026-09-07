@@ -55,9 +55,8 @@ export interface AttendanceRecord {
   officerName: string;
   massSession: string; // "SABTU, 15 AGUSTUS 2026 - 18:00 GEREJA"
   status: 'Hadir Tepat Waktu' | 'Hadir (Sub)' | 'Terlambat';
-  verifiedBy: 'Kiosk Numpad' | 'Face ID Biometric' | 'Admin Manual';
+  verifiedBy: 'Kiosk Numpad' | 'Admin Manual';
   snapshotUrl?: string; // Captured face snapshot data URL
-  faceMatchConfidence?: number; // e.g. 0.94 (94%)
 }
 
 export interface SystemLog {

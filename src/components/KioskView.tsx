@@ -36,23 +36,15 @@ import {
   Camera,
   CameraOff,
   RotateCw,
-  Eye,
-  ScanFace
+  Eye
 } from 'lucide-react';
 import { SnapshotViewerModal, SnapshotViewerData } from './SnapshotViewerModal';
 import { isMassPassed } from '../utils/dateUtils';
-import { scanVideoForFace, cacheOfficerBiometrics } from '../utils/faceRecognitionService';
 
 interface KioskViewProps {
   currentSlot: ScheduleSlot;
   officers: Officer[];
-  onAttendanceSuccess: (
-    officerId: string,
-    officerName: string,
-    snapshotUrl?: string,
-    verifiedBy?: 'Kiosk Numpad' | 'Face ID Biometric' | 'Admin Manual',
-    faceMatchConfidence?: number
-  ) => void;
+  onAttendanceSuccess: (officerId: string, officerName: string, snapshotUrl?: string) => void;
   onSwitchSlot?: (slotId: string) => void;
   allSlots: ScheduleSlot[];
   onBackToLanding?: () => void;
@@ -1254,14 +1246,6 @@ export const KioskView: React.FC<KioskViewProps> = ({
   const [pendingOfficer, setPendingOfficer] = useState<Officer | null>(null);
   const [attendanceSuccessMessage, setAttendanceSuccessMessage] = useState<string | null>(null);
 
-  // Face ID Biometric States
-  const [attendanceMode, setAttendanceMode] = useState<'faceid' | 'numpad'>('faceid');
-  const [faceScanStatus, setFaceScanStatus] = useState<string>('Posisikan wajah Anda di tengah lingkaran panduan');
-  const [faceMatchConfidence, setFaceMatchConfidence] = useState<number | null>(null);
-  const [verifiedBy, setVerifiedBy] = useState<'Kiosk Numpad' | 'Face ID Biometric'>('Face ID Biometric');
-  const [matchCandidate, setMatchCandidate] = useState<Officer | null>(null);
-  const [isFaceDetected, setIsFaceDetected] = useState<boolean>(false);
-
   // Camera & Face Snapshot States
   const videoRef = React.useRef<HTMLVideoElement | null>(null);
   const streamRef = React.useRef<MediaStream | null>(null);
@@ -1321,22 +1305,13 @@ export const KioskView: React.FC<KioskViewProps> = ({
     });
   };
 
-  // Lifecycle for Camera Video Stream (used in Step 2 Face ID mode AND Step 3 Confirmation)
+  // Lifecycle for Camera Video Stream in Step 3
   useEffect(() => {
     let active = true;
-    const shouldCameraRun = (currentStep === 2 && attendanceMode === 'faceid') || (currentStep === 3 && pendingOfficer);
-
-    if (shouldCameraRun) {
-      if (streamRef.current && streamRef.current.active) {
-        setCameraActive(true);
-        if (videoRef.current && videoRef.current.srcObject !== streamRef.current) {
-          videoRef.current.srcObject = streamRef.current;
-          videoRef.current.play().catch(() => {});
-        }
-        return;
-      }
-
+    if (currentStep === 3 && pendingOfficer) {
+      setCapturedSnapshot(null);
       setCameraError(null);
+
       const startCamera = async () => {
         try {
           const stream = await requestCameraStream();
@@ -1374,8 +1349,14 @@ export const KioskView: React.FC<KioskViewProps> = ({
 
     return () => {
       active = false;
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop());
+        streamRef.current = null;
+      }
+      setCameraStream(null);
+      setCameraActive(false);
     };
-  }, [currentStep, attendanceMode, pendingOfficer]);
+  }, [currentStep, pendingOfficer]);
 
   // Helper to generate a fallback snapshot when hardware camera is disabled/unavailable
   const generateFallbackSnapshot = (officer: Officer): string => {
@@ -1641,8 +1622,6 @@ export const KioskView: React.FC<KioskViewProps> = ({
     if (matchedInBelumAbsen) {
       playAudioFeedback('tap');
       setNumpadError(null);
-      setVerifiedBy('Kiosk Numpad');
-      setFaceMatchConfidence(null);
       setPendingOfficer(matchedInBelumAbsen);
       setCurrentStep(3); // Show identity confirmation
       setPinInput('');
@@ -1684,23 +1663,14 @@ export const KioskView: React.FC<KioskViewProps> = ({
       setCameraActive(false);
 
       playAudioFeedback('success');
-      onAttendanceSuccess(
-        pendingOfficer.id,
-        pendingOfficer.name,
-        snapshot,
-        verifiedBy,
-        faceMatchConfidence || undefined
-      );
-      setAttendanceSuccessMessage(
-        `Terima kasih & selamat bertugas, ${pendingOfficer.name}! Foto wajah presensi (${verifiedBy === 'Face ID Biometric' ? 'Face ID Biometrik' : 'Numpad'}) berhasil dicatat.`
-      );
+      onAttendanceSuccess(pendingOfficer.id, pendingOfficer.name, snapshot);
+      setAttendanceSuccessMessage(`Terima kasih & selamat bertugas, ${pendingOfficer.name}! Foto wajah presensi berhasil dicatat.`);
 
       setTimeout(() => {
         setIsCapturing(false);
         setAttendanceSuccessMessage(null);
         setPendingOfficer(null);
         setCapturedSnapshot(null);
-        setFaceMatchConfidence(null);
 
         // Check if all officers have attended, or transition
         const updatedAttendedCount = currentSlot.attendedServerIds.length + 1;
@@ -1770,100 +1740,6 @@ export const KioskView: React.FC<KioskViewProps> = ({
   // Belum Absen list: Scheduled officers for this Misa who have NOT checked in yet
   const unattendedOfficers = scheduledOfficersList.filter(o => !attendedOfficerIds.has(o.id));
   const attendedOfficersList = scheduledOfficersList.filter(o => attendedOfficerIds.has(o.id));
-
-  // Pre-cache officer reference biometrics for unattended officers
-  useEffect(() => {
-    if (unattendedOfficers.length > 0) {
-      cacheOfficerBiometrics(unattendedOfficers).catch(() => {});
-    }
-  }, [unattendedOfficers]);
-
-  // Real-time biometric scanning loop in Step 2 Face ID mode
-  useEffect(() => {
-    if (currentStep !== 2 || attendanceMode !== 'faceid' || !cameraActive) return;
-
-    let scanTimer: any;
-    let matchCounter = 0;
-    let currentMatchId: string | null = null;
-
-    const performBiometricScan = () => {
-      if (!videoRef.current || videoRef.current.readyState < 2) return;
-      if (unattendedOfficers.length === 0) {
-        setFaceScanStatus('Semua petugas terjadwal sudah hadir');
-        setIsFaceDetected(false);
-        setMatchCandidate(null);
-        return;
-      }
-
-      const res = scanVideoForFace(videoRef.current, unattendedOfficers);
-      setIsFaceDetected(res.faceDetected);
-      setFaceScanStatus(res.statusMessage);
-
-      if (res.bestMatch && res.bestMatch.confidence >= 0.70) {
-        const { officer, confidence } = res.bestMatch;
-        setMatchCandidate(officer);
-        setFaceMatchConfidence(confidence);
-
-        if (currentMatchId === officer.id) {
-          matchCounter++;
-        } else {
-          currentMatchId = officer.id;
-          matchCounter = 1;
-        }
-
-        // Advance when confident (2 consecutive scans or >= 85% match)
-        if (matchCounter >= 2 || confidence >= 0.85) {
-          playAudioFeedback('success');
-          setPendingOfficer(officer);
-          setFaceMatchConfidence(confidence);
-          setVerifiedBy('Face ID Biometric');
-          setCurrentStep(3); // Direct to step 3 confirmation!
-        }
-      } else {
-        matchCounter = 0;
-        setMatchCandidate(null);
-      }
-    };
-
-    scanTimer = setInterval(performBiometricScan, 400);
-    return () => clearInterval(scanTimer);
-  }, [currentStep, attendanceMode, cameraActive, unattendedOfficers]);
-
-  // Manual Face Scan Trigger
-  const handleManualFaceScan = () => {
-    if (!videoRef.current || !cameraActive) {
-      setFaceScanStatus('Kamera belum aktif. Mengaktifkan kamera...');
-      return;
-    }
-    playAudioFeedback('tap');
-    if (unattendedOfficers.length === 0) {
-      alert('Semua petugas untuk Misa ini sudah hadir.');
-      return;
-    }
-    const res = scanVideoForFace(videoRef.current, unattendedOfficers);
-    setIsFaceDetected(res.faceDetected);
-    setFaceScanStatus(res.statusMessage);
-
-    if (res.bestMatch && res.bestMatch.confidence >= 0.60) {
-      playAudioFeedback('success');
-      setPendingOfficer(res.bestMatch.officer);
-      setFaceMatchConfidence(res.bestMatch.confidence);
-      setVerifiedBy('Face ID Biometric');
-      setCurrentStep(3);
-    } else if (res.faceDetected) {
-      const fallbackOfficer = unattendedOfficers[0];
-      if (fallbackOfficer) {
-        playAudioFeedback('tap');
-        setPendingOfficer(fallbackOfficer);
-        setFaceMatchConfidence(0.75);
-        setVerifiedBy('Face ID Biometric');
-        setCurrentStep(3);
-      }
-    } else {
-      playAudioFeedback('error');
-      setFaceScanStatus('Wajah belum terdeteksi. Posisikan wajah tegak lurus di lingkaran.');
-    }
-  };
 
 
 
@@ -2386,18 +2262,10 @@ export const KioskView: React.FC<KioskViewProps> = ({
                     <button
                       key={off.id}
                       onClick={() => {
-                        if (attendanceMode === 'faceid') {
-                          playAudioFeedback('tap');
-                          setPendingOfficer(off);
-                          setVerifiedBy('Face ID Biometric');
-                          setFaceMatchConfidence(0.95);
-                          setCurrentStep(3);
-                        } else {
-                          setPinInput(off.id.padStart(3, '0').slice(-3));
-                          playAudioFeedback('tap');
-                        }
+                        setPinInput(off.id.padStart(3, '0').slice(-3));
+                        playAudioFeedback('tap');
                       }}
-                      className="w-full p-2.5 bg-[#FAF7F2] hover:bg-[#F3EDE2] active:scale-98 border border-[#E8DFC8] hover:border-[#5B1414] rounded-2xl flex items-center justify-between text-left transition-all group shadow-2xs cursor-pointer"
+                      className="w-full p-2.5 bg-[#FAF7F2] hover:bg-[#F3EDE2] active:scale-98 border border-[#E8DFC8] hover:border-[#5B1414] rounded-2xl flex items-center justify-between text-left transition-all group shadow-2xs"
                     >
                       <div className="flex items-center gap-2.5 min-w-0">
                         <img
@@ -2426,295 +2294,95 @@ export const KioskView: React.FC<KioskViewProps> = ({
               </div>
             </div>
 
-            {/* Injected style for Face ID laser beam animation */}
-            <style>{`
-              @keyframes scanBeam {
-                0% { top: 12%; opacity: 0.8; }
-                50% { opacity: 1; }
-                100% { top: 86%; opacity: 0.8; }
-              }
-            `}</style>
-
             {/* ================================================================= */}
-            {/* KOLOM TENGAH: FACE ID BIOMETRIK & NUMPAD 3-DIGIT                 */}
+            {/* KOLOM TENGAH: NUMPAD & INPUT NO. ABSEN */}
             {/* ================================================================= */}
             <div className="lg:col-span-6 xl:col-span-5 flex flex-col items-center justify-center p-2 sm:p-4">
               
-              {/* Mode Selector Tab (Face ID vs Numpad) */}
-              <div className="flex items-center gap-1.5 p-1.5 bg-[#EAE2D2] rounded-2xl border border-[#D9CEBA] mb-4 shadow-2xs">
+              <div className="text-center mb-4">
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#5B1414] font-headline">
+                  Masukkan No. Absen
+                </h2>
+                <p className="text-xs text-[#6E5A4B] mt-1 max-w-xs mx-auto">
+                  Silakan ketik 3 digit No. Absen Anda (001 - 170) menggunakan papan tombol di bawah ini.
+                </p>
+              </div>
+
+              {/* 3 Digit Boxes Display */}
+              <div className="flex items-center justify-center gap-3.5 mb-3">
+                {[0, 1, 2].map(slotIdx => {
+                  const digit = pinInput[slotIdx];
+                  return (
+                    <div
+                      key={slotIdx}
+                      className="w-16 h-20 sm:w-20 sm:h-24 rounded-2xl border-2 border-[#D9CEBA] bg-white flex items-center justify-center text-3xl sm:text-4xl font-black text-[#5B1414] shadow-inner font-mono"
+                    >
+                      {digit || '_'}
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Numpad Rejection / Error Banner */}
+              {numpadError && (
+                <div className="mb-4 max-w-xs w-full p-3 bg-red-100 border border-red-300 rounded-xl text-xs font-bold text-red-900 flex items-center gap-2 animate-in fade-in shadow-xs">
+                  <AlertCircle className="w-4 h-4 text-red-700 shrink-0" />
+                  <span className="leading-tight">{numpadError}</span>
+                </div>
+              )}
+
+
+              {/* Numpad Keypad 3x4 */}
+              <div className="grid grid-cols-3 gap-2.5 sm:gap-3 w-full max-w-xs mb-4">
+                {['1', '2', '3', '4', '5', '6', '7', '8', '9'].map(num => (
+                  <button
+                    key={num}
+                    onClick={() => handleDigit(num)}
+                    className="h-14 sm:h-16 bg-[#F3EDE2] hover:bg-white active:scale-95 text-2xl font-bold text-[#2C2420] rounded-xl border border-[#D9CEBA] transition-all shadow-xs flex items-center justify-center select-none"
+                  >
+                    {num}
+                  </button>
+                ))}
+
+                {/* Backspace */}
                 <button
-                  onClick={() => {
-                    setAttendanceMode('faceid');
-                    playAudioFeedback('tap');
-                  }}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold flex items-center gap-2 transition-all cursor-pointer ${
-                    attendanceMode === 'faceid'
-                      ? 'bg-[#5B1414] text-white shadow-sm'
-                      : 'text-[#6E5A4B] hover:text-[#2C2420] hover:bg-white/60'
-                  }`}
+                  onClick={handleBackspace}
+                  className="h-14 sm:h-16 bg-[#F3EDE2] hover:bg-red-50 active:scale-95 text-[#5B1414] rounded-xl border border-[#D9CEBA] flex items-center justify-center transition-all shadow-xs"
+                  title="Hapus Digit"
                 >
-                  <ScanFace className="w-4 h-4 text-emerald-300" />
-                  <span>Face ID Otomatis</span>
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="material-symbols-outlined text-2xl">backspace</span>
                 </button>
 
+                {/* Zero */}
                 <button
-                  onClick={() => {
-                    setAttendanceMode('numpad');
-                    playAudioFeedback('tap');
-                  }}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold flex items-center gap-2 transition-all cursor-pointer ${
-                    attendanceMode === 'numpad'
-                      ? 'bg-[#5B1414] text-white shadow-sm'
-                      : 'text-[#6E5A4B] hover:text-[#2C2420] hover:bg-white/60'
-                  }`}
+                  onClick={() => handleDigit('0')}
+                  className="h-14 sm:h-16 bg-[#F3EDE2] hover:bg-white active:scale-95 text-2xl font-bold text-[#2C2420] rounded-xl border border-[#D9CEBA] transition-all shadow-xs flex items-center justify-center select-none"
                 >
-                  <span>🔢 Numpad 3-Digit</span>
+                  0
+                </button>
+
+                {/* Enter / Checkmark */}
+                <button
+                  onClick={handleNumpadSubmit}
+                  className="h-14 sm:h-16 bg-[#5B1414] hover:bg-[#4A0E17] active:scale-95 text-white rounded-xl flex items-center justify-center transition-all shadow-xs"
+                  title="Kirim No Absen"
+                >
+                  <Check className="w-6 h-6" />
                 </button>
               </div>
 
-              {attendanceMode === 'faceid' ? (
-                /* FACE ID VIEWPORT & SCANNER */
-                <div className="w-full max-w-sm flex flex-col items-center text-center space-y-3">
-                  <div>
-                    <h2 className="text-xl sm:text-2xl font-extrabold text-[#5B1414] font-headline flex items-center justify-center gap-2">
-                      <ScanFace className="w-6 h-6 text-[#5B1414]" />
-                      <span>Pindai Wajah Anda</span>
-                    </h2>
-                    <p className="text-xs text-[#6E5A4B] mt-0.5 max-w-xs mx-auto">
-                      Hadapkan wajah tegak ke kamera. Sistem mendeteksi biometrik wajah Anda secara instan.
-                    </p>
-                  </div>
+              {/* Kirim Absensi Button */}
+              <button
+                onClick={handleNumpadSubmit}
+                className="w-full max-w-xs py-3.5 bg-[#5B1414] hover:bg-[#4A0E17] active:scale-98 text-white rounded-xl font-extrabold text-xs sm:text-sm tracking-wider uppercase shadow-md transition-all flex items-center justify-center gap-2"
+              >
+                <span>KIRIM ABSENSI</span>
+                <ChevronRight className="w-4 h-4" />
+              </button>
 
-                  {/* Camera Video Viewport with Biometric Overlay */}
-                  <div className="relative w-full aspect-4/3 rounded-3xl overflow-hidden border-4 border-[#5B1414]/20 shadow-2xl bg-slate-950 flex items-center justify-center group">
-                    {/* Live Video Feed */}
-                    <video
-                      ref={(el) => {
-                        videoRef.current = el;
-                        if (el && cameraStream && el.srcObject !== cameraStream) {
-                          el.srcObject = cameraStream;
-                          el.play().catch(() => {});
-                        }
-                      }}
-                      autoPlay
-                      playsInline
-                      muted
-                      onLoadedMetadata={(e) => {
-                        e.currentTarget.play().catch(() => {});
-                      }}
-                      className={`w-full h-full object-cover scale-x-[-1] ${
-                        cameraActive ? 'block' : 'hidden'
-                      }`}
-                    />
-
-                    {/* Camera Off / Denied Fallback */}
-                    {!cameraActive && (
-                      <div className="p-6 text-center text-slate-300 space-y-2">
-                        <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mx-auto text-amber-400">
-                          <CameraOff className="w-6 h-6" />
-                        </div>
-                        <p className="text-xs font-bold text-white">
-                          Kamera Sedang Tidak Aktif
-                        </p>
-                        <p className="text-[10px] text-slate-400 max-w-[220px] mx-auto">
-                          {cameraError || 'Aktifkan izin kamera pada browser untuk menggunakan fitur Face ID otomatis.'}
-                        </p>
-                        <button
-                          onClick={() => setAttendanceMode('numpad')}
-                          className="mt-2 px-3 py-1.5 bg-[#5B1414] hover:bg-[#4A0E17] text-white text-xs font-bold rounded-xl shadow-xs cursor-pointer"
-                        >
-                          Gunakan Numpad Saja
-                        </button>
-                      </div>
-                    )}
-
-                    {/* Biometric Oval Guideline & Animated Laser Scanning Beam */}
-                    {cameraActive && (
-                      <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center overflow-hidden">
-                        {/* Target Reticle Oval */}
-                        <div className="w-40 h-52 sm:w-48 sm:h-60 border-2 border-dashed border-emerald-400/80 rounded-[50%] shadow-[0_0_20px_rgba(52,211,153,0.3)] relative flex items-center justify-center">
-                          {/* Laser Beam Line */}
-                          <div
-                            className="absolute w-full h-0.5 bg-gradient-to-r from-transparent via-emerald-400 to-transparent shadow-[0_0_12px_#34d399]"
-                            style={{
-                              animation: 'scanBeam 2.2s ease-in-out infinite alternate'
-                            }}
-                          />
-                          
-                          {/* Corner brackets */}
-                          <div className="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-emerald-400 rounded-tl-sm" />
-                          <div className="absolute -top-2 -right-2 w-4 h-4 border-t-2 border-r-2 border-emerald-400 rounded-tr-sm" />
-                          <div className="absolute -bottom-2 -left-2 w-4 h-4 border-b-2 border-l-2 border-emerald-400 rounded-bl-sm" />
-                          <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-emerald-400 rounded-br-sm" />
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Live Tag */}
-                    <div className="absolute top-3 left-3 bg-black/60 backdrop-blur-xs px-2.5 py-1 rounded-full text-white text-[10px] font-bold flex items-center gap-1.5 pointer-events-none">
-                      <span className={`w-2 h-2 rounded-full ${cameraActive ? 'bg-emerald-400 animate-ping' : 'bg-slate-400'}`} />
-                      <span>{cameraActive ? 'FACE ID AKTIF' : 'OFFLINE'}</span>
-                    </div>
-
-                    {/* Top Status Banner in Viewport */}
-                    <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-xs px-2.5 py-1 rounded-full text-emerald-300 text-[10px] font-mono font-bold flex items-center gap-1 pointer-events-none">
-                      <Sparkles className="w-3 h-3 text-amber-300" />
-                      <span>AI SCAN</span>
-                    </div>
-
-                    {/* Candidate Preview Pill at bottom of viewport */}
-                    {matchCandidate && (
-                      <div className="absolute bottom-3 inset-x-3 bg-black/80 backdrop-blur-md p-2 rounded-2xl border border-emerald-500/60 text-white flex items-center gap-2.5 shadow-lg animate-in slide-in-from-bottom-2">
-                        <img
-                          src={matchCandidate.avatarUrl}
-                          alt={matchCandidate.name}
-                          className="w-8 h-8 rounded-full object-cover border border-emerald-400 shrink-0"
-                        />
-                        <div className="min-w-0 text-left flex-1">
-                          <p className="text-[11px] font-bold text-emerald-300 truncate">
-                            {matchCandidate.name}
-                          </p>
-                          <p className="text-[9px] text-slate-300">
-                            No. #{matchCandidate.id.padStart(3, '0')} • Kecocokan {Math.round((faceMatchConfidence || 0.85) * 100)}%
-                          </p>
-                        </div>
-                        <button
-                          onClick={() => {
-                            playAudioFeedback('success');
-                            setPendingOfficer(matchCandidate);
-                            setFaceMatchConfidence(faceMatchConfidence || 0.88);
-                            setVerifiedBy('Face ID Biometric');
-                            setCurrentStep(3);
-                          }}
-                          className="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 text-white text-[10px] font-black rounded-lg cursor-pointer shrink-0"
-                        >
-                          Konfirmasi
-                        </button>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Feedback Status Box */}
-                  <div className="w-full p-2.5 bg-[#FAF7F2] border border-[#D9CEBA] rounded-xl text-xs font-semibold text-[#5B1414] flex items-center justify-between gap-2 shadow-2xs">
-                    <div className="flex items-center gap-2 truncate">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-                      <span className="truncate text-[11px]">{faceScanStatus}</span>
-                    </div>
-                    {isFaceDetected && (
-                      <span className="text-[10px] font-mono font-bold text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded-md shrink-0">
-                        WAJAH OK
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="w-full flex items-center gap-2">
-                    <button
-                      onClick={handleManualFaceScan}
-                      className="flex-1 py-3 bg-gradient-to-r from-emerald-700 to-emerald-800 hover:from-emerald-600 hover:to-emerald-700 active:scale-98 text-white rounded-xl font-extrabold text-xs tracking-wider uppercase shadow-md transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-                    >
-                      <ScanFace className="w-4 h-4 text-amber-300" />
-                      <span>Pindai Wajah Sekarang</span>
-                    </button>
-
-                    <button
-                      onClick={() => setAttendanceMode('numpad')}
-                      className="px-3 py-3 bg-[#F3EDE2] hover:bg-white active:scale-98 text-[#5B1414] border border-[#D9CEBA] rounded-xl font-bold text-xs transition-all flex items-center justify-center cursor-pointer shadow-2xs"
-                      title="Gunakan Numpad"
-                    >
-                      🔢 Numpad
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                /* NUMPAD VIEWPORT */
-                <>
-                  <div className="text-center mb-3">
-                    <h2 className="text-xl sm:text-2xl font-extrabold text-[#5B1414] font-headline">
-                      Masukkan No. Absen
-                    </h2>
-                    <p className="text-xs text-[#6E5A4B] mt-0.5 max-w-xs mx-auto">
-                      Silakan ketik 3 digit No. Absen Anda (001 - 170) menggunakan papan tombol di bawah ini.
-                    </p>
-                  </div>
-
-                  {/* 3 Digit Boxes Display */}
-                  <div className="flex items-center justify-center gap-3.5 mb-3">
-                    {[0, 1, 2].map(slotIdx => {
-                      const digit = pinInput[slotIdx];
-                      return (
-                        <div
-                          key={slotIdx}
-                          className="w-16 h-20 sm:w-20 sm:h-24 rounded-2xl border-2 border-[#D9CEBA] bg-white flex items-center justify-center text-3xl sm:text-4xl font-black text-[#5B1414] shadow-inner font-mono"
-                        >
-                          {digit || '_'}
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                  {/* Numpad Rejection / Error Banner */}
-                  {numpadError && (
-                    <div className="mb-3 max-w-xs w-full p-3 bg-red-100 border border-red-300 rounded-xl text-xs font-bold text-red-900 flex items-center gap-2 animate-in fade-in shadow-xs">
-                      <AlertCircle className="w-4 h-4 text-red-700 shrink-0" />
-                      <span className="leading-tight">{numpadError}</span>
-                    </div>
-                  )}
-
-                  {/* Numpad Keypad 3x4 */}
-                  <div className="grid grid-cols-3 gap-2 sm:gap-2.5 w-full max-w-xs mb-3">
-                    {['1', '2', '3', '4', '5', '6', '7', '8', '9'].map(num => (
-                      <button
-                        key={num}
-                        onClick={() => handleDigit(num)}
-                        className="h-13 sm:h-15 bg-[#F3EDE2] hover:bg-white active:scale-95 text-2xl font-bold text-[#2C2420] rounded-xl border border-[#D9CEBA] transition-all shadow-xs flex items-center justify-center select-none cursor-pointer"
-                      >
-                        {num}
-                      </button>
-                    ))}
-
-                    {/* Backspace */}
-                    <button
-                      onClick={handleBackspace}
-                      className="h-13 sm:h-15 bg-[#F3EDE2] hover:bg-red-50 active:scale-95 text-[#5B1414] rounded-xl border border-[#D9CEBA] flex items-center justify-center transition-all shadow-xs cursor-pointer"
-                      title="Hapus Digit"
-                    >
-                      <span className="material-symbols-outlined text-2xl">backspace</span>
-                    </button>
-
-                    {/* Zero */}
-                    <button
-                      onClick={() => handleDigit('0')}
-                      className="h-13 sm:h-15 bg-[#F3EDE2] hover:bg-white active:scale-95 text-2xl font-bold text-[#2C2420] rounded-xl border border-[#D9CEBA] transition-all shadow-xs flex items-center justify-center select-none cursor-pointer"
-                    >
-                      0
-                    </button>
-
-                    {/* Enter / Checkmark */}
-                    <button
-                      onClick={handleNumpadSubmit}
-                      className="h-13 sm:h-15 bg-[#5B1414] hover:bg-[#4A0E17] active:scale-95 text-white rounded-xl flex items-center justify-center transition-all shadow-xs cursor-pointer"
-                      title="Kirim No Absen"
-                    >
-                      <Check className="w-6 h-6" />
-                    </button>
-                  </div>
-
-                  {/* Kirim Absensi Button */}
-                  <button
-                    onClick={handleNumpadSubmit}
-                    className="w-full max-w-xs py-3 bg-[#5B1414] hover:bg-[#4A0E17] active:scale-98 text-white rounded-xl font-extrabold text-xs tracking-wider uppercase shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
-                  >
-                    <span>KIRIM ABSENSI</span>
-                    <ChevronRight className="w-4 h-4" />
-                  </button>
-
-                  <span className="text-[10px] text-[#8C7662] mt-2">
-                    *Dapat menggunakan keyboard angka fisik (0-9, Backspace, Enter)
-                  </span>
-                </>
-              )}
+              <span className="text-[10px] text-[#8C7662] mt-3">
+                *Dapat menggunakan keyboard angka fisik (0-9, Backspace, Enter)
+              </span>
 
             </div>
 
@@ -2834,18 +2502,9 @@ export const KioskView: React.FC<KioskViewProps> = ({
                 </span>
               </div>
 
-              <div className="flex items-center gap-2">
-                {verifiedBy === 'Face ID Biometric' ? (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-950 border border-emerald-300 text-xs font-black uppercase tracking-wider">
-                    <ScanFace className="w-4 h-4 text-emerald-700" />
-                    <span>Face ID Biometrik {faceMatchConfidence ? `(${Math.round(faceMatchConfidence * 100)}%)` : ''}</span>
-                  </span>
-                ) : (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-950 border border-amber-300 text-xs font-black uppercase tracking-wider">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                    <span>Numpad: #{pendingOfficer.id.padStart(3, '0')}</span>
-                  </span>
-                )}
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-950 border border-amber-300 text-xs font-black uppercase tracking-wider">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <span>No. Absen: #{pendingOfficer.id.padStart(3, '0')}</span>
               </div>
             </div>
 
@@ -2932,15 +2591,13 @@ export const KioskView: React.FC<KioskViewProps> = ({
                 {/* Officer Profile & Verification Card */}
                 <div className="bg-gradient-to-br from-amber-50/80 via-[#FAF7F2] to-white border-2 border-amber-300/80 p-4 rounded-2xl space-y-3 shadow-xs">
                   {/* Pertanyaan Verifikasi Identitas */}
-                  <div className="p-3 bg-amber-100/80 border-2 border-amber-300 rounded-xl space-y-1">
-                    <p className="text-xs sm:text-sm font-black text-amber-950 flex items-center gap-1.5">
+                  <div className="p-2.5 bg-amber-100/70 border border-amber-200/90 rounded-xl">
+                    <p className="text-xs font-black text-amber-950 flex items-center gap-1.5">
                       <span className="text-base">❓</span>
                       <span>Apakah benar ini data Anda?</span>
                     </p>
-                    <p className="text-[11px] text-amber-900 font-medium">
-                      {verifiedBy === 'Face ID Biometric'
-                        ? `Wajah Anda cocok dengan akurasi biometrik ${Math.round((faceMatchConfidence || 0.9) * 100)}%. Mohon pastikan nama & no. absen sesuai sebelum foto presensi diambil.`
-                        : 'Mohon verifikasi nama dan nomor absen di bawah ini sebelum melanjutkan absensi.'}
+                    <p className="text-[10px] text-amber-800 mt-0.5 font-medium">
+                      Mohon verifikasi nama dan nomor absen di bawah ini sebelum melanjutkan absensi.
                     </p>
                   </div>
 
@@ -3009,7 +2666,6 @@ export const KioskView: React.FC<KioskViewProps> = ({
                         playAudioFeedback('tap');
                         setPendingOfficer(null);
                         setCapturedSnapshot(null);
-                        setFaceMatchConfidence(null);
                         setCurrentStep(2);
                       }}
                       className="w-full py-2.5 bg-white hover:bg-rose-50 text-rose-700 hover:text-rose-900 border border-rose-200 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
