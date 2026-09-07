@@ -2492,18 +2492,19 @@ export const KioskView: React.FC<KioskViewProps> = ({
           
           <div className="bg-white border-2 border-[#D9CEBA] rounded-3xl p-6 sm:p-8 shadow-2xl w-full text-center space-y-6 animate-in zoom-in-95 relative overflow-hidden">
             
-            {/* Top Status Header */}
+            {/* Top Status Header - Verifikasi Identitas */}
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E8DFC8] pb-4">
               <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-xs font-black text-[#5B1414] uppercase tracking-wider font-headline">
-                  Live Camera Presensi Sakristi
+                <span className="w-3 h-3 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="text-xs sm:text-sm font-black text-[#5B1414] uppercase tracking-wider font-headline flex items-center gap-1.5">
+                  <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                  <span>Verifikasi Data Petugas</span>
                 </span>
               </div>
 
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-900 border border-amber-300 text-[11px] font-black uppercase tracking-wider">
-                <CheckCircle2 className="w-3.5 h-3.5 text-amber-700" />
-                <span>ID #{pendingOfficer.id.padStart(3, '0')} Terdaftar</span>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-950 border border-amber-300 text-xs font-black uppercase tracking-wider">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <span>No. Absen: #{pendingOfficer.id.padStart(3, '0')}</span>
               </div>
             </div>
 
@@ -2587,20 +2588,34 @@ export const KioskView: React.FC<KioskViewProps> = ({
               {/* Right Column: Officer Details & Confirmation CTA (5 cols) */}
               <div className="md:col-span-5 text-left space-y-4">
                 
-                {/* Officer Profile Card */}
-                <div className="bg-[#FAF7F2] border border-[#D9CEBA] p-4 rounded-2xl space-y-3">
+                {/* Officer Profile & Verification Card */}
+                <div className="bg-gradient-to-br from-amber-50/80 via-[#FAF7F2] to-white border-2 border-amber-300/80 p-4 rounded-2xl space-y-3 shadow-xs">
+                  {/* Pertanyaan Verifikasi Identitas */}
+                  <div className="p-2.5 bg-amber-100/70 border border-amber-200/90 rounded-xl">
+                    <p className="text-xs font-black text-amber-950 flex items-center gap-1.5">
+                      <span className="text-base">❓</span>
+                      <span>Apakah benar ini data Anda?</span>
+                    </p>
+                    <p className="text-[10px] text-amber-800 mt-0.5 font-medium">
+                      Mohon verifikasi nama dan nomor absen di bawah ini sebelum melanjutkan absensi.
+                    </p>
+                  </div>
+
                   <div className="flex items-center gap-3">
                     <img
                       src={pendingOfficer.avatarUrl}
                       alt={pendingOfficer.name}
-                      className="w-12 h-12 rounded-xl object-cover border border-[#D9CEBA] shadow-2xs shrink-0"
+                      className="w-14 h-14 rounded-2xl object-cover border-2 border-amber-400 shadow-md shrink-0 bg-white"
                     />
                     <div className="min-w-0">
-                      <h2 className="text-base font-extrabold text-[#5B1414] font-headline tracking-tight truncate">
+                      <div className="text-[11px] font-mono font-black text-amber-800 uppercase tracking-wide">
+                        NO. ABSEN: <span className="text-sm font-black text-[#5B1414]">#{pendingOfficer.id.padStart(3, '0')}</span>
+                      </div>
+                      <h2 className="text-base sm:text-lg font-black text-[#5B1414] font-headline tracking-tight truncate">
                         {pendingOfficer.name}
                       </h2>
-                      <div className="text-xs font-mono font-bold text-[#8C7662]">
-                        No. Absen: <span className="text-[#5B1414] font-black">#{pendingOfficer.id.padStart(3, '0')}</span>
+                      <div className="text-[11px] text-[#8C7662] font-semibold truncate">
+                        {pendingOfficer.wilayah || 'Asisten Imam Paroki'}
                       </div>
                     </div>
                   </div>
@@ -2611,8 +2626,8 @@ export const KioskView: React.FC<KioskViewProps> = ({
                       <span className="font-bold text-[#5B1414]">{pendingOfficer.role}</span>
                     </div>
                     <div className="text-[#524135] font-semibold flex items-center justify-between">
-                      <span className="text-[#8C7662]">Wilayah:</span>
-                      <span className="font-bold">{pendingOfficer.wilayah || 'St. Yakobus'}</span>
+                      <span className="text-[#8C7662]">Status Jadwal:</span>
+                      <span className="font-bold text-emerald-700">Terdaftar di Misa Ini</span>
                     </div>
                   </div>
                 </div>
@@ -2625,13 +2640,14 @@ export const KioskView: React.FC<KioskViewProps> = ({
                   </div>
                 ) : (
                   <div className="space-y-2.5">
+                    {/* Tombol Utama: Ya, Benar Saya */}
                     <button
                       onClick={handleConfirmAttendance}
                       disabled={isCapturing}
-                      className="w-full py-3.5 bg-gradient-to-r from-[#5B1414] to-[#7C191E] hover:from-[#4A0E17] hover:to-[#5B1414] active:scale-98 text-white rounded-xl font-extrabold text-xs tracking-wider uppercase shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                      className="w-full py-3.5 bg-gradient-to-r from-emerald-600 via-emerald-700 to-emerald-800 hover:from-emerald-500 hover:to-emerald-700 active:scale-98 text-white rounded-xl font-extrabold text-xs tracking-wider uppercase shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
                     >
                       <Camera className="w-4 h-4 text-amber-300" />
-                      <span>{isCapturing ? 'Merekam Foto...' : 'Ambil Foto & Konfirmasi Hadir'}</span>
+                      <span>{isCapturing ? 'Merekam Foto...' : 'Ya, Benar Saya • Ambil Foto & Presensi'}</span>
                     </button>
 
                     {capturedSnapshot && (
@@ -2644,16 +2660,18 @@ export const KioskView: React.FC<KioskViewProps> = ({
                       </button>
                     )}
 
+                    {/* Tombol Pembatalan: Bukan Saya */}
                     <button
                       onClick={() => {
+                        playAudioFeedback('tap');
                         setPendingOfficer(null);
                         setCapturedSnapshot(null);
                         setCurrentStep(2);
                       }}
-                      className="w-full text-center text-xs font-bold text-[#8C7662] hover:text-[#5B1414] transition-colors inline-flex items-center justify-center gap-1 pt-1 cursor-pointer"
+                      className="w-full py-2.5 bg-white hover:bg-rose-50 text-rose-700 hover:text-rose-900 border border-rose-200 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
                     >
                       <ArrowLeft className="w-3.5 h-3.5" />
-                      <span>Bukan Saya? Kembali ke Numpad</span>
+                      <span>Bukan Saya (Ganti / Masukkan Ulang No. Absen)</span>
                     </button>
                   </div>
                 )}
