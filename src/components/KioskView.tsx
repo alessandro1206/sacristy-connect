@@ -1238,7 +1238,25 @@ export const KioskView: React.FC<KioskViewProps> = ({
 
   // Step 2 States (3-Digit Numpad & Sidebars)
   const [pinInput, setPinInput] = useState<string>('');
-  const [liveTime, setLiveTime] = useState<string>('12 Agustus 2024 12:01');
+  const formatLiveClock = () => {
+    const now = new Date();
+    return now.toLocaleDateString('id-ID', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    }) + ' ' + now.toLocaleTimeString('id-ID', {
+      hour: '2-digit',
+      minute: '2-digit'
+    }) + ' WIB';
+  };
+  const [liveTime, setLiveTime] = useState<string>(formatLiveClock);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setLiveTime(formatLiveClock());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
   const [unattendedSearch, setUnattendedSearch] = useState<string>('');
   const [attendedSearch, setAttendedSearch] = useState<string>('');
 
