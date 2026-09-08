@@ -1902,32 +1902,153 @@ export const KioskView: React.FC<KioskViewProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
             
-            {/* Left Column: Title & Guide */}
-            <div className="md:col-span-5 space-y-6">
+            {/* Left Column: Title, Selected Session, & Koorlap Verification (Side Panel) */}
+            <div className="md:col-span-5 space-y-5 md:sticky md:top-6">
               <div>
                 <h1 className="text-3xl md:text-4xl font-extrabold text-[#5B1414] font-headline tracking-tight uppercase leading-tight">
                   Pilih Jadwal Misa
                 </h1>
                 <p className="text-sm text-[#6E5A4B] mt-2 leading-relaxed">
-                  Silakan pilih jadwal Misa yang akan bertugas. Pastikan jadwal dan nama Koorlap sesuai.
+                  Silakan pilih jadwal Misa di panel samping, lalu verifikasi Koorlap untuk membuka presensi.
                 </p>
               </div>
 
+              {/* Password & No Absen Koorlap Box (Sticky Side Panel) */}
+              <div className="bg-[#F3EDE2] border border-[#D9CEBA] rounded-2xl p-5 shadow-xs space-y-3.5">
+                {/* Active Session Indicator */}
+                <div className="bg-white/90 p-3 rounded-xl border border-[#D9CEBA] shadow-2xs">
+                  <div className="flex items-center justify-between gap-2 mb-1">
+                    <span className="text-[10px] font-black tracking-wider uppercase text-[#7c191e] bg-red-100/70 px-2 py-0.5 rounded-md">
+                      Sesi Terpilih
+                    </span>
+                    <span className="text-[10px] font-bold text-[#6E5A4B]">
+                      {selectedSession.koorlapCount} Petugas Koorlap
+                    </span>
+                  </div>
+                  <h2 className="text-base font-black text-[#2C2420] tracking-tight">
+                    {selectedSession.dayLabel}, {selectedSession.timeDisplay}
+                  </h2>
+                  <p className="text-xs font-semibold text-[#5B1414]">
+                    {selectedSession.dateDisplay} &bull; {selectedSession.location}
+                  </p>
+                  <p className="text-[11px] text-[#6E5A4B] mt-1 line-clamp-2">
+                    {selectedSession.koorlapDisplay}
+                  </p>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div>
+                    <label className="block text-xs font-black text-[#5B1414] uppercase tracking-wider">
+                      Verifikasi Koorlap Jaga ({selectedSession.koorlapCount} Petugas)
+                    </label>
+                    <span className="text-[11px] text-[#6E5A4B]">
+                      {selectedSession.category === 'harian' && 'Misa Harian: Cukup 1 Koorlap yang bertugas.'}
+                      {selectedSession.category === 'mingguan' && 'Misa Sabtu Sore & Minggu: 2 Koorlap bertugas.'}
+                      {selectedSession.category === 'hari_raya' && 'Misa Hari Raya: Tim Koorlap Gabungan.'}
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-bold text-[#7c191e] bg-red-100 px-2 py-0.5 rounded-full shrink-0">
+                    Wajib Koorlap
+                  </span>
+                </div>
+
+                {/* Quick Select for Assigned Koorlaps */}
+                {selectedSession.koorlaps && selectedSession.koorlaps.length > 0 && (
+                  <div className="bg-white/80 p-2.5 rounded-xl border border-[#D9CEBA] space-y-1.5">
+                    <span className="text-[11px] font-bold text-[#5B1414] uppercase tracking-tight block">
+                      Pilih Koorlap yang Sedang Membuka Kiosk:
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedSession.koorlaps.map(k => {
+                        const isChosen = koorlapId.padStart(3, '0') === k.id.padStart(3, '0') || koorlapId === k.id;
+                        return (
+                          <button
+                            key={k.id}
+                            type="button"
+                            onClick={() => {
+                              setKoorlapId(k.id.padStart(3, '0'));
+                              playAudioFeedback('tap');
+                            }}
+                            className={`px-3 py-1 rounded-lg text-xs font-bold border transition-all flex items-center gap-1.5 cursor-pointer ${
+                              isChosen
+                                ? 'bg-[#5B1414] text-white border-[#5B1414] shadow-xs'
+                                : 'bg-[#FAF7F2] text-[#2C2420] border-[#D9CEBA] hover:bg-white'
+                            }`}
+                          >
+                            <ShieldCheck className="w-3.5 h-3.5" />
+                            <span>{k.name}</span>
+                            <span className="font-mono text-[10px] opacity-80">(No. {k.id.padStart(3, '0')})</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {/* Field 1: No. Absen Koorlap (3 Digit) */}
+                  <div>
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-xs font-semibold text-[#6E5A4B]">No. Absen Koorlap</span>
+                      {officers.find(o => o.id === koorlapId.padStart(3, '0') || o.id === koorlapId) && (
+                        <span className="text-[10px] text-emerald-800 font-bold bg-emerald-100 px-1.5 py-0.2 rounded truncate max-w-[120px]">
+                          ✓ {officers.find(o => o.id === koorlapId.padStart(3, '0') || o.id === koorlapId)?.shortName}
+                        </span>
+                      )}
+                    </div>
+                    <input
+                      type="text"
+                      maxLength={3}
+                      value={koorlapId}
+                      onChange={e => setKoorlapId(e.target.value.replace(/\D/g, ''))}
+                      placeholder="3 digit (cth: 001)"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#D9CEBA] bg-white text-sm font-mono font-bold tracking-wider focus:ring-2 focus:ring-[#5B1414] outline-none"
+                    />
+                  </div>
+
+                  {/* Field 2: Password Koorlap */}
+                  <div>
+                    <span className="text-xs font-semibold text-[#6E5A4B] block mb-1">Password Koorlap</span>
+                    <input
+                      type="password"
+                      value={koorlapPassword}
+                      onChange={e => setKoorlapPassword(e.target.value)}
+                      placeholder="PIN / Password..."
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#D9CEBA] bg-white text-sm font-medium focus:ring-2 focus:ring-[#5B1414] outline-none"
+                    />
+                  </div>
+                </div>
+
+                {sessionAuthError && (
+                  <div className="p-2.5 rounded-xl bg-red-100 text-red-900 text-xs font-bold border border-red-300">
+                    {sessionAuthError}
+                  </div>
+                )}
+
+                <button
+                  onClick={handleProceedToModeAbsen}
+                  className="w-full py-3.5 bg-[#5B1414] hover:bg-[#4A0E17] active:scale-98 text-white rounded-xl font-extrabold text-sm tracking-wider uppercase shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <span>MASUK KE MODE ABSEN</span>
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+
               {/* Panduan Box */}
-              <div className="bg-[#F3EDE2] border border-[#D9CEBA] rounded-2xl p-5 shadow-xs">
-                <h3 className="text-xs font-black text-[#5B1414] uppercase tracking-wider flex items-center gap-2 mb-3">
+              <div className="bg-[#FAF7F2] border border-[#D9CEBA] rounded-2xl p-4 shadow-xs">
+                <h3 className="text-xs font-black text-[#5B1414] uppercase tracking-wider flex items-center gap-2 mb-2">
                   <span className="w-4 h-4 rounded-full bg-[#5B1414] text-white flex items-center justify-center text-[10px]">i</span>
                   <span>Panduan</span>
                 </h3>
-                <ol className="text-xs text-[#524135] space-y-2.5 list-decimal list-inside font-medium leading-normal">
-                  <li>Pilih salah satu jadwal di panel kanan.</li>
-                  <li>Masukkan <strong>Password Koorlap</strong> untuk mengunci sesi.</li>
+                <ol className="text-xs text-[#524135] space-y-1.5 list-decimal list-inside font-medium leading-normal">
+                  <li>Pilih salah satu jadwal di panel samping kanan.</li>
+                  <li>Masukkan <strong>No. Absen & Password Koorlap</strong>.</li>
                   <li>Tekan tombol <strong>Masuk ke Mode Absen</strong>.</li>
                 </ol>
               </div>
             </div>
 
-            {/* Right Column: Schedule Cards Grid + Password Verification */}
+            {/* Right Column: Schedule Cards Grid */}
             <div className="md:col-span-7 space-y-6">
               
               {/* Category Filter Tabs */}
@@ -1937,7 +2058,6 @@ export const KioskView: React.FC<KioskViewProps> = ({
                   { key: 'harian', label: 'Misa Harian (1 Koorlap)' },
                   { key: 'mingguan', label: 'Sabtu & Minggu' },
                 ].map(tab => (
-
                   <button
                     key={tab.key}
                     onClick={() => {
@@ -2065,110 +2185,6 @@ export const KioskView: React.FC<KioskViewProps> = ({
                     </div>
                   );
                 })}
-              </div>
-
-              {/* Password & No Absen Koorlap Box */}
-              <div className="bg-[#F3EDE2] border border-[#D9CEBA] rounded-2xl p-5 shadow-xs space-y-3.5">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <label className="block text-xs font-black text-[#5B1414] uppercase tracking-wider">
-                      Verifikasi Koorlap Jaga ({selectedSession.koorlapCount} Petugas Koorlap)
-                    </label>
-                    <span className="text-[11px] text-[#6E5A4B]">
-                      {selectedSession.category === 'harian' && 'Misa Harian: Cukup 1 Koorlap yang bertugas.'}
-                      {selectedSession.category === 'mingguan' && 'Misa Sabtu Sore & Minggu: 2 Koorlap bertugas bersama.'}
-                      {selectedSession.category === 'hari_raya' && 'Misa Hari Besar Natal & Paskah: Tim 3-4 Koorlap Gabungan.'}
-                    </span>
-                  </div>
-                  <span className="text-[10px] font-bold text-[#7c191e] bg-red-100 px-2 py-0.5 rounded-full shrink-0">
-                    Wajib Koorlap
-                  </span>
-                </div>
-
-                {/* Quick Select for Assigned Koorlaps */}
-                {selectedSession.koorlaps && selectedSession.koorlaps.length > 0 && (
-                  <div className="bg-white/80 p-2.5 rounded-xl border border-[#D9CEBA] space-y-1.5">
-                    <span className="text-[11px] font-bold text-[#5B1414] uppercase tracking-tight block">
-                      Pilih Koorlap yang Sedang Membuka Kiosk:
-                    </span>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedSession.koorlaps.map(k => {
-                        const isChosen = koorlapId.padStart(3, '0') === k.id.padStart(3, '0') || koorlapId === k.id;
-                        return (
-                          <button
-                            key={k.id}
-                            type="button"
-                            onClick={() => {
-                              setKoorlapId(k.id.padStart(3, '0'));
-                              playAudioFeedback('tap');
-                            }}
-                            className={`px-3 py-1 rounded-lg text-xs font-bold border transition-all flex items-center gap-1.5 ${
-                              isChosen
-                                ? 'bg-[#5B1414] text-white border-[#5B1414] shadow-xs'
-                                : 'bg-[#FAF7F2] text-[#2C2420] border-[#D9CEBA] hover:bg-white'
-                            }`}
-                          >
-                            <ShieldCheck className="w-3.5 h-3.5" />
-                            <span>{k.name}</span>
-                            <span className="font-mono text-[10px] opacity-80">(No. {k.id.padStart(3, '0')})</span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {/* Field 1: No. Absen Koorlap (3 Digit) */}
-                  <div>
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="text-xs font-semibold text-[#6E5A4B]">No. Absen Koorlap</span>
-                      {officers.find(o => o.id === koorlapId.padStart(3, '0') || o.id === koorlapId) && (
-                        <span className="text-[10px] text-emerald-800 font-bold bg-emerald-100 px-1.5 py-0.2 rounded truncate max-w-[120px]">
-                          ✓ {officers.find(o => o.id === koorlapId.padStart(3, '0') || o.id === koorlapId)?.shortName}
-                        </span>
-                      )}
-                    </div>
-                    <input
-                      type="text"
-                      maxLength={3}
-                      value={koorlapId}
-                      onChange={e => setKoorlapId(e.target.value.replace(/\D/g, ''))}
-                      placeholder="3 digit (cth: 001)"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#D9CEBA] bg-white text-sm font-mono font-bold tracking-wider focus:ring-2 focus:ring-[#5B1414] outline-none"
-                    />
-                  </div>
-
-                  {/* Field 2: Password Koorlap */}
-                  <div>
-                    <span className="text-xs font-semibold text-[#6E5A4B] block mb-1">Password Koorlap</span>
-                    <input
-                      type="password"
-                      value={koorlapPassword}
-                      onChange={e => setKoorlapPassword(e.target.value)}
-                      placeholder="Masukkan PIN / Password..."
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#D9CEBA] bg-white text-sm font-medium focus:ring-2 focus:ring-[#5B1414] outline-none"
-                    />
-                  </div>
-                </div>
-
-                <span className="text-[10px] text-[#8C7662] block">
-                  *Masukkan No. Absen (3 digit) dan Password Koorlap untuk membuka sesi presensi petugas.
-                </span>
-
-                {sessionAuthError && (
-                  <div className="p-2.5 rounded-xl bg-red-100 text-red-900 text-xs font-bold border border-red-300">
-                    {sessionAuthError}
-                  </div>
-                )}
-
-                <button
-                  onClick={handleProceedToModeAbsen}
-                  className="w-full py-3.5 bg-[#5B1414] hover:bg-[#4A0E17] active:scale-98 text-white rounded-xl font-extrabold text-sm tracking-wider uppercase shadow-md transition-all flex items-center justify-center gap-2"
-                >
-                  <span>MASUK KE MODE ABSEN</span>
-                  <ChevronRight className="w-4 h-4" />
-                </button>
               </div>
 
             </div>
