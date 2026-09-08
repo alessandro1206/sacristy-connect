@@ -359,30 +359,23 @@ export default function App() {
 
 
   // Handle officer attendance check-in with face snapshot
-  const handleAttendanceSuccess = (officerId: string, officerName: string, snapshotUrl?: string) => {
-    // 1. Update current slot attendedServerIds & attendanceSnapshots
+  const handleAttendanceSuccess = (officerId: string, officerName: string, snapshotUrl?: string, slotId?: string) => {
+    const targetSlotId = slotId || currentSlot.id;
+
+    // 1. Update target slot attendedServerIds & attendanceSnapshots
     setSchedule(prevSchedule =>
       prevSchedule.map(slot => {
-        if (slot.id === currentSlot.id) {
+        if (slot.id === targetSlotId) {
           if (!slot.attendedServerIds.includes(officerId)) {
             const newAttended = [...slot.attendedServerIds, officerId];
-            const updatedServerIds = [...slot.serverIds];
-            const updatedServerNames = [...slot.serverNames];
             const updatedSnapshots = {
               ...(slot.attendanceSnapshots || {}),
               ...(snapshotUrl ? { [officerId]: snapshotUrl } : {})
             };
 
-            if (updatedServerIds[3] === null) {
-              updatedServerIds[3] = officerId;
-              updatedServerNames[3] = officerName;
-            }
-
             return {
               ...slot,
               attendedServerIds: newAttended,
-              serverIds: updatedServerIds,
-              serverNames: updatedServerNames,
               attendanceSnapshots: updatedSnapshots
             };
           }
@@ -390,6 +383,9 @@ export default function App() {
         return slot;
       })
     );
+
+    // Keep current active slot ID in sync
+    setCurrentSlotId(targetSlotId);
 
     // 2. Increment dutyCount for the officer
     setOfficers(prevOfficers =>
@@ -402,6 +398,7 @@ export default function App() {
     );
 
     // 3. Append to system logs
+    const targetSlot = schedule.find(s => s.id === targetSlotId) || currentSlot;
     const now = new Date();
     const timeString = now.toLocaleDateString('id-ID', { year: 'numeric', month: '2-digit', day: '2-digit' }) + ' ' +
                        now.toLocaleTimeString('id-ID') + ' WIB';
@@ -409,7 +406,7 @@ export default function App() {
       id: 'log-' + Date.now(),
       timestamp: timeString,
       type: 'attendance',
-      description: `Presensi Mandiri ID: ${officerId} (${officerName}) - Hadir Sesi ${currentSlot.massTime}${snapshotUrl ? ' [Foto Wajah]' : ''}`,
+      description: `Presensi Mandiri ID: ${officerId} (${officerName}) - Hadir Sesi ${targetSlot.displayDate}, ${targetSlot.massTime} (${targetSlot.location})${snapshotUrl ? ' [Foto Wajah]' : ''}`,
       actor: 'Kiosk Numpad',
       snapshotUrl: snapshotUrl
     };

@@ -44,7 +44,7 @@ import { isMassPassed } from '../utils/dateUtils';
 interface KioskViewProps {
   currentSlot: ScheduleSlot;
   officers: Officer[];
-  onAttendanceSuccess: (officerId: string, officerName: string, snapshotUrl?: string) => void;
+  onAttendanceSuccess: (officerId: string, officerName: string, snapshotUrl?: string, slotId?: string) => void;
   onSwitchSlot?: (slotId: string) => void;
   allSlots: ScheduleSlot[];
   onBackToLanding?: () => void;
@@ -1663,7 +1663,7 @@ export const KioskView: React.FC<KioskViewProps> = ({
       setCameraActive(false);
 
       playAudioFeedback('success');
-      onAttendanceSuccess(pendingOfficer.id, pendingOfficer.name, snapshot);
+      onAttendanceSuccess(pendingOfficer.id, pendingOfficer.name, snapshot, activeSlot.id);
       setAttendanceSuccessMessage(`Terima kasih & selamat bertugas, ${pendingOfficer.name}! Foto wajah presensi berhasil dicatat.`);
 
       setTimeout(() => {
@@ -1673,8 +1673,8 @@ export const KioskView: React.FC<KioskViewProps> = ({
         setCapturedSnapshot(null);
 
         // Check if all officers have attended, or transition
-        const updatedAttendedCount = currentSlot.attendedServerIds.length + 1;
-        if (updatedAttendedCount >= currentSlot.targetTotal) {
+        const updatedAttendedCount = (activeSlot.attendedServerIds?.length || 0) + 1;
+        if (updatedAttendedCount >= activeSlot.targetTotal) {
           setCurrentStep(4); // All attended -> proceed to Step 4 Assign
         } else {
           setCurrentStep(2); // Continue checking in next officer
@@ -1705,37 +1705,35 @@ export const KioskView: React.FC<KioskViewProps> = ({
   // Step 2 Numpad Error State
   const [numpadError, setNumpadError] = useState<string | null>(null);
 
-  // Calculations for Step 2 & Step 4: Connect Belum Absen list directly to Schedule Generator
-  const attendedOfficerIds = new Set(currentSlot.attendedServerIds);
+  // Active schedule slot strictly matching selectedSession.id from Schedule Generator
+  const activeSlot: ScheduleSlot = React.useMemo(() => {
+    const matched = allSlots.find(s => s.id === selectedSession.id);
+    if (matched) return matched;
+    // Fallback: match by exact date and massTime
+    const matchedByDateTime = allSlots.find(s => 
+      s.date === selectedSession.rawDate && 
+      (s.massTime === selectedSession.timeDisplay || s.massTime.replace(' WIB', '') === selectedSession.timeDisplay.replace(' WIB', ''))
+    );
+    return matchedByDateTime || currentSlot || allSlots[0];
+  }, [allSlots, selectedSession, currentSlot]);
 
-  // Map assigned officer IDs from the active ScheduleSlot in Schedule Generator
+  // Calculations for Step 2 & Step 4: Connect Belum Absen list directly to active slot
+  const attendedOfficerIds = React.useMemo(() => {
+    return new Set(activeSlot.attendedServerIds || []);
+  }, [activeSlot.attendedServerIds]);
+
+  // Map assigned officer IDs directly from activeSlot serverIds
   const scheduledOfficerIds = React.useMemo(() => {
-    // Match currentSlot or matching slot in allSlots
-    const slot = allSlots.find(s => s.id === selectedSession.id || s.massTime.includes(selectedSession.timeDisplay.replace(' WIB', ''))) || currentSlot;
-    const serverIdsFromSlot = (slot?.serverIds || []).filter((id): id is string => typeof id === 'string' && id.trim().length > 0);
-    
-    if (serverIdsFromSlot.length > 0) {
-      return serverIdsFromSlot.map(id => id.padStart(3, '0'));
-    }
-
-    // Default assigned roster per session from Schedule Generator
-    const defaultForSession: Record<string, string[]> = {
-      'misa-harian-pagi': ['001', '002', '003', '042'],
-      'misa-harian-sore': ['002', '056', '057', '042'],
-      'misa-sabtu-1800': ['145', '062', '089', '001', '002', '003', '055'],
-      'misa-minggu-0600': ['002', '003', '042', '015', '089', '104'],
-      'misa-minggu-0830': ['057', '001', '062', '145', '003', '055'],
-      'misa-minggu-1700': ['055', '002', '104', '042', '089', '062']
-    };
-
-    return defaultForSession[selectedSession.id] || ['001', '002', '003', '042', '089', '145', '062', '055', '057'];
-
-  }, [selectedSession, currentSlot, allSlots]);
+    const serverIdsFromSlot = (activeSlot.serverIds || []).filter((id): id is string => typeof id === 'string' && id.trim().length > 0);
+    return serverIdsFromSlot.map(id => id.padStart(3, '0'));
+  }, [activeSlot.serverIds]);
 
   // Scheduled officers for this Misa session in Schedule Generator
-  const scheduledOfficersList = officers.filter(o => 
-    scheduledOfficerIds.includes(o.id.padStart(3, '0')) || scheduledOfficerIds.includes(o.id)
-  );
+  const scheduledOfficersList = React.useMemo(() => {
+    return scheduledOfficerIds
+      .map(id => officers.find(o => o.id === id || o.id.padStart(3, '0') === id))
+      .filter((o): o is Officer => Boolean(o));
+  }, [scheduledOfficerIds, officers]);
 
   // Belum Absen list: Scheduled officers for this Misa who have NOT checked in yet
   const unattendedOfficers = scheduledOfficersList.filter(o => !attendedOfficerIds.has(o.id));
@@ -2008,6 +2006,9 @@ export const KioskView: React.FC<KioskViewProps> = ({
                       key={session.id}
                       onClick={() => {
                         setSelectedSession(session);
+                        if (onSwitchSlot) {
+                          onSwitchSlot(session.id);
+                        }
                         if (session.koorlaps && session.koorlaps.length > 0) {
                           setKoorlapId(session.koorlaps[0].id);
                         }
@@ -2865,14 +2866,14 @@ export const KioskView: React.FC<KioskViewProps> = ({
                       </div>
 
                       <div className="shrink-0 ml-2 flex items-center gap-1.5">
-                        {isAttended && currentSlot.attendanceSnapshots?.[off.id] && (
+                        {isAttended && (activeSlot.attendanceSnapshots?.[off.id] || currentSlot.attendanceSnapshots?.[off.id]) && (
                           <button
                             type="button"
                             onClick={(e) => {
                               e.stopPropagation();
                               playAudioFeedback('tap');
                               setViewerModalData({
-                                snapshotUrl: currentSlot.attendanceSnapshots![off.id],
+                                snapshotUrl: activeSlot.attendanceSnapshots?.[off.id] || currentSlot.attendanceSnapshots![off.id],
                                 officerName: off.name,
                                 officerId: off.id,
                                 massSession: `${selectedSession.dayLabel} • ${selectedSession.timeDisplay}`,
@@ -3031,14 +3032,14 @@ export const KioskView: React.FC<KioskViewProps> = ({
                               </div>
                             </div>
 
-                            {pos.assignedOfficerId && currentSlot.attendanceSnapshots?.[pos.assignedOfficerId] && (
+                            {pos.assignedOfficerId && (activeSlot.attendanceSnapshots?.[pos.assignedOfficerId] || currentSlot.attendanceSnapshots?.[pos.assignedOfficerId]) && (
                               <button
                                 type="button"
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   playAudioFeedback('tap');
                                   setViewerModalData({
-                                    snapshotUrl: currentSlot.attendanceSnapshots![pos.assignedOfficerId!],
+                                    snapshotUrl: activeSlot.attendanceSnapshots?.[pos.assignedOfficerId!] || currentSlot.attendanceSnapshots![pos.assignedOfficerId!],
                                     officerName: pos.assignedOfficerName || '',
                                     officerId: pos.assignedOfficerId!,
                                     massSession: `${selectedSession.dayLabel} • ${selectedSession.timeDisplay}`
