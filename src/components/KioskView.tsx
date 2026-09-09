@@ -44,7 +44,7 @@ import { isMassPassed } from '../utils/dateUtils';
 interface KioskViewProps {
   currentSlot: ScheduleSlot;
   officers: Officer[];
-  onAttendanceSuccess: (officerId: string, officerName: string, snapshotUrl?: string, slotId?: string) => void;
+  onAttendanceSuccess: (officerId: string, officerName: string, snapshotUrl?: string, slotId?: string, attendanceTime?: string) => void;
   onSwitchSlot?: (slotId: string) => void;
   allSlots: ScheduleSlot[];
   onBackToLanding?: () => void;
@@ -1525,7 +1525,7 @@ export const KioskView: React.FC<KioskViewProps> = ({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [currentStep, pinInput, officers]);
 
-  // Step 1: Login Koorlap & Masuk Sesi
+  // Step 1: Login Koorlap / Petugas Jaga & Masuk Sesi
   const handleProceedToModeAbsen = () => {
     const cleanId = koorlapId.trim().toLowerCase();
     const cleanPass = koorlapPassword.trim();
@@ -1537,12 +1537,12 @@ export const KioskView: React.FC<KioskViewProps> = ({
     }
 
     if (!cleanId) {
-      setSessionAuthError('Silakan pilih atau masukkan No. Absen Koorlap yang bertugas.');
+      setSessionAuthError('Silakan pilih atau masukkan No. Absen Petugas / Koorlap yang bertugas.');
       playAudioFeedback('error');
       return;
     }
     if (!cleanPass) {
-      setSessionAuthError('Silakan masukkan Password / PIN Koorlap (Default: 1234).');
+      setSessionAuthError('Silakan masukkan Password / PIN Petugas (Default: 1234).');
       playAudioFeedback('error');
       return;
     }
@@ -1550,29 +1550,37 @@ export const KioskView: React.FC<KioskViewProps> = ({
     // Check Admin override (uses credentials from authStore)
     const isAdminAuth = verifyAdminCredentials(cleanId, cleanPass);
 
-    // Rule: If special Koorlap is assigned, they (or Admin) must unlock. If no special Koorlap assigned (e.g. Misa Harian), any active officer or koorlap can open with PIN
     const assignedKoorlaps = selectedSession.koorlaps || [];
-    const isAssignedKoorlap = assignedKoorlaps.length > 0
-      ? assignedKoorlaps.some(k => {
-          const kId3 = k.id.padStart(3, '0');
-          const userCleanId3 = cleanId.padStart(3, '0');
-          return kId3 === userCleanId3 || k.id === cleanId || k.name.toLowerCase().includes(cleanId);
-        })
-      : officers.some(o => {
-          const oId3 = o.id.padStart(3, '0');
-          const userCleanId3 = cleanId.padStart(3, '0');
-          return (oId3 === userCleanId3 || o.id === cleanId || o.name.toLowerCase().includes(cleanId)) && o.status === 'Aktif';
-        });
+    const scheduledIds = scheduledOfficersList.map(o => o.id.padStart(3, '0'));
+    const userCleanId3 = cleanId.padStart(3, '0');
 
-    if (!isAdminAuth && !isAssignedKoorlap) {
-      setSessionAuthError(`❌ Akses Ditolak: Hanya Koorlap resmi yang ditugaskan pada Misa ini (${selectedSession.koorlapDisplay}) yang berhak membuka presensi.`);
+    // Rule:
+    // 1. Admin can unlock any session
+    // 2. Any assigned Koorlap for this session can unlock
+    // 3. ANY officer scheduled for this session can unlock (e.g. daily Mass with 1 or 2 servers)
+    // 4. If session has 0 Koorlap assigned, any active officer can unlock
+    const isAssignedKoorlap = assignedKoorlaps.some(k => {
+      const kId3 = k.id.padStart(3, '0');
+      return kId3 === userCleanId3 || k.id === cleanId || k.name.toLowerCase().includes(cleanId);
+    });
+
+    const isScheduledOfficer = scheduledIds.includes(userCleanId3) || scheduledOfficersList.some(o => o.id === cleanId || o.name.toLowerCase().includes(cleanId));
+    const isAnyActiveOfficer = officers.some(o => {
+      const oId3 = o.id.padStart(3, '0');
+      return (oId3 === userCleanId3 || o.id === cleanId || o.name.toLowerCase().includes(cleanId)) && o.status === 'Aktif';
+    });
+
+    const isAuthorized = isAdminAuth || isAssignedKoorlap || isScheduledOfficer || (assignedKoorlaps.length === 0 && isAnyActiveOfficer);
+
+    if (!isAuthorized) {
+      setSessionAuthError(`❌ Akses Ditolak: Hanya Petugas yang bertugas atau Koorlap resmi pada Misa ini yang berhak membuka presensi.`);
       playAudioFeedback('error');
       return;
     }
 
     // Check PIN validity against saved officer PIN (default: 1234)
     if (!isAdminAuth && !verifyOfficerPin(cleanId, cleanPass)) {
-      setSessionAuthError('Otorisasi Gagal: PIN salah.');
+      setSessionAuthError('Otorisasi Gagal: PIN salah (Default: 1234).');
       playAudioFeedback('error');
       return;
     }
@@ -1681,8 +1689,9 @@ export const KioskView: React.FC<KioskViewProps> = ({
       setCameraActive(false);
 
       playAudioFeedback('success');
-      onAttendanceSuccess(pendingOfficer.id, pendingOfficer.name, snapshot, activeSlot.id);
-      setAttendanceSuccessMessage(`Terima kasih & selamat bertugas, ${pendingOfficer.name}! Foto wajah presensi berhasil dicatat.`);
+      const timeNowStr = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' WIB';
+      onAttendanceSuccess(pendingOfficer.id, pendingOfficer.name, snapshot, activeSlot.id, timeNowStr);
+      setAttendanceSuccessMessage(`Terima kasih & selamat bertugas, ${pendingOfficer.name}! Foto wajah & jam kehadiran (${timeNowStr}) berhasil dicatat.`);
 
       setTimeout(() => {
         setIsCapturing(false);
@@ -1748,14 +1757,38 @@ export const KioskView: React.FC<KioskViewProps> = ({
 
   // Scheduled officers for this Misa session in Schedule Generator
   const scheduledOfficersList = React.useMemo(() => {
-    return scheduledOfficerIds
+    const fromIds = scheduledOfficerIds
       .map(id => officers.find(o => o.id === id || o.id.padStart(3, '0') === id))
       .filter((o): o is Officer => Boolean(o));
-  }, [scheduledOfficerIds, officers]);
+    if (fromIds.length > 0) return fromIds;
+
+    // Fallback: match by serverNames
+    const fromNames = (activeSlot.serverNames || [])
+      .map(name => {
+        if (!name) return null;
+        return officers.find(o => o.name.toLowerCase() === name.toLowerCase() || (o.shortName && o.shortName.toLowerCase() === name.toLowerCase()));
+      })
+      .filter((o): o is Officer => Boolean(o));
+    return fromNames;
+  }, [scheduledOfficerIds, activeSlot.serverNames, officers]);
 
   // Belum Absen list: Scheduled officers for this Misa who have NOT checked in yet
   const unattendedOfficers = scheduledOfficersList.filter(o => !attendedOfficerIds.has(o.id));
-  const attendedOfficersList = scheduledOfficersList.filter(o => attendedOfficerIds.has(o.id));
+
+  // Attended officers: sorted from top to bottom based on attendance timestamp (earliest first)
+  const attendedOfficersList = React.useMemo(() => {
+    const list = scheduledOfficersList.filter(o => attendedOfficerIds.has(o.id));
+    return list.sort((a, b) => {
+      const timeA = activeSlot.attendanceTimestamps?.[a.id] || '';
+      const timeB = activeSlot.attendanceTimestamps?.[b.id] || '';
+      if (timeA && timeB) {
+        return timeA.localeCompare(timeB);
+      }
+      if (timeA) return -1;
+      if (timeB) return 1;
+      return 0;
+    });
+  }, [scheduledOfficersList, attendedOfficerIds, activeSlot.attendanceTimestamps]);
 
 
 
@@ -1957,21 +1990,33 @@ export const KioskView: React.FC<KioskViewProps> = ({
                 <div className="flex items-center justify-between">
                   <div>
                     <label className="block text-xs font-black text-[#5B1414] uppercase tracking-wider">
-                      Verifikasi Koorlap Jaga ({selectedSession.koorlapCount} Petugas)
+                      {selectedSession.koorlapCount > 0 
+                        ? `Verifikasi Koorlap Jaga (${selectedSession.koorlapCount} Petugas)` 
+                        : `Verifikasi Petugas Jaga (${scheduledOfficersList.length} Petugas Terjadwal)`}
                     </label>
                     <span className="text-[11px] text-[#6E5A4B]">
-                      {selectedSession.category === 'harian' && 'Misa Harian: Cukup 1 Koorlap yang bertugas.'}
-                      {selectedSession.category === 'mingguan' && 'Misa Sabtu Sore & Minggu: 2 Koorlap bertugas.'}
-                      {selectedSession.category === 'hari_raya' && 'Misa Hari Raya: Tim Koorlap Gabungan.'}
+                      {selectedSession.koorlapCount > 0 ? (
+                        <>
+                          {selectedSession.category === 'harian' && 'Misa Harian: Cukup 1 Koorlap yang bertugas.'}
+                          {selectedSession.category === 'mingguan' && 'Misa Sabtu Sore & Minggu: 2 Koorlap bertugas.'}
+                          {selectedSession.category === 'hari_raya' && 'Misa Hari Raya: Tim Koorlap Gabungan.'}
+                        </>
+                      ) : (
+                        'Misa Harian / Kapel: Tanpa Koorlap khusus. Petugas yang bertugas di sesi ini bisa langsung login mandiri.'
+                      )}
                     </span>
                   </div>
-                  <span className="text-[10px] font-bold text-[#7c191e] bg-red-100 px-2 py-0.5 rounded-full shrink-0">
-                    Wajib Koorlap
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0 ${
+                    selectedSession.koorlapCount > 0
+                      ? 'text-[#7c191e] bg-red-100'
+                      : 'text-emerald-800 bg-emerald-100 border border-emerald-300'
+                  }`}>
+                    {selectedSession.koorlapCount > 0 ? 'Wajib Koorlap' : 'Petugas Mandiri'}
                   </span>
                 </div>
 
-                {/* Quick Select for Assigned Koorlaps */}
-                {selectedSession.koorlaps && selectedSession.koorlaps.length > 0 && (
+                {/* Quick Select for Assigned Koorlaps OR Scheduled Officers */}
+                {selectedSession.koorlaps && selectedSession.koorlaps.length > 0 ? (
                   <div className="bg-white/80 p-2.5 rounded-xl border border-[#D9CEBA] space-y-1.5">
                     <span className="text-[11px] font-bold text-[#5B1414] uppercase tracking-tight block">
                       Pilih Koorlap yang Sedang Membuka Kiosk:
@@ -2001,13 +2046,47 @@ export const KioskView: React.FC<KioskViewProps> = ({
                       })}
                     </div>
                   </div>
+                ) : (
+                  scheduledOfficersList.length > 0 && (
+                    <div className="bg-white/80 p-2.5 rounded-xl border border-[#D9CEBA] space-y-1.5">
+                      <span className="text-[11px] font-bold text-[#5B1414] uppercase tracking-tight block">
+                        Pilih Petugas yang Sedang Membuka Presensi:
+                      </span>
+                      <div className="flex flex-wrap gap-2">
+                        {scheduledOfficersList.map(off => {
+                          const isChosen = koorlapId.padStart(3, '0') === off.id.padStart(3, '0') || koorlapId === off.id;
+                          return (
+                            <button
+                              key={off.id}
+                              type="button"
+                              onClick={() => {
+                                setKoorlapId(off.id.padStart(3, '0'));
+                                playAudioFeedback('tap');
+                              }}
+                              className={`px-3 py-1 rounded-lg text-xs font-bold border transition-all flex items-center gap-1.5 cursor-pointer ${
+                                isChosen
+                                  ? 'bg-[#5B1414] text-white border-[#5B1414] shadow-xs'
+                                  : 'bg-[#FAF7F2] text-[#2C2420] border-[#D9CEBA] hover:bg-white'
+                              }`}
+                            >
+                              <UserCheck className="w-3.5 h-3.5 text-emerald-700" />
+                              <span>{off.shortName || off.name}</span>
+                              <span className="font-mono text-[10px] opacity-80">(No. {off.id.padStart(3, '0')})</span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )
                 )}
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {/* Field 1: No. Absen Koorlap (3 Digit) */}
+                  {/* Field 1: No. Absen Koorlap / Petugas (3 Digit) */}
                   <div>
                     <div className="flex justify-between items-center mb-1">
-                      <span className="text-xs font-semibold text-[#6E5A4B]">No. Absen Koorlap</span>
+                      <span className="text-xs font-semibold text-[#6E5A4B]">
+                        {selectedSession.koorlapCount > 0 ? 'No. Absen Koorlap' : 'No. Absen Petugas'}
+                      </span>
                       {officers.find(o => o.id === koorlapId.padStart(3, '0') || o.id === koorlapId) && (
                         <span className="text-[10px] text-emerald-800 font-bold bg-emerald-100 px-1.5 py-0.2 rounded truncate max-w-[120px]">
                           ✓ {officers.find(o => o.id === koorlapId.padStart(3, '0') || o.id === koorlapId)?.shortName}
@@ -2024,14 +2103,16 @@ export const KioskView: React.FC<KioskViewProps> = ({
                     />
                   </div>
 
-                  {/* Field 2: Password Koorlap */}
+                  {/* Field 2: Password Koorlap / Petugas */}
                   <div>
-                    <span className="text-xs font-semibold text-[#6E5A4B] block mb-1">Password Koorlap</span>
+                    <span className="text-xs font-semibold text-[#6E5A4B] block mb-1">
+                      {selectedSession.koorlapCount > 0 ? 'Password Koorlap' : 'PIN Petugas (Default: 1234)'}
+                    </span>
                     <input
                       type="password"
                       value={koorlapPassword}
                       onChange={e => setKoorlapPassword(e.target.value)}
-                      placeholder="PIN / Password..."
+                      placeholder="PIN (Default: 1234)..."
                       className="w-full px-3.5 py-2.5 rounded-xl border border-[#D9CEBA] bg-white text-sm font-medium focus:ring-2 focus:ring-[#5B1414] outline-none"
                     />
                   </div>
@@ -2472,41 +2553,52 @@ export const KioskView: React.FC<KioskViewProps> = ({
                     <p className="text-[10px] mt-0.5">Petugas yang berhasil absen akan muncul di daftar ini.</p>
                   </div>
                 ) : (
-                  filteredAttendedStep2.map(off => (
-                    <div
-                      key={off.id}
-                      className="w-full p-2.5 bg-emerald-50/60 border border-emerald-200/80 rounded-2xl flex items-center justify-between text-left transition-all shadow-2xs"
-                    >
-                      <div className="flex items-center gap-2.5 min-w-0">
-                        <div className="relative shrink-0">
-                          <img
-                            src={off.avatarUrl}
-                            alt={off.name}
-                            className="w-9 h-9 rounded-full object-cover border border-emerald-300"
-                          />
-                          <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-600 rounded-full flex items-center justify-center text-white text-[8px] font-bold border border-white">
-                            ✓
+                  filteredAttendedStep2.map((off, idx) => {
+                    const checkInTime = activeSlot.attendanceTimestamps?.[off.id];
+                    return (
+                      <div
+                        key={off.id}
+                        className="w-full p-2.5 bg-emerald-50/60 border border-emerald-200/80 rounded-2xl flex items-center justify-between text-left transition-all shadow-2xs"
+                      >
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          <div className="relative shrink-0">
+                            <img
+                              src={off.avatarUrl}
+                              alt={off.name}
+                              className="w-9 h-9 rounded-full object-cover border border-emerald-300"
+                            />
+                            <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-600 rounded-full flex items-center justify-center text-white text-[8px] font-bold border border-white">
+                              ✓
+                            </div>
+                          </div>
+                          <div className="min-w-0">
+                            <div className="text-xs font-bold text-emerald-950 truncate flex items-center gap-1.5">
+                              <span className="text-[10px] text-emerald-800 font-mono font-bold bg-emerald-100/60 px-1 rounded">#{idx + 1}</span>
+                              <span className="truncate">{off.name}</span>
+                            </div>
+                            <div className="text-[10px] text-emerald-700 font-medium truncate flex items-center gap-1.5 mt-0.5">
+                              {checkInTime ? (
+                                <span className="inline-flex items-center gap-1 font-bold text-emerald-900 bg-white px-1.5 py-0.5 rounded border border-emerald-300 text-[10px] shadow-2xs">
+                                  <Clock className="w-3 h-3 text-emerald-700" />
+                                  <span>{checkInTime}</span>
+                                </span>
+                              ) : (
+                                <span className="font-semibold text-emerald-800 bg-emerald-100/80 px-1.5 py-0.5 rounded">Hadir</span>
+                              )}
+                              <span>&bull;</span>
+                              <span className="text-emerald-800 truncate">{off.region || off.role}</span>
+                            </div>
                           </div>
                         </div>
-                        <div className="min-w-0">
-                          <div className="text-xs font-bold text-emerald-950 truncate">
-                            {off.name}
-                          </div>
-                          <div className="text-[10px] text-emerald-700 font-medium truncate flex items-center gap-1">
-                            <span>{off.region || off.role}</span>
-                            <span>&bull;</span>
-                            <span className="font-semibold text-emerald-800">Hadir</span>
-                          </div>
-                        </div>
-                      </div>
 
-                      <div className="shrink-0 ml-2 text-right">
-                        <span className="text-[11px] font-mono font-extrabold text-emerald-900 bg-white border border-emerald-300 px-2 py-0.5 rounded-lg shadow-2xs">
-                          {off.id.padStart(3, '0')}
-                        </span>
+                        <div className="shrink-0 ml-2 text-right">
+                          <span className="text-[11px] font-mono font-extrabold text-emerald-900 bg-white border border-emerald-300 px-2 py-0.5 rounded-lg shadow-2xs">
+                            {off.id.padStart(3, '0')}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  ))
+                    );
+                  })
                 )}
               </div>
             </div>

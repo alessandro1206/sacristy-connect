@@ -48,18 +48,8 @@ export const KoorlapPositionManager: React.FC<KoorlapPositionManagerProps> = ({
   // If attended is fewer than 8, let's also allow selecting from all active officers for full demonstration
   const availablePool = attendedOfficers.length >= 4 ? attendedOfficers : officers.filter(o => o.status === 'Aktif');
 
-  const [positions, setPositions] = useState<PositionAssignment[]>(() => {
-    // Initial auto-fill for quick setup
-    return INITIAL_POSITIONS.map((pos, idx) => {
-      const officer = availablePool[idx];
-      return {
-        ...pos,
-        assignedOfficerId: officer ? officer.id : null,
-        assignedOfficerName: officer ? officer.name : null,
-        assignedOfficerAvatar: officer ? officer.avatarUrl : undefined
-      };
-    });
-  });
+  // Positions start unassigned - only assign when Koorlap explicitly sets them
+  const [positions, setPositions] = useState<PositionAssignment[]>(() => INITIAL_POSITIONS);
 
   const [selectedPositionId, setSelectedPositionId] = useState<string | null>(null);
   const [saveBanner, setSaveBanner] = useState<string | null>(null);

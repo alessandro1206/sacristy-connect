@@ -358,11 +358,13 @@ export default function App() {
   };
 
 
-  // Handle officer attendance check-in with face snapshot
-  const handleAttendanceSuccess = (officerId: string, officerName: string, snapshotUrl?: string, slotId?: string) => {
+  // Handle officer attendance check-in with face snapshot and timestamp
+  const handleAttendanceSuccess = (officerId: string, officerName: string, snapshotUrl?: string, slotId?: string, attendanceTime?: string) => {
     const targetSlotId = slotId || currentSlot.id;
+    const now = new Date();
+    const timeFormatted = attendanceTime || now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' WIB';
 
-    // 1. Update target slot attendedServerIds & attendanceSnapshots
+    // 1. Update target slot attendedServerIds, attendanceSnapshots, & attendanceTimestamps
     setSchedule(prevSchedule =>
       prevSchedule.map(slot => {
         if (slot.id === targetSlotId) {
@@ -372,11 +374,16 @@ export default function App() {
               ...(slot.attendanceSnapshots || {}),
               ...(snapshotUrl ? { [officerId]: snapshotUrl } : {})
             };
+            const updatedTimestamps = {
+              ...(slot.attendanceTimestamps || {}),
+              [officerId]: timeFormatted
+            };
 
             return {
               ...slot,
               attendedServerIds: newAttended,
-              attendanceSnapshots: updatedSnapshots
+              attendanceSnapshots: updatedSnapshots,
+              attendanceTimestamps: updatedTimestamps
             };
           }
         }
@@ -399,7 +406,6 @@ export default function App() {
 
     // 3. Append to system logs
     const targetSlot = schedule.find(s => s.id === targetSlotId) || currentSlot;
-    const now = new Date();
     const timeString = now.toLocaleDateString('id-ID', { year: 'numeric', month: '2-digit', day: '2-digit' }) + ' ' +
                        now.toLocaleTimeString('id-ID') + ' WIB';
     const newLog: SystemLog = {

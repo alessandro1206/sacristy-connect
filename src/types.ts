@@ -45,6 +45,7 @@ export interface ScheduleSlot {
   status: 'Scheduled' | 'Tukar Jadwal' | 'Needs Server' | 'Selesai' | 'Berlangsung';
   attendedServerIds: string[]; // IDs of servers who checked in
   attendanceSnapshots?: Record<string, string>; // Maps officerId to captured face snapshot base64 data URL
+  attendanceTimestamps?: Record<string, string>; // Maps officerId to captured check-in timestamp e.g. "17:42:05 WIB"
 }
 
 export interface AttendanceRecord {
