@@ -476,13 +476,14 @@ Lokasi : [Lokasi]`;
         if (v >= 1 && v <= 31 && !allDays.includes(v)) allDays.push(v);
       });
 
-      // Helper to find slots where an officer is assigned
+      // Helper to find slots where an officer is assigned (checks serverIds, serverNotes, and serverNames)
       const getOfficerAssignedSlots = (targetOff: Officer, dayLimit?: number | null) => {
         const oid = targetOff.id.padStart(3, '0');
         const unp = String(parseInt(targetOff.id, 10));
         return schedule.filter(s => {
           const isAssigned = (s.serverIds || []).some(sid => sid && (sid.padStart(3, '0') === oid || sid === unp)) ||
-                             (s.serverNotes || []).some(n => n && (n.includes(oid) || n.includes(unp)));
+                             (s.serverNotes || []).some(n => n && (n.includes(oid) || n.includes(unp))) ||
+                             (s.serverNames || []).some(sn => sn && targetOff.name && sn.toLowerCase().includes(targetOff.name.toLowerCase()));
           if (!isAssigned) return false;
           if (dayLimit !== undefined && dayLimit !== null) {
             const parts = s.date.split('-');
@@ -492,37 +493,62 @@ Lokasi : [Lokasi]`;
         });
       };
 
+      // Smart helper to find the best matching slot for an officer based on any dates/times found in the message
+      const findBestSlotForOfficer = (
+        targetOff: Officer, 
+        days: number[], 
+        times: string[], 
+        excludeSlotId?: string
+      ): ScheduleSlot | null => {
+        const allSlots = getOfficerAssignedSlots(targetOff, null).filter(s => !excludeSlotId || s.id !== excludeSlotId);
+        if (allSlots.length === 0) return null;
+
+        // 1. Match both day AND time
+        if (days.length > 0 && times.length > 0) {
+          const matchBoth = allSlots.find(s => {
+            const parts = s.date.split('-');
+            const d = parts.length === 3 ? parseInt(parts[2], 10) : -1;
+            return days.includes(d) && times.some(t => s.massTime.includes(t));
+          });
+          if (matchBoth) return matchBoth;
+        }
+
+        // 2. Match day
+        if (days.length > 0) {
+          const matchDay = allSlots.find(s => {
+            const parts = s.date.split('-');
+            const d = parts.length === 3 ? parseInt(parts[2], 10) : -1;
+            return days.includes(d);
+          });
+          if (matchDay) return matchDay;
+        }
+
+        // 3. Match time
+        if (times.length > 0) {
+          const matchTime = allSlots.find(s => times.some(t => s.massTime.includes(t)));
+          if (matchTime) return matchTime;
+        }
+
+        // 4. Default to first/upcoming slot
+        return allSlots[0];
+      };
+
       // =========================================================================
       // STEP 4: EXECUTION - MUTUAL SWAP OR ONE-WAY REPLACEMENT
       // =========================================================================
       let modifiedSlotsCount = 0;
 
       if (mode === 'TUKAR_JADWAL') {
-        // Find slot for officerFirst
-        const day1 = allDays[0] || null;
-        const day2 = allDays.length > 1 ? allDays[1] : day1;
+        // Match each officer directly to their own slot in the schedule database
+        // Regardless of text position or which officer ID preceded which date
+        const slot1 = findBestSlotForOfficer(officerFirst, allDays, allTimes);
+        const slot2 = findBestSlotForOfficer(officerSecond, allDays, allTimes, slot1?.id);
 
-        let slots1 = getOfficerAssignedSlots(officerFirst, day1);
-        if (slots1.length === 0 && day2 !== null && allDays.length > 1) {
-          slots1 = getOfficerAssignedSlots(officerFirst, day2);
-        }
-        if (slots1.length === 0) {
-          slots1 = getOfficerAssignedSlots(officerFirst, null);
-        }
-
-        let slots2 = getOfficerAssignedSlots(officerSecond, day2);
-        if (slots2.length === 0 && day1 !== null && allDays.length > 1) {
-          slots2 = getOfficerAssignedSlots(officerSecond, day1);
-        }
-        if (slots2.length === 0) {
-          slots2 = getOfficerAssignedSlots(officerSecond, null);
-        }
-
-        if (slots1.length === 0) {
+        if (!slot1) {
           const err = {
             title: `Petugas #${id1_3} Tidak Memiliki Jadwal Tugas`,
-            reason: `Petugas #${id1_3} (${officerFirst.name}) tidak terdaftar dalam jadwal misa yang disebutkan.`,
-            fixHint: `Pastikan nomor ID #${id1_3} memiliki jadwal tugas di bulan September 2026.`
+            reason: `Petugas #${id1_3} (${officerFirst.name}) tidak terdaftar dalam jadwal misa yang cocok di sistem.`,
+            fixHint: `Pastikan nomor ID #${id1_3} memiliki jadwal tugas aktif di bulan September 2026.`
           };
           setParseError(err);
           playAudioFeedback('warning');
@@ -531,30 +557,17 @@ Lokasi : [Lokasi]`;
           return;
         }
 
-        if (slots2.length === 0) {
+        if (!slot2) {
           const err = {
             title: `Petugas #${id2_3} Tidak Memiliki Jadwal Tugas`,
-            reason: `Petugas #${id2_3} (${officerSecond.name}) tidak terdaftar dalam jadwal misa yang disebutkan.`,
-            fixHint: `Pastikan nomor ID #${id2_3} memiliki jadwal tugas di bulan September 2026.`
+            reason: `Petugas #${id2_3} (${officerSecond.name}) tidak terdaftar dalam jadwal misa yang cocok di sistem.`,
+            fixHint: `Pastikan nomor ID #${id2_3} memiliki jadwal tugas aktif di bulan September 2026.`
           };
           setParseError(err);
           playAudioFeedback('warning');
           if (onAddLog) onAddLog({ type: 'swap', description: `Gagal Tukar: ${err.title}`, actor: 'WA Importer (Admin)' });
           setIsProcessing(false);
           return;
-        }
-
-        // Refine with times if available
-        let slot1 = slots1[0];
-        if (allTimes.length > 0) {
-          const matchT = slots1.find(s => allTimes.some(t => s.massTime.includes(t)));
-          if (matchT) slot1 = matchT;
-        }
-
-        let slot2 = slots2.find(s => s.id !== slot1.id) || slots2[0];
-        if (allTimes.length > 0) {
-          const matchT = slots2.find(s => s.id !== slot1.id && allTimes.some(t => s.massTime.includes(t)));
-          if (matchT) slot2 = matchT;
         }
 
         if (slot1.id === slot2.id) {
@@ -669,55 +682,52 @@ Lokasi : [Lokasi]`;
         }
 
       } else {
-        // ONE-WAY REPLACEMENT: One officer is original (digantikan), one is pengganti (menggantikan)
+        // ONE-WAY REPLACEMENT:
+        // Identify who holds the duty slot (Original / Digantikan) and who will substitute (Pengganti)
+        // Check schedule truth for both officers
+        const slot1Candidate = findBestSlotForOfficer(officerFirst, allDays, allTimes);
+        const slot2Candidate = findBestSlotForOfficer(officerSecond, allDays, allTimes);
+
         let origOfficer: Officer;
         let replOfficer: Officer;
+        let targetSlot: ScheduleSlot | null = null;
 
-        if (mode === 'MENGGANTIKAN') {
-          replOfficer = officerFirst;
-          origOfficer = officerSecond;
-        } else {
+        // Does only officerFirst hold a matching slot?
+        if (slot1Candidate && !slot2Candidate) {
           origOfficer = officerFirst;
           replOfficer = officerSecond;
+          targetSlot = slot1Candidate;
+        } 
+        // Does only officerSecond hold a matching slot?
+        else if (!slot1Candidate && slot2Candidate) {
+          origOfficer = officerSecond;
+          replOfficer = officerFirst;
+          targetSlot = slot2Candidate;
+        } 
+        // If both hold a slot or neither has an exact match:
+        else {
+          if (mode === 'MENGGANTIKAN') {
+            replOfficer = officerFirst;
+            origOfficer = officerSecond;
+            targetSlot = slot2Candidate || findBestSlotForOfficer(origOfficer, allDays, allTimes);
+          } else {
+            origOfficer = officerFirst;
+            replOfficer = officerSecond;
+            targetSlot = slot1Candidate || findBestSlotForOfficer(origOfficer, allDays, allTimes);
+          }
         }
 
-        // Reality Check against schedule:
-        // Does origOfficer actually hold a slot on the specified date?
-        const day = allDays[0] || null;
-        let origSlots = getOfficerAssignedSlots(origOfficer, day);
-        let replSlots = getOfficerAssignedSlots(replOfficer, day);
-
-        // If origOfficer has NO slots on that day, but replOfficer DOES have a slot on that day,
-        // then the user wrote the names in inverted order! Automatically flip to the correct one!
-        if (origSlots.length === 0 && replSlots.length > 0) {
-          const temp = origOfficer;
-          origOfficer = replOfficer;
-          replOfficer = temp;
-          origSlots = replSlots;
-        }
-
-        if (origSlots.length === 0) {
-          // Fallback to entire month
-          origSlots = getOfficerAssignedSlots(origOfficer, null);
-        }
-
-        if (origSlots.length === 0) {
+        if (!targetSlot) {
           const err = {
-            title: `Petugas #${origOfficer.id.padStart(3, '0')} Tidak Memiliki Jadwal`,
-            reason: `Petugas #${origOfficer.id.padStart(3, '0')} (${origOfficer.name}) yang akan digantikan tidak terdaftar dalam jadwal tugas misa mana pun.`,
-            fixHint: `Periksa kembali nomor ID petugas yang akan digantikan.`
+            title: 'Jadwal Tugas Tidak Ditemukan',
+            reason: `Tidak ditemukan jadwal tugas untuk #${id1_3} maupun #${id2_3} pada tanggal atau jam yang dimaksud.`,
+            fixHint: 'Pastikan salah satu petugas terdaftar di jadwal tugas bulan September 2026.'
           };
           setParseError(err);
           playAudioFeedback('warning');
           if (onAddLog) onAddLog({ type: 'swap', description: `Gagal Ganti: ${err.title}`, actor: 'WA Importer (Admin)' });
           setIsProcessing(false);
           return;
-        }
-
-        let targetSlot = origSlots[0];
-        if (allTimes.length > 0) {
-          const matchT = origSlots.find(s => allTimes.some(t => s.massTime.includes(t)));
-          if (matchT) targetSlot = matchT;
         }
 
         const origId_3 = origOfficer.id.padStart(3, '0');
