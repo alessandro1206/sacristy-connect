@@ -211,6 +211,11 @@ Lokasi : [Lokasi]`;
             const currId = slot.serverIds[idx] ? slot.serverIds[idx].padStart(3, '0') : '';
             const note = slot.serverNotes?.[idx] || '';
 
+            // Guard against showing identical names if no actual substitution exists
+            if (origName.trim().toLowerCase() === currName.trim().toLowerCase() && !note.toLowerCase().includes('tukar') && !note.toLowerCase().includes('ganti')) {
+              return;
+            }
+
             let origId = '';
             const origIdMatch = note.match(/#(\d{1,3})|:\s*(\d{1,3})/);
             if (origIdMatch) {
@@ -220,7 +225,7 @@ Lokasi : [Lokasi]`;
               if (matchedOff) origId = matchedOff.id.padStart(3, '0');
             }
 
-            const isMutualSwap = note.toLowerCase().includes('tukar');
+            const isMutualSwap = note.toLowerCase().includes('tukar') || (slot.status && slot.status.toLowerCase().includes('tukar'));
             list.push({
               id: `${slot.id}-${idx}`,
               slotId: slot.id,
@@ -234,7 +239,7 @@ Lokasi : [Lokasi]`;
               currentOfficerId: currId,
               currentOfficerName: currName,
               changeType: isMutualSwap ? 'TUKAR' : 'PENGGANTIAN',
-              note: note || (isMutualSwap ? 'Tukar Jadwal' : 'Penggantian Tugas'),
+              note: note || (isMutualSwap ? 'Tukar Jadwal' : 'Menggantikan Tugas'),
               status: slot.status
             });
           }
@@ -1019,9 +1024,9 @@ Lokasi : [Lokasi]`;
                   <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider ${
                     detectedChange.swapType === 'TUKAR'
                       ? 'bg-purple-100 text-purple-900 border border-purple-300'
-                      : 'bg-amber-100 text-amber-900 border border-amber-300'
+                      : 'bg-emerald-100 text-emerald-900 border border-emerald-300'
                   }`}>
-                    {detectedChange.action}
+                    {detectedChange.swapType === 'TUKAR' ? '⇄ Tukar Jadwal' : '➔ Menggantikan'}
                   </span>
                 </div>
 
@@ -1115,7 +1120,7 @@ Lokasi : [Lokasi]`;
                     <tr>
                       <th className="px-4 py-2.5">TANGGAL &amp; JAM MISA</th>
                       <th className="px-4 py-2.5">LOKASI</th>
-                      <th className="px-4 py-2.5 text-center">TIPE</th>
+                      <th className="px-4 py-2.5 text-center">STATUS</th>
                       <th className="px-4 py-2.5">PETUGAS ASLI</th>
                       <th className="px-4 py-2.5">PETUGAS PENGGANTI</th>
                       <th className="px-4 py-2.5">KETERANGAN</th>
@@ -1144,13 +1149,13 @@ Lokasi : [Lokasi]`;
                           <td className="px-4 py-3 text-[#554d44]">
                             <span className="font-semibold">{row.location}</span>
                           </td>
-                          <td className="px-4 py-3 text-center">
-                            <span className={`inline-block px-2.5 py-0.5 rounded text-[10px] font-bold uppercase border ${
+                          <td className="px-4 py-3 text-center whitespace-nowrap">
+                            <span className={`inline-block px-2.5 py-1 rounded-md text-[10px] font-black uppercase border shadow-2xs ${
                               row.changeType === 'TUKAR'
-                                ? 'bg-purple-50 text-purple-900 border-purple-200'
-                                : 'bg-emerald-50 text-emerald-900 border-emerald-200'
+                                ? 'bg-purple-100 text-purple-900 border-purple-300'
+                                : 'bg-emerald-100 text-emerald-900 border-emerald-300'
                             }`}>
-                              {row.changeType === 'TUKAR' ? '⇄ Tukar' : '➔ Ganti'}
+                              {row.changeType === 'TUKAR' ? '⇄ Tukar Jadwal' : '➔ Menggantikan'}
                             </span>
                           </td>
                           <td className="px-4 py-3 font-medium text-[#6E5A4B]">
